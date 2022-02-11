@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Form as ReactForm,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-} from "reactstrap";
+import { Button, Form as ReactForm, FormGroup, Label, Input } from "reactstrap";
 import { DataStore } from "@aws-amplify/datastore";
 import { Form } from "./models";
+import { Link } from "react-router-dom";
 
-export const RegistrationForm = () => {
+export const RegistrationForm = ({ history }) => {
   const [forms, setForms] = useState([]);
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -66,15 +60,17 @@ export const RegistrationForm = () => {
             onChange={(event) => setEmail(event.target.value)}
           />
         </FormGroup>
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Link style={{ textDecoration: "none" }} to="/registered-players">
+          <div>Submit</div>
+        </Link>
       </ReactForm>
-      {forms.map((form) => (
-        <React.Fragment>
+      {/* {forms.map((form, index) => (
+        <React.Fragment key={index}>
           <div>{form.firstName}</div>
           <div>{form.lastName}</div>
           <div>{form.email}</div>
         </React.Fragment>
-      ))}
+      ))} */}
     </React.Fragment>
   );
 };
