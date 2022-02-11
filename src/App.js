@@ -12,21 +12,20 @@ function App() {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
 
-  useEffect(() => {
-    const func = async () => {
-      const models = await DataStore.query(Form);
-      setForms(models);
-    };
-    func();
-  }, []);
-
   const handleSubmit = async () => {
     const form = {
       firstName: firstName,
       lastName: lastName,
       email: email,
     };
-    let newPost = await DataStore.save(new Form(form));
+    const newForm = await DataStore.save(new Form(form));
+  };
+
+  const deletePlayerHandler = async (form) => {
+    const toDelete = await DataStore.query(Form, form.id);
+    await DataStore.delete(toDelete);
+    const models = await DataStore.query(Form);
+    setForms(models);
   };
   return (
     <div className="App">
@@ -45,7 +44,13 @@ function App() {
           ></Route>
           <Route
             path="/registered-players"
-            element={<RegisteredList forms={forms} />}
+            element={
+              <RegisteredList
+                forms={forms}
+                setForms={setForms}
+                deletePlayerHandler={deletePlayerHandler}
+              />
+            }
           ></Route>
         </Routes>
       </BrowserRouter>

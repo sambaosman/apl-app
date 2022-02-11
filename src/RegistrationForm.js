@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 
 import { Link } from "react-router-dom";
 
-const RegistrationForm = ({ setFirstName, setLastName, setEmail }) => {
+const RegistrationForm = ({
+  handleSubmit,
+  setFirstName,
+  setLastName,
+  setEmail,
+}) => {
   return (
     <React.Fragment>
       <Form>
@@ -35,7 +40,7 @@ const RegistrationForm = ({ setFirstName, setLastName, setEmail }) => {
             onChange={(event) => setEmail(event.target.value)}
           />
         </FormGroup>
-        <Link to="/registered-players">
+        <Link to="/registered-players" onClick={handleSubmit}>
           <div>Submit</div>
         </Link>
       </Form>
