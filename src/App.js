@@ -8,6 +8,7 @@ import { Form } from "./models";
 
 function App() {
   const [forms, setForms] = useState([]);
+  const [newForm, setNewForm] = useState({});
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -19,13 +20,19 @@ function App() {
       email: email,
     };
     const newForm = await DataStore.save(new Form(form));
+    getForms();
+  };
+
+  const getForms = async () => {
+    const models = await DataStore.query(Form);
+    setForms(models);
   };
 
   const deletePlayerHandler = async (form) => {
     const toDelete = await DataStore.query(Form, form.id);
     await DataStore.delete(toDelete);
     const models = await DataStore.query(Form);
-    setForms(models);
+    getForms();
   };
   return (
     <div className="App">
@@ -46,9 +53,17 @@ function App() {
             path="/registered-players"
             element={
               <RegisteredList
+                handleSubmit={handleSubmit}
                 forms={forms}
                 setForms={setForms}
                 deletePlayerHandler={deletePlayerHandler}
+                setFirstName={setFirstName}
+                setLastName={setLastName}
+                setEmail={setEmail}
+                firstName={firstName}
+                lastName={lastName}
+                email={email}
+                getForms={getForms}
               />
             }
           ></Route>
