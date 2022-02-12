@@ -1,6 +1,5 @@
 import React from "react";
 import { Form, FormGroup, Label, Input } from "reactstrap";
-
 import { Link } from "react-router-dom";
 
 const RegistrationForm = ({

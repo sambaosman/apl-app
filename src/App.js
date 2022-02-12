@@ -5,10 +5,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisteredList from "./RegisteredList";
 import { DataStore } from "aws-amplify";
 import { Form } from "./models";
+import AdminPage from "./AdminPage";
 
 function App() {
   const [forms, setForms] = useState([]);
-  const [newForm, setNewForm] = useState({});
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -38,8 +38,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<AdminPage />}></Route>
           <Route
-            path="/"
+            path="/registration-form"
             element={
               <RegistrationForm
                 handleSubmit={handleSubmit}
