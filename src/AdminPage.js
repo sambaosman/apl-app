@@ -5,8 +5,9 @@ const AdminPage = () => {
   return (
     <div>
       <Link to="/registration-form">
-        <div>Go To Form</div>
+        <button>Go To Form</button>
       </Link>
+      <button>Add Team</button>
     </div>
   );
 };

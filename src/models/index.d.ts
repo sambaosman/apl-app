@@ -4,12 +4,42 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-type UserMetaData = {
+type TeamsMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
 type FormMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type UserMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type TeamsFormMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+export declare class Teams {
+  readonly id: string;
+  readonly teamName?: string;
+  readonly Forms?: (TeamsForm | null)[];
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Teams, TeamsMetaData>);
+  static copyOf(source: Teams, mutator: (draft: MutableModel<Teams, TeamsMetaData>) => MutableModel<Teams, TeamsMetaData> | void): Teams;
+}
+
+export declare class Form {
+  readonly id: string;
+  readonly firstName?: string;
+  readonly lastName?: string;
+  readonly email?: string;
+  readonly teamss?: (TeamsForm | null)[];
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Form, FormMetaData>);
+  static copyOf(source: Form, mutator: (draft: MutableModel<Form, FormMetaData>) => MutableModel<Form, FormMetaData> | void): Form;
 }
 
 export declare class User {
@@ -22,13 +52,12 @@ export declare class User {
   static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
 }
 
-export declare class Form {
+export declare class TeamsForm {
   readonly id: string;
-  readonly firstName?: string;
-  readonly lastName?: string;
-  readonly email?: string;
+  readonly teams: Teams;
+  readonly form: Form;
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<Form, FormMetaData>);
-  static copyOf(source: Form, mutator: (draft: MutableModel<Form, FormMetaData>) => MutableModel<Form, FormMetaData> | void): Form;
+  constructor(init: ModelInit<TeamsForm, TeamsFormMetaData>);
+  static copyOf(source: TeamsForm, mutator: (draft: MutableModel<TeamsForm, TeamsFormMetaData>) => MutableModel<TeamsForm, TeamsFormMetaData> | void): TeamsForm;
 }
