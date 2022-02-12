@@ -38,7 +38,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AdminPage />}></Route>
+          <Route exact path="/" element={<AdminPage />}></Route>
           <Route
             path="/registration-form"
             element={

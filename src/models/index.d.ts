@@ -16,14 +16,10 @@ type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type TeamsFormMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
 export declare class Teams {
   readonly id: string;
   readonly teamName?: string;
-  readonly Forms?: (TeamsForm | null)[];
+  readonly Forms?: (Form | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Teams, TeamsMetaData>);
@@ -35,7 +31,7 @@ export declare class Form {
   readonly firstName?: string;
   readonly lastName?: string;
   readonly email?: string;
-  readonly teamss?: (TeamsForm | null)[];
+  readonly teamsID: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Form, FormMetaData>);
@@ -50,14 +46,4 @@ export declare class User {
   readonly userFormId?: string;
   constructor(init: ModelInit<User, UserMetaData>);
   static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
-}
-
-export declare class TeamsForm {
-  readonly id: string;
-  readonly teams: Teams;
-  readonly form: Form;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<TeamsForm, TeamsFormMetaData>);
-  static copyOf(source: TeamsForm, mutator: (draft: MutableModel<TeamsForm, TeamsFormMetaData>) => MutableModel<TeamsForm, TeamsFormMetaData> | void): TeamsForm;
 }

@@ -21,14 +21,14 @@ export const schema = {
                     "name": "Forms",
                     "isArray": true,
                     "type": {
-                        "model": "TeamsForm"
+                        "model": "Form"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "teams"
+                        "associatedWith": "teamsID"
                     }
                 },
                 "createdAt": {
@@ -104,19 +104,12 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "teamss": {
-                    "name": "teamss",
-                    "isArray": true,
-                    "type": {
-                        "model": "TeamsForm"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "form"
-                    }
+                "teamsID": {
+                    "name": "teamsID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -141,6 +134,15 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byTeams",
+                        "fields": [
+                            "teamsID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -232,71 +234,9 @@ export const schema = {
                     }
                 }
             ]
-        },
-        "TeamsForm": {
-            "name": "TeamsForm",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "teams": {
-                    "name": "teams",
-                    "isArray": false,
-                    "type": {
-                        "model": "Teams"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "teamsID"
-                    }
-                },
-                "form": {
-                    "name": "form",
-                    "isArray": false,
-                    "type": {
-                        "model": "Form"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "formID"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "TeamsForms",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                }
-            ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "259adb8d71e4ede3cc95f8df122616b9"
+    "version": "f23c3bdab63933a19a213998f34b0436"
 };
