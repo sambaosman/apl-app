@@ -91,7 +91,7 @@ const RegisteredList = ({
               onChange={(event) => setEmail(event.target.value)}
             />
           </FormGroup>
-          <div onClick={() => updateFormHandler}>Update</div>
+          <div onClick={updateFormHandler}>Update</div>
         </ReactForm>
       </Modal>
     </React.Fragment>
