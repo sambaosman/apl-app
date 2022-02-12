@@ -8,6 +8,8 @@ const AdminPage = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
   const [teamName, setTeamName] = useState(null);
   const [teams, setTeams] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [editedTeam, setEditedTeam] = useState(null);
 
   const addTeam = async () => {
     const newTeam = await DataStore.save(new Teams({ teamName: teamName }));
@@ -23,6 +25,20 @@ const AdminPage = () => {
     const toDelete = await DataStore.query(Teams, teamId);
     await DataStore.delete(toDelete);
     getTeams();
+  };
+
+  const updateTeamHandler = async () => {
+    try {
+      const original = await DataStore.query(Teams, editedTeam);
+      const update = await DataStore.save(
+        Teams.copyOf(original, (updated) => {
+          updated.teamName = teamName;
+        })
+      );
+      getTeams();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -53,9 +69,30 @@ const AdminPage = () => {
           <div key={index}>
             {team.teamName}
             <button onClick={() => deleteTeamHandler(team.id)}>Delete</button>
-            <button>Edit</button>
+            <button
+              onClick={() => {
+                setIsOpen(true);
+                setEditedTeam(team.id);
+              }}
+            >
+              Edit
+            </button>
           </div>
         ))}
+      <Modal isOpen={isOpen} toggle={() => setIsOpen(false)}>
+        <ReactForm>
+          <FormGroup>
+            <Label for="teamName">Team Name</Label>
+            <Input
+              name="teamName"
+              id="teamName"
+              placeholder="Enter Team Name"
+              onChange={(event) => setTeamName(event.target.value)}
+            />
+          </FormGroup>
+          <div onClick={updateTeamHandler}>Update</div>
+        </ReactForm>
+      </Modal>
     </div>
   );
 };
