@@ -19,6 +19,12 @@ const AdminPage = () => {
     setTeams(newTeams);
   };
 
+  const deleteTeamHandler = async (teamId) => {
+    const toDelete = await DataStore.query(Teams, teamId);
+    await DataStore.delete(toDelete);
+    getTeams();
+  };
+
   return (
     <div>
       <Link to="/registration-form">
@@ -43,7 +49,13 @@ const AdminPage = () => {
       ) : null}
 
       {teams &&
-        teams.map((team, index) => <div key={index}>{team.teamName}</div>)}
+        teams.map((team, index) => (
+          <div key={index}>
+            {team.teamName}
+            <button onClick={() => deleteTeamHandler(team.id)}>Delete</button>
+            <button>Edit</button>
+          </div>
+        ))}
     </div>
   );
 };

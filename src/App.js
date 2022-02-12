@@ -31,9 +31,9 @@ function App() {
   const deletePlayerHandler = async (form) => {
     const toDelete = await DataStore.query(Form, form.id);
     await DataStore.delete(toDelete);
-    const models = await DataStore.query(Form);
     getForms();
   };
+
   return (
     <div className="App">
       <BrowserRouter>
