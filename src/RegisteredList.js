@@ -27,19 +27,24 @@ const RegisteredList = ({
       {forms.map((form, index) => (
         <Row key={index}>
           <React.Fragment>
-            <Col md="4">{form.firstName}</Col>
-            <Col md="4">{form.lastName}</Col>
+            <Col md="2">{form.firstName}</Col>
+            <Col md="2">{form.lastName}</Col>
             <Col md="4">{form.email}</Col>
+            <Col md="2">
+              <button
+                onClick={() => {
+                  setIsOpen(true);
+                  setEditedPlayer(form.id);
+                }}
+              >
+                Edit
+              </button>
+            </Col>
+            <Col md="2">
+              {" "}
+              <button onClick={() => deleteForm(form, setForms)}>Delete</button>
+            </Col>
           </React.Fragment>
-          <button
-            onClick={() => {
-              setIsOpen(true);
-              setEditedPlayer(form.id);
-            }}
-          >
-            Edit
-          </button>
-          <button onClick={() => deleteForm(form, setForms)}>Delete</button>
         </Row>
       ))}
       <Modal isOpen={isOpen} toggle={() => setIsOpen(false)}>
@@ -73,7 +78,7 @@ const RegisteredList = ({
             />
           </FormGroup>
           <div
-            onClick={() =>
+            onClick={() => {
               updateForm(
                 editedPlayer,
                 firstName,
@@ -81,8 +86,9 @@ const RegisteredList = ({
                 email,
                 getForms,
                 setForms
-              )
-            }
+              );
+              setIsOpen(false);
+            }}
           >
             Update
           </div>

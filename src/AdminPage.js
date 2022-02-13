@@ -4,10 +4,10 @@ import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
 import { addTeam, deleteTeam, updateTeam } from "./TeamServices";
 
 const AdminPage = ({ signOut, user }) => {
-  const [buttonClicked, setButtonClicked] = useState(false);
   const [teamName, setTeamName] = useState(null);
   const [teams, setTeams] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [addTeamModalOpen, setAddTeamModalOpen] = useState(false);
+  const [editTeamModalOpen, setEditTeamModalOpen] = useState(false);
   const [editedTeam, setEditedTeam] = useState(null);
 
   return (
@@ -15,8 +15,11 @@ const AdminPage = ({ signOut, user }) => {
       <Link to="/registration-form">
         <button>Go To Form</button>
       </Link>
-      <button onClick={() => setButtonClicked(true)}>Add Team</button>
-      {buttonClicked ? (
+      <button onClick={() => setAddTeamModalOpen(true)}>Add Team</button>
+      <Modal
+        isOpen={addTeamModalOpen}
+        toggle={() => setAddTeamModalOpen(false)}
+      >
         <ReactForm>
           <FormGroup>
             <Label for="firstName">Team Name</Label>
@@ -27,12 +30,17 @@ const AdminPage = ({ signOut, user }) => {
               onChange={(event) => setTeamName(event.target.value)}
             />
           </FormGroup>
-          <button type="button" onClick={() => addTeam(teamName, setTeams)}>
+          <button
+            type="button"
+            onClick={() => {
+              addTeam(teamName, setTeams);
+              setAddTeamModalOpen(false);
+            }}
+          >
             Add Team to APL
           </button>
         </ReactForm>
-      ) : null}
-
+      </Modal>
       {teams &&
         teams.map((team, index) => (
           <div key={index}>
@@ -42,7 +50,7 @@ const AdminPage = ({ signOut, user }) => {
             </button>
             <button
               onClick={() => {
-                setIsOpen(true);
+                setEditTeamModalOpen(true);
                 setEditedTeam(team.id, setTeams);
               }}
             >
@@ -50,7 +58,10 @@ const AdminPage = ({ signOut, user }) => {
             </button>
           </div>
         ))}
-      <Modal isOpen={isOpen} toggle={() => setIsOpen(false)}>
+      <Modal
+        isOpen={editTeamModalOpen}
+        toggle={() => setEditTeamModalOpen(false)}
+      >
         <ReactForm>
           <FormGroup>
             <Label for="teamName">Team Name</Label>
@@ -61,7 +72,12 @@ const AdminPage = ({ signOut, user }) => {
               onChange={(event) => setTeamName(event.target.value)}
             />
           </FormGroup>
-          <div onClick={() => updateTeam(editedTeam, teamName, setTeams)}>
+          <div
+            onClick={() => {
+              updateTeam(editedTeam, teamName, setTeams);
+              setEditTeamModalOpen(false);
+            }}
+          >
             Update
           </div>
         </ReactForm>
