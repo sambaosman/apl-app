@@ -4,12 +4,12 @@ import { DataStore } from "aws-amplify";
 import { Form } from "./models";
 import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
 import { Link } from "react-router-dom";
+import { updateForm, deleteForm } from "./RegistrationServices";
 
 const RegisteredList = ({
-  handleSubmit,
   forms,
   setForms,
-  deletePlayerHandler,
+  deleteForm,
   setFirstName,
   setLastName,
   setEmail,
@@ -22,24 +22,8 @@ const RegisteredList = ({
   const [editedPlayer, setEditedPlayer] = useState(null);
 
   useEffect(() => {
-    getForms();
+    getForms(setForms);
   }, []);
-
-  const updateFormHandler = async () => {
-    try {
-      const original = await DataStore.query(Form, editedPlayer);
-      const update = await DataStore.save(
-        Form.copyOf(original, (updated) => {
-          updated.firstName = firstName;
-          updated.lastName = lastName;
-          updated.email = email;
-        })
-      );
-      getForms();
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   return (
     <React.Fragment>
@@ -58,7 +42,7 @@ const RegisteredList = ({
           >
             Edit
           </button>
-          <button onClick={() => deletePlayerHandler(form)}>Delete</button>
+          <button onClick={() => deleteForm(form, setForms)}>Delete</button>
         </Row>
       ))}
       <Modal isOpen={isOpen} toggle={() => setIsOpen(false)}>
@@ -91,7 +75,20 @@ const RegisteredList = ({
               onChange={(event) => setEmail(event.target.value)}
             />
           </FormGroup>
-          <div onClick={updateFormHandler}>Update</div>
+          <div
+            onClick={() =>
+              updateForm(
+                editedPlayer,
+                firstName,
+                lastName,
+                email,
+                getForms,
+                setForms
+              )
+            }
+          >
+            Update
+          </div>
         </ReactForm>
       </Modal>
     </React.Fragment>

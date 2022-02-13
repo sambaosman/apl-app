@@ -10,6 +10,7 @@ import { Amplify } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "./aws-exports";
+import { submitForm, getForms, deleteForm } from "./RegistrationServices";
 Amplify.configure(awsExports);
 
 function App({ signOut, user }) {
@@ -17,27 +18,6 @@ function App({ signOut, user }) {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
-
-  const handleSubmit = async () => {
-    const form = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-    };
-    const newForm = await DataStore.save(new Form(form));
-    getForms();
-  };
-
-  const getForms = async () => {
-    const models = await DataStore.query(Form);
-    setForms(models);
-  };
-
-  const deletePlayerHandler = async (form) => {
-    const toDelete = await DataStore.query(Form, form.id);
-    await DataStore.delete(toDelete);
-    getForms();
-  };
 
   return (
     <div className="App">
@@ -52,10 +32,14 @@ function App({ signOut, user }) {
             path="/registration-form"
             element={
               <RegistrationForm
-                handleSubmit={handleSubmit}
+                submitForm={submitForm}
                 setFirstName={setFirstName}
                 setLastName={setLastName}
                 setEmail={setEmail}
+                firstName={firstName}
+                lastName={lastName}
+                email={email}
+                setForms={setForms}
               />
             }
           ></Route>
@@ -63,10 +47,10 @@ function App({ signOut, user }) {
             path="/registered-players"
             element={
               <RegisteredList
-                handleSubmit={handleSubmit}
+                submitForm={submitForm}
                 forms={forms}
                 setForms={setForms}
-                deletePlayerHandler={deletePlayerHandler}
+                deleteForm={deleteForm}
                 setFirstName={setFirstName}
                 setLastName={setLastName}
                 setEmail={setEmail}
