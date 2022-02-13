@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "reactstrap";
-import { DataStore } from "aws-amplify";
-import { Form } from "./models";
 import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
-import { Link } from "react-router-dom";
-import { updateForm, deleteForm } from "./RegistrationServices";
+import { updateForm } from "./RegistrationServices";
 
 const RegisteredList = ({
   forms,

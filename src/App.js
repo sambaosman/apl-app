@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 import RegistrationForm from "./RegistrationForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisteredList from "./RegisteredList";
-import { DataStore } from "aws-amplify";
-import { Form } from "./models";
 import AdminPage from "./AdminPage";
 import { Amplify } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";

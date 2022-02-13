@@ -1,8 +1,7 @@
-import { DataStore } from "aws-amplify";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
-import { addTeam, getTeams, deleteTeam, updateTeam } from "./TeamServices";
+import { addTeam, deleteTeam, updateTeam } from "./TeamServices";
 
 const AdminPage = ({ signOut, user }) => {
   const [buttonClicked, setButtonClicked] = useState(false);
