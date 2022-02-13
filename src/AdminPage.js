@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
 import { Teams } from "./models";
 
-const AdminPage = () => {
+const AdminPage = ({ signOut, user }) => {
   const [buttonClicked, setButtonClicked] = useState(false);
   const [teamName, setTeamName] = useState(null);
   const [teams, setTeams] = useState([]);
@@ -93,6 +93,8 @@ const AdminPage = () => {
           <div onClick={updateTeamHandler}>Update</div>
         </ReactForm>
       </Modal>
+      <div>Hello {user.attributes.preferred_username}</div>
+      <button onClick={signOut}> Sign out</button>
     </div>
   );
 };

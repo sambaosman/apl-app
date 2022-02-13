@@ -6,9 +6,13 @@ import RegisteredList from "./RegisteredList";
 import { DataStore } from "aws-amplify";
 import { Form } from "./models";
 import AdminPage from "./AdminPage";
+import { Amplify } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
+import awsExports from "./aws-exports";
+Amplify.configure(awsExports);
 
-function App() {
+function App({ signOut, user }) {
   const [forms, setForms] = useState([]);
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -39,7 +43,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<AdminPage />}></Route>
+          <Route
+            exact
+            path="/"
+            element={<AdminPage signOut={signOut} user={user} />}
+          ></Route>
           <Route
             path="/registration-form"
             element={
