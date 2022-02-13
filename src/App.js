@@ -11,6 +11,8 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "./aws-exports";
 import { submitForm, getForms, deleteForm } from "./RegistrationServices";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 Amplify.configure(awsExports);
 
 function App({ signOut, user }) {

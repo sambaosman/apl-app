@@ -18,6 +18,7 @@ const RegistrationForm = ({
         <FormGroup>
           <Label for="firstName">First Name</Label>
           <Input
+            required
             name="firstName"
             id="firstName"
             placeholder="Enter First Name"
@@ -27,6 +28,7 @@ const RegistrationForm = ({
         <FormGroup>
           <Label for="lastName">Last Name</Label>
           <Input
+            required
             name="lastName"
             id="lastName"
             placeholder="Enter Last Name"
@@ -36,6 +38,7 @@ const RegistrationForm = ({
         <FormGroup>
           <Label for="email">Email</Label>
           <Input
+            required
             type="email"
             name="email"
             id="exampleEmail"
