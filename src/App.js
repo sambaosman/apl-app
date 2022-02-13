@@ -6,6 +6,7 @@ import RegisteredList from "./RegisteredList";
 import { DataStore } from "aws-amplify";
 import { Form } from "./models";
 import AdminPage from "./AdminPage";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
 function App() {
   const [forms, setForms] = useState([]);
@@ -74,4 +75,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);
