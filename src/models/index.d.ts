@@ -4,32 +4,46 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-type CommentMetaData = {
+type TeamsMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type PostMetaData = {
+type FormMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Comment {
-  readonly id: string;
-  readonly text?: string;
-  readonly comment?: string;
-  readonly postID: string;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<Comment, CommentMetaData>);
-  static copyOf(source: Comment, mutator: (draft: MutableModel<Comment, CommentMetaData>) => MutableModel<Comment, CommentMetaData> | void): Comment;
+type UserMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Post {
+export declare class Teams {
   readonly id: string;
-  readonly title?: string;
-  readonly content?: string;
-  readonly Comments?: (Comment | null)[];
+  readonly teamName?: string;
+  readonly Forms?: (Form | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<Post, PostMetaData>);
-  static copyOf(source: Post, mutator: (draft: MutableModel<Post, PostMetaData>) => MutableModel<Post, PostMetaData> | void): Post;
+  constructor(init: ModelInit<Teams, TeamsMetaData>);
+  static copyOf(source: Teams, mutator: (draft: MutableModel<Teams, TeamsMetaData>) => MutableModel<Teams, TeamsMetaData> | void): Teams;
+}
+
+export declare class Form {
+  readonly id: string;
+  readonly firstName?: string;
+  readonly lastName?: string;
+  readonly email?: string;
+  readonly teamsID: string;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Form, FormMetaData>);
+  static copyOf(source: Form, mutator: (draft: MutableModel<Form, FormMetaData>) => MutableModel<Form, FormMetaData> | void): Form;
+}
+
+export declare class User {
+  readonly id: string;
+  readonly Form?: Form;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  readonly userFormId?: string;
+  constructor(init: ModelInit<User, UserMetaData>);
+  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
 }

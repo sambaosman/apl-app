@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Comment": {
-            "name": "Comment",
+        "Teams": {
+            "name": "Teams",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,22 +10,102 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "text": {
-                    "name": "text",
+                "teamName": {
+                    "name": "teamName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "comment": {
-                    "name": "comment",
+                "Forms": {
+                    "name": "Forms",
+                    "isArray": true,
+                    "type": {
+                        "model": "Form"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "teamsID"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Teams",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Form": {
+            "name": "Form",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "firstName": {
+                    "name": "firstName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "postID": {
-                    "name": "postID",
+                "lastName": {
+                    "name": "lastName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "teamsID": {
+                    "name": "teamsID",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": true,
@@ -49,7 +129,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Comments",
+            "pluralName": "Forms",
             "attributes": [
                 {
                     "type": "model",
@@ -58,9 +138,9 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byPost",
+                        "name": "byTeams",
                         "fields": [
-                            "postID"
+                            "teamsID"
                         ]
                     }
                 },
@@ -82,8 +162,8 @@ export const schema = {
                 }
             ]
         },
-        "Post": {
-            "name": "Post",
+        "User": {
+            "name": "User",
             "fields": {
                 "id": {
                     "name": "id",
@@ -92,32 +172,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "title": {
-                    "name": "title",
+                "Form": {
+                    "name": "Form",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "content": {
-                    "name": "content",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Comments": {
-                    "name": "Comments",
-                    "isArray": true,
                     "type": {
-                        "model": "Comment"
+                        "model": "Form"
                     },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "postID"
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": "id",
+                        "targetName": "userFormId"
                     }
                 },
                 "createdAt": {
@@ -135,10 +201,17 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
+                },
+                "userFormId": {
+                    "name": "userFormId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Posts",
+            "pluralName": "Users",
             "attributes": [
                 {
                     "type": "model",
@@ -165,5 +238,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "d04d7d8ca8fe9f7470f09d6233beb1a7"
+    "version": "f23c3bdab63933a19a213998f34b0436"
 };
