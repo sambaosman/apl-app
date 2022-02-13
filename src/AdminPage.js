@@ -2,7 +2,7 @@ import { DataStore } from "aws-amplify";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
-import { Teams } from "./models";
+import { addTeam, getTeams, deleteTeam, updateTeam } from "./TeamServices";
 
 const AdminPage = ({ signOut, user }) => {
   const [buttonClicked, setButtonClicked] = useState(false);
@@ -10,36 +10,6 @@ const AdminPage = ({ signOut, user }) => {
   const [teams, setTeams] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [editedTeam, setEditedTeam] = useState(null);
-
-  const addTeam = async () => {
-    const newTeam = await DataStore.save(new Teams({ teamName: teamName }));
-    getTeams();
-  };
-
-  const getTeams = async () => {
-    const newTeams = await DataStore.query(Teams);
-    setTeams(newTeams);
-  };
-
-  const deleteTeamHandler = async (teamId) => {
-    const toDelete = await DataStore.query(Teams, teamId);
-    await DataStore.delete(toDelete);
-    getTeams();
-  };
-
-  const updateTeamHandler = async () => {
-    try {
-      const original = await DataStore.query(Teams, editedTeam);
-      const update = await DataStore.save(
-        Teams.copyOf(original, (updated) => {
-          updated.teamName = teamName;
-        })
-      );
-      getTeams();
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   return (
     <div>
@@ -58,7 +28,7 @@ const AdminPage = ({ signOut, user }) => {
               onChange={(event) => setTeamName(event.target.value)}
             />
           </FormGroup>
-          <button type="button" onClick={() => addTeam()}>
+          <button type="button" onClick={() => addTeam(teamName, setTeams)}>
             Add Team to APL
           </button>
         </ReactForm>
@@ -68,11 +38,13 @@ const AdminPage = ({ signOut, user }) => {
         teams.map((team, index) => (
           <div key={index}>
             {team.teamName}
-            <button onClick={() => deleteTeamHandler(team.id)}>Delete</button>
+            <button onClick={() => deleteTeam(team.id, setTeams)}>
+              Delete
+            </button>
             <button
               onClick={() => {
                 setIsOpen(true);
-                setEditedTeam(team.id);
+                setEditedTeam(team.id, setTeams);
               }}
             >
               Edit
@@ -90,7 +62,9 @@ const AdminPage = ({ signOut, user }) => {
               onChange={(event) => setTeamName(event.target.value)}
             />
           </FormGroup>
-          <div onClick={updateTeamHandler}>Update</div>
+          <div onClick={() => updateTeam(editedTeam, teamName, setTeams)}>
+            Update
+          </div>
         </ReactForm>
       </Modal>
       <div>Hello {user.attributes.preferred_username}</div>
