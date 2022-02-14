@@ -10,11 +10,13 @@ const AdminPage = ({ signOut, user }) => {
   const [editTeamModalOpen, setEditTeamModalOpen] = useState(false);
   const [editedTeam, setEditedTeam] = useState(null);
 
+  let link = `${window.location.href}${teams.pop() && teams.pop().id}`;
+
   return (
     <div>
-      <Link to="/registration-form">
+      {/* <Link to="/registration-form">
         <button>Go To Form</button>
-      </Link>
+      </Link> */}
       <button onClick={() => setAddTeamModalOpen(true)}>Add Team</button>
       <Modal
         isOpen={addTeamModalOpen}
@@ -41,7 +43,15 @@ const AdminPage = ({ signOut, user }) => {
           </button>
         </ReactForm>
       </Modal>
-      {teams &&
+      {teams && teams.pop() && (
+        <div>
+          <div>Here's your shareable link</div>
+          <div>
+            <a href={link}>{link}</a>
+          </div>
+        </div>
+      )}
+      {/* {teams &&
         teams.map((team, index) => (
           <div key={index}>
             {team.teamName}
@@ -57,7 +67,7 @@ const AdminPage = ({ signOut, user }) => {
               Edit
             </button>
           </div>
-        ))}
+        ))} */}
       <Modal
         isOpen={editTeamModalOpen}
         toggle={() => setEditTeamModalOpen(false)}

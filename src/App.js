@@ -18,6 +18,7 @@ function App({ signOut, user }) {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
+  const [teamsID, setTeamsID] = useState();
 
   return (
     <div className="App">
@@ -29,7 +30,7 @@ function App({ signOut, user }) {
             element={<AdminPage signOut={signOut} user={user} />}
           ></Route>
           <Route
-            path="/registration-form"
+            path={"/f6ae81a1-e726-45e9-91aa-5952858c476e"}
             element={
               <RegistrationForm
                 submitForm={submitForm}
@@ -40,11 +41,12 @@ function App({ signOut, user }) {
                 lastName={lastName}
                 email={email}
                 setForms={setForms}
+                setTeamsID={setTeamsID}
               />
             }
           ></Route>
           <Route
-            path="/registered-players"
+            path={`/f6ae81a1-e726-45e9-91aa-5952858c476e/registered-players`}
             element={
               <RegisteredList
                 submitForm={submitForm}
