@@ -12,6 +12,7 @@ const RegistrationForm = ({
   email,
   setForms,
 }) => {
+  const teamsID = window.location.href.split("/").pop();
   return (
     <React.Fragment>
       <Form>
@@ -47,8 +48,10 @@ const RegistrationForm = ({
           />
         </FormGroup>
         <Link
-          to="/registered-players"
-          onClick={() => submitForm(firstName, lastName, email, setForms)}
+          to={`${window.location.pathname}/registered-players`}
+          onClick={() =>
+            submitForm(firstName, lastName, email, setForms, teamsID)
+          }
         >
           <div>Submit</div>
         </Link>

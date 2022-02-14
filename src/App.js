@@ -10,14 +10,22 @@ import "@aws-amplify/ui-react/styles.css";
 import awsExports from "./aws-exports";
 import { submitForm, getForms, deleteForm } from "./RegistrationServices";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getTeams } from "./TeamServices";
 
 Amplify.configure(awsExports);
 
 function App({ signOut, user }) {
   const [forms, setForms] = useState([]);
+  const [teams, setTeams] = useState([]);
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
+  const [teamsID, setTeamsID] = useState();
+
+  useEffect(() => {
+    getForms(setForms);
+    getTeams(setTeams);
+  }, []);
 
   return (
     <div className="App">
@@ -26,41 +34,55 @@ function App({ signOut, user }) {
           <Route
             exact
             path="/"
-            element={<AdminPage signOut={signOut} user={user} />}
-          ></Route>
-          <Route
-            path="/registration-form"
             element={
-              <RegistrationForm
-                submitForm={submitForm}
-                setFirstName={setFirstName}
-                setLastName={setLastName}
-                setEmail={setEmail}
-                firstName={firstName}
-                lastName={lastName}
-                email={email}
-                setForms={setForms}
+              <AdminPage
+                signOut={signOut}
+                user={user}
+                teams={teams}
+                setTeams={setTeams}
               />
             }
           ></Route>
-          <Route
-            path="/registered-players"
-            element={
-              <RegisteredList
-                submitForm={submitForm}
-                forms={forms}
-                setForms={setForms}
-                deleteForm={deleteForm}
-                setFirstName={setFirstName}
-                setLastName={setLastName}
-                setEmail={setEmail}
-                firstName={firstName}
-                lastName={lastName}
-                email={email}
-                getForms={getForms}
-              />
-            }
-          ></Route>
+          {teams &&
+            teams.length &&
+            teams.map((team, index) => (
+              <React.Fragment key={index}>
+                <Route
+                  path={`/${team.id}`}
+                  element={
+                    <RegistrationForm
+                      submitForm={submitForm}
+                      setFirstName={setFirstName}
+                      setLastName={setLastName}
+                      setEmail={setEmail}
+                      firstName={firstName}
+                      lastName={lastName}
+                      email={email}
+                      setForms={setForms}
+                      setTeamsID={setTeamsID}
+                    />
+                  }
+                ></Route>
+                <Route
+                  path={`/${team.id}/registered-players`}
+                  element={
+                    <RegisteredList
+                      submitForm={submitForm}
+                      forms={forms}
+                      setForms={setForms}
+                      deleteForm={deleteForm}
+                      setFirstName={setFirstName}
+                      setLastName={setLastName}
+                      setEmail={setEmail}
+                      firstName={firstName}
+                      lastName={lastName}
+                      email={email}
+                      getForms={getForms}
+                    />
+                  }
+                ></Route>
+              </React.Fragment>
+            ))}
         </Routes>
       </BrowserRouter>
     </div>

@@ -3,18 +3,19 @@ import { Link } from "react-router-dom";
 import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
 import { addTeam, deleteTeam, updateTeam } from "./TeamServices";
 
-const AdminPage = ({ signOut, user }) => {
+const AdminPage = ({ signOut, user, teams, setTeams }) => {
   const [teamName, setTeamName] = useState(null);
-  const [teams, setTeams] = useState([]);
   const [addTeamModalOpen, setAddTeamModalOpen] = useState(false);
   const [editTeamModalOpen, setEditTeamModalOpen] = useState(false);
   const [editedTeam, setEditedTeam] = useState(null);
 
+  let link = `${window.location.href}${teams.pop() && teams.pop().id}`;
+
   return (
     <div>
-      <Link to="/registration-form">
+      {/* <Link to="/registration-form">
         <button>Go To Form</button>
-      </Link>
+      </Link> */}
       <button onClick={() => setAddTeamModalOpen(true)}>Add Team</button>
       <Modal
         isOpen={addTeamModalOpen}
@@ -41,7 +42,15 @@ const AdminPage = ({ signOut, user }) => {
           </button>
         </ReactForm>
       </Modal>
-      {teams &&
+      {teams && teams.pop() && (
+        <div>
+          <div>Here's your shareable link</div>
+          <div>
+            <a href={link}>{link}</a>
+          </div>
+        </div>
+      )}
+      {/* {teams &&
         teams.map((team, index) => (
           <div key={index}>
             {team.teamName}
@@ -57,7 +66,7 @@ const AdminPage = ({ signOut, user }) => {
               Edit
             </button>
           </div>
-        ))}
+        ))} */}
       <Modal
         isOpen={editTeamModalOpen}
         toggle={() => setEditTeamModalOpen(false)}
@@ -82,7 +91,6 @@ const AdminPage = ({ signOut, user }) => {
           </div>
         </ReactForm>
       </Modal>
-      <div>Hello {user.attributes.preferred_username}</div>
       <button onClick={signOut}> Sign out</button>
     </div>
   );

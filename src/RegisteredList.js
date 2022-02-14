@@ -24,29 +24,37 @@ const RegisteredList = ({
 
   return (
     <React.Fragment>
-      {forms.map((form, index) => (
-        <Row key={index}>
-          <React.Fragment>
-            <Col md="2">{form.firstName}</Col>
-            <Col md="2">{form.lastName}</Col>
-            <Col md="4">{form.email}</Col>
-            <Col md="2">
-              <button
-                onClick={() => {
-                  setIsOpen(true);
-                  setEditedPlayer(form.id);
-                }}
-              >
-                Edit
-              </button>
-            </Col>
-            <Col md="2">
-              {" "}
-              <button onClick={() => deleteForm(form, setForms)}>Delete</button>
-            </Col>
-          </React.Fragment>
-        </Row>
-      ))}
+      {forms &&
+        forms.length &&
+        forms
+          .filter(
+            (form) => form.teamsID === window.location.pathname.split("/")[1]
+          )
+          .map((form, index) => (
+            <Row key={index}>
+              <React.Fragment>
+                <Col md="2">{form.firstName}</Col>
+                <Col md="2">{form.lastName}</Col>
+                <Col md="4">{form.email}</Col>
+                <Col md="2">
+                  <button
+                    onClick={() => {
+                      setIsOpen(true);
+                      setEditedPlayer(form.id);
+                    }}
+                  >
+                    Edit
+                  </button>
+                </Col>
+                <Col md="2">
+                  {" "}
+                  <button onClick={() => deleteForm(form, setForms)}>
+                    Delete
+                  </button>
+                </Col>
+              </React.Fragment>
+            </Row>
+          ))}
       <Modal isOpen={isOpen} toggle={() => setIsOpen(false)}>
         <ReactForm>
           <FormGroup>

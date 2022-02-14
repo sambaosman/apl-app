@@ -24,18 +24,25 @@ export const updateForm = async (
   }
 };
 
-export const submitForm = async (firstName, lastName, email, setForms) => {
+export const submitForm = async (
+  firstName,
+  lastName,
+  email,
+  setForms,
+  teamsID
+) => {
   const form = {
     firstName: firstName,
     lastName: lastName,
     email: email,
+    teamsID: teamsID,
   };
   const newForm = await DataStore.save(new Form(form));
   getForms(setForms);
 };
 
-export const getForms = async (setForms) => {
-  const models = await DataStore.query(Form);
+export const getForms = async (setForms, teamsID) => {
+  let models = await DataStore.query(Form);
   setForms(models);
 };
 
