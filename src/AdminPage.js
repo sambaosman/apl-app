@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
 import { addTeam, deleteTeam, updateTeam } from "./TeamServices";
 
-const AdminPage = ({ signOut, user }) => {
+const AdminPage = ({ signOut, user, teams, setTeams }) => {
   const [teamName, setTeamName] = useState(null);
-  const [teams, setTeams] = useState([]);
   const [addTeamModalOpen, setAddTeamModalOpen] = useState(false);
   const [editTeamModalOpen, setEditTeamModalOpen] = useState(false);
   const [editedTeam, setEditedTeam] = useState(null);

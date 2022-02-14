@@ -43,7 +43,6 @@ export const submitForm = async (
 
 export const getForms = async (setForms, teamsID) => {
   let models = await DataStore.query(Form);
-  models.filter((model) => model.teamsID === teamsID);
   setForms(models);
 };
 
