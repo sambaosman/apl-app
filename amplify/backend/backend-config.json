@@ -33,12 +33,16 @@
           "EMAIL"
         ],
         "signupAttributes": [
-          "EMAIL",
-          "PREFERRED_USERNAME"
+          "EMAIL"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS",
+            "REQUIRES_UPPERCASE"
+          ]
         },
         "mfaConfiguration": "OFF",
         "mfaTypes": [
@@ -48,6 +52,13 @@
           "EMAIL"
         ]
       }
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "providerPlugin": "awscloudformation",
+      "type": "manual"
     }
   }
 }

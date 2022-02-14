@@ -4,10 +4,9 @@ import { schema } from './schema';
 
 
 
-const { Teams, Form, User } = initSchema(schema);
+const { Form, Teams } = initSchema(schema);
 
 export {
-  Teams,
   Form,
-  User
+  Teams
 };

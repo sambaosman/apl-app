@@ -82,7 +82,6 @@ const AdminPage = ({ signOut, user }) => {
           </div>
         </ReactForm>
       </Modal>
-      <div>Hello {user.attributes.preferred_username}</div>
       <button onClick={signOut}> Sign out</button>
     </div>
   );
