@@ -9,7 +9,9 @@ const AdminPage = ({ signOut, user, teams, setTeams }) => {
   const [editTeamModalOpen, setEditTeamModalOpen] = useState(false);
   const [editedTeam, setEditedTeam] = useState(null);
 
-  let link = `${window.location.href}${teams.pop() && teams.pop().id}`;
+  let link = `${window.location.href}${
+    teams.pop() && teams.pop() && teams.pop().id
+  }`;
 
   return (
     <div>
@@ -50,7 +52,7 @@ const AdminPage = ({ signOut, user, teams, setTeams }) => {
           </div>
         </div>
       )}
-      {/* {teams &&
+      {teams &&
         teams.map((team, index) => (
           <div key={index}>
             {team.teamName}
@@ -66,7 +68,7 @@ const AdminPage = ({ signOut, user, teams, setTeams }) => {
               Edit
             </button>
           </div>
-        ))} */}
+        ))}
       <Modal
         isOpen={editTeamModalOpen}
         toggle={() => setEditTeamModalOpen(false)}
