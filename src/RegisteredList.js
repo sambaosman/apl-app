@@ -30,7 +30,9 @@ const RegisteredList = ({
         forms.length &&
         forms
           .filter(
-            (form) => form.teamsID === window.location.pathname.split("/")[1]
+            (form) =>
+              form.teamsID === window.location.pathname.split("/")[1] &&
+              !form.guestPlayer
           )
           .map((form, index) => (
             <Row key={index}>

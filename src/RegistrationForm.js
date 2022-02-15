@@ -12,12 +12,12 @@ const RegistrationForm = ({
   email,
   setForms,
 }) => {
-  const splitLink = window.location.href.split("/");
+  const splitLink = window.location.pathname.split("/");
   const teamsID =
-    splitLink.pop() === "guest"
-      ? splitLink[splitLink.length - 1]
-      : splitLink.pop();
-  const guest = window.location.href.includes("guest");
+    splitLink[splitLink.length - 1] === "guest"
+      ? splitLink[splitLink.length - 2]
+      : splitLink[splitLink.length - 1];
+  const guest = window.location.pathname.includes("guest");
   return (
     <React.Fragment>
       <Form>
