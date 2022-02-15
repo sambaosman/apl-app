@@ -64,6 +64,41 @@ function App({ signOut, user }) {
                   }
                 ></Route>
                 <Route
+                  path={`/${team.id}/guest`}
+                  element={
+                    <RegistrationForm
+                      submitForm={submitForm}
+                      setFirstName={setFirstName}
+                      setLastName={setLastName}
+                      setEmail={setEmail}
+                      firstName={firstName}
+                      lastName={lastName}
+                      email={email}
+                      setForms={setForms}
+                      setTeamsID={setTeamsID}
+                    />
+                  }
+                ></Route>
+
+                <Route
+                  path={`/${team.id}/guest/registered-players`}
+                  element={
+                    <RegisteredList
+                      submitForm={submitForm}
+                      forms={forms}
+                      setForms={setForms}
+                      deleteForm={deleteForm}
+                      setFirstName={setFirstName}
+                      setLastName={setLastName}
+                      setEmail={setEmail}
+                      firstName={firstName}
+                      lastName={lastName}
+                      email={email}
+                      getForms={getForms}
+                    />
+                  }
+                ></Route>
+                <Route
                   path={`/${team.id}/registered-players`}
                   element={
                     <RegisteredList

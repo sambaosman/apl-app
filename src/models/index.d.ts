@@ -18,6 +18,7 @@ export declare class Form {
   readonly lastName?: string;
   readonly email?: string;
   readonly teamsID: string;
+  readonly guestPlayer?: boolean;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Form, FormMetaData>);

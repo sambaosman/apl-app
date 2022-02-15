@@ -29,13 +29,15 @@ export const submitForm = async (
   lastName,
   email,
   setForms,
-  teamsID
+  teamsID,
+  guest
 ) => {
   const form = {
     firstName: firstName,
     lastName: lastName,
     email: email,
     teamsID: teamsID,
+    guestPlayer: guest,
   };
   const newForm = await DataStore.save(new Form(form));
   getForms(setForms);

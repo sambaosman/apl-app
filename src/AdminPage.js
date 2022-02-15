@@ -50,6 +50,10 @@ const AdminPage = ({ signOut, user, teams, setTeams }) => {
           <div>
             <a href={link}>{link}</a>
           </div>
+          <div>Here's your shareable guest link</div>
+          <div>
+            <a href={`${link}/guest`}>{`${link}/guest`}</a>
+          </div>
         </div>
       )}
       {teams &&

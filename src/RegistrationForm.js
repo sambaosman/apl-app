@@ -12,7 +12,12 @@ const RegistrationForm = ({
   email,
   setForms,
 }) => {
-  const teamsID = window.location.href.split("/").pop();
+  const splitLink = window.location.href.split("/");
+  const teamsID =
+    splitLink.pop() === "guest"
+      ? splitLink[splitLink.length - 1]
+      : splitLink.pop();
+  const guest = window.location.href.includes("guest");
   return (
     <React.Fragment>
       <Form>
@@ -50,7 +55,7 @@ const RegistrationForm = ({
         <Link
           to={`${window.location.pathname}/registered-players`}
           onClick={() =>
-            submitForm(firstName, lastName, email, setForms, teamsID)
+            submitForm(firstName, lastName, email, setForms, teamsID, guest)
           }
         >
           <div>Submit</div>
