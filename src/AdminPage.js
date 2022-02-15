@@ -9,9 +9,8 @@ const AdminPage = ({ signOut, user, teams, setTeams }) => {
   const [editTeamModalOpen, setEditTeamModalOpen] = useState(false);
   const [editedTeam, setEditedTeam] = useState(null);
 
-  let link = `${window.location.href}${
-    teams.pop() && teams.pop() && teams.pop().id
-  }`;
+  const team = teams.find((team) => teamName === team.teamName);
+  let link = team && `${window.location.href}${team.id}`;
 
   return (
     <div>
@@ -44,7 +43,8 @@ const AdminPage = ({ signOut, user, teams, setTeams }) => {
           </button>
         </ReactForm>
       </Modal>
-      {teams && teams.pop() && (
+      {}
+      {team && (
         <div>
           <div>Here's your shareable link</div>
           <div>
