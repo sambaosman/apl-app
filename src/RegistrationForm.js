@@ -12,12 +12,12 @@ const RegistrationForm = ({
   email,
   setForms,
 }) => {
-  const splitLink = window.location.pathname.split("/");
+  const splitLink = window.location.pathname.split("/"); //separate link by /
   const teamsID =
-    splitLink[splitLink.length - 1] === "guest"
-      ? splitLink[splitLink.length - 2]
+    splitLink[splitLink.length - 1] === "guest" //checking if link includes /guest. if it does,
+      ? splitLink[splitLink.length - 2] //get the previous part of the link to grab the id
       : splitLink[splitLink.length - 1];
-  const guest = window.location.pathname.includes("guest");
+  const guest = window.location.pathname.includes("guest"); //check if player is a guest
   return (
     <React.Fragment>
       <Form>
