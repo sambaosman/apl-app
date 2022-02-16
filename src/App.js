@@ -11,7 +11,8 @@ import { submitForm, getForms, deleteForm } from "./RegistrationServices";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getTeams } from "./TeamServices";
 import awsExports from "./aws-exports";
-import LoginPage from "./LoginRegistration/LoginPage";
+import LoginPage from "./LoginRegistration/Login/LoginPage";
+import RegistrationSelector from "./LoginRegistration/Registration/RegistrationSelector";
 
 Amplify.configure(awsExports);
 
@@ -30,6 +31,7 @@ function App({ signOut, user }) {
 
   return (
     <div className="App">
+      <RegistrationSelector />
       <LoginPage />
       <BrowserRouter>
         <Routes>
