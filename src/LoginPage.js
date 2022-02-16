@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Button } from "./StyledComponents/StyledComponents";
+import { Input, PrimaryButton } from "./StyledComponents/StyledComponents";
 import { Auth } from "aws-amplify";
 
 const LoginPage = () => {
@@ -36,7 +36,7 @@ const LoginPage = () => {
         </span>
       </div>
       <div>
-        <Button onClick={handleFormSubmission}>Log in</Button>
+        <PrimaryButton onClick={handleFormSubmission}>Log in</PrimaryButton>
       </div>
     </div>
   );

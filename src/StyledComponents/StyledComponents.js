@@ -15,7 +15,7 @@ export const Input = styled.input`
   border: none;
 `;
 
-export const Button = styled.button`
+export const PrimaryButton = styled.button`
   background-color: var(--secondary);
   font-size: 15px;
   font-weight: bold;
