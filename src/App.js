@@ -13,7 +13,7 @@ import { getTeams } from "./TeamServices";
 import awsExports from "./aws-exports";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
 import RegistrationSelector from "./LoginRegistration/Registration/RegistrationSelector";
-
+import RegistrationInputGroup from "./LoginRegistration/Registration/RegistrationInputGroup";
 Amplify.configure(awsExports);
 
 function App({ signOut, user }) {
@@ -31,6 +31,7 @@ function App({ signOut, user }) {
 
   return (
     <div className="App">
+      <RegistrationInputGroup />
       <RegistrationSelector />
       <LoginPage />
       <BrowserRouter>

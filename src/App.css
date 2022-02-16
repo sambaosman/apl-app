@@ -62,3 +62,9 @@
 .selector-row:hover {
   cursor: pointer;
 }
+
+.apl-about-message {
+  text-align: left;
+  color: var(--primary);
+  font-size: 14px;
+}
