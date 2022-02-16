@@ -5,24 +5,13 @@ import { Auth } from "aws-amplify";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
-  async function signIn() {
-    try {
-      Auth.signIn({ email, password })
-        .then((user) => {
-          // Handle case where New Password is Required.
-        })
-        .catch((e) => {
-          setErrorMessage(e.message);
-        });
-    } catch (e) {}
-  }
-
-  const handleFormSubmission = (e) => {
+  const handleFormSubmission = async (e) => {
     e.preventDefault();
-
-    signIn();
+    let response = await Auth.signIn({ email, password }).catch((err) => {
+      console.error(err);
+    });
+    console.log("auth response", response);
   };
 
   return (
@@ -42,18 +31,13 @@ const LoginPage = () => {
       />
       <div className="login-subsection">
         Don't have an account?
-        <span
-          className="login-subsection-link"
-          type="submit"
-          onClick={{ handleFormSubmission }}
-        >
+        <span className="login-subsection-link" type="submit">
           Sign Up
         </span>
       </div>
       <div>
-        <Button>Log in</Button>
+        <Button onClick={handleFormSubmission}>Log in</Button>
       </div>
-      <div>{errorMessage}</div>
     </div>
   );
 };

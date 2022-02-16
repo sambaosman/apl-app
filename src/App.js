@@ -30,13 +30,13 @@ function App({ signOut, user }) {
 
   return (
     <div className="App">
+      <LoginPage />
       <BrowserRouter>
         <Routes>
-          <Route
+          {/* <Route
             exact
             path="/"
             element={
-              <LoginPage />
               // <AdminPage
               //   signOut={signOut}
               //   user={user}
@@ -44,7 +44,7 @@ function App({ signOut, user }) {
               //   setTeams={setTeams}
               // />
             }
-          ></Route>
+          ></Route> */}
           {teams &&
             teams.length &&
             teams.map((team, index) => (
