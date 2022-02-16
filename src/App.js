@@ -1,7 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import AppRoutes from "./AppRoutes";
-import { withAuthenticator } from "@aws-amplify/ui-react";
 
 function App({ signOut, user }) {
   return (
@@ -11,4 +10,4 @@ function App({ signOut, user }) {
   );
 }
 
-export default withAuthenticator(App);
+export default App;

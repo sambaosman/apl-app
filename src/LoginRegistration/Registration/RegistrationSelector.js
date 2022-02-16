@@ -33,7 +33,7 @@ const RegistrationSelector = () => {
         <Row className="selector-row" key={index}>
           <Col>
             <div className="registration-selector-icon">
-              <i class={`fa-solid fa-${registrationType.icon}`} />
+              <i className={`fa-solid fa-${registrationType.icon}`} />
             </div>
           </Col>
           <Col>I am a {registrationType.type}</Col>
@@ -44,7 +44,7 @@ const RegistrationSelector = () => {
               marginRight: "20px",
             }}
           >
-            <i class="fa-solid fa-angle-right" />
+            <i className="fa-solid fa-angle-right" />
           </Col>
         </Row>
       ))}

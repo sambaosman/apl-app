@@ -10,8 +10,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { getTeams } from "./TeamServices";
 import awsExports from "./aws-exports";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
-import RegistrationSelector from "./LoginRegistration/Registration/RegistrationSelector";
-import RegistrationInputGroup from "./LoginRegistration/Registration/RegistrationInputGroup";
+import Register from "./LoginRegistration/Registration/Register";
+
 Amplify.configure(awsExports);
 
 const AppRoutes = ({ signOut, user }) => {
@@ -128,7 +128,7 @@ const AppRoutes = ({ signOut, user }) => {
           </Routes>
         </BrowserRouter>
       ) : (
-        <LoginPage />
+        <Register />
       )}
     </div>
   );

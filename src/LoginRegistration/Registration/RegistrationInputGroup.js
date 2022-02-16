@@ -1,7 +1,11 @@
 import React from "react";
 import { Input, PrimaryButton } from "../../StyledComponents/StyledComponents";
 
-const RegistrationInputGroup = ({ customField }) => {
+const RegistrationInputGroup = ({
+  customField,
+  setFormFields,
+  registerFunction,
+}) => {
   return (
     <div className="login-container">
       <div className="app-title">Register For APL</div>
@@ -11,40 +15,40 @@ const RegistrationInputGroup = ({ customField }) => {
         step up.
       </div>
       <Input
-        placeholder="First Name"
-        type="firstName"
-        name="firstName"
-        // onChange={(e) => setEmail(e.target.value)}
+        placeholder="User Name"
+        type="username"
+        name="username"
+        onChange={(e) => setFormFields(e)}
       />
       <Input
         placeholder="Last Name"
         type="lastName"
         name="lastName"
-        // onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setFormFields(e)}
       />
       <Input
         placeholder="Email"
         type="email"
         name="email"
-        // onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setFormFields(e)}
       />
       <Input
         placeholder={customField}
         type={customField}
         name={customField}
-        // onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setFormFields(e)}
       />
       <Input
         placeholder="Password"
         type="password"
         name="password"
-        // onChange={(e) => setPassword(e.target.value)}
+        onChange={(e) => setFormFields(e)}
       />
       <Input
         placeholder="Confirm Password"
         type="password"
         name="confirmPassword"
-        // onChange={(e) => setPassword(e.target.value)}
+        onChange={(e) => setFormFields(e)}
       />
       <div className="login-subsection">
         Already have an account?
@@ -60,7 +64,7 @@ const RegistrationInputGroup = ({ customField }) => {
             </span>
             Go Back
           </span>
-          <PrimaryButton>Register</PrimaryButton>
+          <PrimaryButton onClick={registerFunction}>Register</PrimaryButton>
         </span>
       </div>
     </div>

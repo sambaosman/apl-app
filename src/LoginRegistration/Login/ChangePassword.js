@@ -10,7 +10,7 @@ const ChangePassword = () => {
     e.preventDefault();
     Auth.currentAuthenticatedUser()
       .then((user) => {
-        return Auth.changePassword(user, oldPassword, newPassword);
+        return Auth.completeNewPassword(user, oldPassword, newPassword);
       })
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
