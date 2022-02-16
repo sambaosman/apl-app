@@ -5,12 +5,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisteredList from "./RegisteredList";
 import AdminPage from "./AdminPage";
 import { Amplify } from "aws-amplify";
-import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-import awsExports from "./aws-exports";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 import { submitForm, getForms, deleteForm } from "./RegistrationServices";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getTeams } from "./TeamServices";
+import LoginPage from "./LoginPage";
+import awsExports from "./aws-exports";
 
 Amplify.configure(awsExports);
 
@@ -35,12 +36,13 @@ function App({ signOut, user }) {
             exact
             path="/"
             element={
-              <AdminPage
-                signOut={signOut}
-                user={user}
-                teams={teams}
-                setTeams={setTeams}
-              />
+              <LoginPage />
+              // <AdminPage
+              //   signOut={signOut}
+              //   user={user}
+              //   teams={teams}
+              //   setTeams={setTeams}
+              // />
             }
           ></Route>
           {teams &&

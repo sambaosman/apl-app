@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 import { Link } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
 
 const RegistrationForm = ({
   submitForm,
@@ -18,6 +19,24 @@ const RegistrationForm = ({
       ? splitLink[splitLink.length - 2] //get the previous part of the link to grab the id
       : splitLink[splitLink.length - 1];
   const guest = window.location.pathname.includes("guest"); //check if player is a guest
+
+  const handlePayment = async (e) => {
+    const stripe = await loadStripe(
+      "pk_test_51KTR3VHserWDsTQfAezh70ZTvCbXO3oFk312GrHoTICxpgGv1gUPvKvNztBOxKSF2u4II4Enw4nJ7OnoBntpjiB400m7NH4pUi"
+    );
+    const { error } = await stripe.redirectToCheckout({
+      lineItems: [
+        {
+          price: "price_1KTR7hHserWDsTQfYeCokzt8",
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      successUrl:
+        "http://localhost:3000/a36a9aeb-a4e4-4506-aab6-4029b793d294/guest/registered-players",
+      cancelUrl: "http://localhost:3000",
+    });
+  };
   return (
     <React.Fragment>
       <Form>
@@ -54,9 +73,10 @@ const RegistrationForm = ({
         </FormGroup>
         <Link
           to={`${window.location.pathname}/registered-players`}
-          onClick={() =>
-            submitForm(firstName, lastName, email, setForms, teamsID, guest)
-          }
+          onClick={() => {
+            guest && handlePayment();
+            submitForm(firstName, lastName, email, setForms, teamsID, guest);
+          }}
         >
           <div>Submit</div>
         </Link>
