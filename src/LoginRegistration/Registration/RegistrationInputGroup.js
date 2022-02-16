@@ -1,7 +1,7 @@
 import React from "react";
 import { Input, PrimaryButton } from "../../StyledComponents/StyledComponents";
 
-const RegistrationInputGroup = () => {
+const RegistrationInputGroup = ({ customField }) => {
   return (
     <div className="login-container">
       <div className="app-title">Register For APL</div>
@@ -23,9 +23,27 @@ const RegistrationInputGroup = () => {
         // onChange={(e) => setEmail(e.target.value)}
       />
       <Input
+        placeholder="Email"
+        type="email"
+        name="email"
+        // onChange={(e) => setEmail(e.target.value)}
+      />
+      <Input
+        placeholder={customField}
+        type={customField}
+        name={customField}
+        // onChange={(e) => setEmail(e.target.value)}
+      />
+      <Input
         placeholder="Password"
         type="password"
         name="password"
+        // onChange={(e) => setPassword(e.target.value)}
+      />
+      <Input
+        placeholder="Confirm Password"
+        type="password"
+        name="confirmPassword"
         // onChange={(e) => setPassword(e.target.value)}
       />
       <div className="login-subsection">
@@ -35,7 +53,15 @@ const RegistrationInputGroup = () => {
         </span>
       </div>
       <div>
-        <PrimaryButton>Register</PrimaryButton>
+        <span className="back-button-container">
+          <span className="back-button-text">
+            <span style={{ paddingRight: "10px" }}>
+              <i class="fa-solid fa-arrow-left" />
+            </span>
+            Go Back
+          </span>
+          <PrimaryButton>Register</PrimaryButton>
+        </span>
       </div>
     </div>
   );
