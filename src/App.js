@@ -4,7 +4,7 @@ import RegistrationForm from "./RegistrationForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisteredList from "./RegisteredList";
 import AdminPage from "./AdminPage";
-import { Amplify } from "aws-amplify";
+import { Amplify, Hub } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { submitForm, getForms, deleteForm } from "./RegistrationServices";
@@ -23,16 +23,23 @@ function App({ signOut, user }) {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [teamsID, setTeamsID] = useState();
+  const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
     getForms(setForms);
     getTeams(setTeams);
   }, []);
 
+  useEffect(() => {
+    Hub.listen("auth", (event) => {
+      setCurrentUser(event.payload.data);
+    });
+  });
+
   return (
     <div className="App">
-      <RegistrationInputGroup />
-      <RegistrationSelector />
+      {/* <RegistrationInputGroup />
+      <RegistrationSelector /> */}
       <LoginPage />
       <BrowserRouter>
         <Routes>
