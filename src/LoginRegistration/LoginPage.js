@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, PrimaryButton } from "./StyledComponents/StyledComponents";
+import { Input, PrimaryButton } from "../StyledComponents/StyledComponents";
 import { Auth } from "aws-amplify";
 
 const LoginPage = () => {

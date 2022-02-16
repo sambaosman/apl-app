@@ -10,8 +10,8 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import { submitForm, getForms, deleteForm } from "./RegistrationServices";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getTeams } from "./TeamServices";
-import LoginPage from "./LoginPage";
 import awsExports from "./aws-exports";
+import LoginPage from "./LoginRegistration/LoginPage";
 
 Amplify.configure(awsExports);
 
