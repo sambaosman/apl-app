@@ -2,7 +2,8 @@ import { Auth } from "aws-amplify";
 import React, { useState } from "react";
 import RegistrationInputGroup from "./RegistrationInputGroup";
 import RegistrationSelector from "./RegistrationSelector";
-import { register } from "../LoginRegistrationFunctions";
+import { register, confirmRegistration } from "../LoginRegistrationFunctions";
+
 const Register = () => {
   const initialFormFields = {
     firstName: "",
@@ -30,11 +31,6 @@ const Register = () => {
     setFormFields(() => ({ ...formFields, [e.target.name]: e.target.value }));
   };
 
-  const confirmRegistration = async () => {
-    const { email, code } = formFields;
-    await Auth.confirmSignUp(email, code);
-    setFormFields(() => ({ ...formFields, formType: "signIn" }));
-  };
   const { formType } = formFields;
   return (
     <React.Fragment>
@@ -56,7 +52,9 @@ const Register = () => {
             type="code"
             onChange={(e) => handleOnChange(e)}
           />
-          <button onClick={confirmRegistration}></button>
+          <button
+            onClick={() => confirmRegistration(formFields, setFormFields)}
+          ></button>
         </div>
       )}
     </React.Fragment>

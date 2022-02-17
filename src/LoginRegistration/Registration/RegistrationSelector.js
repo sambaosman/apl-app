@@ -33,10 +33,11 @@ const RegistrationSelector = ({
     },
   ];
 
-  console.log(formFields);
+  const { teamMemberType } = formFields;
+
   return (
     <div className="login-container">
-      {!formFields.teamMemberType ? (
+      {!teamMemberType ? (
         <React.Fragment>
           <div className="app-title" style={{ paddingBottom: "10px" }}>
             Register for APL
@@ -77,7 +78,20 @@ const RegistrationSelector = ({
         <RegistrationInputGroup
           goBack={() => setTeamMemberType()}
           customField={{ name: "jerseyNumber", placeholder: "Jersey Number" }}
-          customID={{ name: "teamID", placeholder: "Team ID" }}
+          customID={{
+            name:
+              teamMemberType === "player" || teamMemberType === "guestPlayer"
+                ? "teamID"
+                : teamMemberType === "manager"
+                ? "managerID"
+                : "adminID",
+            placeholder:
+              teamMemberType === "player" || teamMemberType === "guestPlayer"
+                ? "Team ID"
+                : teamMemberType === "manager"
+                ? "Manager ID"
+                : "Admin ID",
+          }}
           handleOnChange={handleOnChange}
           setFormFields={setFormFields}
           registerFunction={register}

@@ -32,20 +32,35 @@ export const register = async (formFields, setFormFields) => {
     state,
     zip,
   } = formFields;
-  await Auth.signUp({
-    username: email,
-    password,
-    atrributes: {
-      firstName,
-      lastName,
-      jerseyNumber,
-      teamID,
+  try {
+    await Auth.signUp({
+      username: email,
       password,
-      street,
-      city,
-      state,
-      zip,
-    },
-  });
+      atrributes: {
+        firstName,
+        lastName,
+        jerseyNumber,
+        teamID,
+        password,
+        street,
+        city,
+        state,
+        zip,
+      },
+    });
+  } catch (error) {
+    console.log("error registering", error);
+  }
+
   setFormFields(() => ({ ...formFields, formType: "confirmRegistration" }));
+};
+
+export const confirmRegistration = async (formFields, setFormFields) => {
+  const { email, code } = formFields;
+  try {
+    await Auth.confirmSignUp(email, code);
+    setFormFields(() => ({ ...formFields, formType: "signIn" }));
+  } catch (error) {
+    console.log("error confirming code", error);
+  }
 };
