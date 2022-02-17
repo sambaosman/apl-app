@@ -48,11 +48,10 @@ export const register = async (formFields, setFormFields) => {
         zip,
       },
     });
+    setFormFields(() => ({ ...formFields, formType: "confirmRegistration" }));
   } catch (error) {
     console.log("error registering", error);
   }
-
-  setFormFields(() => ({ ...formFields, formType: "confirmRegistration" }));
 };
 
 export const confirmRegistration = async (formFields, setFormFields) => {

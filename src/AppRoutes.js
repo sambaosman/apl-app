@@ -12,7 +12,7 @@ import awsExports from "./aws-exports";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
 import Register from "./LoginRegistration/Registration/Register";
 import { Routes, Route, Link } from "react-router-dom";
-import AdminPage from "./AdminPage";
+import HomePage from "./HomePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 Amplify.configure(awsExports);
@@ -24,7 +24,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [teamsID, setTeamsID] = useState();
-  const [authStatus, setAuthStatus] = useState("");
 
   useEffect(() => {
     getTeamMembers(setTeamMembers);
@@ -43,7 +42,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         element={
           <div>
             {loggedIn ? (
-              <AdminPage
+              <HomePage
                 teams={teams}
                 setTeams={setTeams}
                 setLoggedIn={setLoggedIn}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col } from "reactstrap";
 import RegistrationInputGroup from "./RegistrationInputGroup";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const RegistrationSelector = ({
   handleOnChange,
@@ -75,28 +75,49 @@ const RegistrationSelector = ({
           </div>
         </React.Fragment>
       ) : (
-        <RegistrationInputGroup
-          goBack={() => setTeamMemberType()}
-          customField={{ name: "jerseyNumber", placeholder: "Jersey Number" }}
-          customID={{
-            name:
-              teamMemberType === "player" || teamMemberType === "guestPlayer"
-                ? "teamID"
-                : teamMemberType === "manager"
-                ? "managerID"
-                : "adminID",
-            placeholder:
-              teamMemberType === "player" || teamMemberType === "guestPlayer"
-                ? "Team ID"
-                : teamMemberType === "manager"
-                ? "Manager ID"
-                : "Admin ID",
-          }}
-          handleOnChange={handleOnChange}
-          setFormFields={setFormFields}
-          registerFunction={register}
-          formFields={formFields}
-        />
+        <React.Fragment>
+          {teamMemberType === "player" || teamMemberType === "guestPlayer" ? (
+            <RegistrationInputGroup
+              goBack={() => setTeamMemberType()}
+              customField={{
+                name: "jerseyNumber",
+                placeholder: "Jersey Number",
+              }}
+              customID={{
+                name: "teamID",
+                placeholder: "Team ID",
+              }}
+              handleOnChange={handleOnChange}
+              setFormFields={setFormFields}
+              registerFunction={register}
+              formFields={formFields}
+            />
+          ) : teamMemberType === "manager" ? (
+            <RegistrationInputGroup
+              goBack={() => setTeamMemberType()}
+              customID={{
+                name: "managerID",
+                placeholder: "Manager ID",
+              }}
+              handleOnChange={handleOnChange}
+              setFormFields={setFormFields}
+              registerFunction={register}
+              formFields={formFields}
+            />
+          ) : teamMemberType === "admin" ? (
+            <RegistrationInputGroup
+              goBack={() => setTeamMemberType()}
+              customID={{
+                name: "adminID",
+                placeholder: "Admin ID",
+              }}
+              handleOnChange={handleOnChange}
+              setFormFields={setFormFields}
+              registerFunction={register}
+              formFields={formFields}
+            />
+          ) : null}
+        </React.Fragment>
       )}
     </div>
   );

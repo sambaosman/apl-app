@@ -38,20 +38,16 @@ const RegistrationInputGroup = ({
         name="email"
         onChange={(e) => handleOnChange(e)}
       />
-      <TextInput
-        placeholder={customField.placeholder}
-        name={customField.name}
-        onChange={(e) => handleOnChange(e)}
-      />
+      {customField && (
+        <TextInput
+          placeholder={customField.placeholder}
+          name={customField.name}
+          onChange={(e) => handleOnChange(e)}
+        />
+      )}
       <TextInput
         placeholder={customID.placeholder}
         name={customID.name}
-        onChange={(e) => handleOnChange(e)}
-      />
-      <TextInput
-        placeholder="Email"
-        type="email"
-        name="email"
         onChange={(e) => handleOnChange(e)}
       />
       <TextInput
@@ -73,6 +69,7 @@ const RegistrationInputGroup = ({
         onChange={(e) => handleOnChange(e)}
       />
       <TextInput
+        required
         placeholder="State"
         type="state"
         name="zip"
