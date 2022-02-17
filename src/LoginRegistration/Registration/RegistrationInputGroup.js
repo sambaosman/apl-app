@@ -9,6 +9,7 @@ const RegistrationInputGroup = ({
   goBack,
   customField,
   customID,
+  handleOnChange,
   setFormFields,
   registerFunction,
   formFields,
@@ -24,40 +25,70 @@ const RegistrationInputGroup = ({
       <TextInput
         placeholder="First Name"
         name="firstName"
-        onChange={(e) => setFormFields(e)}
+        onChange={(e) => handleOnChange(e)}
       />
       <TextInput
         placeholder="Last Name"
         name="lastName"
-        onChange={(e) => setFormFields(e)}
+        onChange={(e) => handleOnChange(e)}
       />
       <TextInput
         placeholder="Email"
         type="email"
         name="email"
-        onChange={(e) => setFormFields(e)}
+        onChange={(e) => handleOnChange(e)}
       />
       <TextInput
         placeholder={customField.placeholder}
         name={customField.name}
-        onChange={(e) => setFormFields(e)}
+        onChange={(e) => handleOnChange(e)}
       />
       <TextInput
         placeholder={customID.placeholder}
         name={customID.name}
-        onChange={(e) => setFormFields(e)}
+        onChange={(e) => handleOnChange(e)}
+      />
+      <TextInput
+        placeholder="Email"
+        type="email"
+        name="email"
+        onChange={(e) => handleOnChange(e)}
+      />
+      <TextInput
+        placeholder="Street"
+        type="street"
+        name="street"
+        onChange={(e) => handleOnChange(e)}
+      />
+      <TextInput
+        placeholder="Zip Code"
+        type="zip"
+        name="zip"
+        onChange={(e) => handleOnChange(e)}
+      />
+      <TextInput
+        placeholder="City"
+        type="city"
+        name="city"
+        onChange={(e) => handleOnChange(e)}
+      />
+      <TextInput
+        placeholder="State"
+        type="state"
+        name="zip"
+        onChange={(e) => handleOnChange(e)}
       />
       <TextInput
         placeholder="Password"
         type="password"
         name="password"
-        onChange={(e) => setFormFields(e)}
+        onChange={(e) => handleOnChange(e)}
       />
       <TextInput
         placeholder="Confirm Password"
         type="password"
         name="confirmPassword"
-        onChange={(e) => setFormFields(e)}
+        onChange={(e) => handleOnChange(e)}
       />
       <div className="login-subsection">
         Already have an account?

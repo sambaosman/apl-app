@@ -27,12 +27,25 @@ export const register = async (formFields, setFormFields) => {
     jerseyNumber,
     teamID,
     password,
-    address,
+    street,
+    city,
+    state,
+    zip,
   } = formFields;
   await Auth.signUp({
     username: email,
     password,
-    atrributes: { firstName, lastName, jerseyNumber },
+    atrributes: {
+      firstName,
+      lastName,
+      jerseyNumber,
+      teamID,
+      password,
+      street,
+      city,
+      state,
+      zip,
+    },
   });
   setFormFields(() => ({ ...formFields, formType: "confirmRegistration" }));
 };

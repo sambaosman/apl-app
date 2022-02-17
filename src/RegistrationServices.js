@@ -1,4 +1,4 @@
-import { TeamMembers } from "./models";
+import { TeamMember } from "./models";
 import { DataStore } from "aws-amplify";
 
 export const updateTeamMember = async (
@@ -10,9 +10,9 @@ export const updateTeamMember = async (
   setTeamMembers
 ) => {
   try {
-    const original = await DataStore.query(TeamMembers, editedPlayer);
+    const original = await DataStore.query(TeamMember, editedPlayer);
     const update = await DataStore.save(
-      TeamMembers.copyOf(original, (updated) => {
+      TeamMember.copyOf(original, (updated) => {
         updated.firstName = firstName;
         updated.lastName = lastName;
         updated.email = email;
@@ -39,17 +39,17 @@ export const submitTeamMember = async (
     teamsID: teamsID,
     guestPlayer: guest,
   };
-  const newTeamMember = await DataStore.save(new TeamMembers(teamMember));
+  const newTeamMember = await DataStore.save(new TeamMember(teamMember));
   getTeamMembers(setTeamMembers);
 };
 
 export const getTeamMembers = async (setTeamMembers, teamsID) => {
-  let models = await DataStore.query(TeamMembers);
+  let models = await DataStore.query(TeamMember);
   setTeamMembers(models);
 };
 
 export const deleteTeamMember = async (teamMember, setTeamMembers) => {
-  const toDelete = await DataStore.query(TeamMembers, teamMember.id);
+  const toDelete = await DataStore.query(TeamMember, teamMember.id);
   await DataStore.delete(toDelete);
   getTeamMembers(setTeamMembers);
 };

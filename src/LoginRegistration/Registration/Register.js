@@ -12,16 +12,18 @@ const Register = () => {
     teamID: "",
     password: "",
     code: "",
-    address: {
-      street: "",
-      city: "",
-      state: "",
-      zip: "",
-    },
+    street: "",
+    city: "",
+    state: "",
+    zip: "",
     teamMemberType: "",
     formType: "register",
   };
   const [formFields, setFormFields] = useState(initialFormFields);
+
+  const setTeamMemberType = (teamMemberType) => {
+    setFormFields(() => ({ ...formFields, teamMemberType: teamMemberType }));
+  };
 
   const handleOnChange = (e) => {
     e.persist();
@@ -36,7 +38,16 @@ const Register = () => {
   const { formType } = formFields;
   return (
     <React.Fragment>
-      {formType === "register" && <RegistrationSelector />}
+      {formType === "register" && (
+        <RegistrationSelector
+          handleOnChange={handleOnChange}
+          setFormFields={setFormFields}
+          formFields={formFields}
+          register={register}
+          setTeamMemberType={setTeamMemberType}
+        />
+      )}
+
       {formType === "confirmRegistration" && (
         <div>
           <input

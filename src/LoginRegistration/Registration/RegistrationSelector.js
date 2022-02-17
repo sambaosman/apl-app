@@ -3,29 +3,40 @@ import { Row, Col } from "reactstrap";
 import RegistrationInputGroup from "./RegistrationInputGroup";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-const RegistrationSelector = () => {
+const RegistrationSelector = ({
+  handleOnChange,
+  setFormFields,
+  formFields,
+  register,
+  setTeamMemberType,
+}) => {
   const registrationTypes = [
     {
       type: "player",
+      name: "player",
       icon: "user",
     },
     {
-      type: "guest player",
+      type: "guestPlayer",
+      name: "guest player",
       icon: "user",
     },
     {
       type: "manager",
+      name: "manager",
       icon: "user-tie",
     },
     {
       type: "admin",
+      name: "admin",
       icon: "user-gear",
     },
   ];
-  const [userType, setUserType] = useState("");
+
+  console.log(formFields);
   return (
     <div className="login-container">
-      {!userType ? (
+      {!formFields.teamMemberType ? (
         <React.Fragment>
           <div className="app-title" style={{ paddingBottom: "10px" }}>
             Register for APL
@@ -34,14 +45,14 @@ const RegistrationSelector = () => {
             <Row
               className="selector-row"
               key={index}
-              onClick={() => setUserType(registrationType.type)}
+              onClick={() => setTeamMemberType(registrationType.type)}
             >
               <Col>
                 <div className="registration-selector-icon">
                   <i className={`fa-solid fa-${registrationType.icon}`} />
                 </div>
               </Col>
-              <Col>I am a {registrationType.type}</Col>
+              <Col>I am a {registrationType.name}</Col>
               <Col
                 style={{
                   display: "flex",
@@ -64,11 +75,13 @@ const RegistrationSelector = () => {
         </React.Fragment>
       ) : (
         <RegistrationInputGroup
-          goBack={() => setUserType()}
+          goBack={() => setTeamMemberType()}
           customField={{ name: "jerseyNumber", placeholder: "Jersey Number" }}
           customID={{ name: "teamID", placeholder: "Team ID" }}
-          // registerFunction={register}
-          // setFormFields={handleOnChange}
+          handleOnChange={handleOnChange}
+          setFormFields={setFormFields}
+          registerFunction={register}
+          formFields={formFields}
         />
       )}
     </div>
