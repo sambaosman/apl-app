@@ -14,9 +14,6 @@ const AdminPage = ({ signOut, user, teams, setTeams }) => {
 
   return (
     <div>
-      {/* <Link to="/registration-form">
-        <button>Go To Form</button>
-      </Link> */}
       <button onClick={() => setAddTeamModalOpen(true)}>Add Team</button>
       <Modal
         isOpen={addTeamModalOpen}

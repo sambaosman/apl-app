@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { Input, PrimaryButton } from "../../StyledComponents/StyledComponents";
+import {
+  TextInput,
+  PrimaryButton,
+} from "../../StyledComponents/StyledComponents";
 import { Auth } from "aws-amplify";
 
 const ChangePassword = () => {
@@ -19,13 +22,13 @@ const ChangePassword = () => {
   return (
     <React.Fragment>
       <div className="app-title">Log in</div>
-      <Input
+      <TextInput
         placeholder="Old Password"
         type="password"
         name="old password"
         onChange={(e) => setOldPassword(e.target.value)}
       />
-      <Input
+      <TextInput
         placeholder="New Password"
         type="password"
         name="new password"

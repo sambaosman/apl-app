@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { Input, PrimaryButton } from "../../StyledComponents/StyledComponents";
+import {
+  TextInput,
+  PrimaryButton,
+} from "../../StyledComponents/StyledComponents";
 import { Auth } from "aws-amplify";
 import ChangePassword from "./ChangePassword";
+import { Link } from "react-router-dom";
+
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,13 +28,13 @@ const LoginPage = () => {
       ) : (
         <React.Fragment>
           <div className="app-title">Log in</div>
-          <Input
+          <TextInput
             placeholder="Email"
             type="email"
             name="email"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Input
+          <TextInput
             placeholder="Password"
             type="password"
             name="password"
@@ -41,9 +46,7 @@ const LoginPage = () => {
               Sign Up
             </span>
           </div>
-          <div>
-            <PrimaryButton onClick={handleFormSubmission}>Log in</PrimaryButton>
-          </div>
+          <PrimaryButton onClick={handleFormSubmission}>Log in</PrimaryButton>
         </React.Fragment>
       )}
     </div>

@@ -1,5 +1,8 @@
 import React from "react";
-import { Input, PrimaryButton } from "../../StyledComponents/StyledComponents";
+import {
+  TextInput,
+  PrimaryButton,
+} from "../../StyledComponents/StyledComponents";
 
 const RegistrationInputGroup = ({
   customField,
@@ -14,37 +17,37 @@ const RegistrationInputGroup = ({
         champions and top contenders in the area that are ready to take the next
         step up.
       </div>
-      <Input
+      <TextInput
         placeholder="User Name"
         type="username"
         name="username"
         onChange={(e) => setFormFields(e)}
       />
-      <Input
+      <TextInput
         placeholder="Last Name"
         type="lastName"
         name="lastName"
         onChange={(e) => setFormFields(e)}
       />
-      <Input
+      <TextInput
         placeholder="Email"
         type="email"
         name="email"
         onChange={(e) => setFormFields(e)}
       />
-      <Input
+      <TextInput
         placeholder={customField}
         type={customField}
         name={customField}
         onChange={(e) => setFormFields(e)}
       />
-      <Input
+      <TextInput
         placeholder="Password"
         type="password"
         name="password"
         onChange={(e) => setFormFields(e)}
       />
-      <Input
+      <TextInput
         placeholder="Confirm Password"
         type="password"
         name="confirmPassword"

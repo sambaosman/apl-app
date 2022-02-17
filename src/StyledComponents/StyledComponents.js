@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { Input, Button } from "reactstrap";
 
-export const Input = styled.input`
+export const TextInput = styled(Input)`
   background-color: #f5f5f5;
   font-size: 15px;
   margin-left: 0px;
@@ -15,7 +16,7 @@ export const Input = styled.input`
   border: none;
 `;
 
-export const PrimaryButton = styled.button`
+export const PrimaryButton = styled(Button)`
   background-color: var(--secondary);
   font-size: 15px;
   font-weight: bold;

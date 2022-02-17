@@ -29,8 +29,7 @@ const Register = () => {
   };
 
   const confirmRegistration = async () => {
-    const { firstName, lastName, email, jerseyNumber, password, code } =
-      formFields;
+    const { email, code } = formFields;
     await Auth.confirmSignUp(email, code);
     setFormFields(() => ({ ...formFields, formType: "signIn" }));
   };
