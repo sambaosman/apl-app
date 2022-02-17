@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
 import { addTeam, deleteTeam, updateTeam } from "./TeamServices";
+import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
 
-const AdminPage = ({ signOut, user, teams, setTeams }) => {
+const AdminPage = ({ teams, setTeams, setLoggedIn }) => {
   const [teamName, setTeamName] = useState(null);
   const [addTeamModalOpen, setAddTeamModalOpen] = useState(false);
   const [editTeamModalOpen, setEditTeamModalOpen] = useState(false);
@@ -93,7 +94,7 @@ const AdminPage = ({ signOut, user, teams, setTeams }) => {
           </div>
         </ReactForm>
       </Modal>
-      <button onClick={signOut}> Sign out</button>
+      <button onClick={() => signOut(setLoggedIn)}> Sign out</button>
     </div>
   );
 };

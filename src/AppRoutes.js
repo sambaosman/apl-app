@@ -10,6 +10,7 @@ import awsExports from "./aws-exports";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
 import RegistrationSelector from "./LoginRegistration/Registration/RegistrationSelector";
 import { Routes, Route, Link } from "react-router-dom";
+import AdminPage from "./AdminPage";
 
 Amplify.configure(awsExports);
 
@@ -45,7 +46,11 @@ const AppRoutes = ({ loggedIn, setLoggedIn, signOut }) => {
         element={
           <div>
             {loggedIn ? (
-              <button onClick={() => signOut(setLoggedIn)}>Sign Out</button>
+              <AdminPage
+                teams={teams}
+                setTeams={setTeams}
+                setLoggedIn={setLoggedIn}
+              />
             ) : (
               <Link to="/login">
                 <button>Sign In</button>
