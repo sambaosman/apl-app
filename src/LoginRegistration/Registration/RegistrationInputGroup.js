@@ -5,13 +5,14 @@ import {
 } from "../../StyledComponents/StyledComponents";
 
 const RegistrationInputGroup = ({
+  goBack,
   customField,
   customID,
   setFormFields,
   registerFunction,
 }) => {
   return (
-    <div className="login-container">
+    <React.Fragment>
       <div className="app-title">Register For APL</div>
       <div className="apl-about-message">
         APL is the most elite soccer league in the DMV. We are composed of
@@ -63,7 +64,7 @@ const RegistrationInputGroup = ({
         </span>
       </div>
       <div>
-        <span className="back-button-container">
+        <span className="back-button-container" onClick={goBack}>
           <span className="back-button-text">
             <span style={{ paddingRight: "10px" }}>
               <i class="fa-solid fa-arrow-left" />
@@ -73,7 +74,7 @@ const RegistrationInputGroup = ({
           <PrimaryButton onClick={registerFunction}>Register</PrimaryButton>
         </span>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

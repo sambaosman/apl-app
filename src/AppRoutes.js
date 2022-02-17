@@ -11,7 +11,7 @@ import { getTeams } from "./TeamServices";
 import awsExports from "./aws-exports";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
 import Register from "./LoginRegistration/Registration/Register";
-
+import RegistrationSelector from "./LoginRegistration/Registration/RegistrationSelector";
 Amplify.configure(awsExports);
 
 const AppRoutes = ({ signOut, user }) => {
@@ -128,7 +128,7 @@ const AppRoutes = ({ signOut, user }) => {
           </Routes>
         </BrowserRouter>
       ) : (
-        <Register />
+        <RegistrationSelector />
       )}
     </div>
   );
