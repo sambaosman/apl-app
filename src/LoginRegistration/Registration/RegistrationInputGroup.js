@@ -3,6 +3,7 @@ import {
   TextInput,
   PrimaryButton,
 } from "../../StyledComponents/StyledComponents";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 const RegistrationInputGroup = ({
   goBack,
@@ -59,9 +60,11 @@ const RegistrationInputGroup = ({
       />
       <div className="login-subsection">
         Already have an account?
-        <span className="login-subsection-link" type="submit">
-          Log in
-        </span>
+        <Link to="/login">
+          <span className="login-subsection-link" type="submit">
+            Log in
+          </span>
+        </Link>
       </div>
       <div>
         <span className="back-button-container" onClick={goBack}>

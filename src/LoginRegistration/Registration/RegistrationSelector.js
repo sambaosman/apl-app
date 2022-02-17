@@ -1,28 +1,25 @@
 import React, { useState } from "react";
 import { Row, Col } from "reactstrap";
 import RegistrationInputGroup from "./RegistrationInputGroup";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 const RegistrationSelector = () => {
   const registrationTypes = [
     {
       type: "player",
       icon: "user",
-      link: "/",
     },
     {
       type: "guest player",
       icon: "user",
-      link: "/",
     },
     {
       type: "manager",
       icon: "user-tie",
-      link: "/",
     },
     {
       type: "admin",
       icon: "user-gear",
-      link: "/",
     },
   ];
   const [userType, setUserType] = useState("");
@@ -58,9 +55,11 @@ const RegistrationSelector = () => {
           ))}
           <div className="login-subsection">
             Already have an account?
-            <span className="login-subsection-link" type="submit">
-              Log in
-            </span>
+            <Link to="/login">
+              <span className="login-subsection-link" type="submit">
+                Log in
+              </span>
+            </Link>
           </div>
         </React.Fragment>
       ) : (

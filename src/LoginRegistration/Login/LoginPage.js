@@ -5,20 +5,26 @@ import {
 } from "../../StyledComponents/StyledComponents";
 import { Auth } from "aws-amplify";
 import ChangePassword from "./ChangePassword";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+const LoginPage = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newPasswordRequired, setNewPasswordRequired] = useState(false);
 
-  const handleFormSubmission = async (e) => {
+  const history = useNavigate();
+  const login = async (e) => {
     e.preventDefault();
-    let response = await Auth.signIn({ username: email, password });
-    console.log("auth response", response);
-    if (response.challengeName === "NEW_PASSWORD_REQUIRED") {
-      setNewPasswordRequired(true);
+    try {
+      const user = await Auth.signIn({ username: email, password });
+      history("/");
+      onLogin();
+    } catch (error) {
+      console.log("error logging in", error);
     }
+    // if (response.challengeName === "NEW_PASSWORD_REQUIRED") {
+    //   setNewPasswordRequired(true);
+    // }
   };
 
   return (
@@ -42,11 +48,13 @@ const LoginPage = () => {
           />
           <div className="login-subsection">
             Don't have an account?
-            <span className="login-subsection-link" type="submit">
-              Sign Up
-            </span>
+            <Link to="/register">
+              <span className="login-subsection-link" type="submit">
+                Sign Up
+              </span>
+            </Link>
           </div>
-          <PrimaryButton onClick={handleFormSubmission}>Log in</PrimaryButton>
+          <PrimaryButton onClick={login}>Log in</PrimaryButton>
         </React.Fragment>
       )}
     </div>
