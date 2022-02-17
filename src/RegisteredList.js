@@ -1,50 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "reactstrap";
 import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
-import { updateForm } from "./RegistrationServices";
+import { updateTeamMember, deleteTeamMember } from "./RegistrationServices";
 
 const RegisteredList = ({
-  forms,
-  setForms,
-  deleteForm,
+  teamMembers,
+  setTeamMembers,
+  deleteTeamMember,
   setFirstName,
   setLastName,
   setEmail,
   firstName,
   lastName,
   email,
-  getForms,
+  getTeamMembers,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [editedPlayer, setEditedPlayer] = useState(null);
 
   useEffect(() => {
-    getForms(setForms);
+    getTeamMembers(setTeamMembers);
   }, []);
 
-  let guestPlayers = forms.filter((form) => form.guestPlayer);
+  let guestPlayers = teamMembers.filter((teamMember) => teamMember.guestPlayer);
 
   return (
     <React.Fragment>
-      {forms &&
-        forms.length &&
-        forms
+      {teamMembers &&
+        teamMembers.length &&
+        teamMembers
           .filter(
-            (form) =>
-              form.teamsID === window.location.pathname.split("/")[1] &&
-              !form.guestPlayer
+            (teamMember) =>
+              teamMember.teamsID === window.location.pathname.split("/")[1] &&
+              !teamMember.guestPlayer
           )
-          .map((form, index) => (
+          .map((teamMember, index) => (
             <Row key={index}>
               <React.Fragment>
-                <Col md="2">{form.firstName}</Col>
-                <Col md="2">{form.lastName}</Col>
-                <Col md="4">{form.email}</Col>
+                <Col md="2">{teamMember.firstName}</Col>
+                <Col md="2">{teamMember.lastName}</Col>
+                <Col md="4">{teamMember.email}</Col>
                 <Col md="2">
                   <button
                     onClick={() => {
                       setIsOpen(true);
-                      setEditedPlayer(form.id);
+                      setEditedPlayer(teamMember.id);
                     }}
                   >
                     Edit
@@ -52,7 +52,9 @@ const RegisteredList = ({
                 </Col>
                 <Col md="2">
                   {" "}
-                  <button onClick={() => deleteForm(form, setForms)}>
+                  <button
+                    onClick={() => deleteTeamMember(teamMember, setTeamMembers)}
+                  >
                     Delete
                   </button>
                 </Col>
@@ -64,19 +66,20 @@ const RegisteredList = ({
         guestPlayers.length &&
         guestPlayers
           .filter(
-            (form) => form.teamsID === window.location.pathname.split("/")[1]
+            (teamMember) =>
+              teamMember.teamsID === window.location.pathname.split("/")[1]
           )
-          .map((form, index) => (
+          .map((teamMember, index) => (
             <Row key={index}>
               <React.Fragment>
-                <Col md="2">{form.firstName}</Col>
-                <Col md="2">{form.lastName}</Col>
-                <Col md="4">{form.email}</Col>
+                <Col md="2">{teamMember.firstName}</Col>
+                <Col md="2">{teamMember.lastName}</Col>
+                <Col md="4">{teamMember.email}</Col>
                 <Col md="2">
                   <button
                     onClick={() => {
                       setIsOpen(true);
-                      setEditedPlayer(form.id);
+                      setEditedPlayer(teamMember.id);
                     }}
                   >
                     Edit
@@ -84,7 +87,9 @@ const RegisteredList = ({
                 </Col>
                 <Col md="2">
                   {" "}
-                  <button onClick={() => deleteForm(form, setForms)}>
+                  <button
+                    onClick={() => deleteTeamMember(teamMember, setTeamMembers)}
+                  >
                     Delete
                   </button>
                 </Col>
@@ -123,13 +128,13 @@ const RegisteredList = ({
           </FormGroup>
           <div
             onClick={() => {
-              updateForm(
+              updateTeamMember(
                 editedPlayer,
                 firstName,
                 lastName,
                 email,
-                getForms,
-                setForms
+                getTeamMembers,
+                setTeamMembers
               );
               setIsOpen(false);
             }}

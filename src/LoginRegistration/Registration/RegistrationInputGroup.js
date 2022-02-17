@@ -11,6 +11,7 @@ const RegistrationInputGroup = ({
   customID,
   setFormFields,
   registerFunction,
+  formFields,
 }) => {
   return (
     <React.Fragment>
@@ -74,7 +75,11 @@ const RegistrationInputGroup = ({
             </span>
             Go Back
           </span>
-          <PrimaryButton onClick={registerFunction}>Register</PrimaryButton>
+          <PrimaryButton
+            onClick={() => registerFunction(formFields, setFormFields)}
+          >
+            Register
+          </PrimaryButton>
         </span>
       </div>
     </React.Fragment>

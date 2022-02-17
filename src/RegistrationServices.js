@@ -1,55 +1,55 @@
-import { Form } from "./models";
+import { TeamMembers } from "./models";
 import { DataStore } from "aws-amplify";
 
-export const updateForm = async (
+export const updateTeamMember = async (
   editedPlayer,
   firstName,
   lastName,
   email,
-  getForms,
-  setForms
+  getTeamMembers,
+  setTeamMembers
 ) => {
   try {
-    const original = await DataStore.query(Form, editedPlayer);
+    const original = await DataStore.query(TeamMembers, editedPlayer);
     const update = await DataStore.save(
-      Form.copyOf(original, (updated) => {
+      TeamMembers.copyOf(original, (updated) => {
         updated.firstName = firstName;
         updated.lastName = lastName;
         updated.email = email;
       })
     );
-    getForms(setForms);
+    getTeamMembers(setTeamMembers);
   } catch (err) {
     console.log(err);
   }
 };
 
-export const submitForm = async (
+export const submitTeamMember = async (
   firstName,
   lastName,
   email,
-  setForms,
+  setTeamMembers,
   teamsID,
   guest
 ) => {
-  const form = {
+  const teamMember = {
     firstName: firstName,
     lastName: lastName,
     email: email,
     teamsID: teamsID,
     guestPlayer: guest,
   };
-  const newForm = await DataStore.save(new Form(form));
-  getForms(setForms);
+  const newTeamMember = await DataStore.save(new TeamMembers(teamMember));
+  getTeamMembers(setTeamMembers);
 };
 
-export const getForms = async (setForms, teamsID) => {
-  let models = await DataStore.query(Form);
-  setForms(models);
+export const getTeamMembers = async (setTeamMembers, teamsID) => {
+  let models = await DataStore.query(TeamMembers);
+  setTeamMembers(models);
 };
 
-export const deleteForm = async (form, setForms) => {
-  const toDelete = await DataStore.query(Form, form.id);
+export const deleteTeamMember = async (teamMember, setTeamMembers) => {
+  const toDelete = await DataStore.query(TeamMembers, teamMember.id);
   await DataStore.delete(toDelete);
-  getForms(setForms);
+  getTeamMembers(setTeamMembers);
 };

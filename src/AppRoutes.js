@@ -2,20 +2,23 @@ import React, { useState, useEffect } from "react";
 import RegistrationForm from "./RegistrationForm";
 import RegisteredList from "./RegisteredList";
 import { Amplify } from "aws-amplify";
-import "@aws-amplify/ui-react/styles.css";
-import { submitForm, getForms, deleteForm } from "./RegistrationServices";
-import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  submitTeamMember,
+  getTeamMembers,
+  deleteTeamMember,
+} from "./RegistrationServices";
 import { getTeams } from "./TeamServices";
 import awsExports from "./aws-exports";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
-import RegistrationSelector from "./LoginRegistration/Registration/RegistrationSelector";
+import Register from "./LoginRegistration/Registration/Register";
 import { Routes, Route, Link } from "react-router-dom";
 import AdminPage from "./AdminPage";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 Amplify.configure(awsExports);
 
-const AppRoutes = ({ loggedIn, setLoggedIn, signOut }) => {
-  const [forms, setForms] = useState([]);
+const AppRoutes = ({ loggedIn, setLoggedIn }) => {
+  const [teamMembers, setTeamMembers] = useState([]);
   const [teams, setTeams] = useState([]);
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -24,15 +27,9 @@ const AppRoutes = ({ loggedIn, setLoggedIn, signOut }) => {
   const [authStatus, setAuthStatus] = useState("");
 
   useEffect(() => {
-    getForms(setForms);
+    getTeamMembers(setTeamMembers);
     getTeams(setTeams);
   }, []);
-
-  // const listener = (data) => {
-  //   setAuthStatus(data.payload.event);
-  // };
-
-  // Hub.listen("auth", listener);
 
   const onLogin = () => {
     setLoggedIn(true);
@@ -59,7 +56,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn, signOut }) => {
           </div>
         }
       />
-      <Route path={`/register`} element={<RegistrationSelector />} />
+      <Route path={`/register`} element={<Register />} />
       <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
       {teams &&
         teams.length &&
@@ -69,14 +66,14 @@ const AppRoutes = ({ loggedIn, setLoggedIn, signOut }) => {
               path={`/${team.id}`}
               element={
                 <RegistrationForm
-                  submitForm={submitForm}
+                  submitTeamMember={submitTeamMember}
                   setFirstName={setFirstName}
                   setLastName={setLastName}
                   setEmail={setEmail}
                   firstName={firstName}
                   lastName={lastName}
                   email={email}
-                  setForms={setForms}
+                  setTeamMembers={setTeamMembers}
                   setTeamsID={setTeamsID}
                 />
               }
@@ -85,14 +82,14 @@ const AppRoutes = ({ loggedIn, setLoggedIn, signOut }) => {
               path={`/${team.id}/guest`}
               element={
                 <RegistrationForm
-                  submitForm={submitForm}
+                  submitTeamMember={submitTeamMember}
                   setFirstName={setFirstName}
                   setLastName={setLastName}
                   setEmail={setEmail}
                   firstName={firstName}
                   lastName={lastName}
                   email={email}
-                  setForms={setForms}
+                  setTeamMembers={setTeamMembers}
                   setTeamsID={setTeamsID}
                 />
               }
@@ -102,17 +99,17 @@ const AppRoutes = ({ loggedIn, setLoggedIn, signOut }) => {
               path={`/${team.id}/guest/registered-players`}
               element={
                 <RegisteredList
-                  submitForm={submitForm}
-                  forms={forms}
-                  setForms={setForms}
-                  deleteForm={deleteForm}
+                  submitTeamMember={submitTeamMember}
+                  teamMembers={teamMembers}
+                  setTeamMembers={setTeamMembers}
+                  deleteTeamMember={deleteTeamMember}
                   setFirstName={setFirstName}
                   setLastName={setLastName}
                   setEmail={setEmail}
                   firstName={firstName}
                   lastName={lastName}
                   email={email}
-                  getForms={getForms}
+                  getTeamMembers={getTeamMembers}
                 />
               }
             />
@@ -120,17 +117,17 @@ const AppRoutes = ({ loggedIn, setLoggedIn, signOut }) => {
               path={`/${team.id}/registered-players`}
               element={
                 <RegisteredList
-                  submitForm={submitForm}
-                  forms={forms}
-                  setForms={setForms}
-                  deleteForm={deleteForm}
+                  submitTeamMember={submitTeamMember}
+                  teamMembers={teamMembers}
+                  setTeamMembers={setTeamMembers}
+                  deleteTeamMember={deleteTeamMember}
                   setFirstName={setFirstName}
                   setLastName={setLastName}
                   setEmail={setEmail}
                   firstName={firstName}
                   lastName={lastName}
                   email={email}
-                  getForms={getForms}
+                  getTeamMembers={getTeamMembers}
                 />
               }
             />

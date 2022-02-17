@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Form": {
-            "name": "Form",
+        "TeamMember": {
+            "name": "TeamMember",
             "fields": {
                 "id": {
                     "name": "id",
@@ -14,21 +14,21 @@ export const schema = {
                     "name": "firstName",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "lastName": {
                     "name": "lastName",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "email": {
                     "name": "email",
                     "isArray": false,
                     "type": "AWSEmail",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "teamsID": {
@@ -38,10 +38,31 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "guestPlayer": {
-                    "name": "guestPlayer",
+                "jerseyNumber": {
+                    "name": "jerseyNumber",
                     "isArray": false,
-                    "type": "Boolean",
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "phoneNumber": {
+                    "name": "phoneNumber",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "address": {
+                    "name": "address",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "teamMemberType": {
+                    "name": "teamMemberType",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -63,7 +84,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Forms",
+            "pluralName": "TeamMembers",
             "attributes": [
                 {
                     "type": "model",
@@ -117,7 +138,7 @@ export const schema = {
                     "name": "Forms",
                     "isArray": true,
                     "type": {
-                        "model": "Form"
+                        "model": "TeamMember"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -172,5 +193,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "7b504e624b6c78382041542fcea17574"
+    "version": "b51117effd02b4172d6b84688028744d"
 };

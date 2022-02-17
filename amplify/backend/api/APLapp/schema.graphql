@@ -1,15 +1,18 @@
-type Form @model @auth(rules: [{allow: public}]) {
+type TeamMember @model @auth(rules: [{allow: public}]) {
   id: ID!
-  firstName: String
-  lastName: String
-  email: AWSEmail
+  firstName: String!
+  lastName: String!
+  email: AWSEmail!
   teamsID: ID! @index(name: "byTeams")
-  guestPlayer: Boolean
+  jerseyNumber: Int!
+  phoneNumber: String!
+  address: AWSJSON
+  teamMemberType: String
 }
 
 type Teams @model @auth(rules: [{allow: public}]) {
   id: ID!
   teamName: String
-  Forms: [Form] @hasMany(indexName: "byTeams", fields: ["id"])
+  Forms: [TeamMember] @hasMany(indexName: "byTeams", fields: ["id"])
 }
  

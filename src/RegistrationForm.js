@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 
 const RegistrationForm = ({
-  submitForm,
+  submitTeamMember,
   setFirstName,
   setLastName,
   setEmail,
   firstName,
   lastName,
   email,
-  setForms,
+  setTeamMembers,
 }) => {
   const splitLink = window.location.pathname.split("/"); //separate link by /
   const teamsID =
@@ -75,7 +75,14 @@ const RegistrationForm = ({
           to={`${window.location.pathname}/registered-players`}
           onClick={() => {
             guest && handlePayment();
-            submitForm(firstName, lastName, email, setForms, teamsID, guest);
+            submitTeamMember(
+              firstName,
+              lastName,
+              email,
+              setTeamMembers,
+              teamsID,
+              guest
+            );
           }}
         >
           <div>Submit</div>

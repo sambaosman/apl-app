@@ -18,3 +18,21 @@ export const signOut = async (setLoggedIn) => {
     console.log("error signing out", error);
   }
 };
+
+export const register = async (formFields, setFormFields) => {
+  const {
+    firstName,
+    lastName,
+    email,
+    jerseyNumber,
+    teamID,
+    password,
+    address,
+  } = formFields;
+  await Auth.signUp({
+    username: email,
+    password,
+    atrributes: { firstName, lastName, jerseyNumber },
+  });
+  setFormFields(() => ({ ...formFields, formType: "confirmRegistration" }));
+};

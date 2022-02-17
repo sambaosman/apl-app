@@ -4,7 +4,7 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-type FormMetaData = {
+type TeamMemberMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -12,23 +12,26 @@ type TeamsMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Form {
+export declare class TeamMember {
   readonly id: string;
-  readonly firstName?: string;
-  readonly lastName?: string;
-  readonly email?: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly email: string;
   readonly teamsID: string;
-  readonly guestPlayer?: boolean;
+  readonly jerseyNumber: number;
+  readonly phoneNumber: string;
+  readonly address?: string;
+  readonly teamMemberType?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<Form, FormMetaData>);
-  static copyOf(source: Form, mutator: (draft: MutableModel<Form, FormMetaData>) => MutableModel<Form, FormMetaData> | void): Form;
+  constructor(init: ModelInit<TeamMember, TeamMemberMetaData>);
+  static copyOf(source: TeamMember, mutator: (draft: MutableModel<TeamMember, TeamMemberMetaData>) => MutableModel<TeamMember, TeamMemberMetaData> | void): TeamMember;
 }
 
 export declare class Teams {
   readonly id: string;
   readonly teamName?: string;
-  readonly Forms?: (Form | null)[];
+  readonly Forms?: (TeamMember | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Teams, TeamsMetaData>);

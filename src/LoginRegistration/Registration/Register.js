@@ -1,7 +1,8 @@
 import { Auth } from "aws-amplify";
 import React, { useState } from "react";
 import RegistrationInputGroup from "./RegistrationInputGroup";
-import LoginPage from "../Login/LoginPage";
+import RegistrationSelector from "./RegistrationSelector";
+import { register } from "../LoginRegistrationFunctions";
 const Register = () => {
   const initialFormFields = {
     firstName: "",
@@ -11,6 +12,13 @@ const Register = () => {
     teamID: "",
     password: "",
     code: "",
+    address: {
+      street: "",
+      city: "",
+      state: "",
+      zip: "",
+    },
+    teamMemberType: "",
     formType: "register",
   };
   const [formFields, setFormFields] = useState(initialFormFields);
@@ -18,15 +26,6 @@ const Register = () => {
   const handleOnChange = (e) => {
     e.persist();
     setFormFields(() => ({ ...formFields, [e.target.name]: e.target.value }));
-  };
-  const register = async () => {
-    const { firstName, lastName, email, jerseyNumber, password } = formFields;
-    await Auth.signUp({
-      username: email,
-      password,
-      atrributes: { firstName, lastName, jerseyNumber },
-    });
-    setFormFields(() => ({ ...formFields, formType: "confirmRegistration" }));
   };
 
   const confirmRegistration = async () => {
@@ -37,15 +36,7 @@ const Register = () => {
   const { formType } = formFields;
   return (
     <React.Fragment>
-      {formType === "signIn" && <LoginPage />}
-      {formType === "register" && (
-        <RegistrationInputGroup
-          customField={{ name: "jerseyNumber", placeholder: "Jersey Number" }}
-          customID={{ name: "teamID", placeholder: "Team ID" }}
-          registerFunction={register}
-          setFormFields={handleOnChange}
-        />
-      )}
+      {formType === "register" && <RegistrationSelector />}
       {formType === "confirmRegistration" && (
         <div>
           <input
