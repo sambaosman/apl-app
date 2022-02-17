@@ -4,10 +4,11 @@ import RegistrationInputGroup from "./RegistrationInputGroup";
 import LoginPage from "../Login/LoginPage";
 const Register = () => {
   const initialFormFields = {
-    username: "",
+    firstName: "",
     lastName: "",
     email: "",
     jerseyNumber: "",
+    teamID: "",
     password: "",
     code: "",
     formType: "register",
@@ -39,7 +40,8 @@ const Register = () => {
       {formType === "signIn" && <LoginPage />}
       {formType === "register" && (
         <RegistrationInputGroup
-          customField={"jerseyNumber"}
+          customField={{ name: "jerseyNumber", placeholder: "Jersey Number" }}
+          customID={{ name: "teamID", placeholder: "Team ID" }}
           registerFunction={register}
           setFormFields={handleOnChange}
         />

@@ -6,6 +6,7 @@ import {
 
 const RegistrationInputGroup = ({
   customField,
+  customID,
   setFormFields,
   registerFunction,
 }) => {
@@ -18,14 +19,12 @@ const RegistrationInputGroup = ({
         step up.
       </div>
       <TextInput
-        placeholder="User Name"
-        type="username"
-        name="username"
+        placeholder="First Name"
+        name="firstName"
         onChange={(e) => setFormFields(e)}
       />
       <TextInput
         placeholder="Last Name"
-        type="lastName"
         name="lastName"
         onChange={(e) => setFormFields(e)}
       />
@@ -36,9 +35,13 @@ const RegistrationInputGroup = ({
         onChange={(e) => setFormFields(e)}
       />
       <TextInput
-        placeholder={customField}
-        type={customField}
-        name={customField}
+        placeholder={customField.placeholder}
+        name={customField.name}
+        onChange={(e) => setFormFields(e)}
+      />
+      <TextInput
+        placeholder={customID.placeholder}
+        name={customID.name}
         onChange={(e) => setFormFields(e)}
       />
       <TextInput
