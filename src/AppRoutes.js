@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import RegistrationForm from "./RegistrationForm";
 import RegisteredList from "./RegisteredList";
-import AdminPage from "./AdminPage";
-import { Amplify, Hub } from "aws-amplify";
+import { Amplify } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import { submitForm, getForms, deleteForm } from "./RegistrationServices";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getTeams } from "./TeamServices";
 import awsExports from "./aws-exports";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
-import Register from "./LoginRegistration/Registration/Register";
 import RegistrationSelector from "./LoginRegistration/Registration/RegistrationSelector";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 Amplify.configure(awsExports);
 
@@ -28,11 +26,12 @@ const AppRoutes = ({ loggedIn, setLoggedIn, signOut }) => {
     getForms(setForms);
     getTeams(setTeams);
   }, []);
-  const listener = (data) => {
-    setAuthStatus(data.payload.event);
-  };
 
-  Hub.listen("auth", listener);
+  // const listener = (data) => {
+  //   setAuthStatus(data.payload.event);
+  // };
+
+  // Hub.listen("auth", listener);
 
   const onLogin = () => {
     setLoggedIn(true);
@@ -46,7 +45,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn, signOut }) => {
         element={
           <div>
             {loggedIn ? (
-              <button onClick={signOut}>Sign Out</button>
+              <button onClick={() => signOut(setLoggedIn)}>Sign Out</button>
             ) : (
               <Link to="/login">
                 <button>Sign In</button>
@@ -55,18 +54,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn, signOut }) => {
           </div>
         }
       />
-      {/* <Route
-        exact
-        path="/"
-        element={
-          <AdminPage
-            signOut={signOut}
-            user={user}
-            teams={teams}
-            setTeams={setTeams}
-          />
-        }
-      ></Route> */}
       <Route path={`/register`} element={<RegistrationSelector />} />
       <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
       {teams &&

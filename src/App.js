@@ -1,35 +1,19 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import AppRoutes from "./AppRoutes";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import AdminPage from "./AdminPage";
-import { Auth } from "aws-amplify";
+import { BrowserRouter } from "react-router-dom";
+import {
+  AssessLoggedInState,
+  signOut,
+} from "./LoginRegistration/LoginRegistrationFunctions";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    AssessLoggedInState();
+    AssessLoggedInState(setLoggedIn);
   }, []);
 
-  const AssessLoggedInState = () => {
-    Auth.currentAuthenticatedUser()
-      .then(() => {
-        setLoggedIn(true);
-      })
-      .catch(() => {
-        setLoggedIn(false);
-      });
-  };
-
-  const signOut = async () => {
-    try {
-      await Auth.signOut();
-      setLoggedIn(false);
-    } catch (error) {
-      console.log("error signing out", error);
-    }
-  };
   return (
     <BrowserRouter>
       <div className="App">

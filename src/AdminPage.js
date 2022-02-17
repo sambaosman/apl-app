@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
 import { addTeam, deleteTeam, updateTeam } from "./TeamServices";
 

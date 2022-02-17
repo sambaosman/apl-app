@@ -3,7 +3,7 @@ import {
   TextInput,
   PrimaryButton,
 } from "../../StyledComponents/StyledComponents";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const RegistrationInputGroup = ({
   goBack,
