@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   TextInput,
   PrimaryButton,
@@ -69,10 +69,15 @@ const RegistrationInputGroup = ({
         onChange={(e) => handleOnChange(e)}
       />
       <TextInput
-        required
         placeholder="State"
         type="state"
         name="zip"
+        onChange={(e) => handleOnChange(e)}
+      />
+      <TextInput
+        placeholder="Phone Number"
+        type="phoneNumber"
+        name="phoneNumber"
         onChange={(e) => handleOnChange(e)}
       />
       <TextInput
@@ -104,7 +109,9 @@ const RegistrationInputGroup = ({
             Go Back
           </span>
           <PrimaryButton
-            onClick={() => registerFunction(formFields, setFormFields)}
+            onClick={() =>
+              registerFunction(formFields, setFormFields, setTeamMembers)
+            }
           >
             Register
           </PrimaryButton>

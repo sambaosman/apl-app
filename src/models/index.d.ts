@@ -18,10 +18,13 @@ export declare class TeamMember {
   readonly lastName: string;
   readonly email: string;
   readonly teamsID: string;
-  readonly jerseyNumber: number;
+  readonly jerseyNumber: string;
   readonly phoneNumber: string;
-  readonly address?: string;
+  readonly street?: string;
   readonly teamMemberType?: string;
+  readonly city?: string;
+  readonly state?: string;
+  readonly zipCode?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<TeamMember, TeamMemberMetaData>);

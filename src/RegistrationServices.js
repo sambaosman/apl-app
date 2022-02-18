@@ -27,23 +27,35 @@ export const updateTeamMember = async (
 export const submitTeamMember = async (
   firstName,
   lastName,
+  jerseyNumber,
+  teamID,
   email,
-  setTeamMembers,
-  teamsID,
-  guest
+  password,
+  street,
+  city,
+  state,
+  zip,
+  phoneNumber,
+  setTeamMembers
 ) => {
   const teamMember = {
     firstName: firstName,
     lastName: lastName,
+    jerseyNumber: jerseyNumber,
     email: email,
-    teamsID: teamsID,
-    guestPlayer: guest,
+    teamsID: teamID,
+    street: street,
+    city: city,
+    state: state,
+    zip: zip,
+    phoneNumber: phoneNumber,
   };
   const newTeamMember = await DataStore.save(new TeamMember(teamMember));
+  console.log(newTeamMember);
   getTeamMembers(setTeamMembers);
 };
 
-export const getTeamMembers = async (setTeamMembers, teamsID) => {
+export const getTeamMembers = async (setTeamMembers) => {
   let models = await DataStore.query(TeamMember);
   setTeamMembers(models);
 };

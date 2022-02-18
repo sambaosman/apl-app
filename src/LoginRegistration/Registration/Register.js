@@ -2,7 +2,10 @@ import { Auth } from "aws-amplify";
 import React, { useState } from "react";
 import RegistrationInputGroup from "./RegistrationInputGroup";
 import RegistrationSelector from "./RegistrationSelector";
-import { register, confirmRegistration } from "../LoginRegistrationFunctions";
+import { register } from "../LoginRegistrationFunctions";
+import { useNavigate } from "react-router";
+
+//when registering, check that ManagerID/TeamID/adminID is valid
 
 const Register = () => {
   const initialFormFields = {
@@ -17,11 +20,12 @@ const Register = () => {
     city: "",
     state: "",
     zip: "",
+    phoneNumber: "",
     teamMemberType: "",
     formType: "register",
   };
   const [formFields, setFormFields] = useState(initialFormFields);
-
+  const history = useNavigate();
   const setTeamMemberType = (teamMemberType) => {
     setFormFields(() => ({ ...formFields, teamMemberType: teamMemberType }));
   };
@@ -29,6 +33,17 @@ const Register = () => {
   const handleOnChange = (e) => {
     e.persist();
     setFormFields(() => ({ ...formFields, [e.target.name]: e.target.value }));
+  };
+
+  const confirmRegistration = async (formFields, setFormFields) => {
+    const { email, code } = formFields;
+    try {
+      await Auth.confirmSignUp(email, code);
+      setFormFields(() => ({ ...formFields, formType: "signIn" }));
+      history("/login");
+    } catch (error) {
+      console.log("error confirming code", error);
+    }
   };
 
   const { formType } = formFields;
@@ -54,7 +69,9 @@ const Register = () => {
           />
           <button
             onClick={() => confirmRegistration(formFields, setFormFields)}
-          ></button>
+          >
+            submit
+          </button>
         </div>
       )}
     </React.Fragment>

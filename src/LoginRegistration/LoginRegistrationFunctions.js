@@ -1,5 +1,6 @@
-import { Auth } from "aws-amplify";
-
+import { Auth, DataStore } from "aws-amplify";
+import { submitTeamMember } from "../RegistrationServices";
+import { TeamMember } from "../models";
 export const AssessLoggedInState = (setLoggedIn) => {
   Auth.currentAuthenticatedUser()
     .then(() => {
@@ -19,7 +20,7 @@ export const signOut = async (setLoggedIn) => {
   }
 };
 
-export const register = async (formFields, setFormFields) => {
+export const register = async (formFields, setFormFields, setTeamMembers) => {
   const {
     firstName,
     lastName,
@@ -31,35 +32,29 @@ export const register = async (formFields, setFormFields) => {
     city,
     state,
     zip,
+    phoneNumber,
   } = formFields;
   try {
     await Auth.signUp({
       username: email,
       password,
-      atrributes: {
-        firstName,
-        lastName,
-        jerseyNumber,
-        teamID,
-        password,
-        street,
-        city,
-        state,
-        zip,
-      },
     });
     setFormFields(() => ({ ...formFields, formType: "confirmRegistration" }));
+    submitTeamMember(
+      firstName,
+      lastName,
+      jerseyNumber,
+      teamID,
+      email,
+      password,
+      street,
+      city,
+      state,
+      zip,
+      phoneNumber,
+      setTeamMembers
+    );
   } catch (error) {
     console.log("error registering", error);
-  }
-};
-
-export const confirmRegistration = async (formFields, setFormFields) => {
-  const { email, code } = formFields;
-  try {
-    await Auth.confirmSignUp(email, code);
-    setFormFields(() => ({ ...formFields, formType: "signIn" }));
-  } catch (error) {
-    console.log("error confirming code", error);
   }
 };
