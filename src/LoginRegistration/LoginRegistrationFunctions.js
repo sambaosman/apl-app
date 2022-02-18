@@ -20,41 +20,20 @@ export const signOut = async (setLoggedIn) => {
   }
 };
 
-export const register = async (formFields, setFormFields, setTeamMembers) => {
-  const {
-    firstName,
-    lastName,
-    email,
-    jerseyNumber,
-    teamID,
-    password,
-    street,
-    city,
-    state,
-    zip,
-    phoneNumber,
-  } = formFields;
+export const register = async (
+  formFields,
+  setFormFields,
+  setTeamMembers,
+  setError
+) => {
+  const { userName, email, password } = formFields;
   try {
     await Auth.signUp({
       username: email,
       password,
     });
-    setFormFields(() => ({ ...formFields, formType: "confirmRegistration" }));
-    submitTeamMember(
-      firstName,
-      lastName,
-      jerseyNumber,
-      teamID,
-      email,
-      password,
-      street,
-      city,
-      state,
-      zip,
-      phoneNumber,
-      setTeamMembers
-    );
+    submitTeamMember(formFields, setTeamMembers, setFormFields, setError);
   } catch (error) {
-    console.log("error registering", error);
+    setError(error);
   }
 };

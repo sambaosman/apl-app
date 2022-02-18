@@ -25,19 +25,24 @@ export const updateTeamMember = async (
 };
 
 export const submitTeamMember = async (
-  firstName,
-  lastName,
-  jerseyNumber,
-  teamID,
-  email,
-  password,
-  street,
-  city,
-  state,
-  zip,
-  phoneNumber,
-  setTeamMembers
+  formFields,
+  setTeamMembers,
+  setFormFields,
+  setError
 ) => {
+  const {
+    firstName,
+    lastName,
+    email,
+    jerseyNumber,
+    teamID,
+    password,
+    street,
+    city,
+    state,
+    zip,
+    phoneNumber,
+  } = formFields;
   const teamMember = {
     firstName: firstName,
     lastName: lastName,
@@ -50,9 +55,13 @@ export const submitTeamMember = async (
     zip: zip,
     phoneNumber: phoneNumber,
   };
-  const newTeamMember = await DataStore.save(new TeamMember(teamMember));
-  console.log(newTeamMember);
-  getTeamMembers(setTeamMembers);
+  try {
+    const newTeamMember = await DataStore.save(new TeamMember(teamMember));
+    getTeamMembers(setTeamMembers);
+    setFormFields(() => ({ ...formFields, formType: "confirmRegistration" }));
+  } catch (error) {
+    setError(error);
+  }
 };
 
 export const getTeamMembers = async (setTeamMembers) => {

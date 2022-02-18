@@ -25,6 +25,8 @@ const Register = () => {
     formType: "register",
   };
   const [formFields, setFormFields] = useState(initialFormFields);
+  const [error, setError] = useState();
+
   const history = useNavigate();
   const setTeamMemberType = (teamMemberType) => {
     setFormFields(() => ({ ...formFields, teamMemberType: teamMemberType }));
@@ -35,18 +37,19 @@ const Register = () => {
     setFormFields(() => ({ ...formFields, [e.target.name]: e.target.value }));
   };
 
-  const confirmRegistration = async (formFields, setFormFields) => {
+  const confirmRegistration = async (formFields, setFormFields, setError) => {
     const { email, code } = formFields;
     try {
       await Auth.confirmSignUp(email, code);
       setFormFields(() => ({ ...formFields, formType: "signIn" }));
       history("/login");
     } catch (error) {
-      console.log("error confirming code", error);
+      setError(error);
     }
   };
 
   const { formType } = formFields;
+
   return (
     <React.Fragment>
       {formType === "register" && (
@@ -56,9 +59,10 @@ const Register = () => {
           formFields={formFields}
           register={register}
           setTeamMemberType={setTeamMemberType}
+          setError={setError}
+          error={error}
         />
       )}
-
       {formType === "confirmRegistration" && (
         <div>
           <input
@@ -68,7 +72,9 @@ const Register = () => {
             onChange={(e) => handleOnChange(e)}
           />
           <button
-            onClick={() => confirmRegistration(formFields, setFormFields)}
+            onClick={() =>
+              confirmRegistration(formFields, setFormFields, setError)
+            }
           >
             submit
           </button>

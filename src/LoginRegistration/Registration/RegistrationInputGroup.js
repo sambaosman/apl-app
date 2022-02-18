@@ -4,6 +4,8 @@ import {
   PrimaryButton,
 } from "../../StyledComponents/StyledComponents";
 import { Link } from "react-router-dom";
+import { Form, Field } from "react-final-form";
+import { Button, FormGroup, Label, Input } from "reactstrap";
 
 const RegistrationInputGroup = ({
   goBack,
@@ -13,7 +15,15 @@ const RegistrationInputGroup = ({
   setFormFields,
   registerFunction,
   formFields,
+  setError,
+  error,
 }) => {
+  const [teamMembers, setTeamMembers] = useState([]);
+
+  const onSubmit = (values) => {
+    console.log(values);
+  };
+
   return (
     <React.Fragment>
       <div className="app-title">Register For APL</div>
@@ -22,76 +32,263 @@ const RegistrationInputGroup = ({
         champions and top contenders in the area that are ready to take the next
         step up.
       </div>
-      <TextInput
-        placeholder="First Name"
-        name="firstName"
-        onChange={(e) => handleOnChange(e)}
+      <Form
+        onSubmit={onSubmit}
+        validate={(values) => {
+          const errors = {};
+          function validateEmail(email) {
+            var re =
+              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+          }
+          if (!formFields.firstName) {
+            errors.firstName = "Required";
+          }
+          if (!formFields.lastName) {
+            errors.lastName = "Required";
+          }
+          if (!formFields.zip) {
+            errors.zip = "Required";
+          }
+          if (!formFields.street) {
+            errors.street = "Required";
+          }
+          if (!formFields.city) {
+            errors.city = "Required";
+          }
+          if (!formFields.state) {
+            errors.state = "Required";
+          }
+          if (!formFields.phoneNumber) {
+            errors.state = "Required";
+          }
+          if (!formFields.teamID) {
+            errors.state = "Required";
+          }
+          if (customField && !formFields[customField.name]) {
+            errors.state = "Required";
+          }
+          if (!formFields.email) {
+            errors.email = "Required";
+          } else if (!validateEmail(formFields.email)) {
+            errors.email = "Not an email adress";
+          }
+          if (!formFields.password) {
+            errors.password = "Required";
+          }
+
+          if (!formFields.confirmPassword) {
+            errors.confirmPassword = "Required";
+          } else if (formFields.confirmPassword !== formFields.password) {
+            errors.confirmPassword = "Does not match";
+          }
+          return errors;
+        }}
+        render={({ handleSubmit, values, submitting, validating, valid }) => (
+          <form onSubmit={handleSubmit}>
+            <FormGroup>
+              <Field name="firstName">
+                {({ meta }) => (
+                  <div>
+                    <TextInput
+                      placeholder="First Name"
+                      name="firstName"
+                      onChange={(e) => handleOnChange(e)}
+                      invalid={meta.error && meta.touched}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </div>
+                )}
+              </Field>
+            </FormGroup>
+            <FormGroup>
+              {" "}
+              <Field name="lastName">
+                {({ meta }) => (
+                  <div>
+                    <TextInput
+                      placeholder="Last Name"
+                      name="lastName"
+                      onChange={(e) => handleOnChange(e)}
+                      invalid={meta.error && meta.touched}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </div>
+                )}
+              </Field>
+            </FormGroup>
+            <FormGroup>
+              <Field name="email">
+                {({ meta }) => (
+                  <div>
+                    <TextInput
+                      placeholder="Email"
+                      type="email"
+                      name="email"
+                      onChange={(e) => handleOnChange(e)}
+                      invalid={meta.error && meta.touched}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </div>
+                )}
+              </Field>
+            </FormGroup>
+            <FormGroup>
+              <Field name="email">
+                {({ meta }) => (
+                  <div>
+                    <TextInput
+                      placeholder={customID.placeholder}
+                      name={customID.name}
+                      onChange={(e) => handleOnChange(e)}
+                      invalid={meta.error && meta.touched}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </div>
+                )}
+              </Field>
+            </FormGroup>
+            {customField && (
+              <FormGroup>
+                <Field name={customField.name}>
+                  {({ meta }) => (
+                    <div>
+                      <TextInput
+                        placeholder={customField.placeholder}
+                        name={customField.name}
+                        onChange={(e) => handleOnChange(e)}
+                        invalid={meta.error && meta.touched}
+                      />
+                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                    </div>
+                  )}
+                </Field>
+              </FormGroup>
+            )}
+            <FormGroup>
+              <Field name="zip">
+                {({ meta }) => (
+                  <div>
+                    <TextInput
+                      placeholder="Zip Code"
+                      name="zip"
+                      onChange={(e) => handleOnChange(e)}
+                      invalid={meta.error && meta.touched}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </div>
+                )}
+              </Field>
+            </FormGroup>
+            <FormGroup>
+              <Field name="city">
+                {({ meta }) => (
+                  <div>
+                    <TextInput
+                      placeholder="City"
+                      name="city"
+                      onChange={(e) => handleOnChange(e)}
+                      invalid={meta.error && meta.touched}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </div>
+                )}
+              </Field>
+            </FormGroup>
+            <FormGroup>
+              <Field name="state">
+                {({ meta }) => (
+                  <div>
+                    <TextInput
+                      placeholder="State"
+                      name="state"
+                      invalid={meta.error && meta.touched}
+                      onChange={(e) => handleOnChange(e)}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </div>
+                )}
+              </Field>
+            </FormGroup>
+            <FormGroup>
+              <Field name="street">
+                {({ meta }) => (
+                  <div>
+                    <TextInput
+                      placeholder="Street"
+                      name="street"
+                      invalid={meta.error && meta.touched}
+                      onChange={(e) => handleOnChange(e)}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </div>
+                )}
+              </Field>
+            </FormGroup>
+            <FormGroup>
+              <Field name="phoneNumber">
+                {({ meta }) => (
+                  <div>
+                    <TextInput
+                      placeholder="Phone Number"
+                      name="phoneNumber"
+                      onChange={(e) => handleOnChange(e)}
+                      invalid={meta.error && meta.touched}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </div>
+                )}
+              </Field>
+            </FormGroup>
+
+            <FormGroup>
+              <Field name="password">
+                {({ meta }) => (
+                  <div>
+                    <TextInput
+                      placeholder="Password"
+                      name="password"
+                      onChange={(e) => handleOnChange(e)}
+                      invalid={meta.error && meta.touched}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </div>
+                )}
+              </Field>
+            </FormGroup>
+            <FormGroup>
+              <Field name="confirmPassword">
+                {({ meta }) => (
+                  <div>
+                    <TextInput
+                      placeholder="Confirm Password"
+                      name="confirmPassword"
+                      onChange={(e) => handleOnChange(e)}
+                      invalid={meta.error && meta.touched}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </div>
+                )}
+              </Field>
+            </FormGroup>
+            <PrimaryButton
+              disabled={!valid}
+              onClick={() =>
+                registerFunction(
+                  formFields,
+                  setFormFields,
+                  setTeamMembers,
+                  setError
+                )
+              }
+            >
+              Register
+            </PrimaryButton>
+          </form>
+        )}
       />
-      <TextInput
-        placeholder="Last Name"
-        name="lastName"
-        onChange={(e) => handleOnChange(e)}
-      />
-      <TextInput
-        placeholder="Email"
-        type="email"
-        name="email"
-        onChange={(e) => handleOnChange(e)}
-      />
-      {customField && (
-        <TextInput
-          placeholder={customField.placeholder}
-          name={customField.name}
-          onChange={(e) => handleOnChange(e)}
-        />
-      )}
-      <TextInput
-        placeholder={customID.placeholder}
-        name={customID.name}
-        onChange={(e) => handleOnChange(e)}
-      />
-      <TextInput
-        placeholder="Street"
-        type="street"
-        name="street"
-        onChange={(e) => handleOnChange(e)}
-      />
-      <TextInput
-        placeholder="Zip Code"
-        type="zip"
-        name="zip"
-        onChange={(e) => handleOnChange(e)}
-      />
-      <TextInput
-        placeholder="City"
-        type="city"
-        name="city"
-        onChange={(e) => handleOnChange(e)}
-      />
-      <TextInput
-        placeholder="State"
-        type="state"
-        name="zip"
-        onChange={(e) => handleOnChange(e)}
-      />
-      <TextInput
-        placeholder="Phone Number"
-        type="phoneNumber"
-        name="phoneNumber"
-        onChange={(e) => handleOnChange(e)}
-      />
-      <TextInput
-        placeholder="Password"
-        type="password"
-        name="password"
-        onChange={(e) => handleOnChange(e)}
-      />
-      <TextInput
-        placeholder="Confirm Password"
-        type="password"
-        name="confirmPassword"
-        onChange={(e) => handleOnChange(e)}
-      />
+
+      {error && <div>{error.message}</div>}
       <div className="login-subsection">
         Already have an account?
         <Link to="/login">
@@ -108,13 +305,6 @@ const RegistrationInputGroup = ({
             </span>
             Go Back
           </span>
-          <PrimaryButton
-            onClick={() =>
-              registerFunction(formFields, setFormFields, setTeamMembers)
-            }
-          >
-            Register
-          </PrimaryButton>
         </span>
       </div>
     </React.Fragment>
