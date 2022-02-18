@@ -77,3 +77,10 @@
 .back-button-container:hover {
   cursor: pointer;
 }
+
+.form-error {
+  color: var(--secondary);
+  font-size: 10px;
+  float: right;
+  padding-bottom: 10px;
+}

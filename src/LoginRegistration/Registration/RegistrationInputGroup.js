@@ -96,7 +96,9 @@ const RegistrationInputGroup = ({
                       onChange={(e) => handleOnChange(e)}
                       invalid={meta.error && meta.touched}
                     />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className="form-error">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
@@ -112,7 +114,9 @@ const RegistrationInputGroup = ({
                       onChange={(e) => handleOnChange(e)}
                       invalid={meta.error && meta.touched}
                     />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className="form-error">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
@@ -128,7 +132,9 @@ const RegistrationInputGroup = ({
                       onChange={(e) => handleOnChange(e)}
                       invalid={meta.error && meta.touched}
                     />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className="form-error">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
@@ -143,7 +149,9 @@ const RegistrationInputGroup = ({
                       onChange={(e) => handleOnChange(e)}
                       invalid={meta.error && meta.touched}
                     />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className="form-error">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
@@ -159,7 +167,9 @@ const RegistrationInputGroup = ({
                         onChange={(e) => handleOnChange(e)}
                         invalid={meta.error && meta.touched}
                       />
-                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                      {meta.error && meta.touched && (
+                        <span className="form-error">{meta.error}</span>
+                      )}
                     </div>
                   )}
                 </Field>
@@ -175,7 +185,9 @@ const RegistrationInputGroup = ({
                       onChange={(e) => handleOnChange(e)}
                       invalid={meta.error && meta.touched}
                     />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className="form-error">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
@@ -190,7 +202,9 @@ const RegistrationInputGroup = ({
                       onChange={(e) => handleOnChange(e)}
                       invalid={meta.error && meta.touched}
                     />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className="form-error">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
@@ -205,7 +219,9 @@ const RegistrationInputGroup = ({
                       invalid={meta.error && meta.touched}
                       onChange={(e) => handleOnChange(e)}
                     />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className="form-error">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
@@ -220,7 +236,9 @@ const RegistrationInputGroup = ({
                       invalid={meta.error && meta.touched}
                       onChange={(e) => handleOnChange(e)}
                     />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className="form-error">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
@@ -235,7 +253,9 @@ const RegistrationInputGroup = ({
                       onChange={(e) => handleOnChange(e)}
                       invalid={meta.error && meta.touched}
                     />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className="form-error">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
@@ -247,11 +267,14 @@ const RegistrationInputGroup = ({
                   <div>
                     <TextInput
                       placeholder="Password"
+                      type="password"
                       name="password"
                       onChange={(e) => handleOnChange(e)}
                       invalid={meta.error && meta.touched}
                     />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className="form-error">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
@@ -261,18 +284,22 @@ const RegistrationInputGroup = ({
                 {({ meta }) => (
                   <div>
                     <TextInput
+                      type="password"
                       placeholder="Confirm Password"
                       name="confirmPassword"
                       onChange={(e) => handleOnChange(e)}
                       invalid={meta.error && meta.touched}
                     />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className="form-error">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
             </FormGroup>
             <PrimaryButton
-              disabled={!valid}
+              // disabled={!valid}
+              type="submit"
               onClick={() =>
                 registerFunction(
                   formFields,
@@ -288,7 +315,6 @@ const RegistrationInputGroup = ({
         )}
       />
 
-      {error && <div>{error.message}</div>}
       <div className="login-subsection">
         Already have an account?
         <Link to="/login">
