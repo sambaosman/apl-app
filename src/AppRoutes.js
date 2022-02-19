@@ -55,7 +55,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
           </div>
         }
       />
-      <Route path={`/register`} element={<Register />} />
+      <Route path={`/register`} element={<Register teams={teams} />} />
       <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
       {teams &&
         teams.length &&

@@ -17,12 +17,13 @@ const RegistrationInputGroup = ({
   formFields,
   setError,
   error,
+  teams,
 }) => {
-  const [teamMembers, setTeamMembers] = useState([]);
-
   const onSubmit = (values) => {
     console.log(values);
   };
+
+  const teamIDs = teams && teams.length && teams.map((team) => team.id);
 
   return (
     <React.Fragment>
@@ -60,13 +61,15 @@ const RegistrationInputGroup = ({
             errors.state = "Required";
           }
           if (!formFields.phoneNumber) {
-            errors.state = "Required";
+            errors.phoneNumber = "Required";
           }
           if (!formFields.teamID) {
-            errors.state = "Required";
+            errors.teamID = "Required";
+          } else if (teamIDs && !teamIDs.includes(formFields.teamID)) {
+            errors.teamID = "Not a valid Team ID";
           }
           if (customField && !formFields[customField.name]) {
-            errors.state = "Required";
+            errors[customField.name] = "Required";
           }
           if (!formFields.email) {
             errors.email = "Required";
@@ -301,12 +304,13 @@ const RegistrationInputGroup = ({
               // disabled={!valid}
               type="submit"
               onClick={() =>
-                registerFunction(
-                  formFields,
-                  setFormFields,
-                  setTeamMembers,
-                  setError
-                )
+                // registerFunction(
+                //   formFields,
+                //   setFormFields,
+                //   setTeamMembers,
+                //   setError
+                // )
+                console.log("test")
               }
             >
               Register
