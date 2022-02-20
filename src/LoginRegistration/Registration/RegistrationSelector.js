@@ -12,6 +12,7 @@ const RegistrationSelector = ({
   setError,
   error,
   teams,
+  setTeamMembers,
 }) => {
   const registrationTypes = [
     {
@@ -97,6 +98,7 @@ const RegistrationSelector = ({
               setError={setError}
               error={error}
               teams={teams}
+              setTeamMembers={setTeamMembers}
             />
           ) : teamMemberType === "manager" ? (
             <RegistrationInputGroup
@@ -112,6 +114,7 @@ const RegistrationSelector = ({
               setError={setError}
               error={error}
               teams={teams}
+              setTeamMembers={setTeamMembers}
             />
           ) : teamMemberType === "admin" ? (
             <RegistrationInputGroup
@@ -127,6 +130,7 @@ const RegistrationSelector = ({
               setError={setError}
               error={error}
               teams={teams}
+              setTeamMembers={setTeamMembers}
             />
           ) : null}
         </React.Fragment>

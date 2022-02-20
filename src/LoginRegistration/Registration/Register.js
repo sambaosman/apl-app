@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 
 //when registering, check that ManagerID/TeamID/adminID is valid
 
-const Register = ({ teams }) => {
+const Register = ({ teams, setTeamMembers }) => {
   const initialFormFields = {
     firstName: "",
     lastName: "",
@@ -62,6 +62,7 @@ const Register = ({ teams }) => {
           setError={setError}
           error={error}
           teams={teams}
+          setTeamMembers={setTeamMembers}
         />
       )}
       {formType === "confirmRegistration" && (

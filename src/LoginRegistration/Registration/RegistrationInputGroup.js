@@ -18,6 +18,7 @@ const RegistrationInputGroup = ({
   setError,
   error,
   teams,
+  setTeamMembers,
 }) => {
   const onSubmit = (values) => {
     console.log(values);
@@ -301,16 +302,14 @@ const RegistrationInputGroup = ({
               </Field>
             </FormGroup>
             <PrimaryButton
-              // disabled={!valid}
               type="submit"
               onClick={() =>
-                // registerFunction(
-                //   formFields,
-                //   setFormFields,
-                //   setTeamMembers,
-                //   setError
-                // )
-                console.log("test")
+                registerFunction(
+                  formFields,
+                  setFormFields,
+                  setTeamMembers,
+                  setError
+                )
               }
             >
               Register
