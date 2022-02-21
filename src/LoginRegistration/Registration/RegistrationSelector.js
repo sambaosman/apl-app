@@ -1,79 +1,70 @@
 import React, { useState } from "react";
 import { Row, Col } from "reactstrap";
 import RegistrationInputGroup from "./RegistrationInputGroup";
-import { Link } from "react-router-dom";
+import {
+  Link,
+  Routes,
+  Route,
+  useNavigate,
+  createSearchParams,
+} from "react-router-dom";
 
-const RegistrationSelector = ({
-  handleOnChange,
-  setFormFields,
-  formFields,
-  register,
-  setTeamMemberType,
-  setError,
-  error,
-  teams,
-  setTeamMembers,
-  history,
-}) => {
+const RegistrationSelector = ({ formFields }) => {
   const registrationTypes = [
     {
       type: "player",
       name: "player",
       icon: "user",
-      link: "/register/account?type=player",
     },
     {
       type: "guestPlayer",
       name: "guest player",
       icon: "user",
-      link: "/register/account?type=guestPlayer",
     },
     {
       type: "manager",
       name: "manager",
       icon: "user-tie",
-      link: "/register/account?type=manager",
     },
     {
       type: "admin",
       name: "admin",
       icon: "user-gear",
-      link: "/register/account?type=admin",
     },
   ];
 
   const { teamMemberType } = formFields;
+  const history = useNavigate();
 
   return (
-    <div className="login-container">
-      {!teamMemberType ? (
+    <React.Fragment>
+      <div className="login-container">
         <React.Fragment>
           <div className="app-title" style={{ paddingBottom: "10px" }}>
             Register for APL
           </div>
           {registrationTypes.map((registrationType, index) => (
-            <Link to={registrationType.link} key={index}>
-              <Row
-                className="selector-row"
-                onClick={() => setTeamMemberType(registrationType.type)}
+            <Row
+              className="selector-row"
+              key={index}
+              onClick={() => history(`/register/${registrationType.type}`)}
+            >
+              <Col>
+                <div className="registration-selector-icon">
+                  <i className={`fa-solid fa-${registrationType.icon}`} />
+                </div>
+              </Col>
+              <Col>I am a {registrationType.name}</Col>
+              <Col
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginRight: "20px",
+                }}
               >
-                <Col>
-                  <div className="registration-selector-icon">
-                    <i className={`fa-solid fa-${registrationType.icon}`} />
-                  </div>
-                </Col>
-                <Col>I am a {registrationType.name}</Col>
-                <Col
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    marginRight: "20px",
-                  }}
-                >
-                  <i className="fa-solid fa-angle-right" />
-                </Col>
-              </Row>
-            </Link>
+                <i className="fa-solid fa-angle-right" />
+              </Col>
+            </Row>
           ))}
           <div className="login-subsection">
             Already have an account?
@@ -84,67 +75,8 @@ const RegistrationSelector = ({
             </Link>
           </div>
         </React.Fragment>
-      ) : (
-        <React.Fragment>
-          {teamMemberType === "player" || teamMemberType === "guestPlayer" ? (
-            <RegistrationInputGroup
-              goBack={() => setTeamMemberType()}
-              customField={{
-                name: "jerseyNumber",
-                placeholder: "Jersey Number",
-              }}
-              customID={{
-                name: "teamID",
-                placeholder: "Team ID",
-              }}
-              handleOnChange={handleOnChange}
-              setFormFields={setFormFields}
-              registerFunction={register}
-              formFields={formFields}
-              setError={setError}
-              error={error}
-              teams={teams}
-              setTeamMembers={setTeamMembers}
-              history={history}
-            />
-          ) : teamMemberType === "manager" ? (
-            <RegistrationInputGroup
-              goBack={() => setTeamMemberType()}
-              customID={{
-                name: "managerID",
-                placeholder: "Manager ID",
-              }}
-              handleOnChange={handleOnChange}
-              setFormFields={setFormFields}
-              registerFunction={register}
-              formFields={formFields}
-              setError={setError}
-              error={error}
-              teams={teams}
-              setTeamMembers={setTeamMembers}
-              history={history}
-            />
-          ) : teamMemberType === "admin" ? (
-            <RegistrationInputGroup
-              goBack={() => setTeamMemberType()}
-              customID={{
-                name: "adminID",
-                placeholder: "Admin ID",
-              }}
-              handleOnChange={handleOnChange}
-              setFormFields={setFormFields}
-              registerFunction={register}
-              formFields={formFields}
-              setError={setError}
-              error={error}
-              teams={teams}
-              setTeamMembers={setTeamMembers}
-              history={history}
-            />
-          ) : null}
-        </React.Fragment>
-      )}
-    </div>
+      </div>
+    </React.Fragment>
   );
 };
 

@@ -27,6 +27,13 @@ const RegistrationInputGroup = ({
 
   const teamIDs = teams && teams.length && teams.map((team) => team.id);
 
+  // const getIDFromURL = () => {
+  //   let link = window.location.pathname;
+  //   let id = link.split("id?")[1];
+  //   console.log("id", id);
+  // };
+  // getIDFromURL();
+
   return (
     <React.Fragment>
       <div className="app-title">Register For APL</div>
@@ -331,7 +338,7 @@ const RegistrationInputGroup = ({
         <span className="back-button-container" onClick={() => history(-1)}>
           <span className="back-button-text">
             <span style={{ paddingRight: "10px" }}>
-              <i class="fa-solid fa-arrow-left" />
+              <i className="fa-solid fa-arrow-left" />
             </span>
             Go Back
           </span>

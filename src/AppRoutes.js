@@ -11,9 +11,12 @@ import { getTeams } from "./TeamServices";
 import awsExports from "./aws-exports";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
 import Register from "./LoginRegistration/Registration/Register";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import HomePage from "./HomePage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import RegistrationInputGroup from "./LoginRegistration/Registration/RegistrationInputGroup";
+import { register } from "./LoginRegistration/LoginRegistrationFunctions";
+import AuthCodeInput from "./LoginRegistration/Registration/AuthCodeInput";
 
 Amplify.configure(awsExports);
 
@@ -25,6 +28,36 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
   const [email, setEmail] = useState();
   const [teamsID, setTeamsID] = useState();
 
+  const initialFormFields = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    jerseyNumber: "",
+    teamID: "",
+    password: "",
+    street: "",
+    city: "",
+    state: "",
+    zip: "",
+    phoneNumber: "",
+    teamMemberType: "",
+    formType: "register",
+  };
+  const [formFields, setFormFields] = useState(initialFormFields);
+  const [error, setError] = useState();
+
+  const history = useNavigate();
+  const setTeamMemberType = (teamMemberType) => {
+    setFormFields(() => ({ ...formFields, teamMemberType: teamMemberType }));
+  };
+
+  const handleOnChange = (e) => {
+    e.persist();
+    setFormFields(() => ({ ...formFields, [e.target.name]: e.target.value }));
+  };
+
+  const { formType } = formFields;
+
   useEffect(() => {
     getTeamMembers(setTeamMembers);
     getTeams(setTeams);
@@ -34,68 +67,141 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     setLoggedIn(true);
   };
 
+  const memberType = ["player", "guestPlayer", "manager", "admin"];
   return (
     <Routes>
       <Route
         exact
         path={`/register/*`}
-        element={<Register teams={teams} setTeamMembers={setTeamMembers} />}
-      />
-      <Route
-        path={`/register/account?type=player`}
-        element={<div>test 1</div>}
-      />
-      <Route
-        path={`/register/account?type=guestPlayer`}
-        element={<div>test 2</div>}
-      />
-      <Route
-        path={`/register/account?type=manager`}
-        element={<div>test 3</div>}
-      />
-      <Route
-        path={`/register/account?type=admin`}
-        element={<div>test 4</div>}
+        element={<Register formFields={formFields} />}
       />
       <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
+      <Route
+        path="/register/authCode"
+        element={
+          <AuthCodeInput
+            formFields={formFields}
+            setFormFields={setFormFields}
+            history={history}
+            setError={setError}
+          />
+        }
+      />
+      <Route
+        path="/register/player"
+        element={
+          <RegistrationInputGroup
+            goBack={() => setTeamMemberType()}
+            customField={{
+              name: "jerseyNumber",
+              placeholder: "Jersey Number",
+            }}
+            customID={{
+              name: "teamID",
+              placeholder: "Team ID",
+            }}
+            handleOnChange={handleOnChange}
+            setFormFields={setFormFields}
+            registerFunction={register}
+            formFields={formFields}
+            setError={setError}
+            error={error}
+            teams={teams}
+            setTeamMembers={setTeamMembers}
+          />
+        }
+      />
+      <Route
+        path="/register/guestPlayer"
+        element={
+          <RegistrationInputGroup
+            goBack={() => setTeamMemberType()}
+            customField={{
+              name: "jerseyNumber",
+              placeholder: "Jersey Number",
+            }}
+            customID={{
+              name: "teamID",
+              placeholder: "Team ID",
+            }}
+            handleOnChange={handleOnChange}
+            setFormFields={setFormFields}
+            registerFunction={register}
+            formFields={formFields}
+            setError={setError}
+            error={error}
+            teams={teams}
+            setTeamMembers={setTeamMembers}
+          />
+        }
+      />
+
+      <Route
+        path="/register/manager"
+        element={
+          <RegistrationInputGroup
+            goBack={() => setTeamMemberType()}
+            customID={{
+              name: "managerID",
+              placeholder: "Manager ID",
+            }}
+            handleOnChange={handleOnChange}
+            setFormFields={setFormFields}
+            registerFunction={register}
+            formFields={formFields}
+            setError={setError}
+            error={error}
+            teams={teams}
+            setTeamMembers={setTeamMembers}
+          />
+        }
+      />
+
+      <Route
+        path="/register/admin"
+        element={
+          <RegistrationInputGroup
+            goBack={() => setTeamMemberType()}
+            customID={{
+              name: "adminID",
+              placeholder: "Admin ID",
+            }}
+            handleOnChange={handleOnChange}
+            setFormFields={setFormFields}
+            registerFunction={register}
+            formFields={formFields}
+            setError={setError}
+            error={error}
+            teams={teams}
+            setTeamMembers={setTeamMembers}
+          />
+        }
+      />
+
       {teams &&
         teams.length &&
         teams.map((team, index) => (
           <React.Fragment key={index}>
-            <Route
-              path={`/${team.id}`}
-              element={
-                <RegistrationForm
-                  submitTeamMember={submitTeamMember}
-                  setFirstName={setFirstName}
-                  setLastName={setLastName}
-                  setEmail={setEmail}
-                  firstName={firstName}
-                  lastName={lastName}
-                  email={email}
-                  setTeamMembers={setTeamMembers}
-                  setTeamsID={setTeamsID}
-                />
-              }
-            />
-            <Route
-              path={`/${team.id}/guest`}
-              element={
-                <RegistrationForm
-                  submitTeamMember={submitTeamMember}
-                  setFirstName={setFirstName}
-                  setLastName={setLastName}
-                  setEmail={setEmail}
-                  firstName={firstName}
-                  lastName={lastName}
-                  email={email}
-                  setTeamMembers={setTeamMembers}
-                  setTeamsID={setTeamsID}
-                />
-              }
-            />
+            {memberType.map((type, index) => (
+              <Route
+                path={`/register/account?type=${type}/id?=${team.id}`}
+                element={
+                  <RegistrationForm
+                    submitTeamMember={submitTeamMember}
+                    setFirstName={setFirstName}
+                    setLastName={setLastName}
+                    setEmail={setEmail}
+                    firstName={firstName}
+                    lastName={lastName}
+                    email={email}
+                    setTeamMembers={setTeamMembers}
+                    setTeamsID={setTeamsID}
+                  />
+                }
+              />
+            ))}
 
-            <Route
+            {/* <Route
               path={`/${team.id}/guest/registered-players`}
               element={
                 <RegisteredList
@@ -130,11 +236,10 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                   getTeamMembers={getTeamMembers}
                 />
               }
-            />
+            /> */}
           </React.Fragment>
         ))}
       <Route
-        exact
         path="/"
         element={
           <div>
