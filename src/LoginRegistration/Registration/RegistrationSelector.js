@@ -52,10 +52,9 @@ const RegistrationSelector = ({
             Register for APL
           </div>
           {registrationTypes.map((registrationType, index) => (
-            <Link to={registrationType.link}>
+            <Link to={registrationType.link} key={index}>
               <Row
                 className="selector-row"
-                key={index}
                 onClick={() => setTeamMemberType(registrationType.type)}
               >
                 <Col>

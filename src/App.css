@@ -2,6 +2,10 @@
   --primary: #4a4a4a;
   --secondary: #a24936;
 }
+a {
+  color: var(--primary) !important;
+  text-decoration: none !important;
+}
 
 .App {
   text-align: center;

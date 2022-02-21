@@ -41,6 +41,22 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path={`/register/*`}
         element={<Register teams={teams} setTeamMembers={setTeamMembers} />}
       />
+      <Route
+        path={`/register/account?type=player`}
+        element={<div>test 1</div>}
+      />
+      <Route
+        path={`/register/account?type=guestPlayer`}
+        element={<div>test 2</div>}
+      />
+      <Route
+        path={`/register/account?type=manager`}
+        element={<div>test 3</div>}
+      />
+      <Route
+        path={`/register/account?type=admin`}
+        element={<div>test 4</div>}
+      />
       <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
       {teams &&
         teams.length &&
