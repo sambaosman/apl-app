@@ -19,21 +19,25 @@ const RegistrationSelector = ({
       type: "player",
       name: "player",
       icon: "user",
+      link: "/register/account?type=player",
     },
     {
       type: "guestPlayer",
       name: "guest player",
       icon: "user",
+      link: "/register/account?type=guestPlayer",
     },
     {
       type: "manager",
       name: "manager",
       icon: "user-tie",
+      link: "/register/account?type=manager",
     },
     {
       type: "admin",
       name: "admin",
       icon: "user-gear",
+      link: "/register/account?type=admin",
     },
   ];
 
@@ -47,27 +51,29 @@ const RegistrationSelector = ({
             Register for APL
           </div>
           {registrationTypes.map((registrationType, index) => (
-            <Row
-              className="selector-row"
-              key={index}
-              onClick={() => setTeamMemberType(registrationType.type)}
-            >
-              <Col>
-                <div className="registration-selector-icon">
-                  <i className={`fa-solid fa-${registrationType.icon}`} />
-                </div>
-              </Col>
-              <Col>I am a {registrationType.name}</Col>
-              <Col
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  marginRight: "20px",
-                }}
+            <Link to={registrationType.link}>
+              <Row
+                className="selector-row"
+                key={index}
+                onClick={() => setTeamMemberType(registrationType.type)}
               >
-                <i className="fa-solid fa-angle-right" />
-              </Col>
-            </Row>
+                <Col>
+                  <div className="registration-selector-icon">
+                    <i className={`fa-solid fa-${registrationType.icon}`} />
+                  </div>
+                </Col>
+                <Col>I am a {registrationType.name}</Col>
+                <Col
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    marginRight: "20px",
+                  }}
+                >
+                  <i className="fa-solid fa-angle-right" />
+                </Col>
+              </Row>
+            </Link>
           ))}
           <div className="login-subsection">
             Already have an account?

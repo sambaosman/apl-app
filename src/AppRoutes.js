@@ -38,25 +38,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     <Routes>
       <Route
         exact
-        path="/"
-        element={
-          <div>
-            {loggedIn ? (
-              <HomePage
-                teams={teams}
-                setTeams={setTeams}
-                setLoggedIn={setLoggedIn}
-              />
-            ) : (
-              <Link to="/login">
-                <button>Sign In</button>
-              </Link>
-            )}
-          </div>
-        }
-      />
-      <Route
-        path={`/register`}
+        path={`/register/*`}
         element={<Register teams={teams} setTeamMembers={setTeamMembers} />}
       />
       <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
@@ -135,6 +117,25 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             />
           </React.Fragment>
         ))}
+      <Route
+        exact
+        path="/"
+        element={
+          <div>
+            {loggedIn ? (
+              <HomePage
+                teams={teams}
+                setTeams={setTeams}
+                setLoggedIn={setLoggedIn}
+              />
+            ) : (
+              <Link to="/login">
+                <button>Sign In</button>
+              </Link>
+            )}
+          </div>
+        }
+      />
     </Routes>
   );
 };
