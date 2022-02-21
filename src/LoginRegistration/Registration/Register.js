@@ -63,6 +63,7 @@ const Register = ({ teams, setTeamMembers }) => {
           error={error}
           teams={teams}
           setTeamMembers={setTeamMembers}
+          history={history}
         />
       )}
       {formType === "confirmRegistration" && (

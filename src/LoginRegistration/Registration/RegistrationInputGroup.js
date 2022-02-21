@@ -19,6 +19,7 @@ const RegistrationInputGroup = ({
   error,
   teams,
   setTeamMembers,
+  history,
 }) => {
   const onSubmit = (values) => {
     console.log(values);
@@ -327,7 +328,7 @@ const RegistrationInputGroup = ({
         </Link>
       </div>
       <div>
-        <span className="back-button-container" onClick={goBack}>
+        <span className="back-button-container" onClick={() => history(-1)}>
           <span className="back-button-text">
             <span style={{ paddingRight: "10px" }}>
               <i class="fa-solid fa-arrow-left" />
