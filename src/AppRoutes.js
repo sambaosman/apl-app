@@ -63,11 +63,19 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     getTeams(setTeams);
   }, []);
 
+  const getIDFromURL = () => {
+    let link = window.location.pathname;
+    let linkArray = link.split("/").pop();
+    return parseInt(linkArray) ? linkArray : null;
+  };
+  let id = getIDFromURL();
+
   const onLogin = () => {
     setLoggedIn(true);
   };
 
   const memberType = ["player", "guestPlayer", "manager", "admin"];
+
   return (
     <Routes>
       <Route
@@ -108,6 +116,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
+            id={id}
           />
         }
       />
@@ -132,6 +141,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
+            id={id}
           />
         }
       />
@@ -153,6 +163,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
+            id={id}
           />
         }
       />
@@ -174,6 +185,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
+            id={id}
           />
         }
       />
@@ -184,18 +196,24 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
           <React.Fragment key={index}>
             {memberType.map((type, index) => (
               <Route
-                path={`/register/account?type=${type}/id?=${team.id}`}
+                key={index}
+                path={`/register/${type}/${team.id}`}
                 element={
-                  <RegistrationForm
-                    submitTeamMember={submitTeamMember}
-                    setFirstName={setFirstName}
-                    setLastName={setLastName}
-                    setEmail={setEmail}
-                    firstName={firstName}
-                    lastName={lastName}
-                    email={email}
+                  <RegistrationInputGroup
+                    goBack={() => setTeamMemberType()}
+                    customID={{
+                      name: "adminID",
+                      placeholder: "Admin ID",
+                    }}
+                    handleOnChange={handleOnChange}
+                    setFormFields={setFormFields}
+                    registerFunction={register}
+                    formFields={formFields}
+                    setError={setError}
+                    error={error}
+                    teams={teams}
                     setTeamMembers={setTeamMembers}
-                    setTeamsID={setTeamsID}
+                    id={id}
                   />
                 }
               />

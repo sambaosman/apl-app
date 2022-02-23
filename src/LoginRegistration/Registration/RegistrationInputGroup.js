@@ -20,19 +20,13 @@ const RegistrationInputGroup = ({
   teams,
   setTeamMembers,
   history,
+  id,
 }) => {
   const onSubmit = (values) => {
     console.log(values);
   };
 
   const teamIDs = teams && teams.length && teams.map((team) => team.id);
-
-  // const getIDFromURL = () => {
-  //   let link = window.location.pathname;
-  //   let id = link.split("id?")[1];
-  //   console.log("id", id);
-  // };
-  // getIDFromURL();
 
   return (
     <React.Fragment>
@@ -152,7 +146,7 @@ const RegistrationInputGroup = ({
               </Field>
             </FormGroup>
             <FormGroup>
-              <Field name="email">
+              <Field name="teamID">
                 {({ meta }) => (
                   <div>
                     <TextInput
@@ -160,6 +154,7 @@ const RegistrationInputGroup = ({
                       name={customID.name}
                       onChange={(e) => handleOnChange(e)}
                       invalid={meta.error && meta.touched}
+                      value={id}
                     />
                     {meta.error && meta.touched && (
                       <span className="form-error">{meta.error}</span>
