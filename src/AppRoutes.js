@@ -66,7 +66,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
   const getIDFromURL = () => {
     let link = window.location.pathname;
     let linkArray = link.split("/").pop();
-    return parseInt(linkArray) ? linkArray : null;
+    return parseInt(linkArray) ? linkArray : "";
   };
   let id = getIDFromURL();
 
