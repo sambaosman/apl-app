@@ -26,7 +26,7 @@ export const register = async (
   setTeamMembers,
   setError
 ) => {
-  const { userName, email, password } = formFields;
+  const { email, password, teamID } = formFields;
   try {
     await Auth.signUp({
       username: email,

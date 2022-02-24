@@ -12,6 +12,7 @@ const HomePage = ({ teams, setTeams, setLoggedIn }) => {
     Auth.currentAuthenticatedUser().then((user) => {
       console.log(user);
     });
+
     const getTeamMembers = async () => {
       let models = await DataStore.query(TeamMember);
       setTeamMembers(models);

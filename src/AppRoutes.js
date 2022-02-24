@@ -61,14 +61,14 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
   useEffect(() => {
     getTeamMembers(setTeamMembers);
     getTeams(setTeams);
+    const getIDFromURL = () => {
+      let link = window.location.pathname;
+      let linkArray = link.split("/").pop();
+      return parseInt(linkArray) ? linkArray : "";
+    };
+    let id = getIDFromURL();
+    setFormFields({ ...formFields, teamID: id });
   }, []);
-
-  const getIDFromURL = () => {
-    let link = window.location.pathname;
-    let linkArray = link.split("/").pop();
-    return parseInt(linkArray) ? linkArray : "";
-  };
-  let id = getIDFromURL();
 
   const onLogin = () => {
     setLoggedIn(true);
@@ -116,7 +116,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
-            id={id}
           />
         }
       />
@@ -141,7 +140,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
-            id={id}
           />
         }
       />
@@ -152,7 +150,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
           <RegistrationInputGroup
             goBack={() => setTeamMemberType()}
             customID={{
-              name: "managerID",
+              name: "teamID",
               placeholder: "Manager ID",
             }}
             handleOnChange={handleOnChange}
@@ -163,7 +161,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
-            id={id}
           />
         }
       />
@@ -174,7 +171,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
           <RegistrationInputGroup
             goBack={() => setTeamMemberType()}
             customID={{
-              name: "adminID",
+              name: "teamID",
               placeholder: "Admin ID",
             }}
             handleOnChange={handleOnChange}
@@ -185,7 +182,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
-            id={id}
           />
         }
       />
@@ -202,8 +198,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                   <RegistrationInputGroup
                     goBack={() => setTeamMemberType()}
                     customID={{
-                      name: "adminID",
-                      placeholder: "Admin ID",
+                      name: `${type}ID`,
+                      placeholder: `${type} ID`,
                     }}
                     handleOnChange={handleOnChange}
                     setFormFields={setFormFields}
@@ -213,7 +209,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                     error={error}
                     teams={teams}
                     setTeamMembers={setTeamMembers}
-                    id={id}
                   />
                 }
               />

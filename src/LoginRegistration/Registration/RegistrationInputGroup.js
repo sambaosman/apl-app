@@ -20,7 +20,6 @@ const RegistrationInputGroup = ({
   teams,
   setTeamMembers,
   history,
-  id,
 }) => {
   const onSubmit = (values) => {
     console.log(values);
@@ -154,7 +153,7 @@ const RegistrationInputGroup = ({
                       name={customID.name}
                       onChange={(e) => handleOnChange(e)}
                       invalid={meta.error && meta.touched}
-                      value={id}
+                      value={formFields.teamID}
                     />
                     {meta.error && meta.touched && (
                       <span className="form-error">{meta.error}</span>
@@ -304,6 +303,7 @@ const RegistrationInputGroup = ({
                 )}
               </Field>
             </FormGroup>
+            <div>Error: {error.message}</div>
             <PrimaryButton
               type="submit"
               onClick={() =>
