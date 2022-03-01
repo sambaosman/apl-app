@@ -1,21 +1,21 @@
-type TeamMember @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  firstName: String!
-  lastName: String!
-  email: String!
-  teamsID: ID! @index(name: "byTeams")
-  jerseyNumber: String!
-  phoneNumber: String!
-  street: String
-  teamMemberType: String
-  city: String
-  state: String
-  zipCode: String
-}
-
 type Teams @model @auth(rules: [{allow: public}]) {
   id: ID!
   teamName: String
-  Forms: [TeamMember] @hasMany(indexName: "byTeams", fields: ["id"])
+  TeamMembers: [TeamMember] @hasMany(indexName: "byTeams", fields: ["id"])
+}
+
+type TeamMember @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  firstName: String
+  lastName: String
+  email: String
+  jerseyNumber: String
+  street: String
+  city: String
+  state: String
+  zip: String
+  phoneNumber: String
+  teamMemberType: String
+  teamsID: ID! @index(name: "byTeams")
 }
  

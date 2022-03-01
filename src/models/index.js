@@ -4,9 +4,9 @@ import { schema } from './schema';
 
 
 
-const { TeamMember, Teams } = initSchema(schema);
+const { Teams, TeamMember } = initSchema(schema);
 
 export {
-  TeamMember,
-  Teams
+  Teams,
+  TeamMember
 };
