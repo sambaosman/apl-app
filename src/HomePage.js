@@ -31,6 +31,7 @@ const HomePage = ({ teams, setTeams, setLoggedIn }) => {
           setTeamMembers={setTeamMembers}
           userType={userType}
           teamID={teamID}
+          setLoggedIn={setLoggedIn}
         />
       )}
     </React.Fragment>

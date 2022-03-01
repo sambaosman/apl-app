@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { TeamMember } from "./models";
 import { DataStore } from "aws-amplify";
 import { deleteTeamMember } from "./RegistrationServices";
+import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
 
-const PlayerPage = ({ teamMembers, setTeamMembers, teamID }) => {
+const PlayerPage = ({ teamMembers, setTeamMembers, teamID, setLoggedIn }) => {
   useEffect(() => {
     const getTeamMembers = async () => {
       let models = await DataStore.query(TeamMember);
@@ -60,6 +61,7 @@ const PlayerPage = ({ teamMembers, setTeamMembers, teamID }) => {
             </div>
           </div>
         ))}
+      <button onClick={() => signOut(setLoggedIn)}> Sign out</button>
     </React.Fragment>
   );
 };
