@@ -14,9 +14,41 @@ const PlayerPage = ({ teamMembers, setTeamMembers, teamID }) => {
 
   return (
     <React.Fragment>
-      test
+      <div>Managers</div>
       {teamMembers
-        .filter((team) => team.teamsID === teamID)
+        .filter(
+          (team) => team.teamsID === teamID && team.teamMemberType === "manager"
+        )
+        .map((teamMember) => (
+          <div>
+            {teamMember.firstName}
+            {teamMember.teamsID}
+            <div onClick={() => deleteTeamMember(teamMember, setTeamMembers)}>
+              click here
+            </div>
+          </div>
+        ))}
+      <div>Players</div>
+
+      {teamMembers
+        .filter(
+          (team) => team.teamsID === teamID && team.teamMemberType === "player"
+        )
+        .map((teamMember) => (
+          <div>
+            {teamMember.firstName}
+            {teamMember.teamsID}
+            <div onClick={() => deleteTeamMember(teamMember, setTeamMembers)}>
+              click here
+            </div>
+          </div>
+        ))}
+      <div>Guests</div>
+      {teamMembers
+        .filter(
+          (team) =>
+            team.teamsID === teamID && team.teamMemberType === "guestPlayer"
+        )
         .map((teamMember) => (
           <div>
             {teamMember.firstName}
