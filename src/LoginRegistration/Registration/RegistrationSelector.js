@@ -26,11 +26,6 @@ const RegistrationSelector = ({ formFields }) => {
       name: "manager",
       icon: "user-tie",
     },
-    {
-      type: "admin",
-      name: "admin",
-      icon: "user-gear",
-    },
   ];
 
   const { teamMemberType } = formFields;

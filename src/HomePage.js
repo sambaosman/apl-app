@@ -19,7 +19,8 @@ const HomePage = ({ teams, setTeams, setLoggedIn }) => {
 
   return (
     <React.Fragment>
-      {userType === "admin" ? (
+      <AdminPage teams={teams} setTeams={setTeams} setLoggedIn={setLoggedIn} />
+      {/* {userType === "admin" ? (
         <AdminPage
           teams={teams}
           setTeams={setTeams}
@@ -33,7 +34,7 @@ const HomePage = ({ teams, setTeams, setLoggedIn }) => {
           teamID={teamID}
           setLoggedIn={setLoggedIn}
         />
-      )}
+      )} */}
     </React.Fragment>
   );
 };
