@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import RegistrationForm from "./RegistrationForm";
-import RegisteredList from "./RegisteredList";
 import { Amplify } from "aws-amplify";
 import {
   submitTeamMember,
@@ -231,43 +230,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                 }
               />
             ))}
-
-            {/* <Route
-              path={`/${team.id}/guest/registered-players`}
-              element={
-                <RegisteredList
-                  submitTeamMember={submitTeamMember}
-                  teamMembers={teamMembers}
-                  setTeamMembers={setTeamMembers}
-                  deleteTeamMember={deleteTeamMember}
-                  setFirstName={setFirstName}
-                  setLastName={setLastName}
-                  setEmail={setEmail}
-                  firstName={firstName}
-                  lastName={lastName}
-                  email={email}
-                  getTeamMembers={getTeamMembers}
-                />
-              }
-            />
-            <Route
-              path={`/${team.id}/registered-players`}
-              element={
-                <RegisteredList
-                  submitTeamMember={submitTeamMember}
-                  teamMembers={teamMembers}
-                  setTeamMembers={setTeamMembers}
-                  deleteTeamMember={deleteTeamMember}
-                  setFirstName={setFirstName}
-                  setLastName={setLastName}
-                  setEmail={setEmail}
-                  firstName={firstName}
-                  lastName={lastName}
-                  email={email}
-                  getTeamMembers={getTeamMembers}
-                />
-              }
-            /> */}
           </React.Fragment>
         ))}
       <Route
