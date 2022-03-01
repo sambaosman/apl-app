@@ -12,16 +12,11 @@ const PlayerPage = ({ teamMembers, setTeamMembers, teamID }) => {
     getTeamMembers();
   }, []);
 
-  let filteredTeamMembers = teamMembers.filter(
-    (team) => team.teamsID === teamID
-  );
-  console.log("filter", filteredTeamMembers);
-
   return (
     <React.Fragment>
       test
       {teamMembers
-        // .filter((team) => team.teamsID === teamID)
+        .filter((team) => team.teamsID === teamID)
         .map((teamMember) => (
           <div>
             {teamMember.firstName}
@@ -29,7 +24,6 @@ const PlayerPage = ({ teamMembers, setTeamMembers, teamID }) => {
             <div onClick={() => deleteTeamMember(teamMember, setTeamMembers)}>
               click here
             </div>
-            C
           </div>
         ))}
     </React.Fragment>
