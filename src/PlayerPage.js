@@ -23,6 +23,8 @@ const PlayerPage = ({ teamMembers, setTeamMembers, teamID }) => {
           <div>
             {teamMember.firstName}
             {teamMember.teamsID}
+            {teamMember.teamMemberType}
+
             <div onClick={() => deleteTeamMember(teamMember, setTeamMembers)}>
               click here
             </div>

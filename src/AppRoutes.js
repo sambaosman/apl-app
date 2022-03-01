@@ -28,6 +28,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
   const [email, setEmail] = useState();
   const [teamsID, setTeamsID] = useState();
 
+  console.log("test", window.location.pathname.split("/")[2]);
+
   const initialFormFields = {
     firstName: "",
     lastName: "",
@@ -40,16 +42,13 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     state: "",
     zip: "",
     phoneNumber: "",
-    teamMemberType: "",
+    teamMemberType: window.location.pathname.split("/")[2],
     formType: "register",
   };
   const [formFields, setFormFields] = useState(initialFormFields);
   const [error, setError] = useState();
 
   const history = useNavigate();
-  const setTeamMemberType = (teamMemberType) => {
-    setFormFields(() => ({ ...formFields, teamMemberType: teamMemberType }));
-  };
 
   const handleOnChange = (e) => {
     e.persist();
@@ -57,10 +56,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
   };
 
   const { formType } = formFields;
-
-  let b = window.location.pathname.split("/");
-
-  console.log("a", b[2]);
 
   useEffect(() => {
     getTeamMembers(setTeamMembers);
@@ -75,7 +70,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     setFormFields({
       ...formFields,
       teamID: id,
-      teamMemberType: link.split("/")[2],
     });
   }, []);
 
@@ -108,7 +102,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/register/player"
         element={
           <RegistrationInputGroup
-            goBack={() => setTeamMemberType()}
+            // goBack={() => setTeamMemberType()}
             customField={{
               name: "jerseyNumber",
               placeholder: "Jersey Number",
@@ -133,7 +127,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/register/guestPlayer"
         element={
           <RegistrationInputGroup
-            goBack={() => setTeamMemberType()}
+            // goBack={() => setTeamMemberType()}
             customField={{
               name: "jerseyNumber",
               placeholder: "Jersey Number",
@@ -159,7 +153,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/register/manager"
         element={
           <RegistrationInputGroup
-            goBack={() => setTeamMemberType()}
+            // goBack={() => setTeamMemberType()}
             customID={{
               name: "teamID",
               placeholder: "Manager ID",
@@ -181,7 +175,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/register/admin"
         element={
           <RegistrationInputGroup
-            goBack={() => setTeamMemberType()}
+            // goBack={() => setTeamMemberType()}
             customID={{
               name: "teamID",
               placeholder: "Admin ID",
@@ -209,7 +203,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                 path={`/register/${type}/${team.id}`}
                 element={
                   <RegistrationInputGroup
-                    goBack={() => setTeamMemberType()}
+                    // goBack={() => setTeamMemberType()}
                     customID={{
                       name: `${type}ID`,
                       placeholder: `${type} ID`,

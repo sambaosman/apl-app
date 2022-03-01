@@ -43,6 +43,7 @@ export const submitTeamMember = async (
     state,
     zip,
     phoneNumber,
+    teamMemberType,
   } = formFields;
   const teamMember = {
     firstName: firstName,
@@ -55,6 +56,7 @@ export const submitTeamMember = async (
     state: state,
     zip: zip,
     phoneNumber: phoneNumber,
+    teamMemberType: teamMemberType,
   };
   try {
     const newTeamMember = await DataStore.save(new TeamMember(teamMember));
