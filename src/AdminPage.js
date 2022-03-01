@@ -5,13 +5,17 @@ import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
 
 const AdminPage = ({ teams, setTeams, setLoggedIn }) => {
   const [teamName, setTeamName] = useState(null);
-  const [showLink, setShowLink] = useState(false);
+  const [openedLinkID, setOpenedLinkID] = useState("");
   const [addTeamModalOpen, setAddTeamModalOpen] = useState(false);
   const [editTeamModalOpen, setEditTeamModalOpen] = useState(false);
   const [editedTeam, setEditedTeam] = useState(null);
 
   const team = teams.find((team) => teamName === team.teamName);
   let link = team && `${window.location.href}${team.id}`;
+
+  const showLinkHandler = (id) => {
+    setOpenedLinkID(id);
+  };
 
   return (
     <div>
@@ -71,12 +75,12 @@ const AdminPage = ({ teams, setTeams, setLoggedIn }) => {
             </button>
             <button
               onClick={() => {
-                setShowLink(!showLink);
+                showLinkHandler(team.id);
               }}
             >
               See shareable link
             </button>
-            {showLink ? (
+            {team.id === openedLinkID ? (
               <div>
                 <div>Here's your shareable link</div>
                 <div>
