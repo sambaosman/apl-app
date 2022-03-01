@@ -85,20 +85,20 @@ const AdminPage = ({ teams, setTeams, setLoggedIn }) => {
                 <div>Here's your shareable link</div>
                 <div>
                   <a
-                    href={`${window.location.href}manager/${team.id}`}
-                  >{`${window.location.href}manager/${team.id}`}</a>
+                    href={`${window.location.href}register/manager/${team.id}`}
+                  >{`${window.location.href}register/manager/${team.id}`}</a>
                 </div>
                 <div>Here's your shareable player link</div>
                 <div>
                   <a
-                    href={`${window.location.href}player/${team.id}`}
-                  >{`${window.location.href}player/${team.id}`}</a>
+                    href={`${window.location.href}register/player/${team.id}`}
+                  >{`${window.location.href}register/player/${team.id}`}</a>
                 </div>
                 <div>Here's your shareable guest player link</div>
                 <div>
                   <a
-                    href={`${window.location.href}guestPlayer/${team.id}`}
-                  >{`${window.location.href}guestPlayer/${team.id}`}</a>
+                    href={`${window.location.href}register/guestPlayer/${team.id}`}
+                  >{`${window.location.href}register/guestPlayer/${team.id}`}</a>
                 </div>
               </div>
             ) : null}

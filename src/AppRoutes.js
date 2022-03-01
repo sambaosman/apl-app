@@ -17,6 +17,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import RegistrationInputGroup from "./LoginRegistration/Registration/RegistrationInputGroup";
 import { register } from "./LoginRegistration/LoginRegistrationFunctions";
 import AuthCodeInput from "./LoginRegistration/Registration/AuthCodeInput";
+import Waiver from "./LoginRegistration/Waiver";
 
 Amplify.configure(awsExports);
 
@@ -97,6 +98,17 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         }
       />
       <Route
+        path="/register/waiver"
+        element={
+          <Waiver
+            formFields={formFields}
+            setFormFields={setFormFields}
+            history={history}
+            setError={setError}
+          />
+        }
+      />
+      <Route
         path="/register/player"
         element={
           <RegistrationInputGroup
@@ -111,7 +123,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             }}
             handleOnChange={handleOnChange}
             setFormFields={setFormFields}
-            registerFunction={register}
+            registerFunction={() => history("/register/waiver")}
             history={history}
             formFields={formFields}
             setError={setError}
@@ -136,7 +148,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             }}
             handleOnChange={handleOnChange}
             setFormFields={setFormFields}
-            registerFunction={register}
+            registerFunction={() => history("/register/waiver")}
             history={history}
             formFields={formFields}
             setError={setError}
@@ -158,7 +170,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             }}
             handleOnChange={handleOnChange}
             setFormFields={setFormFields}
-            registerFunction={register}
+            registerFunction={() => history("/register/waiver")}
             history={history}
             formFields={formFields}
             setError={setError}
@@ -180,7 +192,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             }}
             handleOnChange={handleOnChange}
             setFormFields={setFormFields}
-            registerFunction={register}
+            registerFunction={() => history("/register/waiver")}
             history={history}
             formFields={formFields}
             setError={setError}
@@ -208,7 +220,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                     }}
                     handleOnChange={handleOnChange}
                     setFormFields={setFormFields}
-                    registerFunction={register}
+                    registerFunction={() => history("/register/waiver")}
                     history={history}
                     formFields={formFields}
                     setError={setError}
