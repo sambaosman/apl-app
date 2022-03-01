@@ -1,20 +1,40 @@
 import React, { useState } from "react";
-import { Auth } from "aws-amplify";
+import { Auth, formField } from "aws-amplify";
 import {
   NumberInput,
   PrimaryButton,
 } from "../../StyledComponents/StyledComponents";
 import { Row, Col } from "reactstrap";
+import { loadStripe } from "@stripe/stripe-js";
+
+const handlePayment = async (e) => {
+  const stripe = await loadStripe(
+    "pk_test_51KTR3VHserWDsTQfAezh70ZTvCbXO3oFk312GrHoTICxpgGv1gUPvKvNztBOxKSF2u4II4Enw4nJ7OnoBntpjiB400m7NH4pUi"
+  );
+  const { error } = await stripe.redirectToCheckout({
+    lineItems: [
+      {
+        price: "price_1KTR7hHserWDsTQfYeCokzt8",
+        quantity: 1,
+      },
+    ],
+    mode: "payment",
+    successUrl:
+      "http://localhost:3000/a36a9aeb-a4e4-4506-aab6-4029b793d294/guest/registered-players",
+    cancelUrl: "http://localhost:3000",
+  });
+};
 
 const AuthCodeInput = ({ formFields, setFormFields, setError, history }) => {
   const [authCode, setAuthCode] = useState(new Array(6).fill(""));
 
   const confirmRegistration = async (formFields, setFormFields, setError) => {
-    const { email } = formFields;
+    const { email, teamMemberType } = formFields;
     try {
       await Auth.confirmSignUp(email, authCode.join(""));
       setFormFields(() => ({ ...formFields, formType: "signIn" }));
       history("/login");
+      teamMemberType !== "guestPlayer" && handlePayment();
     } catch (error) {
       setError(error);
     }
@@ -52,7 +72,9 @@ const AuthCodeInput = ({ formFields, setFormFields, setError, history }) => {
         })}
       </Row>
       <PrimaryButton
-        onClick={() => confirmRegistration(formFields, setFormFields, setError)}
+        onClick={(e) =>
+          confirmRegistration(formFields, setFormFields, setError)
+        }
       >
         Submit
       </PrimaryButton>
