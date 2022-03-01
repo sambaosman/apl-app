@@ -17,6 +17,8 @@ import RegistrationInputGroup from "./LoginRegistration/Registration/Registratio
 import { register } from "./LoginRegistration/LoginRegistrationFunctions";
 import AuthCodeInput from "./LoginRegistration/Registration/AuthCodeInput";
 import Waiver from "./LoginRegistration/Waiver";
+import Roster from "./Roster";
+import { Auth } from "aws-amplify";
 
 Amplify.configure(awsExports);
 
@@ -40,11 +42,13 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     state: "",
     zip: "",
     phoneNumber: "",
-    teamMemberType: window.location.pathname.split("/")[2], //getting user type from url
+    teamMemberType: "", //getting user type from url
     formType: "register",
   };
   const [formFields, setFormFields] = useState(initialFormFields);
   const [error, setError] = useState();
+  const [userType, setUserType] = useState("");
+  const [teamID, setTeamID] = useState("");
 
   const history = useNavigate();
 
@@ -52,6 +56,13 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     e.persist();
     setFormFields({ ...formFields, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser().then((user) => {
+      setUserType(user.attributes["custom:userType"]);
+      setTeamID(user.attributes["custom:teamID"]);
+    });
+  }, []);
 
   const { formType } = formFields;
 
@@ -106,6 +117,10 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             setError={setError}
           />
         }
+      />
+      <Route
+        path="/roster"
+        element={<Roster teamMembers={teamMembers} teamID={teamID} />}
       />
       <Route
         path="/register/player"
@@ -241,6 +256,11 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                 teams={teams}
                 setTeams={setTeams}
                 setLoggedIn={setLoggedIn}
+                history={history}
+                userType={userType}
+                teamID={teamID}
+                teamMembers={teamMembers}
+                setTeamMembers={setTeamMembers}
               />
             ) : (
               <Link to="/login">

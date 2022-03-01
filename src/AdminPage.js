@@ -3,7 +3,7 @@ import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
 import { addTeam, deleteTeam, updateTeam } from "./TeamServices";
 import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
 
-const AdminPage = ({ teams, setTeams, setLoggedIn }) => {
+const AdminPage = ({ teams, setTeams, setLoggedIn, history }) => {
   const [teamName, setTeamName] = useState(null);
   const [openedLinkID, setOpenedLinkID] = useState("");
   const [addTeamModalOpen, setAddTeamModalOpen] = useState(false);
@@ -45,19 +45,6 @@ const AdminPage = ({ teams, setTeams, setLoggedIn }) => {
           </button>
         </ReactForm>
       </Modal>
-      {}
-      {team && (
-        <div>
-          <div>Here's your shareable link</div>
-          <div>
-            <a href={link}>{link}</a>
-          </div>
-          <div>Here's your shareable guest link</div>
-          <div>
-            <a href={`${link}/guest`}>{`${link}/guest`}</a>
-          </div>
-        </div>
-      )}
       {teams &&
         teams.map((team, index) => (
           <div key={index}>
@@ -79,6 +66,13 @@ const AdminPage = ({ teams, setTeams, setLoggedIn }) => {
               }}
             >
               See shareable link
+            </button>
+            <button
+              onClick={() => {
+                history("/roster");
+              }}
+            >
+              See roster
             </button>
             {team.id === openedLinkID ? (
               <div>

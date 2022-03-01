@@ -27,7 +27,7 @@ const PlayerPage = ({ teamMembers, setTeamMembers, teamID, setLoggedIn }) => {
             {teamMember.teamMemberType}
 
             <div onClick={() => deleteTeamMember(teamMember, setTeamMembers)}>
-              click here
+              delete
             </div>
           </div>
         ))}
@@ -42,7 +42,7 @@ const PlayerPage = ({ teamMembers, setTeamMembers, teamID, setLoggedIn }) => {
             {teamMember.firstName}
             {teamMember.teamsID}
             <div onClick={() => deleteTeamMember(teamMember, setTeamMembers)}>
-              click here
+              delete
             </div>
           </div>
         ))}
@@ -57,7 +57,7 @@ const PlayerPage = ({ teamMembers, setTeamMembers, teamID, setLoggedIn }) => {
             {teamMember.firstName}
             {teamMember.teamsID}
             <div onClick={() => deleteTeamMember(teamMember, setTeamMembers)}>
-              click here
+              delete
             </div>
           </div>
         ))}
