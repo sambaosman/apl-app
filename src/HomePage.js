@@ -10,7 +10,7 @@ const HomePage = ({ teams, setTeams, setLoggedIn }) => {
   const [teamMembers, setTeamMembers] = useState([]);
   useEffect(() => {
     Auth.currentAuthenticatedUser().then((user) => {
-      console.log(user);
+      console.log("user", user);
     });
 
     const getTeamMembers = async () => {

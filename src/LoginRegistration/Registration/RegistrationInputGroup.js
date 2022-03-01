@@ -14,12 +14,12 @@ const RegistrationInputGroup = ({
   handleOnChange,
   setFormFields,
   registerFunction,
+  history,
   formFields,
   setError,
   error,
   teams,
   setTeamMembers,
-  history,
 }) => {
   const onSubmit = (values) => {
     console.log(values);
@@ -266,7 +266,6 @@ const RegistrationInputGroup = ({
                 )}
               </Field>
             </FormGroup>
-
             <FormGroup>
               <Field name="password">
                 {({ meta }) => (
@@ -303,7 +302,7 @@ const RegistrationInputGroup = ({
                 )}
               </Field>
             </FormGroup>
-            <div>Error: {error.message}</div>
+            {error && <div>Error: {error.message}</div>}{" "}
             <PrimaryButton
               type="submit"
               onClick={() =>
@@ -311,7 +310,8 @@ const RegistrationInputGroup = ({
                   formFields,
                   setFormFields,
                   setTeamMembers,
-                  setError
+                  setError,
+                  history
                 )
               }
             >

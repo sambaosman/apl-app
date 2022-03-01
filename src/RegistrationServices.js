@@ -28,7 +28,8 @@ export const submitTeamMember = async (
   formFields,
   setTeamMembers,
   setFormFields,
-  setError
+  setError,
+  history
 ) => {
   const {
     firstName,
@@ -59,6 +60,7 @@ export const submitTeamMember = async (
     const newTeamMember = await DataStore.save(new TeamMember(teamMember));
     getTeamMembers(setTeamMembers);
     setFormFields(() => ({ ...formFields, formType: "confirmRegistration" }));
+    history("/register/authCode");
   } catch (error) {
     setError(error);
   }

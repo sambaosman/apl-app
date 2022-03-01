@@ -58,16 +58,25 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
 
   const { formType } = formFields;
 
+  let b = window.location.pathname.split("/");
+
+  console.log("a", b[2]);
+
   useEffect(() => {
     getTeamMembers(setTeamMembers);
+    let link;
     getTeams(setTeams);
     const getIDFromURL = () => {
-      let link = window.location.pathname;
+      link = window.location.pathname;
       let linkArray = link.split("/").pop();
       return parseInt(linkArray) ? linkArray : "";
     };
     let id = getIDFromURL();
-    setFormFields({ ...formFields, teamID: id });
+    setFormFields({
+      ...formFields,
+      teamID: id,
+      teamMemberType: link.split("/")[2],
+    });
   }, []);
 
   const onLogin = () => {
@@ -111,6 +120,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             handleOnChange={handleOnChange}
             setFormFields={setFormFields}
             registerFunction={register}
+            history={history}
             formFields={formFields}
             setError={setError}
             error={error}
@@ -135,6 +145,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             handleOnChange={handleOnChange}
             setFormFields={setFormFields}
             registerFunction={register}
+            history={history}
             formFields={formFields}
             setError={setError}
             error={error}
@@ -156,6 +167,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             handleOnChange={handleOnChange}
             setFormFields={setFormFields}
             registerFunction={register}
+            history={history}
             formFields={formFields}
             setError={setError}
             error={error}
@@ -177,6 +189,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             handleOnChange={handleOnChange}
             setFormFields={setFormFields}
             registerFunction={register}
+            history={history}
             formFields={formFields}
             setError={setError}
             error={error}
@@ -204,6 +217,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                     handleOnChange={handleOnChange}
                     setFormFields={setFormFields}
                     registerFunction={register}
+                    history={history}
                     formFields={formFields}
                     setError={setError}
                     error={error}

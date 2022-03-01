@@ -24,15 +24,26 @@ export const register = async (
   formFields,
   setFormFields,
   setTeamMembers,
-  setError
+  setError,
+  history
 ) => {
-  const { email, password, teamID } = formFields;
+  const { email, password, teamID, teamMemberType } = formFields;
   try {
     await Auth.signUp({
       username: email,
       password,
+      attributes: {
+        "custom:teamID": teamID,
+        "custom:userType": teamMemberType,
+      },
     });
-    submitTeamMember(formFields, setTeamMembers, setFormFields, setError);
+    submitTeamMember(
+      formFields,
+      setTeamMembers,
+      setFormFields,
+      setError,
+      history
+    );
   } catch (error) {
     setError(error);
   }
