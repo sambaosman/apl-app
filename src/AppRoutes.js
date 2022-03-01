@@ -28,8 +28,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
   const [email, setEmail] = useState();
   const [teamsID, setTeamsID] = useState();
 
-  console.log("test", window.location.pathname.split("/")[2]);
-
   const initialFormFields = {
     firstName: "",
     lastName: "",
@@ -42,7 +40,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     state: "",
     zip: "",
     phoneNumber: "",
-    teamMemberType: window.location.pathname.split("/")[2],
+    teamMemberType: window.location.pathname.split("/")[2], //getting user type from url
     formType: "register",
   };
   const [formFields, setFormFields] = useState(initialFormFields);
@@ -52,7 +50,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
 
   const handleOnChange = (e) => {
     e.persist();
-    setFormFields(() => ({ ...formFields, [e.target.name]: e.target.value }));
+    setFormFields({ ...formFields, [e.target.name]: e.target.value });
   };
 
   const { formType } = formFields;
