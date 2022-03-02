@@ -3,7 +3,7 @@ import React from "react";
 const Roster = ({ teamMembers, clickedTeam }) => {
   return (
     <div>
-      <h1>{clickedTeam.teamName}</h1>
+      <h1>{clickedTeam && clickedTeam.teamName}</h1>
       {teamMembers &&
         teamMembers.length &&
         teamMembers

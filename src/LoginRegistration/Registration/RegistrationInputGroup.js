@@ -309,15 +309,16 @@ const RegistrationInputGroup = ({
             {error && <div>Error: {error.message}</div>}{" "}
             <PrimaryButton
               type="submit"
-              onClick={() =>
-                registerFunction(
-                  formFields,
-                  setFormFields,
-                  setTeamMembers,
-                  setError,
-                  history
-                )
-              }
+              onClick={() => {
+                valid &&
+                  registerFunction(
+                    formFields,
+                    setFormFields,
+                    setTeamMembers,
+                    setError,
+                    history
+                  );
+              }}
             >
               Register
             </PrimaryButton>
