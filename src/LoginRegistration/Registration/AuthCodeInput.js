@@ -34,7 +34,7 @@ const AuthCodeInput = ({ formFields, setFormFields, setError, history }) => {
       await Auth.confirmSignUp(email, authCode.join(""));
       setFormFields(() => ({ ...formFields }));
       history("/login");
-      teamMemberType !== "guestPlayer" && handlePayment();
+      teamMemberType === "guestPlayer" && handlePayment();
     } catch (error) {
       setError(error);
     }
