@@ -17,11 +17,13 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <AppRoutes
-          loggedIn={loggedIn}
-          setLoggedIn={setLoggedIn}
-          signOut={signOut}
-        />
+        <div className="app-container">
+          <AppRoutes
+            loggedIn={loggedIn}
+            setLoggedIn={setLoggedIn}
+            signOut={signOut}
+          />
+        </div>
       </div>
     </BrowserRouter>
   );

@@ -12,134 +12,31 @@ const PlayerPage = ({
   setLoggedIn,
   userType,
 }) => {
-  const mockTeams = [
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "guestPlayer",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "guestPlayer",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "guestPlayer",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "player",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "player",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "player",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "player",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "player",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "player",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "manager",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "manager",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "manager",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "manager",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "manager",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "manager",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "manager",
-      teamsID: "1234",
-    },
-    {
-      firstName: "Salma",
-      lastName: "Osman",
-      jerseyNumber: "7",
-      teamMemberType: "manager",
-      teamsID: "1234",
-    },
-  ];
   useEffect(() => {
     const getTeamMembers = async () => {
       let models = await DataStore.query(TeamMember);
-      setTeamMembers(mockTeams);
+      setTeamMembers(models);
     };
     getTeamMembers();
   }, []);
+
+  const managers = teamMembers.filter(
+    (team) => team.teamsID === teamID && team.teamMemberType === "manager"
+  );
+
+  const players = teamMembers.filter(
+    (team) =>
+      team.teamsID === "1234" &&
+      // teamID
+      team.teamMemberType === "player"
+  );
+
+  const guestPlayers = teamMembers.filter(
+    (team) =>
+      team.teamsID === "1234" &&
+      // teamID
+      team.teamMemberType === "guestPlayer"
+  );
 
   return (
     <div style={{ width: "100%", margin: "auto" }}>
@@ -160,14 +57,8 @@ const PlayerPage = ({
       <div className="roster-user-section">
         <div className="roster-user-label">Managers</div>
       </div>
-      {teamMembers
-        .filter(
-          (team) =>
-            team.teamsID === "1234" &&
-            // teamID
-            team.teamMemberType === "manager"
-        )
-        .map((teamMember, index) => (
+      {managers && managers.length ? (
+        managers.map((teamMember, index) => (
           <RosterIndividual
             key={index}
             teamMember={teamMember}
@@ -175,19 +66,16 @@ const PlayerPage = ({
             deleteTeamMember={deleteTeamMember}
             userType={userType}
           />
-        ))}
+        ))
+      ) : (
+        <div>No managers to show</div>
+      )}
       <div className="roster-user-section">
         <div className="roster-user-label">Players</div>
       </div>
 
-      {teamMembers
-        .filter(
-          (team) =>
-            team.teamsID === "1234" &&
-            // teamID
-            team.teamMemberType === "player"
-        )
-        .map((teamMember, index) => (
+      {players && players.length ? (
+        players.map((teamMember, index) => (
           <RosterIndividual
             key={index}
             teamMember={teamMember}
@@ -195,18 +83,15 @@ const PlayerPage = ({
             deleteTeamMember={deleteTeamMember}
             userType={userType}
           />
-        ))}
+        ))
+      ) : (
+        <div>No players to show</div>
+      )}
       <div className="roster-user-section">
         <div className="roster-user-label"> Guests</div>
       </div>
-      {teamMembers
-        .filter(
-          (team) =>
-            team.teamsID === "1234" &&
-            // teamID
-            team.teamMemberType === "guestPlayer"
-        )
-        .map((teamMember, index) => (
+      {guestPlayers && guestPlayers.length ? (
+        guestPlayers.map((teamMember, index) => (
           <RosterIndividual
             key={index}
             teamMember={teamMember}
@@ -214,7 +99,10 @@ const PlayerPage = ({
             deleteTeamMember={deleteTeamMember}
             userType={userType}
           />
-        ))}
+        ))
+      ) : (
+        <div>No Guests to show</div>
+      )}
     </div>
   );
 };
