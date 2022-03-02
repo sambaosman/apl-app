@@ -4,7 +4,13 @@ import { DataStore } from "aws-amplify";
 import { deleteTeamMember } from "./RegistrationServices";
 import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
 
-const PlayerPage = ({ teamMembers, setTeamMembers, teamID, setLoggedIn }) => {
+const PlayerPage = ({
+  teamMembers,
+  setTeamMembers,
+  teamID,
+  setLoggedIn,
+  userType,
+}) => {
   useEffect(() => {
     const getTeamMembers = async () => {
       let models = await DataStore.query(TeamMember);
@@ -26,9 +32,11 @@ const PlayerPage = ({ teamMembers, setTeamMembers, teamID, setLoggedIn }) => {
             {teamMember.teamsID}
             {teamMember.teamMemberType}
 
-            <div onClick={() => deleteTeamMember(teamMember, setTeamMembers)}>
-              delete
-            </div>
+            {userType === "manager" && (
+              <div onClick={() => deleteTeamMember(teamMember, setTeamMembers)}>
+                delete
+              </div>
+            )}
           </div>
         ))}
       <div>Players</div>
@@ -41,9 +49,11 @@ const PlayerPage = ({ teamMembers, setTeamMembers, teamID, setLoggedIn }) => {
           <div>
             {teamMember.firstName}
             {teamMember.teamsID}
-            <div onClick={() => deleteTeamMember(teamMember, setTeamMembers)}>
-              delete
-            </div>
+            {userType === "manager" && (
+              <div onClick={() => deleteTeamMember(teamMember, setTeamMembers)}>
+                delete
+              </div>
+            )}
           </div>
         ))}
       <div>Guests</div>
@@ -56,9 +66,11 @@ const PlayerPage = ({ teamMembers, setTeamMembers, teamID, setLoggedIn }) => {
           <div>
             {teamMember.firstName}
             {teamMember.teamsID}
-            <div onClick={() => deleteTeamMember(teamMember, setTeamMembers)}>
-              delete
-            </div>
+            {userType === "manager" && (
+              <div onClick={() => deleteTeamMember(teamMember, setTeamMembers)}>
+                delete
+              </div>
+            )}
           </div>
         ))}
       <button onClick={() => signOut(setLoggedIn)}> Sign out</button>
