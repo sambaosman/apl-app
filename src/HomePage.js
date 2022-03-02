@@ -15,7 +15,7 @@ const HomePage = ({
 }) => {
   return (
     <React.Fragment>
-      {userType !== "admin" ? (
+      {userType === "admin" ? (
         <AdminPage
           teams={teams}
           setTeams={setTeams}

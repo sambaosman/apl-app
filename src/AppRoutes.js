@@ -29,7 +29,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     state: "",
     zip: "",
     phoneNumber: "",
-    teamMemberType: "", //getting user type from url
+    teamMemberType: window.location.pathname.split("/")[2], //getting user type from url
   };
   const [teamMembers, setTeamMembers] = useState([]);
   const [teams, setTeams] = useState([]);
@@ -48,6 +48,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
 
   useEffect(() => {
     Auth.currentAuthenticatedUser().then((user) => {
+      console.log("user", user);
       setUserType(user.attributes["custom:userType"]);
       setTeamID(user.attributes["custom:teamID"]);
     });
