@@ -130,7 +130,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             }}
             handleOnChange={handleOnChange}
             setFormFields={setFormFields}
-            registerFunction={() => history("/register/waiver")}
+            registerFunction={() => console.log("test")}
             history={history}
             formFields={formFields}
             setError={setError}
@@ -155,7 +155,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             }}
             handleOnChange={handleOnChange}
             setFormFields={setFormFields}
-            registerFunction={() => history("/register/waiver")}
+            registerFunction={() => console.log("test")}
             history={history}
             formFields={formFields}
             setError={setError}
@@ -177,7 +177,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             }}
             handleOnChange={handleOnChange}
             setFormFields={setFormFields}
-            registerFunction={() => history("/register/waiver")}
+            registerFunction={() => console.log("test")}
             history={history}
             formFields={formFields}
             setError={setError}
@@ -199,7 +199,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             }}
             handleOnChange={handleOnChange}
             setFormFields={setFormFields}
-            registerFunction={() => history("/register/waiver")}
+            registerFunction={() => console.log("test")}
             history={history}
             formFields={formFields}
             setError={setError}
@@ -227,7 +227,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                     }}
                     handleOnChange={handleOnChange}
                     setFormFields={setFormFields}
-                    registerFunction={() => history("/register/waiver")}
+                    registerFunction={() => console.log("test")}
                     history={history}
                     formFields={formFields}
                     setError={setError}
