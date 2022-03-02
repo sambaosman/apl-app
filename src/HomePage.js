@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AdminPage from "./AdminPage";
 import PlayerPage from "./PlayerPage";
-import { Auth } from "aws-amplify";
-import { TeamMember } from "./models";
-import { DataStore } from "aws-amplify";
 
 const HomePage = ({
   teams,

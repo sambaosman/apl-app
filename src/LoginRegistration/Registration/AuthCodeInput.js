@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Auth, formField } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import {
   NumberInput,
   PrimaryButton,
@@ -32,7 +32,7 @@ const AuthCodeInput = ({ formFields, setFormFields, setError, history }) => {
     const { email, teamMemberType } = formFields;
     try {
       await Auth.confirmSignUp(email, authCode.join(""));
-      setFormFields(() => ({ ...formFields, formType: "signIn" }));
+      setFormFields(() => ({ ...formFields }));
       history("/login");
       teamMemberType !== "guestPlayer" && handlePayment();
     } catch (error) {

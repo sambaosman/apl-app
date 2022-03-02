@@ -61,7 +61,7 @@ export const submitTeamMember = async (
   try {
     const newTeamMember = await DataStore.save(new TeamMember(teamMember));
     getTeamMembers(setTeamMembers);
-    setFormFields(() => ({ ...formFields, formType: "confirmRegistration" }));
+    setFormFields(() => ({ ...formFields }));
     history("/register/authCode");
   } catch (error) {
     setError(error);

@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RegistrationForm from "./RegistrationForm";
 import { Amplify } from "aws-amplify";
-import {
-  submitTeamMember,
-  getTeamMembers,
-  deleteTeamMember,
-} from "./RegistrationServices";
+import { getTeamMembers } from "./RegistrationServices";
 import { getTeams } from "./TeamServices";
 import awsExports from "./aws-exports";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
@@ -14,7 +10,6 @@ import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import HomePage from "./HomePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import RegistrationInputGroup from "./LoginRegistration/Registration/RegistrationInputGroup";
-import { register } from "./LoginRegistration/LoginRegistrationFunctions";
 import AuthCodeInput from "./LoginRegistration/Registration/AuthCodeInput";
 import Waiver from "./LoginRegistration/Waiver";
 import Roster from "./Roster";
@@ -26,11 +21,12 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
   const [teamMembers, setTeamMembers] = useState([]);
   const [teams, setTeams] = useState([]);
   const [clickedTeam, setClickedTeam] = useState();
+  const [formFields, setFormFields] = useState(initialFormFields);
+  const [error, setError] = useState();
+  const [userType, setUserType] = useState("");
+  const [teamID, setTeamID] = useState("");
 
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [teamsID, setTeamsID] = useState();
+  const history = useNavigate();
 
   const initialFormFields = {
     firstName: "",
@@ -45,14 +41,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     zip: "",
     phoneNumber: "",
     teamMemberType: "", //getting user type from url
-    formType: "register",
   };
-  const [formFields, setFormFields] = useState(initialFormFields);
-  const [error, setError] = useState();
-  const [userType, setUserType] = useState("");
-  const [teamID, setTeamID] = useState("");
-
-  const history = useNavigate();
 
   const handleOnChange = (e) => {
     e.persist();
@@ -65,8 +54,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       setTeamID(user.attributes["custom:teamID"]);
     });
   }, []);
-
-  const { formType } = formFields;
 
   useEffect(() => {
     getTeamMembers(setTeamMembers);
