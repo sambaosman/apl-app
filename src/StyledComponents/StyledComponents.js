@@ -20,16 +20,18 @@ export const NumberInput = styled(Input)`
   display: flex;
   text-align: center;
   font-size: 30px;
+  font-weight: bold;
   margin-left: 0px;
   margin-right: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  height: 70px;
-  width: 70px;
+  height: 60px;
+  width: 60px;
   padding: 10px;
   border-radius: 7px;
-  border: 2px solid var(--secondary);
+  background-color: #f8f8f8;
   color: var(--secondary);
+  border: none;
 `;
 
 export const PrimaryButton = styled(Button)`

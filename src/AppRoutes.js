@@ -9,7 +9,7 @@ import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import HomePage from "./HomePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import RegistrationInputGroup from "./LoginRegistration/Registration/RegistrationInputGroup";
-import AuthCodeInput from "./LoginRegistration/Registration/AuthCodeInput";
+import OTP from "./LoginRegistration/Registration/OTP";
 import Waiver from "./LoginRegistration/Waiver";
 import Roster from "./Roster";
 import { Auth } from "aws-amplify";
@@ -87,7 +87,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       <Route
         path="/register/authCode"
         element={
-          <AuthCodeInput
+          <OTP
             formFields={formFields}
             setFormFields={setFormFields}
             history={history}

@@ -25,7 +25,7 @@ const handlePayment = async (e) => {
   });
 };
 
-const AuthCodeInput = ({ formFields, setFormFields, setError, history }) => {
+const OTP = ({ formFields, setFormFields, setError, history }) => {
   const [authCode, setAuthCode] = useState(new Array(6).fill(""));
 
   const confirmRegistration = async (formFields, setFormFields, setError) => {
@@ -51,35 +51,44 @@ const AuthCodeInput = ({ formFields, setFormFields, setError, history }) => {
     }
   };
   return (
-    <React.Fragment>
-      <Row>
-        <div className="app-title">Confirm Code</div>
+    <div>
+      {/* <Row style={{ display: "flex", justifyContent: "center" }}>
+        <div className="icon-circle">
+          <i class="fa-solid fa-mobile-screen"></i>{" "}
+        </div>
       </Row>
-      <Row>
+      <hr /> */}
+      <Row style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ fontWeight: "bold", fontSize: "17px" }}>Verification</div>
+        <div style={{ fontSize: "13px" }}>
+          Please enter your OTP code sent to your email
+        </div>
+      </Row>
+      <Row style={{ display: "flex", justifyContent: "center" }}>
         {authCode.map((data, index) => {
           return (
-            <Col md="2" key={index}>
-              <NumberInput
-                name="code"
-                type="code"
-                onChange={(e) => handleChange(e.target, index)}
-                maxLength="1"
-                value={data}
-                onFocus={(e) => e.target.select()}
-              />
-            </Col>
+            <NumberInput
+              name="code"
+              type="code"
+              onChange={(e) => handleChange(e.target, index)}
+              maxLength="1"
+              value={data}
+              onFocus={(e) => e.target.select()}
+            />
           );
         })}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <PrimaryButton
+            onClick={(e) =>
+              confirmRegistration(formFields, setFormFields, setError)
+            }
+          >
+            Verify
+          </PrimaryButton>
+        </div>
       </Row>
-      <PrimaryButton
-        onClick={(e) =>
-          confirmRegistration(formFields, setFormFields, setError)
-        }
-      >
-        Submit
-      </PrimaryButton>
-    </React.Fragment>
+    </div>
   );
 };
 
-export default AuthCodeInput;
+export default OTP;
