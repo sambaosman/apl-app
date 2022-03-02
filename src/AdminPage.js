@@ -3,7 +3,13 @@ import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
 import { addTeam, deleteTeam, updateTeam } from "./TeamServices";
 import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
 
-const AdminPage = ({ teams, setTeams, setLoggedIn, history }) => {
+const AdminPage = ({
+  teams,
+  setTeams,
+  setLoggedIn,
+  history,
+  setClickedTeam,
+}) => {
   const [teamName, setTeamName] = useState(null);
   const [openedLinkID, setOpenedLinkID] = useState("");
   const [addTeamModalOpen, setAddTeamModalOpen] = useState(false);
@@ -69,6 +75,7 @@ const AdminPage = ({ teams, setTeams, setLoggedIn, history }) => {
             </button>
             <button
               onClick={() => {
+                setClickedTeam(team);
                 history("/roster");
               }}
             >

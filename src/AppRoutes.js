@@ -25,6 +25,8 @@ Amplify.configure(awsExports);
 const AppRoutes = ({ loggedIn, setLoggedIn }) => {
   const [teamMembers, setTeamMembers] = useState([]);
   const [teams, setTeams] = useState([]);
+  const [clickedTeam, setClickedTeam] = useState();
+
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -120,7 +122,13 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       />
       <Route
         path="/roster"
-        element={<Roster teamMembers={teamMembers} teamID={teamID} />}
+        element={
+          <Roster
+            teamMembers={teamMembers}
+            teamID={teamID}
+            clickedTeam={clickedTeam}
+          />
+        }
       />
       <Route
         path="/register/player"
@@ -261,6 +269,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                 teamID={teamID}
                 teamMembers={teamMembers}
                 setTeamMembers={setTeamMembers}
+                setClickedTeam={setClickedTeam}
               />
             ) : (
               <Link to="/login">

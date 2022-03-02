@@ -14,6 +14,7 @@ const HomePage = ({
   teamID,
   teamMembers,
   setTeamMembers,
+  setClickedTeam,
 }) => {
   return (
     <React.Fragment>
@@ -23,6 +24,7 @@ const HomePage = ({
           setTeams={setTeams}
           setLoggedIn={setLoggedIn}
           history={history}
+          setClickedTeam={setClickedTeam}
         />
       ) : (
         <PlayerPage

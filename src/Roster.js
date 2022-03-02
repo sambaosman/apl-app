@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { TeamMember } from "./models";
-import { DataStore } from "aws-amplify";
-const Roster = ({ teamMembers, teamID }) => {
+import React from "react";
+const Roster = ({ teamMembers, clickedTeam }) => {
   return (
     <div>
+      <h1>{clickedTeam.teamName}</h1>
       {teamMembers &&
         teamMembers.length &&
         teamMembers
-          .filter((member) => member.id === teamID)
+          .filter((member) => member.teamsID === clickedTeam.id)
           .map((member) => (
             <div>
-              <div>{member.id}</div>
+              <div>{member.teamsID}</div>
               <div>{member.firstName}</div>
               <div>{member.lastName}</div>
             </div>
