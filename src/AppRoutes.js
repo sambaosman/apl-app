@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import RegistrationForm from "./RegistrationForm";
 import { Amplify } from "aws-amplify";
 import { getTeamMembers } from "./RegistrationServices";
 import { getTeams } from "./TeamServices";
@@ -18,16 +17,6 @@ import { Auth } from "aws-amplify";
 Amplify.configure(awsExports);
 
 const AppRoutes = ({ loggedIn, setLoggedIn }) => {
-  const [teamMembers, setTeamMembers] = useState([]);
-  const [teams, setTeams] = useState([]);
-  const [clickedTeam, setClickedTeam] = useState();
-  const [formFields, setFormFields] = useState(initialFormFields);
-  const [error, setError] = useState();
-  const [userType, setUserType] = useState("");
-  const [teamID, setTeamID] = useState("");
-
-  const history = useNavigate();
-
   const initialFormFields = {
     firstName: "",
     lastName: "",
@@ -42,6 +31,15 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     phoneNumber: "",
     teamMemberType: "", //getting user type from url
   };
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [teams, setTeams] = useState([]);
+  const [clickedTeam, setClickedTeam] = useState();
+  const [formFields, setFormFields] = useState(initialFormFields);
+  const [error, setError] = useState();
+  const [userType, setUserType] = useState("");
+  const [teamID, setTeamID] = useState("");
+
+  const history = useNavigate();
 
   const handleOnChange = (e) => {
     e.persist();
