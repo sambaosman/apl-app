@@ -16,6 +16,7 @@ export declare class Teams {
   readonly id: string;
   readonly teamName?: string;
   readonly TeamMembers?: (TeamMember | null)[];
+  readonly division?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Teams, TeamsMetaData>);

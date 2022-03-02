@@ -2,6 +2,7 @@ type Teams @model @auth(rules: [{allow: public}]) {
   id: ID!
   teamName: String
   TeamMembers: [TeamMember] @hasMany(indexName: "byTeams", fields: ["id"])
+  division: String
 }
 
 type TeamMember @model @auth(rules: [{allow: public}]) {

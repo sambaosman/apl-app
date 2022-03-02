@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
 import { addTeam, deleteTeam, updateTeam } from "./TeamServices";
 import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 
 const AdminPage = ({
   teams,
@@ -11,10 +17,12 @@ const AdminPage = ({
   setClickedTeam,
 }) => {
   const [teamName, setTeamName] = useState(null);
+  const [division, setDivision] = useState(null);
   const [openedLinkID, setOpenedLinkID] = useState("");
   const [addTeamModalOpen, setAddTeamModalOpen] = useState(false);
   const [editTeamModalOpen, setEditTeamModalOpen] = useState(false);
   const [editedTeam, setEditedTeam] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const team = teams.find((team) => teamName === team.teamName);
   let link = team && `${window.location.href}${team.id}`;
@@ -39,11 +47,27 @@ const AdminPage = ({
               placeholder="Enter Team Name"
               onChange={(event) => setTeamName(event.target.value)}
             />
+            <Dropdown
+              isOpen={dropdownOpen}
+              toggle={() => setDropdownOpen(!dropdownOpen)}
+            >
+              <DropdownToggle caret>
+                {division ? division : "Division"}
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={() => setDivision("premier")}>
+                  Premier
+                </DropdownItem>
+                <DropdownItem onClick={() => setDivision("championship")}>
+                  Championship
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
           </FormGroup>
           <button
             type="button"
             onClick={() => {
-              addTeam(teamName, setTeams);
+              addTeam(teamName, setTeams, division);
               setAddTeamModalOpen(false);
             }}
           >
@@ -55,6 +79,7 @@ const AdminPage = ({
         teams.map((team, index) => (
           <div key={index}>
             {team.teamName}
+            <div>{team.division}</div>
             <button onClick={() => deleteTeam(team.id, setTeams)}>
               Delete
             </button>
@@ -118,6 +143,7 @@ const AdminPage = ({
               placeholder="Enter Team Name"
               onChange={(event) => setTeamName(event.target.value)}
             />
+            <Label for="teamName">League</Label>
           </FormGroup>
           <div
             onClick={() => {

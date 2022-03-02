@@ -1,8 +1,10 @@
 import { Teams } from "./models";
 import { DataStore } from "aws-amplify";
 
-export const addTeam = async (teamName, setTeams) => {
-  const newTeam = await DataStore.save(new Teams({ teamName: teamName }));
+export const addTeam = async (teamName, setTeams, division) => {
+  const newTeam = await DataStore.save(
+    new Teams({ teamName: teamName, division: division })
+  );
   getTeams(setTeams);
 };
 

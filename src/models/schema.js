@@ -31,6 +31,13 @@ export const schema = {
                         "associatedWith": "teamsID"
                     }
                 },
+                "division": {
+                    "name": "division",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -214,5 +221,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "d4c5bd71e06b98998afea342d923b277"
+    "version": "d273276f5f2b926be7e8041b004343e2"
 };
