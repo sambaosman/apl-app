@@ -12,6 +12,12 @@ a {
   color: var(--primary);
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .app-title {
   font-size: 20px;
   font-weight: bold;
@@ -97,4 +103,45 @@ a {
   margin-top: 30px !important;
   margin-bottom: 20px !important;
   border-radius: 100%;
+}
+
+.roster-user-section {
+  border-bottom: 2px solid #f8f8f8;
+  margin: 0px 0px 20px 0px;
+  text-align: left;
+}
+.roster-user-label {
+  padding: 20px;
+}
+
+.logout-button {
+  font-weight: bold;
+}
+
+.logout-button:hover {
+  cursor: pointer;
+}
+
+.user-icon-circle {
+  height: 60px;
+  width: 60px;
+  background-color: #f8f8f8;
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.delete-player-icon {
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-player-icon:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
 }
