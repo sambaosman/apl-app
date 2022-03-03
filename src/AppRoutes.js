@@ -57,12 +57,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       setUserType(user.attributes["custom:userType"]);
       setTeamID(user.attributes["custom:teamID"]);
     });
-  }, []);
-
-  useEffect(() => {
-    getTeamMembers(setTeamMembers);
     let link;
-    getTeams(setTeams);
     const getIDFromURL = () => {
       link = window.location.pathname;
       let linkArray = link.split("/").pop();
@@ -73,6 +68,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       ...formFields,
       teamID: id,
     });
+    getTeamMembers(setTeamMembers);
+    getTeams(setTeams);
   }, []);
 
   const onLogin = () => {
