@@ -25,7 +25,7 @@ const handlePayment = async (e) => {
   });
 };
 
-const OTP = ({ formFields, setFormFields, setError, history }) => {
+const OTP = ({ formFields, setFormFields, history, setError, error }) => {
   const [authCode, setAuthCode] = useState(new Array(6).fill(""));
 
   const confirmRegistration = async (formFields, setFormFields, setError) => {
@@ -79,7 +79,7 @@ const OTP = ({ formFields, setFormFields, setError, history }) => {
         })}
         <div style={{ display: "flex", justifyContent: "center" }}>
           <PrimaryButton
-            disabled={authCode.length > 4}
+            // disabled={authCode.length > 4}
             onClick={(e) =>
               confirmRegistration(formFields, setFormFields, setError)
             }
@@ -88,6 +88,7 @@ const OTP = ({ formFields, setFormFields, setError, history }) => {
           </PrimaryButton>
         </div>
       </Row>
+      {error && <div>Error: {error.message}</div>}{" "}
     </div>
   );
 };

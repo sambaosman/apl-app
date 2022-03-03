@@ -30,7 +30,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     state: "",
     zip: "",
     phoneNumber: "",
-    teamMemberType: window.location.pathname.split("/")[2], //getting user type from url
+    teamMemberType: "", //getting user type from url
   };
   const [teamMembers, setTeamMembers] = useState([]);
   const [teams, setTeams] = useState([]);
@@ -44,7 +44,11 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
 
   const handleOnChange = (e) => {
     e.persist();
-    setFormFields({ ...formFields, [e.target.name]: e.target.value });
+    setFormFields({
+      ...formFields,
+      [e.target.name]: e.target.value,
+      teamMemberType: window.location.pathname.split("/")[2],
+    });
   };
 
   useEffect(() => {
@@ -93,6 +97,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             setFormFields={setFormFields}
             history={history}
             setError={setError}
+            error={error}
           />
         }
       />
