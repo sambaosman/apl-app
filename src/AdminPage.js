@@ -17,6 +17,7 @@ import {
   DropdownItem,
 } from "reactstrap";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
+import AddTeamModal from "./AddTeamModal";
 
 const AdminPage = ({
   teams,
@@ -58,47 +59,17 @@ const AdminPage = ({
           style={{ fontSize: "25px", color: "white" }}
         />
       </div>
-      <Modal
-        isOpen={addTeamModalOpen}
-        toggle={() => setAddTeamModalOpen(false)}
-      >
-        <ReactForm>
-          <FormGroup>
-            <Label for="firstName">Team Name</Label>
-            <Input
-              name="teamName"
-              id="teamName"
-              placeholder="Enter Team Name"
-              onChange={(event) => setTeamName(event.target.value)}
-            />
-            <Dropdown
-              isOpen={dropdownOpen}
-              toggle={() => setDropdownOpen(!dropdownOpen)}
-            >
-              <DropdownToggle caret>
-                {division ? division : "Division"}
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem onClick={() => setDivision("premier")}>
-                  Premier
-                </DropdownItem>
-                <DropdownItem onClick={() => setDivision("championship")}>
-                  Championship
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </FormGroup>
-          <button
-            type="button"
-            onClick={() => {
-              addTeam(teamName, setTeams, division);
-              setAddTeamModalOpen(false);
-            }}
-          >
-            Add Team to APL
-          </button>
-        </ReactForm>
-      </Modal>
+      <AddTeamModal
+        addTeamModalOpen={addTeamModalOpen}
+        setAddTeamModalOpen={setAddTeamModalOpen}
+        dropdownOpen={dropdownOpen}
+        setDropdownOpen={setDropdownOpen}
+        division={division}
+        setDivision={setDivision}
+        setTeams={setTeams}
+        teamName={teamName}
+        setTeamName={setTeamName}
+      />
       <div className="roster-user-section">
         <div className="roster-user-label">Premier</div>
       </div>
