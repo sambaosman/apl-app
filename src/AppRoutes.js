@@ -30,7 +30,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     state: "",
     zip: "",
     phoneNumber: "",
-    teamMemberType: "", //getting user type from url
+    teamMemberType: "",
   };
   const [teamMembers, setTeamMembers] = useState([]);
   const [teams, setTeams] = useState([]);
@@ -47,7 +47,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     setFormFields({
       ...formFields,
       [e.target.name]: e.target.value,
-      teamMemberType: window.location.pathname.split("/")[2],
+      teamMemberType: window.location.pathname.split("/")[2], //getting user type from url
     });
   };
 

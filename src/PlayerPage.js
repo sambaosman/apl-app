@@ -25,17 +25,11 @@ const PlayerPage = ({
   );
 
   const players = teamMembers.filter(
-    (team) =>
-      team.teamsID === "1234" &&
-      // teamID
-      team.teamMemberType === "player"
+    (team) => team.teamsID === teamID && team.teamMemberType === "player"
   );
 
   const guestPlayers = teamMembers.filter(
-    (team) =>
-      team.teamsID === "1234" &&
-      // teamID
-      team.teamMemberType === "guestPlayer"
+    (team) => team.teamsID === teamID && team.teamMemberType === "guestPlayer"
   );
 
   return (
@@ -101,7 +95,7 @@ const PlayerPage = ({
           />
         ))
       ) : (
-        <div>No Guests to show</div>
+        <div>No guests to show</div>
       )}
     </div>
   );
