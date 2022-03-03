@@ -35,13 +35,22 @@ const AdminPage = ({
   const team = teams.find((team) => teamName === team.teamName);
   let link = team && `${window.location.href}${team.id}`;
 
-  const showLinkHandler = (id) => {
+  const showLinkHandler = (event, id) => {
+    event.stopPropagation();
     setOpenedLinkID(id);
   };
 
   return (
     <div>
-      <button onClick={() => setAddTeamModalOpen(true)}>Add Team</button>
+      <div
+        className="add-circle-button"
+        onClick={() => setAddTeamModalOpen(true)}
+      >
+        <i
+          className={`fa-solid fa-plus`}
+          style={{ fontSize: "25px", color: "white" }}
+        />
+      </div>
       <Modal
         isOpen={addTeamModalOpen}
         toggle={() => setAddTeamModalOpen(false)}
@@ -168,6 +177,10 @@ const RosterIndividual = ({
           alignItems: "center",
           width: "400px",
         }}
+        onClick={(event) => {
+          setClickedTeam(event, team);
+          history("/roster");
+        }}
       >
         <Col>
           <div className="user-icon-circle"></div>
@@ -178,6 +191,15 @@ const RosterIndividual = ({
         <Col>
           <div
             className="delete-player-icon"
+            onClick={() => {
+              setEditTeamModalOpen(true);
+              setEditedTeam(team.id, setTeams);
+            }}
+          >
+            <i className={`fa-solid fa-pencil`} style={{ fontSize: "15px" }} />
+          </div>
+          <div
+            className="delete-player-icon"
             onClick={() => deleteTeam(team.id, setTeams)}
           >
             <i
@@ -185,29 +207,14 @@ const RosterIndividual = ({
               style={{ fontSize: "15px", color: "#a24936" }}
             />
           </div>
-          <button
-            onClick={() => {
-              setEditTeamModalOpen(true);
-              setEditedTeam(team.id, setTeams);
-            }}
-          >
-            Edit
-          </button>
-          <button
+          <div
+            className="delete-player-icon"
             onClick={() => {
               showLinkHandler(team.id);
             }}
           >
-            See shareable link
-          </button>
-          <button
-            onClick={() => {
-              setClickedTeam(team);
-              history("/roster");
-            }}
-          >
-            See roster
-          </button>
+            <i className={`fa-solid fa-share`} style={{ fontSize: "15px" }} />
+          </div>
         </Col>
       </Row>
     </div>

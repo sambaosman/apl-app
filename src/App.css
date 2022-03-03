@@ -145,3 +145,17 @@ a {
   cursor: pointer;
   background-color: #f8f8f8;
 }
+
+.add-circle-button {
+  background-color: var(--secondary);
+  height: 60px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+}
+
+.add-circle-button:hover {
+  cursor: pointer;
+}
