@@ -21,13 +21,20 @@ export const deleteTeam = async (event, teamId, setTeams) => {
   getTeams(setTeams);
 };
 
-export const updateTeam = async (event, editedTeam, teamName, setTeams) => {
+export const updateTeam = async (
+  event,
+  editedTeam,
+  teamName,
+  setTeams,
+  division
+) => {
   event.stopPropagation();
   try {
     const original = await DataStore.query(Teams, editedTeam);
     const update = await DataStore.save(
       Teams.copyOf(original, (updated) => {
         updated.teamName = teamName;
+        updated.division = division;
       })
     );
     getTeams(setTeams);

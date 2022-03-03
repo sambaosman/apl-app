@@ -19,6 +19,7 @@ const EditTeamModal = ({
   setTeams,
   teamName,
   setTeamName,
+  editedTeam,
 }) => {
   return (
     <Modal
@@ -60,7 +61,7 @@ const EditTeamModal = ({
         </FormGroup>
         <PrimaryButton
           onClick={(event) => {
-            updateTeam(event, teamName, setTeams, division);
+            updateTeam(event, editedTeam, teamName, setTeams, division);
             setEditTeamModalOpen(false);
           }}
         >

@@ -78,6 +78,7 @@ const AdminPage = ({
         setTeams={setTeams}
         teamName={teamName}
         setTeamName={setTeamName}
+        editedTeam={editedTeam}
       />
       <div className="roster-user-section">
         <div className="roster-user-label">Premier</div>

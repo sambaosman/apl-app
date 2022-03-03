@@ -22,9 +22,6 @@ const LoginPage = ({ onLogin, error, setError }) => {
     } catch (error) {
       setError(error);
     }
-    // if (response.challengeName === "NEW_PASSWORD_REQUIRED") {
-    //   setNewPasswordRequired(true);
-    // }
   };
 
   return (
