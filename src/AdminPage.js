@@ -16,6 +16,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import { PrimaryButton } from "./StyledComponents/StyledComponents";
 
 const AdminPage = ({
   teams,
@@ -31,6 +32,12 @@ const AdminPage = ({
   const [editTeamModalOpen, setEditTeamModalOpen] = useState(false);
   const [editedTeam, setEditedTeam] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [premierTeams, setPremierTeams] = useState(
+    teams.filter((team) => team.division === "premier")
+  );
+  const [championshipTeams, setChampionshipTeams] = useState(
+    teams.filter((team) => team.division === "championship")
+  );
 
   const team = teams.find((team) => teamName === team.teamName);
   let link = team && `${window.location.href}${team.id}`;
@@ -92,8 +99,11 @@ const AdminPage = ({
           </button>
         </ReactForm>
       </Modal>
-      {teams &&
-        teams.map((team, index) => (
+      <div className="roster-user-section">
+        <div className="roster-user-label">Premier</div>
+      </div>
+      {premierTeams && premierTeams.length ? (
+        premierTeams.map((team, index) => (
           <div key={index}>
             <RosterIndividual
               team={team}
@@ -127,7 +137,52 @@ const AdminPage = ({
               </div>
             ) : null}
           </div>
-        ))}
+        ))
+      ) : (
+        <div>No teams found</div>
+      )}
+      <div className="roster-user-section">
+        <div className="roster-user-label">Championship</div>
+      </div>
+      {championshipTeams && championshipTeams.length ? (
+        championshipTeams.map((team, index) => (
+          <div key={index}>
+            <RosterIndividual
+              team={team}
+              setTeams={setTeams}
+              setEditTeamModalOpen={setEditTeamModalOpen}
+              setEditedTeam={setEditedTeam}
+              showLinkHandler={showLinkHandler}
+              setClickedTeam={setClickedTeam}
+              history={history}
+            />
+            {team.id === openedLinkID ? (
+              <div>
+                <div>Here's your shareable link</div>
+                <div>
+                  <a
+                    href={`${window.location.href}register/manager/${team.id}`}
+                  >{`${window.location.href}register/manager/${team.id}`}</a>
+                </div>
+                <div>Here's your shareable player link</div>
+                <div>
+                  <a
+                    href={`${window.location.href}register/player/${team.id}`}
+                  >{`${window.location.href}register/player/${team.id}`}</a>
+                </div>
+                <div>Here's your shareable guest player link</div>
+                <div>
+                  <a
+                    href={`${window.location.href}register/guestPlayer/${team.id}`}
+                  >{`${window.location.href}register/guestPlayer/${team.id}`}</a>
+                </div>
+              </div>
+            ) : null}
+          </div>
+        ))
+      ) : (
+        <div>No teams found</div>
+      )}
       <Modal
         isOpen={editTeamModalOpen}
         toggle={() => setEditTeamModalOpen(false)}
@@ -153,7 +208,10 @@ const AdminPage = ({
           </div>
         </ReactForm>
       </Modal>
-      <button onClick={() => signOut(setLoggedIn)}> Sign out</button>
+      <PrimaryButton onClick={() => signOut(setLoggedIn)}>
+        {" "}
+        Sign out
+      </PrimaryButton>
     </div>
   );
 };
