@@ -85,7 +85,12 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path={`/register/*`}
         element={<Register formFields={formFields} />}
       />
-      <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
+      <Route
+        path="/login"
+        element={
+          <LoginPage onLogin={onLogin} error={error} setError={setError} />
+        }
+      />
       <Route
         path="/register/authCode"
         element={
@@ -262,7 +267,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
               />
             ) : (
               <Link to="/login">
-                <PrimaryButton>Sign In</PrimaryButton>
+                <PrimaryButton>Log In</PrimaryButton>
               </Link>
             )}
           </div>
