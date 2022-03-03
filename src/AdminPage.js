@@ -1,98 +1,236 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
-import { addTeam, deleteTeam, updateTeam } from "./TeamServices";
+import React, { useState, useEffect } from "react";
+import {
+  Form as ReactForm,
+  FormGroup,
+  Label,
+  Input,
+  Modal,
+  Row,
+  Col,
+} from "reactstrap";
+import { deleteTeam, updateTeam } from "./TeamServices";
+import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
+import { PrimaryButton } from "./StyledComponents/StyledComponents";
+import AddTeamModal from "./AddTeamModal";
+import EditTeamModal from "./EditTeamModal";
 
-const AdminPage = ({ signOut, user, teams, setTeams }) => {
+const AdminPage = ({
+  teams,
+  setTeams,
+  setLoggedIn,
+  history,
+  setClickedTeam,
+}) => {
   const [teamName, setTeamName] = useState(null);
+  const [division, setDivision] = useState(null);
+  const [openedLinkID, setOpenedLinkID] = useState("");
   const [addTeamModalOpen, setAddTeamModalOpen] = useState(false);
   const [editTeamModalOpen, setEditTeamModalOpen] = useState(false);
   const [editedTeam, setEditedTeam] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [premierTeams, setPremierTeams] = useState([]);
+  const [championshipTeams, setChampionshipTeams] = useState([]);
 
-  let link = `${window.location.href}${teams.pop() && teams.pop().id}`;
+  useEffect(() => {
+    setPremierTeams(teams.filter((team) => team.division === "premier"));
+    setChampionshipTeams(
+      teams.filter((team) => team.division === "championship")
+    );
+  }, [teams]);
+
+  const team = teams.find((team) => teamName === team.teamName);
+  let link = team && `${window.location.href}${team.id}`;
+
+  const showLinkHandler = (event, id) => {
+    event.stopPropagation();
+    setOpenedLinkID(id);
+  };
 
   return (
     <div>
-      {/* <Link to="/registration-form">
-        <button>Go To Form</button>
-      </Link> */}
-      <button onClick={() => setAddTeamModalOpen(true)}>Add Team</button>
-      <Modal
-        isOpen={addTeamModalOpen}
-        toggle={() => setAddTeamModalOpen(false)}
+      <div
+        className="add-circle-button"
+        onClick={() => setAddTeamModalOpen(true)}
       >
-        <ReactForm>
-          <FormGroup>
-            <Label for="firstName">Team Name</Label>
-            <Input
-              name="teamName"
-              id="teamName"
-              placeholder="Enter Team Name"
-              onChange={(event) => setTeamName(event.target.value)}
-            />
-          </FormGroup>
-          <button
-            type="button"
-            onClick={() => {
-              addTeam(teamName, setTeams);
-              setAddTeamModalOpen(false);
-            }}
-          >
-            Add Team to APL
-          </button>
-        </ReactForm>
-      </Modal>
-      {teams && teams.pop() && (
-        <div>
-          <div>Here's your shareable link</div>
-          <div>
-            <a href={link}>{link}</a>
-          </div>
-        </div>
-      )}
-      {/* {teams &&
-        teams.map((team, index) => (
+        <i
+          className={`fa-solid fa-plus`}
+          style={{ fontSize: "25px", color: "white" }}
+        />
+      </div>
+      <AddTeamModal
+        addTeamModalOpen={addTeamModalOpen}
+        setAddTeamModalOpen={setAddTeamModalOpen}
+        dropdownOpen={dropdownOpen}
+        setDropdownOpen={setDropdownOpen}
+        division={division}
+        setDivision={setDivision}
+        setTeams={setTeams}
+        teamName={teamName}
+        setTeamName={setTeamName}
+      />
+      <EditTeamModal
+        editTeamModalOpen={editTeamModalOpen}
+        setEditTeamModalOpen={setEditTeamModalOpen}
+        dropdownOpen={dropdownOpen}
+        setDropdownOpen={setDropdownOpen}
+        division={division}
+        setDivision={setDivision}
+        setTeams={setTeams}
+        teamName={teamName}
+        setTeamName={setTeamName}
+      />
+      <div className="roster-user-section">
+        <div className="roster-user-label">Premier</div>
+      </div>
+      {premierTeams && premierTeams.length ? (
+        premierTeams.map((team, index) => (
           <div key={index}>
-            {team.teamName}
-            <button onClick={() => deleteTeam(team.id, setTeams)}>
-              Delete
-            </button>
-            <button
-              onClick={() => {
-                setEditTeamModalOpen(true);
-                setEditedTeam(team.id, setTeams);
-              }}
-            >
-              Edit
-            </button>
-          </div>
-        ))} */}
-      <Modal
-        isOpen={editTeamModalOpen}
-        toggle={() => setEditTeamModalOpen(false)}
-      >
-        <ReactForm>
-          <FormGroup>
-            <Label for="teamName">Team Name</Label>
-            <Input
-              name="teamName"
-              id="teamName"
-              placeholder="Enter Team Name"
-              onChange={(event) => setTeamName(event.target.value)}
+            <RosterIndividual
+              team={team}
+              setTeams={setTeams}
+              setEditTeamModalOpen={setEditTeamModalOpen}
+              setEditedTeam={setEditedTeam}
+              showLinkHandler={showLinkHandler}
+              setClickedTeam={setClickedTeam}
+              history={history}
             />
-          </FormGroup>
-          <div
-            onClick={() => {
-              updateTeam(editedTeam, teamName, setTeams);
-              setEditTeamModalOpen(false);
-            }}
-          >
-            Update
+            {team.id === openedLinkID ? (
+              <div>
+                <div>Here's your shareable link</div>
+                <div>
+                  <a
+                    href={`${window.location.href}register/manager/${team.id}`}
+                  >{`${window.location.href}register/manager/${team.id}`}</a>
+                </div>
+                <div>Here's your shareable player link</div>
+                <div>
+                  <a
+                    href={`${window.location.href}register/player/${team.id}`}
+                  >{`${window.location.href}register/player/${team.id}`}</a>
+                </div>
+                <div>Here's your shareable guest player link</div>
+                <div>
+                  <a
+                    href={`${window.location.href}register/guestPlayer/${team.id}`}
+                  >{`${window.location.href}register/guestPlayer/${team.id}`}</a>
+                </div>
+              </div>
+            ) : null}
           </div>
-        </ReactForm>
-      </Modal>
-      <button onClick={signOut}> Sign out</button>
+        ))
+      ) : (
+        <div>No teams found</div>
+      )}
+      <div className="roster-user-section">
+        <div className="roster-user-label">Championship</div>
+      </div>
+      {championshipTeams && championshipTeams.length ? (
+        championshipTeams.map((team, index) => (
+          <div key={index}>
+            <RosterIndividual
+              team={team}
+              setTeams={setTeams}
+              setEditTeamModalOpen={setEditTeamModalOpen}
+              setEditedTeam={setEditedTeam}
+              showLinkHandler={showLinkHandler}
+              setClickedTeam={setClickedTeam}
+              history={history}
+            />
+            {team.id === openedLinkID ? (
+              <div>
+                <div>Here's your shareable link</div>
+                <div>
+                  <a
+                    href={`${window.location.href}register/manager/${team.id}`}
+                  >{`${window.location.href}register/manager/${team.id}`}</a>
+                </div>
+                <div>Here's your shareable player link</div>
+                <div>
+                  <a
+                    href={`${window.location.href}register/player/${team.id}`}
+                  >{`${window.location.href}register/player/${team.id}`}</a>
+                </div>
+                <div>Here's your shareable guest player link</div>
+                <div>
+                  <a
+                    href={`${window.location.href}register/guestPlayer/${team.id}`}
+                  >{`${window.location.href}register/guestPlayer/${team.id}`}</a>
+                </div>
+              </div>
+            ) : null}
+          </div>
+        ))
+      ) : (
+        <div>No teams found</div>
+      )}
+
+      <PrimaryButton onClick={() => signOut(setLoggedIn)}>
+        {" "}
+        Sign out
+      </PrimaryButton>
     </div>
   );
 };
 export default AdminPage;
+
+const RosterIndividual = ({
+  team,
+  setTeams,
+  setEditTeamModalOpen,
+  setEditedTeam,
+  showLinkHandler,
+  setClickedTeam,
+  history,
+}) => {
+  return (
+    <div style={{ display: "flex", justifyContent: "flex-start" }}>
+      <Row
+        style={{
+          margin: "20px",
+          display: "flex",
+          alignItems: "center",
+          width: "400px",
+        }}
+        // onClick={(event) => {
+        //   setClickedTeam(event, team);
+        //   history("/roster");
+        // }}
+      >
+        <Col>
+          <div className="user-icon-circle"></div>
+        </Col>
+        <Col style={{ textAlign: "left", fontWeight: "bold" }}>
+          {team.teamName}
+        </Col>
+        <Col>
+          <div
+            className="delete-player-icon"
+            onClick={() => {
+              setEditTeamModalOpen(true);
+              setEditedTeam(team.id, setTeams);
+            }}
+          >
+            <i className={`fa-solid fa-pencil`} style={{ fontSize: "15px" }} />
+          </div>
+          <div
+            className="delete-player-icon"
+            onClick={(event) => deleteTeam(event, team.id, setTeams)}
+          >
+            <i
+              className={`fa-solid fa-times`}
+              style={{ fontSize: "15px", color: "#a24936" }}
+            />
+          </div>
+          <div
+            className="delete-player-icon"
+            onClick={(event) => {
+              showLinkHandler(event, team.id);
+            }}
+          >
+            <i className={`fa-solid fa-share`} style={{ fontSize: "15px" }} />
+          </div>
+        </Col>
+      </Row>
+    </div>
+  );
+};

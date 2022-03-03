@@ -1,92 +1,32 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import RegistrationForm from "./RegistrationForm";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import RegisteredList from "./RegisteredList";
-import AdminPage from "./AdminPage";
-import { Amplify } from "aws-amplify";
-import { withAuthenticator } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui-react/styles.css";
-import awsExports from "./aws-exports";
-import { submitForm, getForms, deleteForm } from "./RegistrationServices";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { getTeams } from "./TeamServices";
+import AppRoutes from "./AppRoutes";
+import { BrowserRouter } from "react-router-dom";
+import {
+  AssessLoggedInState,
+  signOut,
+} from "./LoginRegistration/LoginRegistrationFunctions";
 
-Amplify.configure(awsExports);
-
-function App({ signOut, user }) {
-  const [forms, setForms] = useState([]);
-  const [teams, setTeams] = useState([]);
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [teamsID, setTeamsID] = useState();
+function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    getForms(setForms);
-    getTeams(setTeams);
+    AssessLoggedInState(setLoggedIn);
   }, []);
 
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <AdminPage
-                signOut={signOut}
-                user={user}
-                teams={teams}
-                setTeams={setTeams}
-              />
-            }
-          ></Route>
-          {teams &&
-            teams.length &&
-            teams.map((team, index) => (
-              <React.Fragment key={index}>
-                <Route
-                  path={`/${team.id}`}
-                  element={
-                    <RegistrationForm
-                      submitForm={submitForm}
-                      setFirstName={setFirstName}
-                      setLastName={setLastName}
-                      setEmail={setEmail}
-                      firstName={firstName}
-                      lastName={lastName}
-                      email={email}
-                      setForms={setForms}
-                      setTeamsID={setTeamsID}
-                    />
-                  }
-                ></Route>
-                <Route
-                  path={`/${team.id}/registered-players`}
-                  element={
-                    <RegisteredList
-                      submitForm={submitForm}
-                      forms={forms}
-                      setForms={setForms}
-                      deleteForm={deleteForm}
-                      setFirstName={setFirstName}
-                      setLastName={setLastName}
-                      setEmail={setEmail}
-                      firstName={firstName}
-                      lastName={lastName}
-                      email={email}
-                      getForms={getForms}
-                    />
-                  }
-                ></Route>
-              </React.Fragment>
-            ))}
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <div className="app-container">
+          <AppRoutes
+            loggedIn={loggedIn}
+            setLoggedIn={setLoggedIn}
+            signOut={signOut}
+          />
+        </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
-export default withAuthenticator(App);
+export default App;

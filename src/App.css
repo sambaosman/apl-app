@@ -1,38 +1,161 @@
+:root {
+  --primary: #4a4a4a;
+  --secondary: #a24936;
+}
+a {
+  color: var(--primary) !important;
+  text-decoration: none !important;
+}
+
 .App {
   text-align: center;
+  color: var(--primary);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.center {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.login-subsection {
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+.login-subsection-link {
+  text-align: left;
+  padding: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-subsection-link:hover {
+  cursor: pointer;
+}
+
+.app-container {
+  width: 100vw;
+  padding: 20px;
+}
+
+.registration-selector-icon {
+  background-color: white;
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.selector-row {
+  background-color: #f6f6f6;
+  border-radius: 7px;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  margin: 20px;
+  font-weight: bold;
+  text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.selector-row:hover {
+  cursor: pointer;
+}
+
+.apl-about-message {
+  text-align: left;
+  font-size: 14px;
+}
+
+.back-button-text {
+  font-weight: bold;
+}
+.back-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.back-button-container:hover {
+  cursor: pointer;
+}
+
+.form-error {
+  color: var(--secondary);
+  font-size: 10px;
+  float: right;
+  padding-bottom: 10px;
+}
+
+.icon-circle {
+  height: 150px;
+  width: 150px !important;
+  background-color: var(--secondary);
+  opacity: 0.25;
+  margin-top: 30px !important;
+  margin-bottom: 20px !important;
+  border-radius: 100%;
+}
+
+.roster-user-section {
+  border-bottom: 2px solid #f8f8f8;
+  margin: 0px 0px 20px 0px;
+  text-align: left;
+}
+.roster-user-label {
+  padding: 20px;
+}
+
+.logout-button {
+  font-weight: bold;
+}
+
+.logout-button:hover {
+  cursor: pointer;
+}
+
+.user-icon-circle {
+  height: 60px;
+  width: 60px;
+  background-color: #f8f8f8;
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.delete-player-icon {
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-player-icon:hover {
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
+
+.add-circle-button {
+  background-color: var(--secondary);
+  height: 60px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+}
+
+.add-circle-button:hover {
+  cursor: pointer;
 }
