@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Form as ReactForm, FormGroup, Label, Input, Modal } from "reactstrap";
+import {
+  Form as ReactForm,
+  FormGroup,
+  Label,
+  Input,
+  Modal,
+  Row,
+  Col,
+} from "reactstrap";
 import { addTeam, deleteTeam, updateTeam } from "./TeamServices";
 import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
 import {
@@ -78,34 +86,15 @@ const AdminPage = ({
       {teams &&
         teams.map((team, index) => (
           <div key={index}>
-            {team.teamName}
-            <div>{team.division}</div>
-            <button onClick={() => deleteTeam(team.id, setTeams)}>
-              Delete
-            </button>
-            <button
-              onClick={() => {
-                setEditTeamModalOpen(true);
-                setEditedTeam(team.id, setTeams);
-              }}
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => {
-                showLinkHandler(team.id);
-              }}
-            >
-              See shareable link
-            </button>
-            <button
-              onClick={() => {
-                setClickedTeam(team);
-                history("/roster");
-              }}
-            >
-              See roster
-            </button>
+            <RosterIndividual
+              team={team}
+              setTeams={setTeams}
+              setEditTeamModalOpen={setEditTeamModalOpen}
+              setEditedTeam={setEditedTeam}
+              showLinkHandler={showLinkHandler}
+              setClickedTeam={setClickedTeam}
+              history={history}
+            />
             {team.id === openedLinkID ? (
               <div>
                 <div>Here's your shareable link</div>
@@ -160,3 +149,67 @@ const AdminPage = ({
   );
 };
 export default AdminPage;
+
+const RosterIndividual = ({
+  team,
+  setTeams,
+  setEditTeamModalOpen,
+  setEditedTeam,
+  showLinkHandler,
+  setClickedTeam,
+  history,
+}) => {
+  return (
+    <div style={{ display: "flex", justifyContent: "flex-start" }}>
+      <Row
+        style={{
+          margin: "20px",
+          display: "flex",
+          alignItems: "center",
+          width: "400px",
+        }}
+      >
+        <Col>
+          <div className="user-icon-circle"></div>
+        </Col>
+        <Col style={{ textAlign: "left", fontWeight: "bold" }}>
+          {team.teamName}
+        </Col>
+        <Col>
+          <div
+            className="delete-player-icon"
+            onClick={() => deleteTeam(team.id, setTeams)}
+          >
+            <i
+              className={`fa-solid fa-times`}
+              style={{ fontSize: "15px", color: "#a24936" }}
+            />
+          </div>
+          <button
+            onClick={() => {
+              setEditTeamModalOpen(true);
+              setEditedTeam(team.id, setTeams);
+            }}
+          >
+            Edit
+          </button>
+          <button
+            onClick={() => {
+              showLinkHandler(team.id);
+            }}
+          >
+            See shareable link
+          </button>
+          <button
+            onClick={() => {
+              setClickedTeam(team);
+              history("/roster");
+            }}
+          >
+            See roster
+          </button>
+        </Col>
+      </Row>
+    </div>
+  );
+};
