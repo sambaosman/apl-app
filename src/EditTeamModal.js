@@ -7,11 +7,11 @@ import {
 } from "reactstrap";
 import { PrimaryButton, TextInput } from "./StyledComponents/StyledComponents";
 import { Form as ReactForm, FormGroup, Label, Modal } from "reactstrap";
-import { addTeam } from "./TeamServices";
+import { updateTeam } from "./TeamServices";
 
-const AddTeamModal = ({
-  addTeamModalOpen,
-  setAddTeamModalOpen,
+const EditTeamModal = ({
+  editTeamModalOpen,
+  setEditTeamModalOpen,
   dropdownOpen,
   setDropdownOpen,
   division,
@@ -21,7 +21,10 @@ const AddTeamModal = ({
   setTeamName,
 }) => {
   return (
-    <Modal isOpen={addTeamModalOpen} toggle={() => setAddTeamModalOpen(false)}>
+    <Modal
+      isOpen={editTeamModalOpen}
+      toggle={() => setEditTeamModalOpen(false)}
+    >
       <ReactForm style={{ padding: "20px" }}>
         <FormGroup>
           <Label for="firstName">Team Name</Label>
@@ -57,15 +60,15 @@ const AddTeamModal = ({
         </FormGroup>
         <PrimaryButton
           onClick={(event) => {
-            addTeam(event, teamName, setTeams, division);
-            setAddTeamModalOpen(false);
+            updateTeam(event, teamName, setTeams, division);
+            setEditTeamModalOpen(false);
           }}
         >
-          Add Team to APL
+          Update Team
         </PrimaryButton>
       </ReactForm>
     </Modal>
   );
 };
 
-export default AddTeamModal;
+export default EditTeamModal;

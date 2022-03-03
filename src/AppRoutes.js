@@ -13,6 +13,7 @@ import OTP from "./LoginRegistration/Registration/OTP";
 import Waiver from "./LoginRegistration/Waiver";
 import Roster from "./Roster";
 import { Auth } from "aws-amplify";
+import { PrimaryButton } from "./StyledComponents/StyledComponents";
 
 Amplify.configure(awsExports);
 
@@ -259,7 +260,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
               />
             ) : (
               <Link to="/login">
-                <button>Sign In</button>
+                <PrimaryButton>Sign In</PrimaryButton>
               </Link>
             )}
           </div>

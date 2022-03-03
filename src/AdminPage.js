@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Form as ReactForm,
   FormGroup,
@@ -8,16 +8,11 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { addTeam, deleteTeam, updateTeam } from "./TeamServices";
+import { deleteTeam, updateTeam } from "./TeamServices";
 import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import AddTeamModal from "./AddTeamModal";
+import EditTeamModal from "./EditTeamModal";
 
 const AdminPage = ({
   teams,
@@ -33,12 +28,15 @@ const AdminPage = ({
   const [editTeamModalOpen, setEditTeamModalOpen] = useState(false);
   const [editedTeam, setEditedTeam] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [premierTeams, setPremierTeams] = useState(
-    teams.filter((team) => team.division === "premier")
-  );
-  const [championshipTeams, setChampionshipTeams] = useState(
-    teams.filter((team) => team.division === "championship")
-  );
+  const [premierTeams, setPremierTeams] = useState([]);
+  const [championshipTeams, setChampionshipTeams] = useState([]);
+
+  useEffect(() => {
+    setPremierTeams(teams.filter((team) => team.division === "premier"));
+    setChampionshipTeams(
+      teams.filter((team) => team.division === "championship")
+    );
+  }, [teams]);
 
   const team = teams.find((team) => teamName === team.teamName);
   let link = team && `${window.location.href}${team.id}`;
@@ -62,6 +60,17 @@ const AdminPage = ({
       <AddTeamModal
         addTeamModalOpen={addTeamModalOpen}
         setAddTeamModalOpen={setAddTeamModalOpen}
+        dropdownOpen={dropdownOpen}
+        setDropdownOpen={setDropdownOpen}
+        division={division}
+        setDivision={setDivision}
+        setTeams={setTeams}
+        teamName={teamName}
+        setTeamName={setTeamName}
+      />
+      <EditTeamModal
+        editTeamModalOpen={editTeamModalOpen}
+        setEditTeamModalOpen={setEditTeamModalOpen}
         dropdownOpen={dropdownOpen}
         setDropdownOpen={setDropdownOpen}
         division={division}
@@ -154,31 +163,7 @@ const AdminPage = ({
       ) : (
         <div>No teams found</div>
       )}
-      <Modal
-        isOpen={editTeamModalOpen}
-        toggle={() => setEditTeamModalOpen(false)}
-      >
-        <ReactForm>
-          <FormGroup>
-            <Label for="teamName">Team Name</Label>
-            <Input
-              name="teamName"
-              id="teamName"
-              placeholder="Enter Team Name"
-              onChange={(event) => setTeamName(event.target.value)}
-            />
-            <Label for="teamName">League</Label>
-          </FormGroup>
-          <div
-            onClick={() => {
-              updateTeam(editedTeam, teamName, setTeams);
-              setEditTeamModalOpen(false);
-            }}
-          >
-            Update
-          </div>
-        </ReactForm>
-      </Modal>
+
       <PrimaryButton onClick={() => signOut(setLoggedIn)}>
         {" "}
         Sign out
@@ -206,10 +191,10 @@ const RosterIndividual = ({
           alignItems: "center",
           width: "400px",
         }}
-        onClick={(event) => {
-          setClickedTeam(event, team);
-          history("/roster");
-        }}
+        // onClick={(event) => {
+        //   setClickedTeam(event, team);
+        //   history("/roster");
+        // }}
       >
         <Col>
           <div className="user-icon-circle"></div>
@@ -229,7 +214,7 @@ const RosterIndividual = ({
           </div>
           <div
             className="delete-player-icon"
-            onClick={() => deleteTeam(team.id, setTeams)}
+            onClick={(event) => deleteTeam(event, team.id, setTeams)}
           >
             <i
               className={`fa-solid fa-times`}
@@ -238,8 +223,8 @@ const RosterIndividual = ({
           </div>
           <div
             className="delete-player-icon"
-            onClick={() => {
-              showLinkHandler(team.id);
+            onClick={(event) => {
+              showLinkHandler(event, team.id);
             }}
           >
             <i className={`fa-solid fa-share`} style={{ fontSize: "15px" }} />
