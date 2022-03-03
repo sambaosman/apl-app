@@ -57,12 +57,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       setUserType(user.attributes["custom:userType"]);
       setTeamID(user.attributes["custom:teamID"]);
     });
-  }, []);
-
-  useEffect(() => {
-    getTeamMembers(setTeamMembers);
     let link;
-    getTeams(setTeams);
     const getIDFromURL = () => {
       link = window.location.pathname;
       let linkArray = link.split("/").pop();
@@ -73,6 +68,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       ...formFields,
       teamID: id,
     });
+    getTeamMembers(setTeamMembers);
+    getTeams(setTeams);
   }, []);
 
   const onLogin = () => {
@@ -88,7 +85,12 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path={`/register/*`}
         element={<Register formFields={formFields} />}
       />
-      <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
+      <Route
+        path="/login"
+        element={
+          <LoginPage onLogin={onLogin} error={error} setError={setError} />
+        }
+      />
       <Route
         path="/register/authCode"
         element={
@@ -265,7 +267,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
               />
             ) : (
               <Link to="/login">
-                <PrimaryButton>Sign In</PrimaryButton>
+                <PrimaryButton>Log In</PrimaryButton>
               </Link>
             )}
           </div>

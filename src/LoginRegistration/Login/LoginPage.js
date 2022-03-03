@@ -7,7 +7,7 @@ import { Auth } from "aws-amplify";
 import ChangePassword from "./ChangePassword";
 import { Link, useNavigate } from "react-router-dom";
 
-const LoginPage = ({ onLogin }) => {
+const LoginPage = ({ onLogin, error, setError }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newPasswordRequired, setNewPasswordRequired] = useState(false);
@@ -20,11 +20,8 @@ const LoginPage = ({ onLogin }) => {
       history("/");
       onLogin();
     } catch (error) {
-      console.log("error logging in", error);
+      setError(error);
     }
-    // if (response.challengeName === "NEW_PASSWORD_REQUIRED") {
-    //   setNewPasswordRequired(true);
-    // }
   };
 
   return (
@@ -55,6 +52,7 @@ const LoginPage = ({ onLogin }) => {
             </Link>
           </div>
           <PrimaryButton onClick={login}>Log in</PrimaryButton>
+          {error && <div>Error: {error.message}</div>}{" "}
         </React.Fragment>
       )}
     </div>
