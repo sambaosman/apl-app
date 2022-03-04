@@ -138,7 +138,7 @@ const AdminPage = ({
 
       <PrimaryButton onClick={() => signOut(setLoggedIn)}>
         {" "}
-        Log out
+        Log Out
       </PrimaryButton>
     </div>
   );

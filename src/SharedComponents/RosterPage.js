@@ -68,26 +68,28 @@ const RosterPage = ({
       >
         <div>
           <div className="app-title">{team && team.teamName}</div>
-          <div>
-            <span
-              className="icon-button"
-              onClick={(event) => {
-                toggleLinkModal();
-              }}
-            >
-              <i className="fa-solid fa-link" />
-            </span>
-            <LinkModal
-              team={team}
-              isLinkModalOpen={isLinkModalOpen}
-              toggleLinkModal={toggleLinkModal}
-            />
-          </div>
+          {(userType === "admin" || userType === "manager") && (
+            <div>
+              <span
+                className="icon-button"
+                onClick={(event) => {
+                  toggleLinkModal();
+                }}
+              >
+                <i className="fa-solid fa-link" />
+              </span>
+              <LinkModal
+                team={team}
+                isLinkModalOpen={isLinkModalOpen}
+                toggleLinkModal={toggleLinkModal}
+              />
+            </div>
+          )}
         </div>
 
         <div className="logout-button" onClick={() => signOut(setLoggedIn)}>
           {" "}
-          Log out
+          Log Out
         </div>
       </div>
       {array.map((type) => (

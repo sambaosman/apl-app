@@ -28,20 +28,19 @@ const RosterIndividual = ({ player, setTeamMembers, userType }) => {
         <Col style={{ textAlign: "left", fontWeight: "bold" }}>
           {player.firstName} {player.lastName}
         </Col>
-        {userType === "manager" ||
-          (userType === "admin" && (
-            <Col>
-              <div
-                className="delete-player-icon"
-                onClick={() => deleteTeamMember(player, setTeamMembers)}
-              >
-                <i
-                  className={`fa-solid fa-times`}
-                  style={{ fontSize: "15px", color: "#a24936" }}
-                />
-              </div>
-            </Col>
-          ))}
+        {(userType === "manager" || userType === "admin") && (
+          <Col>
+            <div
+              className="delete-player-icon"
+              onClick={() => deleteTeamMember(player, setTeamMembers)}
+            >
+              <i
+                className={`fa-solid fa-times`}
+                style={{ fontSize: "15px", color: "#a24936" }}
+              />
+            </div>
+          </Col>
+        )}
       </Row>
     </div>
   );
