@@ -25,17 +25,18 @@ export declare class Teams {
 
 export declare class TeamMember {
   readonly id: string;
-  readonly firstName?: string;
-  readonly lastName?: string;
-  readonly email?: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly email: string;
   readonly jerseyNumber?: string;
-  readonly street?: string;
-  readonly city?: string;
-  readonly state?: string;
-  readonly zip?: string;
-  readonly phoneNumber?: string;
+  readonly street: string;
+  readonly city: string;
+  readonly state: string;
+  readonly zip: string;
+  readonly phoneNumber: string;
   readonly teamMemberType?: string;
   readonly teamsID: string;
+  readonly dob: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<TeamMember, TeamMemberMetaData>);

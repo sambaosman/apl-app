@@ -49,7 +49,9 @@ const RegistrationSelector = ({ formFields }) => {
                   <i className={`fa-solid fa-${registrationType.icon}`} />
                 </div>
               </Col>
-              <Col>I am a {registrationType.name}</Col>
+              <Col style={{ minWidth: "200px" }}>
+                I am a {registrationType.name}
+              </Col>
               <Col
                 style={{
                   display: "flex",

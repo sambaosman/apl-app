@@ -25,8 +25,8 @@ export const NumberInput = styled(Input)`
   margin-right: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  height: 60px;
-  width: 60px;
+  height: 50px;
+  width: 50px;
   padding: 10px;
   border-radius: 7px;
   background-color: #f8f8f8;

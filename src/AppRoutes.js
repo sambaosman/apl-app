@@ -12,8 +12,10 @@ import RegistrationInputGroup from "./LoginRegistration/Registration/Registratio
 import OTP from "./LoginRegistration/Registration/OTP";
 import Waiver from "./LoginRegistration/Waiver";
 import Roster from "./Roster";
+import RosterPage from "./SharedComponents/RosterPage";
 import { Auth } from "aws-amplify";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
+import moment from "moment";
 
 Amplify.configure(awsExports);
 
@@ -30,8 +32,10 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     state: "",
     zip: "",
     phoneNumber: "",
+    dob: moment().locale("en").format("YYYY-MM-DD"),
     teamMemberType: "",
   };
+  const [isLoading, setIsLoading] = useState(false);
   const [teamMembers, setTeamMembers] = useState([]);
   const [teams, setTeams] = useState([]);
   const [clickedTeam, setClickedTeam] = useState();
@@ -50,6 +54,23 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       teamMemberType: window.location.pathname.split("/")[2], //getting user type from url
     });
   };
+  useEffect(() => {
+    setIsLoading(true);
+    const getUserFromURL = () => {
+      let link = window.location.pathname;
+      let linkArray = link.split("/");
+      let user = linkArray.length == 3 ? linkArray[2] : linkArray[3];
+      return user;
+    };
+    let user = getUserFromURL();
+    setUserType(user);
+    getTeamMembers(setTeamMembers);
+    getTeams(setTeams);
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, [userType]);
 
   useEffect(() => {
     Auth.currentAuthenticatedUser().then((user) => {
@@ -68,15 +89,17 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       ...formFields,
       teamID: id,
     });
-    getTeamMembers(setTeamMembers);
-    getTeams(setTeams);
-  }, []);
+  }, [loggedIn]);
 
   const onLogin = () => {
     setLoggedIn(true);
   };
 
   const memberType = ["player", "guestPlayer", "manager", "admin"];
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Routes>
@@ -88,7 +111,12 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       <Route
         path="/login"
         element={
-          <LoginPage onLogin={onLogin} error={error} setError={setError} />
+          <LoginPage
+            onLogin={onLogin}
+            error={error}
+            setError={setError}
+            setIsLoading={setIsLoading}
+          />
         }
       />
       <Route
@@ -117,10 +145,15 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       <Route
         path="/roster"
         element={
-          <Roster
+          <RosterPage
+            team={clickedTeam}
             teamMembers={teamMembers}
-            teamID={teamID}
-            clickedTeam={clickedTeam}
+            setTeamMembers={setTeamMembers}
+            userType={userType}
+            setLoggedIn={setLoggedIn}
+            history={history}
+            usersTeam={teamID}
+            teams={teams}
           />
         }
       />
@@ -128,7 +161,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/register/player"
         element={
           <RegistrationInputGroup
-            // goBack={() => setTeamMemberType()}
             customField={{
               name: "jerseyNumber",
               placeholder: "Jersey Number",
@@ -146,6 +178,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
+            teamMembers={teamMembers}
+            userType={userType}
           />
         }
       />
@@ -153,7 +187,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/register/guestPlayer"
         element={
           <RegistrationInputGroup
-            // goBack={() => setTeamMemberType()}
             customField={{
               name: "jerseyNumber",
               placeholder: "Jersey Number",
@@ -171,6 +204,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
+            teammembers={teamMembers}
+            userType={userType}
           />
         }
       />
@@ -179,7 +214,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/register/manager"
         element={
           <RegistrationInputGroup
-            // goBack={() => setTeamMemberType()}
             customID={{
               name: "teamID",
               placeholder: "Manager ID",
@@ -193,6 +227,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
+            teamMembers={teamMembers}
+            userType={userType}
           />
         }
       />
@@ -201,7 +237,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/register/admin"
         element={
           <RegistrationInputGroup
-            // goBack={() => setTeamMemberType()}
             customID={{
               name: "teamID",
               placeholder: "Admin ID",
@@ -215,6 +250,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
+            teamMembers={teamMembers}
+            userType={userType}
           />
         }
       />
@@ -243,6 +280,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                     error={error}
                     teams={teams}
                     setTeamMembers={setTeamMembers}
+                    teamMembers={teamMembers}
+                    userType={userType}
                   />
                 }
               />
@@ -255,6 +294,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
           <div>
             {loggedIn ? (
               <HomePage
+                team={clickedTeam}
                 teams={teams}
                 setTeams={setTeams}
                 setLoggedIn={setLoggedIn}
@@ -264,6 +304,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                 teamMembers={teamMembers}
                 setTeamMembers={setTeamMembers}
                 setClickedTeam={setClickedTeam}
+                setUserType={setUserType}
               />
             ) : (
               <Link to="/login">

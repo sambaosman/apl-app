@@ -20,9 +20,34 @@ const RegistrationInputGroup = ({
   error,
   teams,
   setTeamMembers,
+  teamMembers,
+  userType,
 }) => {
   const onSubmit = (values) => {
     console.log(values);
+  };
+
+  const isTooManyMembers = (userType) => {
+    let filteredTeamMembers =
+      teamMembers &&
+      teamMembers.filter((member) => member.teamsID === formFields.teamID);
+    let userFilteredTeamMembers =
+      filteredTeamMembers &&
+      filteredTeamMembers.filter(
+        (member) => member.teamMemberType === userType
+      );
+    return (
+      userFilteredTeamMembers &&
+      userFilteredTeamMembers.length > //adds maximum members to a team
+        //maximum of 4 managers, 22 players, and 4 guest players
+        (userType === "manager"
+          ? 4
+          : userType === "player"
+          ? 22
+          : userType === "guestPlayer"
+          ? 4
+          : 100)
+    );
   };
 
   const teamIDs = teams && teams.length && teams.map((team) => team.id);
@@ -65,6 +90,9 @@ const RegistrationInputGroup = ({
           if (!formFields.phoneNumber) {
             errors.phoneNumber = "Required";
           }
+          if (!formFields.dob) {
+            errors.dob = "Required";
+          }
           if (!formFields.teamID) {
             errors.teamID = "Required";
           } else if (
@@ -73,7 +101,12 @@ const RegistrationInputGroup = ({
             formFields.teamID !== "admin1234"
           ) {
             errors.teamID = "Not a valid Team ID";
+          } else if (isTooManyMembers(userType)) {
+            errors.teamID = `Too many ${
+              userType !== "guestPlayer" ? userType : "guest player"
+            }s`;
           }
+
           if (customField && !formFields[customField.name]) {
             errors[customField.name] = "Required";
           }
@@ -243,6 +276,24 @@ const RegistrationInputGroup = ({
                     <TextInput
                       placeholder="Street"
                       name="street"
+                      invalid={meta.error && meta.touched}
+                      onChange={(e) => handleOnChange(e)}
+                    />
+                    {meta.error && meta.touched && (
+                      <span className="form-error">{meta.error}</span>
+                    )}
+                  </div>
+                )}
+              </Field>
+            </FormGroup>
+            <FormGroup>
+              <Field name="dob">
+                {({ meta }) => (
+                  <div>
+                    <TextInput
+                      type="date"
+                      placeholder="Date of Birth"
+                      name="dob"
                       invalid={meta.error && meta.touched}
                       onChange={(e) => handleOnChange(e)}
                     />

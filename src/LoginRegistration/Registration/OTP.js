@@ -19,8 +19,7 @@ const handlePayment = async (e) => {
       },
     ],
     mode: "payment",
-    successUrl:
-      "http://localhost:3000/a36a9aeb-a4e4-4506-aab6-4029b793d294/guest/registered-players",
+    successUrl: "http://localhost:3000/login",
     cancelUrl: "http://localhost:3000",
   });
 };
@@ -34,7 +33,7 @@ const OTP = ({ formFields, setFormFields, history, setError, error }) => {
       await Auth.confirmSignUp(email, authCode.join(""));
       setFormFields(() => ({ ...formFields }));
       history("/login");
-      teamMemberType === "guestPlayer" && handlePayment();
+      // teamMemberType === "guestPlayer" && handlePayment();
     } catch (error) {
       setError(error);
     }
@@ -79,7 +78,7 @@ const OTP = ({ formFields, setFormFields, history, setError, error }) => {
         })}
         <div style={{ display: "flex", justifyContent: "center" }}>
           <PrimaryButton
-            // disabled={authCode.length > 4}
+            disabled={authCode.length < 6}
             onClick={(e) =>
               confirmRegistration(formFields, setFormFields, setError)
             }

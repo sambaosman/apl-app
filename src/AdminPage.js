@@ -41,11 +41,6 @@ const AdminPage = ({
   const team = teams.find((team) => teamName === team.teamName);
   let link = team && `${window.location.href}${team.id}`;
 
-  const showLinkHandler = (event, id) => {
-    event.stopPropagation();
-    setOpenedLinkID(id);
-  };
-
   return (
     <div>
       <div
@@ -91,32 +86,9 @@ const AdminPage = ({
               setTeams={setTeams}
               setEditTeamModalOpen={setEditTeamModalOpen}
               setEditedTeam={setEditedTeam}
-              showLinkHandler={showLinkHandler}
               setClickedTeam={setClickedTeam}
               history={history}
             />
-            {team.id === openedLinkID ? (
-              <div>
-                <div>Here's your shareable link</div>
-                <div>
-                  <a
-                    href={`${window.location.href}register/manager/${team.id}`}
-                  >{`${window.location.href}register/manager/${team.id}`}</a>
-                </div>
-                <div>Here's your shareable player link</div>
-                <div>
-                  <a
-                    href={`${window.location.href}register/player/${team.id}`}
-                  >{`${window.location.href}register/player/${team.id}`}</a>
-                </div>
-                <div>Here's your shareable guest player link</div>
-                <div>
-                  <a
-                    href={`${window.location.href}register/guestPlayer/${team.id}`}
-                  >{`${window.location.href}register/guestPlayer/${team.id}`}</a>
-                </div>
-              </div>
-            ) : null}
           </div>
         ))
       ) : (
@@ -133,7 +105,6 @@ const AdminPage = ({
               setTeams={setTeams}
               setEditTeamModalOpen={setEditTeamModalOpen}
               setEditedTeam={setEditedTeam}
-              showLinkHandler={showLinkHandler}
               setClickedTeam={setClickedTeam}
               history={history}
             />
@@ -167,7 +138,7 @@ const AdminPage = ({
 
       <PrimaryButton onClick={() => signOut(setLoggedIn)}>
         {" "}
-        Sign out
+        Log Out
       </PrimaryButton>
     </div>
   );
@@ -179,23 +150,17 @@ const RosterIndividual = ({
   setTeams,
   setEditTeamModalOpen,
   setEditedTeam,
-  showLinkHandler,
   setClickedTeam,
   history,
 }) => {
   return (
     <div style={{ display: "flex", justifyContent: "flex-start" }}>
       <Row
-        style={{
-          margin: "20px",
-          display: "flex",
-          alignItems: "center",
-          width: "400px",
+        className="individual-team"
+        onClick={() => {
+          setClickedTeam(team);
+          history("/roster");
         }}
-        // onClick={(event) => {
-        //   setClickedTeam(event, team);
-        //   history("/roster");
-        // }}
       >
         <Col>
           <div className="user-icon-circle"></div>
@@ -221,14 +186,6 @@ const RosterIndividual = ({
               className={`fa-solid fa-times`}
               style={{ fontSize: "15px", color: "#a24936" }}
             />
-          </div>
-          <div
-            className="delete-player-icon"
-            onClick={(event) => {
-              showLinkHandler(event, team.id);
-            }}
-          >
-            <i className={`fa-solid fa-share`} style={{ fontSize: "15px" }} />
           </div>
         </Col>
       </Row>
