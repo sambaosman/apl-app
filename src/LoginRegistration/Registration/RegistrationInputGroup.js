@@ -93,7 +93,9 @@ const RegistrationInputGroup = ({
           ) {
             errors.teamID = "Not a valid Team ID";
           } else if (isTooManyMembers(userType)) {
-            errors.teamID = "Too many people";
+            errors.teamID = `Too many ${
+              userType !== "guestPlayer" ? userType : "guest player"
+            }s`;
           }
 
           if (customField && !formFields[customField.name]) {
