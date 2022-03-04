@@ -128,6 +128,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             userType={userType}
             setLoggedIn={setLoggedIn}
             history={history}
+            usersTeam={teamID}
+            teams={teams}
           />
         }
       />
@@ -262,6 +264,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
           <div>
             {loggedIn ? (
               <HomePage
+                team={clickedTeam}
                 teams={teams}
                 setTeams={setTeams}
                 setLoggedIn={setLoggedIn}

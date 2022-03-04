@@ -1,8 +1,10 @@
 import React from "react";
 import AdminPage from "./AdminPage";
 import PlayerPage from "./PlayerPage";
+import RosterPage from "./SharedComponents/RosterPage";
 
 const HomePage = ({
+  team,
   teams,
   setTeams,
   setLoggedIn,
@@ -24,14 +26,24 @@ const HomePage = ({
           setClickedTeam={setClickedTeam}
         />
       ) : (
-        <PlayerPage
+        <RosterPage
+          team={team}
           teamMembers={teamMembers}
           setTeamMembers={setTeamMembers}
           userType={userType}
-          teamID={teamID}
           setLoggedIn={setLoggedIn}
-          userType={userType}
+          history={history}
+          usersTeam={teamID}
+          teams={teams}
         />
+        // <PlayerPage
+        //   teamMembers={teamMembers}
+        //   setTeamMembers={setTeamMembers}
+        //   userType={userType}
+        //   teamID={teamID}
+        //   setLoggedIn={setLoggedIn}
+        //   userType={userType}
+        // />
       )}
     </React.Fragment>
   );

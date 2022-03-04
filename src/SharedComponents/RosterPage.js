@@ -9,7 +9,12 @@ const RosterPage = ({
   userType,
   setLoggedIn,
   history,
+  usersTeam,
+  teams,
 }) => {
+  if (!team) {
+    team = teams.find((team) => team.id === usersTeam);
+  }
   let teamID = team && team.id;
   const managers =
     teamMembers &&
@@ -48,7 +53,7 @@ const RosterPage = ({
           alignItems: "center",
         }}
       >
-        <div className="app-title">{team.teamName}</div>
+        <div className="app-title">{team && team.teamName}</div>
         <div className="logout-button" onClick={() => signOut(setLoggedIn)}>
           {" "}
           Log out
