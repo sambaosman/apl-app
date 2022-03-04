@@ -58,9 +58,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       setUserType(user.attributes["custom:userType"]);
       setTeamID(user.attributes["custom:teamID"]);
     });
-  }, [loggedIn]);
-
-  useEffect(() => {
     let link;
     const getIDFromURL = () => {
       link = window.location.pathname;
@@ -74,7 +71,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     });
     getTeamMembers(setTeamMembers);
     getTeams(setTeams);
-  }, []);
+  }, [loggedIn]);
 
   const onLogin = () => {
     setLoggedIn(true);
