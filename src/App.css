@@ -112,6 +112,7 @@ a {
 }
 .roster-user-label {
   padding: 20px;
+  text-transform: capitalize;
 }
 
 .logout-button {

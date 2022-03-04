@@ -12,6 +12,7 @@ import RegistrationInputGroup from "./LoginRegistration/Registration/Registratio
 import OTP from "./LoginRegistration/Registration/OTP";
 import Waiver from "./LoginRegistration/Waiver";
 import Roster from "./Roster";
+import RosterPage from "./SharedComponents/RosterPage";
 import { Auth } from "aws-amplify";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
 
@@ -120,10 +121,13 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       <Route
         path="/roster"
         element={
-          <Roster
+          <RosterPage
+            team={clickedTeam}
             teamMembers={teamMembers}
-            teamID={teamID}
-            clickedTeam={clickedTeam}
+            setTeamMembers={setTeamMembers}
+            userType={userType}
+            setLoggedIn={setLoggedIn}
+            history={history}
           />
         }
       />
