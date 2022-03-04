@@ -41,11 +41,6 @@ const AdminPage = ({
   const team = teams.find((team) => teamName === team.teamName);
   let link = team && `${window.location.href}${team.id}`;
 
-  const showLinkHandler = (event, id) => {
-    event.stopPropagation();
-    setOpenedLinkID(id);
-  };
-
   return (
     <div>
       <div
