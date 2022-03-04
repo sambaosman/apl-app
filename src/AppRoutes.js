@@ -57,6 +57,9 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       setUserType(user.attributes["custom:userType"]);
       setTeamID(user.attributes["custom:teamID"]);
     });
+  }, [loggedIn]);
+
+  useEffect(() => {
     let link;
     const getIDFromURL = () => {
       link = window.location.pathname;
@@ -264,6 +267,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                 teamMembers={teamMembers}
                 setTeamMembers={setTeamMembers}
                 setClickedTeam={setClickedTeam}
+                setUserType={setUserType}
               />
             ) : (
               <Link to="/login">
