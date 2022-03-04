@@ -192,10 +192,10 @@ const RosterIndividual = ({
           alignItems: "center",
           width: "400px",
         }}
-        // onClick={(event) => {
-        //   setClickedTeam(event, team);
-        //   history("/roster");
-        // }}
+        onClick={() => {
+          setClickedTeam(team);
+          history("/roster");
+        }}
       >
         <Col>
           <div className="user-icon-circle"></div>
