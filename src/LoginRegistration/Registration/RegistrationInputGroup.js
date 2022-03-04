@@ -6,6 +6,7 @@ import {
 import { Link } from "react-router-dom";
 import { Form, Field } from "react-final-form";
 import { Button, FormGroup, Label, Input } from "reactstrap";
+import moment from "moment";
 
 const RegistrationInputGroup = ({
   goBack,
@@ -64,6 +65,9 @@ const RegistrationInputGroup = ({
           }
           if (!formFields.phoneNumber) {
             errors.phoneNumber = "Required";
+          }
+          if (!formFields.dob) {
+            errors.dob = "Required";
           }
           if (!formFields.teamID) {
             errors.teamID = "Required";
@@ -243,6 +247,24 @@ const RegistrationInputGroup = ({
                     <TextInput
                       placeholder="Street"
                       name="street"
+                      invalid={meta.error && meta.touched}
+                      onChange={(e) => handleOnChange(e)}
+                    />
+                    {meta.error && meta.touched && (
+                      <span className="form-error">{meta.error}</span>
+                    )}
+                  </div>
+                )}
+              </Field>
+            </FormGroup>
+            <FormGroup>
+              <Field name="dob">
+                {({ meta }) => (
+                  <div>
+                    <TextInput
+                      type="date"
+                      placeholder="Date of Birth"
+                      name="dob"
                       invalid={meta.error && meta.touched}
                       onChange={(e) => handleOnChange(e)}
                     />

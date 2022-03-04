@@ -15,6 +15,7 @@ import Roster from "./Roster";
 import RosterPage from "./SharedComponents/RosterPage";
 import { Auth } from "aws-amplify";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
+import moment from "moment";
 
 Amplify.configure(awsExports);
 
@@ -31,6 +32,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     state: "",
     zip: "",
     phoneNumber: "",
+    dob: moment().locale("en").format("YYYY-MM-DD"),
     teamMemberType: "",
   };
   const [teamMembers, setTeamMembers] = useState([]);

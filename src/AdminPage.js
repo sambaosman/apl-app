@@ -86,32 +86,9 @@ const AdminPage = ({
               setTeams={setTeams}
               setEditTeamModalOpen={setEditTeamModalOpen}
               setEditedTeam={setEditedTeam}
-              showLinkHandler={showLinkHandler}
               setClickedTeam={setClickedTeam}
               history={history}
             />
-            {team.id === openedLinkID ? (
-              <div>
-                <div>Here's your shareable link</div>
-                <div>
-                  <a
-                    href={`${window.location.href}register/manager/${team.id}`}
-                  >{`${window.location.href}register/manager/${team.id}`}</a>
-                </div>
-                <div>Here's your shareable player link</div>
-                <div>
-                  <a
-                    href={`${window.location.href}register/player/${team.id}`}
-                  >{`${window.location.href}register/player/${team.id}`}</a>
-                </div>
-                <div>Here's your shareable guest player link</div>
-                <div>
-                  <a
-                    href={`${window.location.href}register/guestPlayer/${team.id}`}
-                  >{`${window.location.href}register/guestPlayer/${team.id}`}</a>
-                </div>
-              </div>
-            ) : null}
           </div>
         ))
       ) : (
@@ -128,7 +105,6 @@ const AdminPage = ({
               setTeams={setTeams}
               setEditTeamModalOpen={setEditTeamModalOpen}
               setEditedTeam={setEditedTeam}
-              showLinkHandler={showLinkHandler}
               setClickedTeam={setClickedTeam}
               history={history}
             />
@@ -162,7 +138,7 @@ const AdminPage = ({
 
       <PrimaryButton onClick={() => signOut(setLoggedIn)}>
         {" "}
-        Sign out
+        Log out
       </PrimaryButton>
     </div>
   );
@@ -174,7 +150,6 @@ const RosterIndividual = ({
   setTeams,
   setEditTeamModalOpen,
   setEditedTeam,
-  showLinkHandler,
   setClickedTeam,
   history,
 }) => {
@@ -216,14 +191,6 @@ const RosterIndividual = ({
               className={`fa-solid fa-times`}
               style={{ fontSize: "15px", color: "#a24936" }}
             />
-          </div>
-          <div
-            className="delete-player-icon"
-            onClick={(event) => {
-              showLinkHandler(event, team.id);
-            }}
-          >
-            <i className={`fa-solid fa-share`} style={{ fontSize: "15px" }} />
           </div>
         </Col>
       </Row>
