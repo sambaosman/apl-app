@@ -35,6 +35,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     dob: moment().locale("en").format("YYYY-MM-DD"),
     teamMemberType: "",
   };
+  const [isLoading, setIsLoading] = useState(false);
   const [teamMembers, setTeamMembers] = useState([]);
   const [teams, setTeams] = useState([]);
   const [clickedTeam, setClickedTeam] = useState();
@@ -53,6 +54,21 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       teamMemberType: window.location.pathname.split("/")[2], //getting user type from url
     });
   };
+  useEffect(() => {
+    setIsLoading(true);
+    const getUserFromURL = () => {
+      let link = window.location.pathname;
+      let linkArray = link.split("/");
+      let user = linkArray.length == 3 ? linkArray[2] : linkArray[3];
+      return user;
+    };
+    let user = getUserFromURL();
+    setUserType(user);
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, [userType]);
 
   useEffect(() => {
     Auth.currentAuthenticatedUser().then((user) => {
@@ -80,6 +96,10 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
   };
 
   const memberType = ["player", "guestPlayer", "manager", "admin"];
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Routes>
@@ -136,7 +156,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/register/player"
         element={
           <RegistrationInputGroup
-            // goBack={() => setTeamMemberType()}
             customField={{
               name: "jerseyNumber",
               placeholder: "Jersey Number",
@@ -154,6 +173,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
+            teamMembers={teamMembers}
+            userType={userType}
           />
         }
       />
@@ -161,7 +182,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/register/guestPlayer"
         element={
           <RegistrationInputGroup
-            // goBack={() => setTeamMemberType()}
             customField={{
               name: "jerseyNumber",
               placeholder: "Jersey Number",
@@ -179,6 +199,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
+            teammembers={teamMembers}
+            userType={userType}
           />
         }
       />
@@ -187,7 +209,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/register/manager"
         element={
           <RegistrationInputGroup
-            // goBack={() => setTeamMemberType()}
             customID={{
               name: "teamID",
               placeholder: "Manager ID",
@@ -201,6 +222,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
+            teamMembers={teamMembers}
+            userType={userType}
           />
         }
       />
@@ -209,7 +232,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/register/admin"
         element={
           <RegistrationInputGroup
-            // goBack={() => setTeamMemberType()}
             customID={{
               name: "teamID",
               placeholder: "Admin ID",
@@ -223,6 +245,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
             error={error}
             teams={teams}
             setTeamMembers={setTeamMembers}
+            teamMembers={teamMembers}
+            userType={userType}
           />
         }
       />
@@ -251,6 +275,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                     error={error}
                     teams={teams}
                     setTeamMembers={setTeamMembers}
+                    teamMembers={teamMembers}
+                    userType={userType}
                   />
                 }
               />

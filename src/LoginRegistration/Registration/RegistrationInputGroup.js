@@ -6,7 +6,6 @@ import {
 import { Link } from "react-router-dom";
 import { Form, Field } from "react-final-form";
 import { Button, FormGroup, Label, Input } from "reactstrap";
-import moment from "moment";
 
 const RegistrationInputGroup = ({
   goBack,
@@ -21,9 +20,25 @@ const RegistrationInputGroup = ({
   error,
   teams,
   setTeamMembers,
+  teamMembers,
+  userType,
 }) => {
   const onSubmit = (values) => {
     console.log(values);
+  };
+
+  const isTooManyMembers = (userType) => {
+    let filteredTeamMembers = teamMembers.filter(
+      (member) => member.teamsID === formFields.teamID
+    );
+    let userFilteredTeamMembers = filteredTeamMembers.filter(
+      (member) => member.teamMemberType === userType
+    );
+    return (
+      userFilteredTeamMembers.length > //adds maximum members to a team
+      //maximum of 4 managers, 22 players, and 4 guest players
+      (userType === "manager" ? 4 : userType === "player" ? 22 : 4)
+    );
   };
 
   const teamIDs = teams && teams.length && teams.map((team) => team.id);
@@ -77,7 +92,10 @@ const RegistrationInputGroup = ({
             formFields.teamID !== "admin1234"
           ) {
             errors.teamID = "Not a valid Team ID";
+          } else if (isTooManyMembers(userType)) {
+            errors.teamID = "Too many people";
           }
+
           if (customField && !formFields[customField.name]) {
             errors[customField.name] = "Required";
           }
