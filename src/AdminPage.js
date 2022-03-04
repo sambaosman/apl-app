@@ -156,12 +156,7 @@ const RosterIndividual = ({
   return (
     <div style={{ display: "flex", justifyContent: "flex-start" }}>
       <Row
-        style={{
-          margin: "20px",
-          display: "flex",
-          alignItems: "center",
-          width: "400px",
-        }}
+        className="individual-team"
         onClick={() => {
           setClickedTeam(team);
           history("/roster");
