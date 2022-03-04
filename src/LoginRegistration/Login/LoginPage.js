@@ -7,20 +7,23 @@ import { Auth } from "aws-amplify";
 import ChangePassword from "./ChangePassword";
 import { Link, useNavigate } from "react-router-dom";
 
-const LoginPage = ({ onLogin, error, setError }) => {
+const LoginPage = ({ onLogin, error, setError, setIsLoading }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newPasswordRequired, setNewPasswordRequired] = useState(false);
 
   const history = useNavigate();
   const login = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       const user = await Auth.signIn({ username: email, password });
       history("/");
       onLogin();
+      setIsLoading(true);
     } catch (error) {
       setError(error);
+      setIsLoading(false);
     }
   };
 

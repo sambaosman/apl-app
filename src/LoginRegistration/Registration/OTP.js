@@ -78,7 +78,7 @@ const OTP = ({ formFields, setFormFields, history, setError, error }) => {
         })}
         <div style={{ display: "flex", justifyContent: "center" }}>
           <PrimaryButton
-            // disabled={authCode.length > 4}
+            disabled={authCode.length < 6}
             onClick={(e) =>
               confirmRegistration(formFields, setFormFields, setError)
             }

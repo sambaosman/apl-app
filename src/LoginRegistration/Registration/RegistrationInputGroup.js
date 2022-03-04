@@ -28,16 +28,25 @@ const RegistrationInputGroup = ({
   };
 
   const isTooManyMembers = (userType) => {
-    let filteredTeamMembers = teamMembers.filter(
-      (member) => member.teamsID === formFields.teamID
-    );
-    let userFilteredTeamMembers = filteredTeamMembers.filter(
-      (member) => member.teamMemberType === userType
-    );
+    let filteredTeamMembers =
+      teamMembers &&
+      teamMembers.filter((member) => member.teamsID === formFields.teamID);
+    let userFilteredTeamMembers =
+      filteredTeamMembers &&
+      filteredTeamMembers.filter(
+        (member) => member.teamMemberType === userType
+      );
     return (
+      userFilteredTeamMembers &&
       userFilteredTeamMembers.length > //adds maximum members to a team
-      //maximum of 4 managers, 22 players, and 4 guest players
-      (userType === "manager" ? 4 : userType === "player" ? 22 : 4)
+        //maximum of 4 managers, 22 players, and 4 guest players
+        (userType === "manager"
+          ? 4
+          : userType === "player"
+          ? 22
+          : userType === "guestPlayer"
+          ? 4
+          : 100)
     );
   };
 

@@ -64,6 +64,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     };
     let user = getUserFromURL();
     setUserType(user);
+    getTeamMembers(setTeamMembers);
+    getTeams(setTeams);
   }, []);
 
   useEffect(() => {
@@ -87,8 +89,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       ...formFields,
       teamID: id,
     });
-    getTeamMembers(setTeamMembers);
-    getTeams(setTeams);
   }, [loggedIn]);
 
   const onLogin = () => {
@@ -111,7 +111,12 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       <Route
         path="/login"
         element={
-          <LoginPage onLogin={onLogin} error={error} setError={setError} />
+          <LoginPage
+            onLogin={onLogin}
+            error={error}
+            setError={setError}
+            setIsLoading={setIsLoading}
+          />
         }
       />
       <Route
