@@ -7,16 +7,17 @@ type Teams @model @auth(rules: [{allow: public}]) {
 
 type TeamMember @model @auth(rules: [{allow: public}]) {
   id: ID!
-  firstName: String
-  lastName: String
-  email: String
+  firstName: String!
+  lastName: String!
+  email: String!
   jerseyNumber: String
-  street: String
-  city: String
-  state: String
-  zip: String
-  phoneNumber: String
+  street: String!
+  city: String!
+  state: String!
+  zip: String!
+  phoneNumber: String!
   teamMemberType: String
   teamsID: ID! @index(name: "byTeams")
+  dob: String!
 }
  
