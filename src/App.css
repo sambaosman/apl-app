@@ -160,3 +160,12 @@ a {
 .add-circle-button:hover {
   cursor: pointer;
 }
+
+.icon-button:hover {
+  color: var(--secondary);
+  cursor: pointer;
+}
+
+.shareable-link {
+  padding-left: 20px;
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RosterIndividual from "./RosterIndividual";
 import { signOut } from "../LoginRegistration/LoginRegistrationFunctions";
+import LinkModal from "./LinkModal";
 
 const RosterPage = ({
   team,
@@ -12,6 +13,13 @@ const RosterPage = ({
   usersTeam,
   teams,
 }) => {
+  const [openedLinkID, setOpenedLinkID] = useState("");
+  const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
+
+  const toggleLinkModal = () => {
+    setIsLinkModalOpen(!isLinkModalOpen);
+  };
+
   if (!team) {
     team = teams.find((team) => team.id === usersTeam);
   }
@@ -44,6 +52,11 @@ const RosterPage = ({
     { name: "guest player", array: guestPlayers },
   ];
 
+  const showLinkHandler = (event, id) => {
+    event.stopPropagation();
+    setOpenedLinkID(id);
+  };
+
   return (
     <div style={{ width: "100%", margin: "auto" }}>
       <div
@@ -53,7 +66,25 @@ const RosterPage = ({
           alignItems: "center",
         }}
       >
-        <div className="app-title">{team && team.teamName}</div>
+        <div>
+          <div className="app-title">{team && team.teamName}</div>
+          <div>
+            <span
+              className="icon-button"
+              onClick={(event) => {
+                toggleLinkModal();
+              }}
+            >
+              <i className="fa-solid fa-link" />
+            </span>
+            <LinkModal
+              team={team}
+              isLinkModalOpen={isLinkModalOpen}
+              toggleLinkModal={toggleLinkModal}
+            />
+          </div>
+        </div>
+
         <div className="logout-button" onClick={() => signOut(setLoggedIn)}>
           {" "}
           Log out

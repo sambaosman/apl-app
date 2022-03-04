@@ -36,14 +36,6 @@ const HomePage = ({
           usersTeam={teamID}
           teams={teams}
         />
-        // <PlayerPage
-        //   teamMembers={teamMembers}
-        //   setTeamMembers={setTeamMembers}
-        //   userType={userType}
-        //   teamID={teamID}
-        //   setLoggedIn={setLoggedIn}
-        //   userType={userType}
-        // />
       )}
     </React.Fragment>
   );
