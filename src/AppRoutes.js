@@ -253,7 +253,14 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                 path={`/register/${type}/${team.id}`}
                 element={
                   <RegistrationInputGroup
-                    // goBack={() => setTeamMemberType()}
+                    customField={
+                      type === "player" || type === "guestPlayer"
+                        ? {
+                            name: "jerseyNumber",
+                            placeholder: "Jersey Number",
+                          }
+                        : false
+                    }
                     customID={{
                       name: `${type}ID`,
                       placeholder: `${type} ID`,
