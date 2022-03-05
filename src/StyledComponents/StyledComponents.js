@@ -46,4 +46,5 @@ export const PrimaryButton = styled(Button)`
   display: block;
   border: none;
   float: right;
+  margin-top: 20px;
 `;
