@@ -38,6 +38,11 @@ const AdminPage = ({
     );
   }, [teams]);
 
+  const updateTeam = (event, id, setTeams) => {
+    event.stopPropagation();
+    setEditTeamModalOpen(true);
+    setEditedTeam(id);
+  };
   const team = teams.find((team) => teamName === team.teamName);
   let link = team && `${window.location.href}${team.id}`;
 
@@ -99,7 +104,7 @@ const AdminPage = ({
               team={team}
               setTeams={setTeams}
               setEditTeamModalOpen={setEditTeamModalOpen}
-              setEditedTeam={setEditedTeam}
+              updateTeam={updateTeam}
               setClickedTeam={setClickedTeam}
               history={history}
             />
@@ -118,7 +123,7 @@ const AdminPage = ({
               team={team}
               setTeams={setTeams}
               setEditTeamModalOpen={setEditTeamModalOpen}
-              setEditedTeam={setEditedTeam}
+              updateTeam={updateTeam}
               setClickedTeam={setClickedTeam}
               history={history}
             />
@@ -158,7 +163,7 @@ const RosterIndividual = ({
   team,
   setTeams,
   setEditTeamModalOpen,
-  setEditedTeam,
+  updateTeam,
   setClickedTeam,
   history,
 }) => {
@@ -180,9 +185,8 @@ const RosterIndividual = ({
         <Col>
           <div
             className="delete-player-icon"
-            onClick={() => {
-              setEditTeamModalOpen(true);
-              setEditedTeam(team.id, setTeams);
+            onClick={(event) => {
+              updateTeam(event, team.id, setTeams);
             }}
           >
             <i className={`fa-solid fa-pencil`} style={{ fontSize: "15px" }} />
