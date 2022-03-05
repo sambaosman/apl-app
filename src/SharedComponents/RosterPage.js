@@ -13,7 +13,6 @@ const RosterPage = ({
   usersTeam,
   teams,
 }) => {
-  const [openedLinkID, setOpenedLinkID] = useState("");
   const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
 
   const toggleLinkModal = () => {
@@ -52,11 +51,6 @@ const RosterPage = ({
     { name: "guest player", array: guestPlayers },
   ];
 
-  const showLinkHandler = (event, id) => {
-    event.stopPropagation();
-    setOpenedLinkID(id);
-  };
-
   return (
     <div style={{ width: "100%", margin: "auto" }}>
       <div
@@ -87,13 +81,15 @@ const RosterPage = ({
           )}
         </div>
 
-        <div className="logout-button" onClick={() => signOut(setLoggedIn)}>
-          {" "}
+        <div
+          className="logout-button"
+          onClick={() => signOut(setLoggedIn, history)}
+        >
           Log Out
         </div>
       </div>
-      {array.map((type) => (
-        <React.Fragment>
+      {array.map((type, index) => (
+        <React.Fragment key={index}>
           <div className="roster-user-section">
             <div className="roster-user-label">{type.name}</div>
           </div>

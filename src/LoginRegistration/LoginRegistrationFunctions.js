@@ -11,10 +11,11 @@ export const AssessLoggedInState = (setLoggedIn) => {
     });
 };
 
-export const signOut = async (setLoggedIn) => {
+export const signOut = async (setLoggedIn, history) => {
   try {
     await Auth.signOut();
     setLoggedIn(false);
+    history("/");
   } catch (error) {
     console.log("error signing out", error);
   }

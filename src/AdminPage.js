@@ -42,15 +42,29 @@ const AdminPage = ({
   let link = team && `${window.location.href}${team.id}`;
 
   return (
-    <div>
+    <div style={{ width: "100%", margin: "auto" }}>
       <div
-        className="add-circle-button"
-        onClick={() => setAddTeamModalOpen(true)}
+        style={{
+          display: "flex",
+          justifyContent: " space-between",
+          alignItems: "center",
+        }}
       >
-        <i
-          className={`fa-solid fa-plus`}
-          style={{ fontSize: "25px", color: "white" }}
-        />
+        <div
+          className="add-circle-button"
+          onClick={() => setAddTeamModalOpen(true)}
+        >
+          <i
+            className={`fa-solid fa-plus`}
+            style={{ fontSize: "25px", color: "white" }}
+          />
+        </div>
+        <div
+          className="logout-button"
+          onClick={() => signOut(setLoggedIn, history)}
+        >
+          Log Out
+        </div>
       </div>
       <AddTeamModal
         addTeamModalOpen={addTeamModalOpen}
@@ -135,11 +149,6 @@ const AdminPage = ({
       ) : (
         <div>No teams found</div>
       )}
-
-      <PrimaryButton onClick={() => signOut(setLoggedIn)}>
-        {" "}
-        Log Out
-      </PrimaryButton>
     </div>
   );
 };
