@@ -219,14 +219,14 @@ const RegistrationInputGroup = ({
               </FormGroup>
             )}
             <FormGroup>
-              <Field name="zip">
+              <Field name="street">
                 {({ meta }) => (
                   <div>
                     <TextInput
-                      placeholder="Zip Code"
-                      name="zip"
-                      onChange={(e) => handleOnChange(e)}
+                      placeholder="Street"
+                      name="street"
                       invalid={meta.error && meta.touched}
+                      onChange={(e) => handleOnChange(e)}
                     />
                     {meta.error && meta.touched && (
                       <span className="form-error">{meta.error}</span>
@@ -270,14 +270,14 @@ const RegistrationInputGroup = ({
               </Field>
             </FormGroup>
             <FormGroup>
-              <Field name="street">
+              <Field name="zip">
                 {({ meta }) => (
                   <div>
                     <TextInput
-                      placeholder="Street"
-                      name="street"
-                      invalid={meta.error && meta.touched}
+                      placeholder="Zip Code"
+                      name="zip"
                       onChange={(e) => handleOnChange(e)}
+                      invalid={meta.error && meta.touched}
                     />
                     {meta.error && meta.touched && (
                       <span className="form-error">{meta.error}</span>
