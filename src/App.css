@@ -203,3 +203,14 @@ input[type="date"]:focus::-webkit-datetime-edit {
   background-color: #f8f8f84b;
   border-radius: 7px;
 }
+
+@media screen {
+  .printed-roster {
+    display: none;
+  }
+}
+
+.player-header {
+  font-weight: bold;
+  font-size: 15px;
+}

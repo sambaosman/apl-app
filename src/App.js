@@ -14,8 +14,6 @@ function App() {
     AssessLoggedInState(setLoggedIn);
   }, []);
 
-  console.log("logged in", loggedIn);
-
   return (
     <BrowserRouter>
       <div className="App">

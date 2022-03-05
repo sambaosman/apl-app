@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import RosterIndividual from "./RosterIndividual";
 import { signOut } from "../LoginRegistration/LoginRegistrationFunctions";
 import LinkModal from "./LinkModal";
+import ReactToPrint from "react-to-print";
+import { render } from "@testing-library/react";
+import PrintedRoster from "../PrintedRoster";
 
 const RosterPage = ({
   team,
@@ -14,6 +17,8 @@ const RosterPage = ({
   teams,
 }) => {
   const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
+
+  const componentRef = useRef();
 
   const toggleLinkModal = () => {
     setIsLinkModalOpen(!isLinkModalOpen);
@@ -62,6 +67,25 @@ const RosterPage = ({
       >
         <div>
           <div className="app-title">{team && team.teamName}</div>
+          <ReactToPrint
+            trigger={() => (
+              <div className="add-circle-button">
+                <i
+                  className={`fa-solid fa-print`}
+                  style={{ fontSize: "25px", color: "white" }}
+                />
+              </div>
+            )}
+            content={() => componentRef.current}
+          />
+          <PrintedRoster
+            ref={componentRef}
+            managers={managers}
+            players={players}
+            guestPlayers={guestPlayers}
+            team={team}
+          />
+
           {(userType === "admin" || userType === "manager") && (
             <div>
               <span

@@ -62,8 +62,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     };
     let user = getUserFromURL();
     setUserType(user);
-    getTeamMembers(setTeamMembers);
-    getTeams(setTeams);
   }, []);
 
   useEffect(() => {
