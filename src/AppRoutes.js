@@ -35,7 +35,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     dob: moment().locale("en").format("YYYY-MM-DD"),
     teamMemberType: "",
   };
-  const [isLoading, setIsLoading] = useState(false);
   const [teamMembers, setTeamMembers] = useState([]);
   const [teams, setTeams] = useState([]);
   const [clickedTeam, setClickedTeam] = useState();
@@ -55,7 +54,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     });
   };
   useEffect(() => {
-    setIsLoading(true);
     const getUserFromURL = () => {
       let link = window.location.pathname;
       let linkArray = link.split("/");
@@ -67,10 +65,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     getTeamMembers(setTeamMembers);
     getTeams(setTeams);
   }, []);
-
-  useEffect(() => {
-    setIsLoading(false);
-  }, [userType]);
 
   useEffect(() => {
     Auth.currentAuthenticatedUser().then((user) => {
@@ -97,10 +91,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
 
   const memberType = ["player", "guestPlayer", "manager", "admin"];
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <Routes>
       <Route
@@ -111,12 +101,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       <Route
         path="/login"
         element={
-          <LoginPage
-            onLogin={onLogin}
-            error={error}
-            setError={setError}
-            setIsLoading={setIsLoading}
-          />
+          <LoginPage onLogin={onLogin} error={error} setError={setError} />
         }
       />
       <Route
