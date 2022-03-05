@@ -27,6 +27,11 @@ const RegistrationInputGroup = ({
     console.log(values);
   };
 
+  const doesEmailAlreadyExist = (email) => {
+    let memberEmails = teamMembers.map((member) => member.email);
+    return memberEmails.includes(email);
+  };
+
   const isTooManyMembers = (userType) => {
     let filteredTeamMembers =
       teamMembers &&
@@ -114,6 +119,8 @@ const RegistrationInputGroup = ({
             errors.email = "Required";
           } else if (!validateEmail(formFields.email)) {
             errors.email = "Not an email adress";
+          } else if (doesEmailAlreadyExist(formFields.email)) {
+            errors.email = "An account with the given email already exists";
           }
           if (!formFields.password) {
             errors.password = "Required";
