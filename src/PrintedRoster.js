@@ -1,13 +1,6 @@
-import React, { useState, useRef } from "react";
-import {
-  Form as ReactForm,
-  FormGroup,
-  Label,
-  Input,
-  Modal,
-  Row,
-  Col,
-} from "reactstrap";
+import React from "react";
+import { Row, Col } from "reactstrap";
+import logo from "./Images/apllogo.png";
 
 class PrintedRoster extends React.Component {
   render() {
@@ -15,9 +8,10 @@ class PrintedRoster extends React.Component {
     return (
       <div className="printed-roster">
         <div style={{ margin: "40px" }}>
+          <img src={logo} height="100" width="100" style={{ color: "red" }} />
           <div className="app-title">{team && team.teamName}</div>
           <div className="player-header">Managers</div>
-          {managers ? (
+          {managers && managers.length ? (
             managers.map((manager) => (
               <Row>
                 <Col>
@@ -29,7 +23,7 @@ class PrintedRoster extends React.Component {
             <div>None</div>
           )}
           <div className="player-header">Players</div>
-          {players ? (
+          {players && players.length ? (
             players.map((player) => (
               <Row>
                 <Col>{player.jerseyNumber}</Col>
@@ -43,7 +37,7 @@ class PrintedRoster extends React.Component {
             <div>None</div>
           )}
           <div className="player-header">Guest Players</div>
-          {guestPlayers ? (
+          {guestPlayers && guestPlayers.length ? (
             guestPlayers.map((guest) => (
               <Row>
                 <Col>{guest.jerseyNumber}</Col>

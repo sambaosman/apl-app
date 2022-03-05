@@ -62,7 +62,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     };
     let user = getUserFromURL();
     setUserType(user);
-    setError(null);
   }, []);
 
   useEffect(() => {

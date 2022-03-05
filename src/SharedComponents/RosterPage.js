@@ -3,7 +3,6 @@ import RosterIndividual from "./RosterIndividual";
 import { signOut } from "../LoginRegistration/LoginRegistrationFunctions";
 import LinkModal from "./LinkModal";
 import ReactToPrint from "react-to-print";
-import { render } from "@testing-library/react";
 import PrintedRoster from "../PrintedRoster";
 
 const RosterPage = ({
