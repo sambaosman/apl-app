@@ -46,9 +46,9 @@ const RosterPage = ({
     );
 
   const array = [
-    { name: "manager", array: managers },
-    { name: "player", array: players },
-    { name: "guest player", array: guestPlayers },
+    { name: "managers", array: managers },
+    { name: "players", array: players },
+    { name: "guest players", array: guestPlayers },
   ];
 
   return (
@@ -102,7 +102,7 @@ const RosterPage = ({
               />
             ))
           ) : (
-            <div>{`No ${type.name}s to show`}</div>
+            <div>{`No ${type.name} to show`}</div>
           )}
         </React.Fragment>
       ))}

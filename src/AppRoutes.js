@@ -83,6 +83,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       ...formFields,
       teamID: id,
     });
+    getTeamMembers(setTeamMembers);
+    getTeams(setTeams);
   }, [loggedIn]);
 
   const onLogin = () => {
