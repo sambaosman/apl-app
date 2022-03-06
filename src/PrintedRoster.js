@@ -13,38 +13,62 @@ class PrintedRoster extends React.Component {
           <div className="player-header">Managers</div>
           {managers && managers.length ? (
             managers.map((manager) => (
-              <Row>
-                <Col>
-                  {manager.firstName} {manager.lastName}
-                </Col>
-              </Row>
+              <React.Fragment>
+                <Row>
+                  <Col>Name</Col>
+                </Row>
+                <hr />
+                <Row>
+                  <Col>
+                    {manager.firstName} {manager.lastName}
+                  </Col>
+                </Row>
+              </React.Fragment>
             ))
           ) : (
             <div>None</div>
           )}
           <div className="player-header">Players</div>
+          <hr />
+
           {players && players.length ? (
             players.map((player) => (
-              <Row>
-                <Col>{player.jerseyNumber}</Col>
+              <React.Fragment>
+                <Row>
+                  <Col>Name</Col>
+                  <Col>Jersey Number</Col>
+                </Row>
+                <hr />
 
-                <Col>
-                  {player.firstName} {player.lastName}
-                </Col>
-              </Row>
+                <Row>
+                  <Col>
+                    {player.firstName} {player.lastName}
+                  </Col>
+                  <Col>{player.jerseyNumber}</Col>
+                </Row>
+              </React.Fragment>
             ))
           ) : (
             <div>None</div>
           )}
           <div className="player-header">Guest Players</div>
+          <hr />
           {guestPlayers && guestPlayers.length ? (
             guestPlayers.map((guest) => (
-              <Row>
-                <Col>{guest.jerseyNumber}</Col>
-                <Col>
-                  {guest.firstName} {guest.lastName}
-                </Col>
-              </Row>
+              <React.Fragment>
+                <Row>
+                  <Col>Name</Col>
+                  <Col>Jersey Number</Col>
+                  <hr />
+                </Row>
+                <Row>
+                  <Col>
+                    {" "}
+                    {guest.firstName} {guest.lastName}
+                  </Col>
+                  <Col>{guest.jerseyNumber}</Col>
+                </Row>
+              </React.Fragment>
             ))
           ) : (
             <div>None</div>

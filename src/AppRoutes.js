@@ -83,6 +83,14 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     });
     getTeamMembers(setTeamMembers);
     getTeams(setTeams);
+    const getUserFromURL = () => {
+      let link = window.location.pathname;
+      let linkArray = link.split("/");
+      let user = linkArray.length == 3 ? linkArray[2] : linkArray[3];
+      return user;
+    };
+    let user = getUserFromURL();
+    setUserType(user);
   }, [loggedIn]);
 
   const onLogin = () => {
