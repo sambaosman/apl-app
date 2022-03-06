@@ -71,7 +71,7 @@ const RosterPage = ({
           <Row>
             <ReactToPrint
               trigger={() => (
-                <Col>
+                <Col style={{ display: "flex", alignItems: "flex-end" }}>
                   <span className="print-button">
                     <i
                       className={`fa-solid fa-print`}
