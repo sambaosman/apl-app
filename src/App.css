@@ -112,7 +112,7 @@ a {
   text-align: left;
 }
 .roster-user-label {
-  padding: 20px;
+  padding-top: 20px;
   text-transform: capitalize;
 }
 
@@ -215,4 +215,9 @@ input[type="date"]:focus::-webkit-datetime-edit {
 .player-header {
   font-weight: bold;
   font-size: 15px;
+}
+
+.btn-secondary:hover {
+  color: #f8f8f8;
+  background-color: #f8f8f8 !important;
 }
