@@ -1,6 +1,6 @@
 :root {
   --primary: #4a4a4a;
-  --secondary: #a24936;
+  --secondary: #2d4c74;
 }
 a {
   color: var(--primary) !important;
@@ -10,6 +10,29 @@ a {
 .App {
   text-align: center;
   color: var(--primary);
+}
+
+.header-title {
+  text-transform: uppercase;
+  color: var(--primary);
+  font-weight: bold;
+  letter-spacing: 1.3;
+  padding-left: 20px;
+}
+
+.app-header {
+  height: 50px;
+  width: 100%;
+  background-color: #f8f8f8;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.logo-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px 0px 20px;
 }
 
 .center {
@@ -22,11 +45,13 @@ a {
   font-size: 20px;
   font-weight: bold;
   text-align: left;
+  color: var(--primary);
 }
 
 .login-subsection {
   text-align: left;
   padding-bottom: 10px;
+  padding-top: 20px;
 }
 
 .login-subsection-link {
@@ -111,8 +136,10 @@ a {
   text-align: left;
 }
 .roster-user-label {
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 10px;
   text-transform: capitalize;
+  color: var(--primary);
 }
 
 .logout-button {
@@ -140,6 +167,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  float: right;
 }
 
 .delete-player-icon:hover {
@@ -155,6 +183,21 @@ a {
   justify-content: center;
   align-items: center;
   border-radius: 100%;
+}
+
+.print-button {
+  background-color: var(--secondary);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+}
+
+.print-button:hover {
+  cursor: pointer;
+  background-color: var(--primary);
 }
 
 .add-circle-button:hover {
@@ -202,4 +245,20 @@ input[type="date"]:focus::-webkit-datetime-edit {
   cursor: pointer;
   background-color: #f8f8f84b;
   border-radius: 7px;
+}
+
+@media screen {
+  .printed-roster {
+    display: none;
+  }
+}
+
+.player-header {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary) !important;
+  border: none !important;
 }

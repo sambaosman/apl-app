@@ -27,6 +27,11 @@ const RegistrationInputGroup = ({
     console.log(values);
   };
 
+  const doesEmailAlreadyExist = (email) => {
+    let memberEmails = teamMembers.map((member) => member.email);
+    return memberEmails.includes(email);
+  };
+
   const isTooManyMembers = (userType) => {
     let filteredTeamMembers =
       teamMembers &&
@@ -53,7 +58,7 @@ const RegistrationInputGroup = ({
   const teamIDs = teams && teams.length && teams.map((team) => team.id);
 
   return (
-    <React.Fragment>
+    <div className="app-container">
       <div className="app-title">Register For APL</div>
       <div className="apl-about-message">
         APL is the most elite soccer league in the DMV. We are composed of
@@ -114,6 +119,8 @@ const RegistrationInputGroup = ({
             errors.email = "Required";
           } else if (!validateEmail(formFields.email)) {
             errors.email = "Not an email adress";
+          } else if (doesEmailAlreadyExist(formFields.email)) {
+            errors.email = "An account with the given email already exists";
           }
           if (!formFields.password) {
             errors.password = "Required";
@@ -219,14 +226,14 @@ const RegistrationInputGroup = ({
               </FormGroup>
             )}
             <FormGroup>
-              <Field name="zip">
+              <Field name="street">
                 {({ meta }) => (
                   <div>
                     <TextInput
-                      placeholder="Zip Code"
-                      name="zip"
-                      onChange={(e) => handleOnChange(e)}
+                      placeholder="Street"
+                      name="street"
                       invalid={meta.error && meta.touched}
+                      onChange={(e) => handleOnChange(e)}
                     />
                     {meta.error && meta.touched && (
                       <span className="form-error">{meta.error}</span>
@@ -270,14 +277,14 @@ const RegistrationInputGroup = ({
               </Field>
             </FormGroup>
             <FormGroup>
-              <Field name="street">
+              <Field name="zip">
                 {({ meta }) => (
                   <div>
                     <TextInput
-                      placeholder="Street"
-                      name="street"
-                      invalid={meta.error && meta.touched}
+                      placeholder="Zip Code"
+                      name="zip"
                       onChange={(e) => handleOnChange(e)}
+                      invalid={meta.error && meta.touched}
                     />
                     {meta.error && meta.touched && (
                       <span className="form-error">{meta.error}</span>
@@ -395,7 +402,7 @@ const RegistrationInputGroup = ({
           </span>
         </span>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

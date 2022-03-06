@@ -46,4 +46,19 @@ export const PrimaryButton = styled(Button)`
   display: block;
   border: none;
   float: right;
+  margin-top: 20px;
+`;
+
+export const IconButton = styled(Button)`
+  font-size: 15px;
+  background-color: white;
+  font-weight: bold;
+  color: white;
+  margin-right: none;
+  height: 40px;
+  border-radius: 7px;
+  display: block;
+  border: none;
+  float: right;
+  margin-top: 10px;
 `;

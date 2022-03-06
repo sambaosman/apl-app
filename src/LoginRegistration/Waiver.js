@@ -10,7 +10,7 @@ const Waiver = ({
   history,
 }) => {
   return (
-    <div>
+    <div className="app-container">
       <div className="app-title">
         AMATEUR ATHLETIC WAIVER AND RELEASE OF LIABILITY
       </div>

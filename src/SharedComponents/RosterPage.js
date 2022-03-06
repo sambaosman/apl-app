@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import RosterIndividual from "./RosterIndividual";
 import { signOut } from "../LoginRegistration/LoginRegistrationFunctions";
 import LinkModal from "./LinkModal";
+import ReactToPrint from "react-to-print";
+import PrintedRoster from "../PrintedRoster";
+import { PrimaryButton } from "../StyledComponents/StyledComponents";
+import { Row, Col } from "reactstrap";
 
 const RosterPage = ({
   team,
@@ -14,6 +18,8 @@ const RosterPage = ({
   teams,
 }) => {
   const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
+
+  const componentRef = useRef();
 
   const toggleLinkModal = () => {
     setIsLinkModalOpen(!isLinkModalOpen);
@@ -46,9 +52,9 @@ const RosterPage = ({
     );
 
   const array = [
-    { name: "manager", array: managers },
-    { name: "player", array: players },
-    { name: "guest player", array: guestPlayers },
+    { name: "managers", array: managers },
+    { name: "players", array: players },
+    { name: "guest players", array: guestPlayers },
   ];
 
   return (
@@ -57,35 +63,54 @@ const RosterPage = ({
         style={{
           display: "flex",
           justifyContent: " space-between",
-          alignItems: "center",
+          alignItems: "flex-start",
         }}
       >
         <div>
           <div className="app-title">{team && team.teamName}</div>
-          {(userType === "admin" || userType === "manager") && (
-            <div>
-              <span
-                className="icon-button"
-                onClick={(event) => {
-                  toggleLinkModal();
-                }}
-              >
-                <i className="fa-solid fa-link" />
-              </span>
-              <LinkModal
-                team={team}
-                isLinkModalOpen={isLinkModalOpen}
-                toggleLinkModal={toggleLinkModal}
-              />
-            </div>
-          )}
-        </div>
-
-        <div
-          className="logout-button"
-          onClick={() => signOut(setLoggedIn, history)}
-        >
-          Log Out
+          <Row>
+            <ReactToPrint
+              trigger={() => (
+                <Col style={{ display: "flex", alignItems: "flex-end" }}>
+                  <span className="print-button">
+                    <i
+                      className={`fa-solid fa-print`}
+                      style={{ fontSize: "15px", color: "white" }}
+                    />
+                  </span>
+                </Col>
+              )}
+              content={() => componentRef.current}
+            />
+            {(userType === "admin" || userType === "manager") && (
+              <Col style={{ display: "flex", alignItems: "flex-end" }}>
+                <PrimaryButton
+                  onClick={(event) => {
+                    toggleLinkModal();
+                  }}
+                  style={{ width: "250px" }}
+                >
+                  <i
+                    className={`fa-solid fa-link`}
+                    style={{ fontSize: "15px", color: "white" }}
+                  />
+                  <span style={{ paddingLeft: "10px" }}>Shareable Links</span>
+                </PrimaryButton>
+                <LinkModal
+                  team={team}
+                  isLinkModalOpen={isLinkModalOpen}
+                  toggleLinkModal={toggleLinkModal}
+                />
+              </Col>
+            )}
+          </Row>
+          <PrintedRoster
+            ref={componentRef}
+            managers={managers}
+            players={players}
+            guestPlayers={guestPlayers}
+            team={team}
+          />
         </div>
       </div>
       {array.map((type, index) => (
@@ -102,7 +127,7 @@ const RosterPage = ({
               />
             ))
           ) : (
-            <div>{`No ${type.name}s to show`}</div>
+            <div>{`No ${type.name} to show`}</div>
           )}
         </React.Fragment>
       ))}

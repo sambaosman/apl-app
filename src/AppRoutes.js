@@ -16,6 +16,7 @@ import RosterPage from "./SharedComponents/RosterPage";
 import { Auth } from "aws-amplify";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import moment from "moment";
+import AppHeader from "./AppHeader";
 
 Amplify.configure(awsExports);
 
@@ -62,8 +63,6 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     };
     let user = getUserFromURL();
     setUserType(user);
-    getTeamMembers(setTeamMembers);
-    getTeams(setTeams);
   }, []);
 
   useEffect(() => {
@@ -83,6 +82,17 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       ...formFields,
       teamID: id,
     });
+    getTeamMembers(setTeamMembers);
+    getTeams(setTeams);
+    const getUserFromURL = () => {
+      let link = window.location.pathname;
+      let linkArray = link.split("/");
+      let user = linkArray.length == 3 ? linkArray[2] : linkArray[3];
+      return user;
+    };
+    let user = getUserFromURL();
+    setUserType(user);
+    setError(null);
   }, [loggedIn]);
 
   const onLogin = () => {
@@ -130,16 +140,21 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       <Route
         path="/roster"
         element={
-          <RosterPage
-            team={clickedTeam}
-            teamMembers={teamMembers}
-            setTeamMembers={setTeamMembers}
-            userType={userType}
-            setLoggedIn={setLoggedIn}
-            history={history}
-            usersTeam={teamID}
-            teams={teams}
-          />
+          <React.Fragment>
+            <AppHeader setLoggedIn={setLoggedIn} />
+            <div className="app-container">
+              <RosterPage
+                team={clickedTeam}
+                teamMembers={teamMembers}
+                setTeamMembers={setTeamMembers}
+                userType={userType}
+                setLoggedIn={setLoggedIn}
+                history={history}
+                usersTeam={teamID}
+                teams={teams}
+              />
+            </div>
+          </React.Fragment>
         }
       />
       <Route
@@ -251,7 +266,14 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                 path={`/register/${type}/${team.id}`}
                 element={
                   <RegistrationInputGroup
-                    // goBack={() => setTeamMemberType()}
+                    customField={
+                      type === "player" || type === "guestPlayer"
+                        ? {
+                            name: "jerseyNumber",
+                            placeholder: "Jersey Number",
+                          }
+                        : false
+                    }
                     customID={{
                       name: `${type}ID`,
                       placeholder: `${type} ID`,
@@ -293,7 +315,12 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
               />
             ) : (
               <Link to="/login">
-                <PrimaryButton>Log In</PrimaryButton>
+                <div
+                  className="app-container"
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <PrimaryButton> Log In</PrimaryButton>
+                </div>
               </Link>
             )}
           </div>
