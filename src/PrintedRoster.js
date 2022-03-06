@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Table } from "reactstrap";
+import { Table } from "reactstrap";
 import logo from "./Images/apllogo.png";
 
 class PrintedRoster extends React.Component {
@@ -7,9 +7,11 @@ class PrintedRoster extends React.Component {
     const { managers, players, guestPlayers, team } = this.props;
     return (
       <div className="printed-roster">
-        <div style={{ margin: "40px" }}>
+        <div style={{ margin: "20px" }}>
           <img src={logo} height="50" width="50" />
-          <div className="app-title">{team && team.teamName}</div> <br />
+          <span className="app-title" style={{ paddingLeft: "10px" }}>
+            {team && team.teamName}
+          </span>
           <div className="player-header">Managers</div>
           <Table>
             {managers && managers.length ? (
@@ -35,7 +37,6 @@ class PrintedRoster extends React.Component {
               <div>None</div>
             )}
           </Table>
-          <br />
           <div className="player-header">Players</div>
           <Table>
             {players && players.length ? (
@@ -63,7 +64,6 @@ class PrintedRoster extends React.Component {
               <div>None</div>
             )}
           </Table>
-          <br />
           <div className="player-header">Guest Players</div>
           <Table>
             {guestPlayers && guestPlayers.length ? (
