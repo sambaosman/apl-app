@@ -92,6 +92,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     };
     let user = getUserFromURL();
     setUserType(user);
+    setError(null);
   }, [loggedIn]);
 
   const onLogin = () => {
@@ -314,7 +315,12 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
               />
             ) : (
               <Link to="/login">
-                <PrimaryButton>Log In</PrimaryButton>
+                <div
+                  className="app-container"
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <PrimaryButton> Log In</PrimaryButton>
+                </div>
               </Link>
             )}
           </div>

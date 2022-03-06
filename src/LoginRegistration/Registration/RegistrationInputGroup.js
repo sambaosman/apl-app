@@ -58,7 +58,7 @@ const RegistrationInputGroup = ({
   const teamIDs = teams && teams.length && teams.map((team) => team.id);
 
   return (
-    <React.Fragment>
+    <div className="app-container">
       <div className="app-title">Register For APL</div>
       <div className="apl-about-message">
         APL is the most elite soccer league in the DMV. We are composed of
@@ -402,7 +402,7 @@ const RegistrationInputGroup = ({
           </span>
         </span>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

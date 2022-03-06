@@ -32,7 +32,7 @@ const RegistrationSelector = ({ formFields }) => {
   const history = useNavigate();
 
   return (
-    <React.Fragment>
+    <div className="app-container">
       <div className="login-container">
         <React.Fragment>
           <div className="app-title" style={{ paddingBottom: "10px" }}>
@@ -73,7 +73,7 @@ const RegistrationSelector = ({ formFields }) => {
           </div>
         </React.Fragment>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

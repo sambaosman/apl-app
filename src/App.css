@@ -129,6 +129,7 @@ a {
 }
 .roster-user-label {
   padding-top: 20px;
+  padding-bottom: 10px;
   text-transform: capitalize;
   color: var(--primary);
 }

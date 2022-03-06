@@ -34,6 +34,7 @@ const OTP = ({ formFields, setFormFields, history, setError, error }) => {
       setFormFields(() => ({ ...formFields }));
       history("/login");
       // teamMemberType === "guestPlayer" && handlePayment();
+      setError(null);
     } catch (error) {
       setError(error);
     }
@@ -50,7 +51,7 @@ const OTP = ({ formFields, setFormFields, history, setError, error }) => {
     }
   };
   return (
-    <div>
+    <div className="app-container">
       {/* <Row style={{ display: "flex", justifyContent: "center" }}>
         <div className="icon-circle">
           <i class="fa-solid fa-mobile-screen"></i>{" "}
