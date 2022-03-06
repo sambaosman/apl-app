@@ -141,7 +141,7 @@ a {
   width: 30px;
   height: 30px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   float: right;
 }
@@ -159,6 +159,21 @@ a {
   justify-content: center;
   align-items: center;
   border-radius: 100%;
+}
+
+.print-button {
+  background-color: var(--secondary);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+}
+
+.print-button:hover {
+  cursor: pointer;
+  background-color: var(--primary);
 }
 
 .add-circle-button:hover {
@@ -220,11 +235,6 @@ input[type="date"]:focus::-webkit-datetime-edit {
 }
 
 .btn-secondary:hover {
-  color: #f8f8f8;
-  background-color: #f8f8f8 !important;
-}
-
-.btn-secondary:focus {
-  color: #f8f8f8;
-  background-color: #f8f8f8 !important;
+  background-color: var(--primary) !important;
+  border: none !important;
 }

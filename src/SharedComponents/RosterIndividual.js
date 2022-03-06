@@ -10,7 +10,7 @@ const RosterIndividual = ({ player, setTeamMembers, userType }) => {
           margin: "20px",
           display: "flex",
           alignItems: "center",
-          width: "400px",
+          width: "100%",
         }}
       >
         <Col>

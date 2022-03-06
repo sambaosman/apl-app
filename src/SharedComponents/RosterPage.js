@@ -4,6 +4,8 @@ import { signOut } from "../LoginRegistration/LoginRegistrationFunctions";
 import LinkModal from "./LinkModal";
 import ReactToPrint from "react-to-print";
 import PrintedRoster from "../PrintedRoster";
+import { PrimaryButton } from "../StyledComponents/StyledComponents";
+import { Row, Col } from "reactstrap";
 
 const RosterPage = ({
   team,
@@ -66,17 +68,42 @@ const RosterPage = ({
       >
         <div>
           <div className="app-title">{team && team.teamName}</div>
-          <ReactToPrint
-            trigger={() => (
-              <div className="add-circle-button">
-                <i
-                  className={`fa-solid fa-print`}
-                  style={{ fontSize: "25px", color: "white" }}
+          <Row>
+            <ReactToPrint
+              trigger={() => (
+                <Col>
+                  <span className="print-button">
+                    <i
+                      className={`fa-solid fa-print`}
+                      style={{ fontSize: "15px", color: "white" }}
+                    />
+                  </span>
+                </Col>
+              )}
+              content={() => componentRef.current}
+            />
+            {(userType === "admin" || userType === "manager") && (
+              <Col style={{ display: "flex", alignItems: "flex-end" }}>
+                <PrimaryButton
+                  onClick={(event) => {
+                    toggleLinkModal();
+                  }}
+                  style={{ width: "250px" }}
+                >
+                  <i
+                    className={`fa-solid fa-link`}
+                    style={{ fontSize: "15px", color: "white" }}
+                  />
+                  <span style={{ paddingLeft: "10px" }}>Shareable Links</span>
+                </PrimaryButton>
+                <LinkModal
+                  team={team}
+                  isLinkModalOpen={isLinkModalOpen}
+                  toggleLinkModal={toggleLinkModal}
                 />
-              </div>
+              </Col>
             )}
-            content={() => componentRef.current}
-          />
+          </Row>
           <PrintedRoster
             ref={componentRef}
             managers={managers}
@@ -84,24 +111,6 @@ const RosterPage = ({
             guestPlayers={guestPlayers}
             team={team}
           />
-
-          {(userType === "admin" || userType === "manager") && (
-            <div>
-              <span
-                className="icon-button"
-                onClick={(event) => {
-                  toggleLinkModal();
-                }}
-              >
-                <i className="fa-solid fa-link" />
-              </span>
-              <LinkModal
-                team={team}
-                isLinkModalOpen={isLinkModalOpen}
-                toggleLinkModal={toggleLinkModal}
-              />
-            </div>
-          )}
         </div>
 
         <div

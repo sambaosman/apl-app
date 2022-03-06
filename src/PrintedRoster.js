@@ -8,7 +8,7 @@ class PrintedRoster extends React.Component {
     return (
       <div className="printed-roster">
         <div style={{ margin: "40px" }}>
-          <img src={logo} height="100" width="100" style={{ color: "red" }} />
+          <img src={logo} height="50" width="50" />
           <div className="app-title">{team && team.teamName}</div> <br />
           <div className="player-header">Managers</div>
           <Table>
