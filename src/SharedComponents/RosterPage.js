@@ -112,13 +112,6 @@ const RosterPage = ({
             team={team}
           />
         </div>
-
-        <div
-          className="logout-button"
-          onClick={() => signOut(setLoggedIn, history)}
-        >
-          Log Out
-        </div>
       </div>
       {array.map((type, index) => (
         <React.Fragment key={index}>

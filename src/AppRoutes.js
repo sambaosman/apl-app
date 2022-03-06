@@ -16,6 +16,7 @@ import RosterPage from "./SharedComponents/RosterPage";
 import { Auth } from "aws-amplify";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import moment from "moment";
+import AppHeader from "./AppHeader";
 
 Amplify.configure(awsExports);
 
@@ -138,16 +139,21 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       <Route
         path="/roster"
         element={
-          <RosterPage
-            team={clickedTeam}
-            teamMembers={teamMembers}
-            setTeamMembers={setTeamMembers}
-            userType={userType}
-            setLoggedIn={setLoggedIn}
-            history={history}
-            usersTeam={teamID}
-            teams={teams}
-          />
+          <React.Fragment>
+            <AppHeader setLoggedIn={setLoggedIn} />
+            <div className="app-container">
+              <RosterPage
+                team={clickedTeam}
+                teamMembers={teamMembers}
+                setTeamMembers={setTeamMembers}
+                userType={userType}
+                setLoggedIn={setLoggedIn}
+                history={history}
+                usersTeam={teamID}
+                teams={teams}
+              />
+            </div>
+          </React.Fragment>
         }
       />
       <Route

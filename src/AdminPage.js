@@ -64,12 +64,6 @@ const AdminPage = ({
             style={{ fontSize: "25px", color: "white" }}
           />
         </div>
-        <div
-          className="logout-button"
-          onClick={() => signOut(setLoggedIn, history)}
-        >
-          Log Out
-        </div>
       </div>
       <AddTeamModal
         addTeamModalOpen={addTeamModalOpen}

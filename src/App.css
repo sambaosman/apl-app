@@ -12,6 +12,21 @@ a {
   color: var(--primary);
 }
 
+.app-header {
+  height: 50px;
+  width: 100%;
+  background-color: #f8f8f8;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.logo-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px 0px 20px;
+}
+
 .center {
   display: flex;
   justify-content: center;
