@@ -255,11 +255,18 @@ input[type="date"]:focus::-webkit-datetime-edit {
 
 .player-header {
   font-weight: bold;
-  font-size: 15px;
-  padding: 10px;
+  font-size: 13px;
 }
 
 .btn-secondary:hover {
   background-color: var(--primary) !important;
   border: none !important;
+}
+
+td {
+  padding: 4px !important;
+}
+
+th {
+  padding: 4px !important;
 }
