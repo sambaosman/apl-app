@@ -25,7 +25,9 @@ const RosterIndividual = ({ player, setTeamMembers, userType }) => {
             )}
           </div>
         </Col>
-        <Col style={{ textAlign: "left", fontWeight: "bold" }}>
+        <Col
+          style={{ textAlign: "left", fontWeight: "bold", minWidth: "150px" }}
+        >
           {player.firstName} {player.lastName}
         </Col>
         {(userType === "manager" || userType === "admin") && (
