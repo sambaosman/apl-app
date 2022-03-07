@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Table } from "reactstrap";
+import { Table } from "reactstrap";
 import logo from "./Images/apllogo.png";
 
 class PrintedRoster extends React.Component {
@@ -7,88 +7,91 @@ class PrintedRoster extends React.Component {
     const { managers, players, guestPlayers, team } = this.props;
     return (
       <div className="printed-roster">
-        <div style={{ margin: "40px" }}>
+        <div style={{ margin: "20px" }}>
           <img src={logo} height="50" width="50" />
-          <div className="app-title">{team && team.teamName}</div> <br />
+          <span className="app-title" style={{ paddingLeft: "10px" }}>
+            {team && team.teamName}
+          </span>
           <div className="player-header">Managers</div>
           <Table>
+            <thead>
+              <tr>
+                <th>Name</th>
+              </tr>
+            </thead>
             {managers && managers.length ? (
               managers.map((manager, index) => (
-                <React.Fragment>
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th>Name</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">{index + 1}</th>
-                      <td>
-                        {manager.firstName} {manager.lastName}
-                      </td>
-                    </tr>
-                  </tbody>
-                </React.Fragment>
+                <tbody key={index}>
+                  <tr>
+                    <td>
+                      {manager.firstName} {manager.lastName}
+                    </td>
+                  </tr>
+                </tbody>
               ))
             ) : (
-              <div>None</div>
+              <tbody>
+                <tr>
+                  <td>None</td>
+                  <td></td>
+                </tr>
+              </tbody>
             )}
           </Table>
-          <br />
           <div className="player-header">Players</div>
           <Table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Jersey Number</th>
+              </tr>
+            </thead>
             {players && players.length ? (
               players.map((player, index) => (
-                <React.Fragment key={index}>
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th>Name</th>
-                      <th>Jersey Number</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">{index + 1}</th>
-                      <td>
-                        {player.firstName} {player.lastName}{" "}
-                      </td>
-                      <td>{player.jerseyNumber}</td>
-                    </tr>
-                  </tbody>
-                </React.Fragment>
+                <tbody key={index}>
+                  <tr>
+                    <td>
+                      {player.firstName} {player.lastName}{" "}
+                    </td>
+                    <td>{player.jerseyNumber}</td>
+                  </tr>
+                </tbody>
               ))
             ) : (
-              <div>None</div>
+              <tbody>
+                <tr>
+                  <td>None</td>
+                  <td></td>
+                </tr>
+              </tbody>
             )}
           </Table>
-          <br />
           <div className="player-header">Guest Players</div>
           <Table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Jersey Number</th>
+              </tr>
+            </thead>
             {guestPlayers && guestPlayers.length ? (
-              guestPlayers.map((guest, index) => (
-                <React.Fragment key={index}>
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th>Name</th>
-                      <th>Jersey Number</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">{index + 1}</th>
-                      <td>
-                        {guest.firstName} {guest.lastName}{" "}
-                      </td>
-                      <td>{guest.jerseyNumber}</td>
-                    </tr>
-                  </tbody>
-                </React.Fragment>
+              guestPlayers.map((guestPlayer, index) => (
+                <tbody key={index}>
+                  <tr>
+                    <td>
+                      {guestPlayer.firstName} {guestPlayer.lastName}{" "}
+                    </td>
+                    <td>{guestPlayer.jerseyNumber}</td>
+                  </tr>
+                </tbody>
               ))
             ) : (
-              <div>None</div>
+              <tbody>
+                <tr>
+                  <td>None</td>
+                  <td></td>
+                </tr>
+              </tbody>
             )}
           </Table>
         </div>
