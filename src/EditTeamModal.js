@@ -26,7 +26,7 @@ const EditTeamModal = ({
     <Modal
       isModalOpen={editTeamModalOpen}
       toggleModal={() => setEditTeamModalOpen(false)}
-      title={"Shareable Links"}
+      title={"Edit Team"}
       isButtonVisible={true}
       buttonFunction={(event) => {
         updateTeam(event, editedTeam, teamName, setTeams, division);
