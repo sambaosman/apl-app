@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import RosterIndividual from "./RosterIndividual";
 import { signOut } from "../LoginRegistration/LoginRegistrationFunctions";
 import LinkModal from "./LinkModal";
@@ -6,6 +6,7 @@ import ReactToPrint from "react-to-print";
 import PrintedRoster from "../PrintedRoster";
 import { PrimaryButton } from "../StyledComponents/StyledComponents";
 import { Row, Col } from "reactstrap";
+import { getTeamMembers } from "../RegistrationServices";
 
 const RosterPage = ({
   team,
@@ -24,6 +25,10 @@ const RosterPage = ({
   const toggleLinkModal = () => {
     setIsLinkModalOpen(!isLinkModalOpen);
   };
+
+  useEffect(() => {
+    getTeamMembers(setTeamMembers);
+  }, []);
 
   if (!team) {
     team = teams.find((team) => team.id === usersTeam);
