@@ -58,9 +58,15 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     const getUserFromURL = () => {
       let link = window.location.pathname;
       let linkArray = link.split("/");
-      let user = linkArray.length == 3 ? linkArray[2] : linkArray[3];
+      let user = linkArray[2];
       return user;
     };
+    const getIDFromURL = () => {
+      let link = window.location.pathname;
+      let linkArray = link.split("/");
+      return linkArray.length == 4 ? linkArray[3] : "";
+    };
+    let id = getIDFromURL();
     let user = getUserFromURL();
     setUserType(user);
   }, []);
@@ -71,11 +77,10 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       setUserType(user.attributes["custom:userType"]);
       setTeamID(user.attributes["custom:teamID"]);
     });
-    let link;
     const getIDFromURL = () => {
-      link = window.location.pathname;
-      let linkArray = link.split("/").pop();
-      return parseInt(linkArray) ? linkArray : "";
+      let link = window.location.pathname;
+      let linkArray = link.split("/");
+      return linkArray.length == 4 ? linkArray[3] : "";
     };
     let id = getIDFromURL();
     setFormFields({
@@ -87,7 +92,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     const getUserFromURL = () => {
       let link = window.location.pathname;
       let linkArray = link.split("/");
-      let user = linkArray.length == 3 ? linkArray[2] : linkArray[3];
+      let user = linkArray[2];
       return user;
     };
     let user = getUserFromURL();
@@ -132,6 +137,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
           <Waiver
             formFields={formFields}
             setFormFields={setFormFields}
+            setTeamMembers={setTeamMembers}
             history={history}
             setError={setError}
           />
@@ -275,8 +281,15 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                         : false
                     }
                     customID={{
-                      name: `${type}ID`,
-                      placeholder: `${type} ID`,
+                      name: `teamID`,
+                      placeholder:
+                        type === "admin"
+                          ? "Admin ID"
+                          : type === "player" || type === "guestPlayer"
+                          ? "Team ID"
+                          : type === "manager"
+                          ? "Manager ID"
+                          : "ID",
                     }}
                     handleOnChange={handleOnChange}
                     setFormFields={setFormFields}

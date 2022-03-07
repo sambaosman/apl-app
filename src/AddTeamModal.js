@@ -5,9 +5,10 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import { PrimaryButton, TextInput } from "./StyledComponents/StyledComponents";
-import { Form as ReactForm, FormGroup, Label, Modal } from "reactstrap";
+import { TextInput } from "./StyledComponents/StyledComponents";
+import { Form as ReactForm, FormGroup, Label } from "reactstrap";
 import { addTeam } from "./TeamServices";
+import Modal from "./SharedComponents/Modal";
 
 const AddTeamModal = ({
   addTeamModalOpen,
@@ -21,8 +22,17 @@ const AddTeamModal = ({
   setTeamName,
 }) => {
   return (
-    <Modal isOpen={addTeamModalOpen} toggle={() => setAddTeamModalOpen(false)}>
-      <ReactForm style={{ padding: "20px" }}>
+    <Modal
+      isModalOpen={addTeamModalOpen}
+      toggleModal={() => setAddTeamModalOpen(false)}
+      title={"Add Team"}
+      isButtonVisible={true}
+      buttonFunction={(event) => {
+        addTeam(event, teamName, setTeams, division);
+        setAddTeamModalOpen(false);
+      }}
+      buttonTitle={"Add Team"}
+      children={
         <FormGroup>
           <Label for="firstName">Team Name</Label>
           <TextInput
@@ -55,16 +65,8 @@ const AddTeamModal = ({
             </DropdownMenu>
           </Dropdown>
         </FormGroup>
-        <PrimaryButton
-          onClick={(event) => {
-            addTeam(event, teamName, setTeams, division);
-            setAddTeamModalOpen(false);
-          }}
-        >
-          Add Team to APL
-        </PrimaryButton>
-      </ReactForm>
-    </Modal>
+      }
+    />
   );
 };
 
