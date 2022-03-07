@@ -61,6 +61,12 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       let user = linkArray.length == 3 ? linkArray[2] : linkArray[3];
       return user;
     };
+    const getIDFromURL = () => {
+      let link = window.location.pathname;
+      let linkArray = link.split("/").pop();
+      return linkArray;
+    };
+    let id = getIDFromURL();
     let user = getUserFromURL();
     setUserType(user);
   }, []);
@@ -75,7 +81,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     const getIDFromURL = () => {
       link = window.location.pathname;
       let linkArray = link.split("/").pop();
-      return parseInt(linkArray) ? linkArray : "";
+      return linkArray;
     };
     let id = getIDFromURL();
     setFormFields({
@@ -275,8 +281,8 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                         : false
                     }
                     customID={{
-                      name: `${type}ID`,
-                      placeholder: `${type} ID`,
+                      name: `teamID`,
+                      placeholder: `test`,
                     }}
                     handleOnChange={handleOnChange}
                     setFormFields={setFormFields}

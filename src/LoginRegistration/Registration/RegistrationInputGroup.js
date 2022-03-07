@@ -23,6 +23,7 @@ const RegistrationInputGroup = ({
   teamMembers,
   userType,
 }) => {
+  console.log("formFields", formFields);
   const onSubmit = (values) => {
     console.log(values);
   };
