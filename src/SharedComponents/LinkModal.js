@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  PrimaryButton,
-  IconButton,
-  TextInput,
-} from "../StyledComponents/StyledComponents";
-import {
-  Form as ReactForm,
-  FormGroup,
-  Label,
-  Modal,
-  Row,
-  Col,
-} from "reactstrap";
+import { IconButton, TextInput } from "../StyledComponents/StyledComponents";
+import { Form as ReactForm, FormGroup, Label, Row, Col } from "reactstrap";
+import Modal from "./Modal";
 
 const LinkModal = ({ team, isLinkModalOpen, toggleLinkModal }) => {
   useEffect(() => {
@@ -25,10 +15,15 @@ const LinkModal = ({ team, isLinkModalOpen, toggleLinkModal }) => {
   const [guestPlayerCopied, setGuestPlayerCopied] = useState(false);
 
   return (
-    <Modal isOpen={isLinkModalOpen} toggle={toggleLinkModal}>
-      {team && (
-        <div style={{ padding: "20px" }}>
-          <div className="app-title">Shareable Links</div>
+    <Modal
+      isModalOpen={isLinkModalOpen}
+      toggleModal={toggleLinkModal}
+      title={"Shareable Links"}
+      isButtonVisible={false}
+      buttonFunction={false}
+      buttonTitle={false}
+      children={
+        <React.Fragment>
           <div
             className="roster-user-label"
             style={{ textAlign: "left", fontWeight: "bold" }}
@@ -129,9 +124,9 @@ const LinkModal = ({ team, isLinkModalOpen, toggleLinkModal }) => {
               </IconButton>
             </Col>
           </Row>
-        </div>
-      )}
-    </Modal>
+        </React.Fragment>
+      }
+    />
   );
 };
 
