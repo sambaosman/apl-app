@@ -138,6 +138,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
           <Waiver
             formFields={formFields}
             setFormFields={setFormFields}
+            setTeamMembers={setTeamMembers}
             history={history}
             setError={setError}
           />
