@@ -282,7 +282,14 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                     }
                     customID={{
                       name: `teamID`,
-                      placeholder: `Team ID`,
+                      placeholder:
+                        type === "admin"
+                          ? "Admin ID"
+                          : type === "player" || type === "guestPlayer"
+                          ? "Team ID"
+                          : type === "manager"
+                          ? "Manager ID"
+                          : "ID",
                     }}
                     handleOnChange={handleOnChange}
                     setFormFields={setFormFields}
