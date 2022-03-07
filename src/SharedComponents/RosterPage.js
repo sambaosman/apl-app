@@ -103,6 +103,17 @@ const RosterPage = ({
                 />
               </Col>
             )}
+            {userType === "admin" && (
+              <Col style={{ display: "flex", alignItems: "flex-end" }}>
+                <PrimaryButton style={{ width: "250px" }}>
+                  <i
+                    className={`fa-solid fa-file-export`}
+                    style={{ fontSize: "15px", color: "white" }}
+                  />
+                  <span style={{ paddingLeft: "10px" }}>Export as CSV</span>
+                </PrimaryButton>
+              </Col>
+            )}
           </Row>
           <PrintedRoster
             ref={componentRef}
