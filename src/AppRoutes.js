@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Amplify } from "aws-amplify";
+// import { Amplify } from "aws-amplify";
 import { getTeamMembers } from "./RegistrationServices";
 import { getTeams } from "./TeamServices";
-import awsExports from "./aws-exports";
+// import awsExports from "./aws-exports";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
 import Register from "./LoginRegistration/Registration/Register";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
@@ -18,9 +18,13 @@ import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import moment from "moment";
 import AppHeader from "./AppHeader";
 
-Amplify.configure(awsExports);
+// Amplify.configure(awsExports);
 
-const AppRoutes = ({ loggedIn, setLoggedIn }) => {
+const AppRoutes = (
+  {
+    // loggedIn, setLoggedIn
+  }
+) => {
   const initialFormFields = {
     firstName: "",
     lastName: "",
@@ -66,11 +70,11 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
   }, []);
 
   useEffect(() => {
-    Auth.currentAuthenticatedUser().then((user) => {
-      console.log("user", user);
-      setUserType(user.attributes["custom:userType"]);
-      setTeamID(user.attributes["custom:teamID"]);
-    });
+    // Auth.currentAuthenticatedUser().then((user) => {
+    //   console.log("user", user);
+    //   setUserType(user.attributes["custom:userType"]);
+    //   setTeamID(user.attributes["custom:teamID"]);
+    // });
     let link;
     const getIDFromURL = () => {
       link = window.location.pathname;
@@ -93,11 +97,11 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
     let user = getUserFromURL();
     setUserType(user);
     setError(null);
-  }, [loggedIn]);
+  }, []);
 
-  const onLogin = () => {
-    setLoggedIn(true);
-  };
+  // const onLogin = () => {
+  //   setLoggedIn(true);
+  // };
 
   const memberType = ["player", "guestPlayer", "manager", "admin"];
 
@@ -111,7 +115,11 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
       <Route
         path="/login"
         element={
-          <LoginPage onLogin={onLogin} error={error} setError={setError} />
+          <LoginPage
+            // onLogin={onLogin}
+            error={error}
+            setError={setError}
+          />
         }
       />
       <Route
@@ -141,14 +149,16 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/roster"
         element={
           <React.Fragment>
-            <AppHeader setLoggedIn={setLoggedIn} />
+            <AppHeader
+            // setLoggedIn={setLoggedIn}
+            />
             <div className="app-container">
               <RosterPage
                 team={clickedTeam}
                 teamMembers={teamMembers}
                 setTeamMembers={setTeamMembers}
                 userType={userType}
-                setLoggedIn={setLoggedIn}
+                // setLoggedIn={setLoggedIn}
                 history={history}
                 usersTeam={teamID}
                 teams={teams}
@@ -299,21 +309,21 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
         path="/"
         element={
           <div>
-            {loggedIn ? (
-              <HomePage
-                team={clickedTeam}
-                teams={teams}
-                setTeams={setTeams}
-                setLoggedIn={setLoggedIn}
-                history={history}
-                userType={userType}
-                teamID={teamID}
-                teamMembers={teamMembers}
-                setTeamMembers={setTeamMembers}
-                setClickedTeam={setClickedTeam}
-                setUserType={setUserType}
-              />
-            ) : (
+            {/* {loggedIn ? ( */}
+            <HomePage
+              team={clickedTeam}
+              teams={teams}
+              setTeams={setTeams}
+              // setLoggedIn={setLoggedIn}
+              history={history}
+              userType={userType}
+              teamID={teamID}
+              teamMembers={teamMembers}
+              setTeamMembers={setTeamMembers}
+              setClickedTeam={setClickedTeam}
+              setUserType={setUserType}
+            />
+            {/* ) : (
               <Link to="/login">
                 <div
                   className="app-container"
@@ -322,7 +332,7 @@ const AppRoutes = ({ loggedIn, setLoggedIn }) => {
                   <PrimaryButton> Log In</PrimaryButton>
                 </div>
               </Link>
-            )}
+            )} */}
           </div>
         }
       />

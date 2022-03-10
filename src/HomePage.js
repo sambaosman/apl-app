@@ -7,7 +7,7 @@ const HomePage = ({
   team,
   teams,
   setTeams,
-  setLoggedIn,
+  // setLoggedIn,
   history,
   userType,
   teamID,
@@ -17,13 +17,15 @@ const HomePage = ({
 }) => {
   return (
     <React.Fragment>
-      <AppHeader setLoggedIn={setLoggedIn} />
+      <AppHeader
+      // setLoggedIn={setLoggedIn}
+      />
       <div className="app-container">
         {userType === "admin" ? (
           <AdminPage
             teams={teams}
             setTeams={setTeams}
-            setLoggedIn={setLoggedIn}
+            // setLoggedIn={setLoggedIn}
             history={history}
             setClickedTeam={setClickedTeam}
           />
@@ -33,7 +35,7 @@ const HomePage = ({
             teamMembers={teamMembers}
             setTeamMembers={setTeamMembers}
             userType={userType}
-            setLoggedIn={setLoggedIn}
+            // setLoggedIn={setLoggedIn}
             history={history}
             usersTeam={teamID}
             teams={teams}
