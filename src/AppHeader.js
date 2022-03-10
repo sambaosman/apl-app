@@ -1,13 +1,8 @@
 import React from "react";
-// import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
 import logo from "./Images/apllogo.png";
 import { useNavigate } from "react-router-dom";
 
-const AppHeader = (
-  {
-    // setLoggedIn
-  }
-) => {
+const AppHeader = () => {
   const history = useNavigate();
 
   return (
@@ -17,12 +12,7 @@ const AppHeader = (
           <img src={logo} height="50" width="50" />
           <span className="header-title">American Premier League</span>
         </div>
-        <div
-          className="logout-button"
-          // onClick={() => signOut(setLoggedIn, history)}
-        >
-          Log Out
-        </div>
+        <div className="logout-button">Log Out</div>
       </div>
     </div>
   );

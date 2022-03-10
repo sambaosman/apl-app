@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-// import { Amplify } from "aws-amplify";
 import { getTeamMembers } from "./RegistrationServices";
 import { getTeams } from "./TeamServices";
-// import awsExports from "./aws-exports";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
 import Register from "./LoginRegistration/Registration/Register";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
@@ -13,18 +11,11 @@ import OTP from "./LoginRegistration/Registration/OTP";
 import Waiver from "./LoginRegistration/Waiver";
 import Roster from "./Roster";
 import RosterPage from "./SharedComponents/RosterPage";
-import { Auth } from "aws-amplify";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import moment from "moment";
 import AppHeader from "./AppHeader";
 
-// Amplify.configure(awsExports);
-
-const AppRoutes = (
-  {
-    // loggedIn, setLoggedIn
-  }
-) => {
+const AppRoutes = () => {
   const initialFormFields = {
     firstName: "",
     lastName: "",
@@ -70,11 +61,6 @@ const AppRoutes = (
   }, []);
 
   useEffect(() => {
-    // Auth.currentAuthenticatedUser().then((user) => {
-    //   console.log("user", user);
-    //   setUserType(user.attributes["custom:userType"]);
-    //   setTeamID(user.attributes["custom:teamID"]);
-    // });
     let link;
     const getIDFromURL = () => {
       link = window.location.pathname;
@@ -99,10 +85,6 @@ const AppRoutes = (
     setError(null);
   }, []);
 
-  // const onLogin = () => {
-  //   setLoggedIn(true);
-  // };
-
   const memberType = ["player", "guestPlayer", "manager", "admin"];
 
   return (
@@ -114,13 +96,7 @@ const AppRoutes = (
       />
       <Route
         path="/login"
-        element={
-          <LoginPage
-            // onLogin={onLogin}
-            error={error}
-            setError={setError}
-          />
-        }
+        element={<LoginPage error={error} setError={setError} />}
       />
       <Route
         path="/register/authCode"
@@ -149,16 +125,13 @@ const AppRoutes = (
         path="/roster"
         element={
           <React.Fragment>
-            <AppHeader
-            // setLoggedIn={setLoggedIn}
-            />
+            <AppHeader />
             <div className="app-container">
               <RosterPage
                 team={clickedTeam}
                 teamMembers={teamMembers}
                 setTeamMembers={setTeamMembers}
                 userType={userType}
-                // setLoggedIn={setLoggedIn}
                 history={history}
                 usersTeam={teamID}
                 teams={teams}
@@ -309,12 +282,10 @@ const AppRoutes = (
         path="/"
         element={
           <div>
-            {/* {loggedIn ? ( */}
             <HomePage
               team={clickedTeam}
               teams={teams}
               setTeams={setTeams}
-              // setLoggedIn={setLoggedIn}
               history={history}
               userType={userType}
               teamID={teamID}
@@ -323,16 +294,6 @@ const AppRoutes = (
               setClickedTeam={setClickedTeam}
               setUserType={setUserType}
             />
-            {/* ) : (
-              <Link to="/login">
-                <div
-                  className="app-container"
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <PrimaryButton> Log In</PrimaryButton>
-                </div>
-              </Link>
-            )} */}
           </div>
         }
       />

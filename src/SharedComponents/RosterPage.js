@@ -12,7 +12,6 @@ const RosterPage = ({
   teamMembers,
   setTeamMembers,
   userType,
-  setLoggedIn,
   history,
   usersTeam,
   teams,
