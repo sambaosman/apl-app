@@ -11,7 +11,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import RegistrationInputGroup from "./LoginRegistration/Registration/RegistrationInputGroup";
 import OTP from "./LoginRegistration/Registration/OTP";
 import Waiver from "./LoginRegistration/Waiver";
-import Roster from "./Roster";
 import RosterPage from "./SharedComponents/RosterPage";
 import { Auth } from "aws-amplify";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";

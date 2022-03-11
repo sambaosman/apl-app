@@ -19,15 +19,15 @@ const HomePage = ({
     <React.Fragment>
       <AppHeader setLoggedIn={setLoggedIn} />
       <div className="app-container">
-        {userType === "admin" ? (
-          <AdminPage
-            teams={teams}
-            setTeams={setTeams}
-            setLoggedIn={setLoggedIn}
-            history={history}
-            setClickedTeam={setClickedTeam}
-          />
-        ) : (
+        {/* {userType === "admin" ? ( */}
+        <AdminPage
+          teams={teams}
+          setTeams={setTeams}
+          setLoggedIn={setLoggedIn}
+          history={history}
+          setClickedTeam={setClickedTeam}
+        />
+        {/* ) : (
           <RosterPage
             team={team}
             teamMembers={teamMembers}
@@ -38,7 +38,7 @@ const HomePage = ({
             usersTeam={teamID}
             teams={teams}
           />
-        )}
+        )} */}
       </div>
     </React.Fragment>
   );
