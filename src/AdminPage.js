@@ -14,13 +14,7 @@ import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import AddTeamModal from "./AddTeamModal";
 import EditTeamModal from "./EditTeamModal";
 
-const AdminPage = ({
-  teams,
-  setTeams,
-  setLoggedIn,
-  history,
-  setClickedTeam,
-}) => {
+const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
   const [teamName, setTeamName] = useState(null);
   const [division, setDivision] = useState(null);
   const [openedLinkID, setOpenedLinkID] = useState("");
