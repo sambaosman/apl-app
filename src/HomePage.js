@@ -22,7 +22,6 @@ const HomePage = ({
         <AdminPage
           teams={teams}
           setTeams={setTeams}
-          setLoggedIn={setLoggedIn}
           history={history}
           setClickedTeam={setClickedTeam}
         />
