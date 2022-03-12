@@ -32,6 +32,17 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
     );
   }, [teams]);
 
+  useEffect(() => {
+    fetch("/teams")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("response", res);
+      })
+      .catch((error) => {
+        console.error("error", error);
+      });
+  }, []);
+
   const updateTeam = (event, id, setTeams) => {
     event.stopPropagation();
     setEditTeamModalOpen(true);
