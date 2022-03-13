@@ -13,8 +13,7 @@ import RosterPage from "./SharedComponents/RosterPage";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import moment from "moment";
 import AppHeader from "./AppHeader";
-import { getTeams } from "./ApiFunctions";
-import axios from "axios";
+import { getTeams } from "./server/ApiFunctions";
 
 const AppRoutes = () => {
   const initialFormFields = {
@@ -89,9 +88,7 @@ const AppRoutes = () => {
     let user = getUserFromURL();
     setUserType(user);
     setError(null);
-    axios.get(`/teams`).then((res) => {
-      setTeams(res.data.Items);
-    });
+    getTeams(setTeams);
   }, []);
 
   const memberType = ["player", "guestPlayer", "manager", "admin"];

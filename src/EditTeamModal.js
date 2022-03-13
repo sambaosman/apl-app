@@ -7,9 +7,8 @@ import {
 } from "reactstrap";
 import { TextInput } from "./StyledComponents/StyledComponents";
 import { Form as ReactForm, FormGroup, Label } from "reactstrap";
-import { updateTeam } from "./TeamServices";
 import Modal from "./SharedComponents/Modal";
-import axios from "axios";
+import { updatedTeam } from "./server/ApiFunctions";
 
 const EditTeamModal = ({
   editTeamModalOpen,
@@ -30,13 +29,7 @@ const EditTeamModal = ({
       title={"Edit Team"}
       isButtonVisible={true}
       buttonFunction={(event) => {
-        axios
-          .put(`teams/${editedTeam}`, {
-            teamName: teamName,
-            division: division,
-          })
-          .then((response) => console.log("a", response));
-        updateTeam(event, editedTeam, teamName, setTeams, division);
+        updatedTeam(editedTeam, teamName, division);
         setEditTeamModalOpen(false);
       }}
       buttonTitle={"Update Team"}

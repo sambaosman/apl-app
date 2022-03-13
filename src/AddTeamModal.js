@@ -7,12 +7,9 @@ import {
 } from "reactstrap";
 import { TextInput } from "./StyledComponents/StyledComponents";
 import { Form as ReactForm, FormGroup, Label } from "reactstrap";
-// import { addTeam } from "./TeamServices";
-import { addTeam } from "./ApiFunctions";
+import { addTeam } from "./server/ApiFunctions";
 import Modal from "./SharedComponents/Modal";
-import axios from "axios";
 
-import { v4 as uuidv4 } from "uuid";
 const AddTeamModal = ({
   addTeamModalOpen,
   setAddTeamModalOpen,
@@ -31,11 +28,7 @@ const AddTeamModal = ({
       title={"Add Team"}
       isButtonVisible={true}
       buttonFunction={(event) => {
-        axios.post(`/teams`, {
-          id: uuidv4(),
-          teamName: teamName,
-          division: division,
-        });
+        addTeam(teamName, division);
         setAddTeamModalOpen(false);
       }}
       buttonTitle={"Add Team"}

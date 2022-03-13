@@ -8,13 +8,11 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { deleteTeam, updateTeam } from "./TeamServices";
 import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import AddTeamModal from "./AddTeamModal";
 import EditTeamModal from "./EditTeamModal";
-import { getTeams } from "./ApiFunctions";
-import axios from "axios";
+import { getTeams, deleteTeam } from "./server/ApiFunctions";
 
 const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
   const [teamName, setTeamName] = useState(null);
@@ -183,12 +181,7 @@ const RosterIndividual = ({
           </div>
           <div
             className="delete-player-icon"
-            onClick={(event) =>
-              axios.delete(`teams/${team.id}`).then((res) => {
-                console.log(res);
-                console.log(res.data);
-              })
-            }
+            onClick={(event) => deleteTeam(team.id)}
           >
             <i
               className={`fa-solid fa-times`}
