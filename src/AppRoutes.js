@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getTeamMembers } from "./RegistrationServices";
-import { getTeams } from "./TeamServices";
+// import { getTeams } from "./TeamServices";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
 import Register from "./LoginRegistration/Registration/Register";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
@@ -13,6 +13,8 @@ import RosterPage from "./SharedComponents/RosterPage";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import moment from "moment";
 import AppHeader from "./AppHeader";
+import { getTeams } from "./ApiFunctions";
+import axios from "axios";
 
 const AppRoutes = () => {
   const initialFormFields = {
@@ -78,7 +80,6 @@ const AppRoutes = () => {
       teamID: id,
     });
     getTeamMembers(setTeamMembers);
-    getTeams(setTeams);
     const getUserFromURL = () => {
       let link = window.location.pathname;
       let linkArray = link.split("/");
@@ -88,6 +89,9 @@ const AppRoutes = () => {
     let user = getUserFromURL();
     setUserType(user);
     setError(null);
+    axios.get(`/teams`).then((res) => {
+      setTeams(res.data.Items);
+    });
   }, []);
 
   const memberType = ["player", "guestPlayer", "manager", "admin"];

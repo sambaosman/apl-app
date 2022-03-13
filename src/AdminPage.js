@@ -13,6 +13,7 @@ import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import AddTeamModal from "./AddTeamModal";
 import EditTeamModal from "./EditTeamModal";
+import { getTeams } from "./ApiFunctions";
 
 const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
   const [teamName, setTeamName] = useState(null);
@@ -31,17 +32,6 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
       teams.filter((team) => team.division === "championship")
     );
   }, [teams]);
-
-  useEffect(() => {
-    fetch("/teams")
-      .then((res) => res.json())
-      .then((res) => {
-        console.log("response", res);
-      })
-      .catch((error) => {
-        console.error("error", error);
-      });
-  }, []);
 
   const updateTeam = (event, id, setTeams) => {
     event.stopPropagation();
