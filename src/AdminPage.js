@@ -26,18 +26,19 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
   const [championshipTeams, setChampionshipTeams] = useState([]);
 
   useEffect(() => {
-    setPremierTeams(teams.filter((team) => team.division === "premier"));
+    setPremierTeams(
+      teams && teams.filter((team) => team.division === "premier")
+    );
     setChampionshipTeams(
-      teams.filter((team) => team.division === "championship")
+      teams && teams.filter((team) => team.division === "championship")
     );
   }, [teams]);
 
   const updateTeam = (event, id, setTeams) => {
-    event.stopPropagation();
     setEditTeamModalOpen(true);
     setEditedTeam(id);
   };
-  const team = teams.find((team) => teamName === team.teamName);
+  const team = teams && teams.find((team) => teamName === team.teamName);
   let link = team && `${window.location.href}${team.id}`;
 
   return (
@@ -174,14 +175,18 @@ const RosterIndividual = ({
           <div
             className="delete-player-icon"
             onClick={(event) => {
-              updateTeam(event, team.id, setTeams);
+              event.stopPropagation();
+              updateTeam(team.id, setTeams);
             }}
           >
             <i className={`fa-solid fa-pencil`} style={{ fontSize: "15px" }} />
           </div>
           <div
             className="delete-player-icon"
-            onClick={(event) => deleteTeam(team.id)}
+            onClick={(event) => {
+              event.stopPropagation();
+              deleteTeam(team.id, setTeams);
+            }}
           >
             <i
               className={`fa-solid fa-times`}

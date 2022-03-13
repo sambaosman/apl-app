@@ -8,7 +8,7 @@ import {
 import { TextInput } from "./StyledComponents/StyledComponents";
 import { Form as ReactForm, FormGroup, Label } from "reactstrap";
 import Modal from "./SharedComponents/Modal";
-import { updatedTeam } from "./server/ApiFunctions";
+import { updateTeam } from "./server/ApiFunctions";
 
 const EditTeamModal = ({
   editTeamModalOpen,
@@ -29,7 +29,7 @@ const EditTeamModal = ({
       title={"Edit Team"}
       isButtonVisible={true}
       buttonFunction={(event) => {
-        updatedTeam(editedTeam, teamName, division);
+        updateTeam(editedTeam, teamName, division, setTeams);
         setEditTeamModalOpen(false);
       }}
       buttonTitle={"Update Team"}

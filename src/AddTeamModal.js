@@ -28,7 +28,7 @@ const AddTeamModal = ({
       title={"Add Team"}
       isButtonVisible={true}
       buttonFunction={(event) => {
-        addTeam(teamName, division);
+        addTeam(teamName, division, setTeams);
         setAddTeamModalOpen(false);
       }}
       buttonTitle={"Add Team"}

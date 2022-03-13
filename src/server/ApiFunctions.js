@@ -13,23 +13,30 @@ export const getTeamById = async (id) => {
   });
 };
 
-export const addTeam = (teamName, division) => {
+export const addTeam = (teamName, division, setTeams) => {
   axios
     .post("/teams", { id: uuidv4(), teamName: teamName, division: division })
+    .then((res) => {
+      getTeams(setTeams);
+    })
     .catch((err) => {
       console.error(err);
     });
 };
 
-export const updatedTeam = (id, teamName, division) => {
-  axios.put(`teams/${id}`, {
-    teamName: teamName,
-    division: division,
-  });
+export const updateTeam = (id, teamName, division, setTeams) => {
+  axios
+    .put(`teams/${id}`, {
+      teamName: teamName,
+      division: division,
+    })
+    .then((res) => {
+      getTeams(setTeams);
+    });
 };
 
-export const deleteTeam = (id) => {
+export const deleteTeam = (id, setTeams) => {
   axios.delete(`teams/${id}`).then((res) => {
-    console.log(res);
+    getTeams(setTeams);
   });
 };
