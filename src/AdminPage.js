@@ -14,6 +14,7 @@ import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import AddTeamModal from "./AddTeamModal";
 import EditTeamModal from "./EditTeamModal";
 import { getTeams } from "./ApiFunctions";
+import axios from "axios";
 
 const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
   const [teamName, setTeamName] = useState(null);
@@ -182,7 +183,12 @@ const RosterIndividual = ({
           </div>
           <div
             className="delete-player-icon"
-            onClick={(event) => deleteTeam(event, team.id, setTeams)}
+            onClick={(event) =>
+              axios.delete(`teams/${team.id}`).then((res) => {
+                console.log(res);
+                console.log(res.data);
+              })
+            }
           >
             <i
               className={`fa-solid fa-times`}

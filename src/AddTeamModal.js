@@ -31,16 +31,12 @@ const AddTeamModal = ({
       title={"Add Team"}
       isButtonVisible={true}
       buttonFunction={(event) => {
-        axios
-          .post(`/teams`, {
-            id: uuidv4(),
-            teamName: teamName,
-            division: division,
-          })
-          .then((res) => {
-            console.log(res);
-            console.log(res.data);
-          });
+        axios.post(`/teams`, {
+          id: uuidv4(),
+          teamName: teamName,
+          division: division,
+        });
+        setAddTeamModalOpen(false);
       }}
       buttonTitle={"Add Team"}
       children={
