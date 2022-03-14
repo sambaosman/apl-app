@@ -3,7 +3,24 @@ const app = express();
 const AWS = require("aws-sdk");
 const fs = require("fs");
 const multer = require("multer");
-const upload = multer({ dest: "images/" });
+const multerS3 = require("multer-s3");
+const uuid = require("uuid").v4;
+const path = require("path");
+
+const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "apl-logos",
+    metadata: (req, file, cb) => {
+      cb(null, { fieldName: file.fieldname });
+    },
+    key: (req, file, cb) => {
+      cb(null, `${uuid()}`);
+    },
+  }),
+});
 
 require("dotenv").config(); //gets variables from .env and allows us to pass it in here
 
@@ -13,14 +30,11 @@ AWS.config.update({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
-app.post("/api/images", upload.single("image"), (req, res) => {
-  // 4
+app.post("/images", upload.single("image"), (req, res) => {
   const imagePath = req.file.path;
   const description = req.body.description;
-
-  // Save this data to a database probably
-
   res.send({ description, imagePath });
+  return res.json({ status: "ok" });
 });
 
 app.get("/images/:imageName", (req, res) => {
