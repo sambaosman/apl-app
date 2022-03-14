@@ -1,5 +1,26 @@
 const express = require("express");
 const app = express();
+const AWS = require("aws-sdk");
+const fs = require("fs");
+
+const s3 = new AWS.S3();
+require("dotenv").config(); //gets variables from .env and allows us to pass it in here
+
+AWS.config.update({
+  region: process.env.AWS_DEFAULT_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
+
+(async () => {
+  await s3
+    .putObject({
+      Body: "hello world",
+      Bucket: "apl-logos",
+      Key: "my-file.txt",
+    })
+    .promise();
+})();
 
 const {
   getTeams,
