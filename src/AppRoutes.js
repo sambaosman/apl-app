@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getTeamMembers } from "./RegistrationServices";
-import { getTeams } from "./TeamServices";
+// import { getTeams } from "./TeamServices";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
 import Register from "./LoginRegistration/Registration/Register";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
@@ -9,11 +9,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import RegistrationInputGroup from "./LoginRegistration/Registration/RegistrationInputGroup";
 import OTP from "./LoginRegistration/Registration/OTP";
 import Waiver from "./LoginRegistration/Waiver";
-import Roster from "./Roster";
 import RosterPage from "./SharedComponents/RosterPage";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import moment from "moment";
 import AppHeader from "./AppHeader";
+import { getTeams } from "./server/ApiFunctions";
 
 const AppRoutes = () => {
   const initialFormFields = {
@@ -53,9 +53,15 @@ const AppRoutes = () => {
     const getUserFromURL = () => {
       let link = window.location.pathname;
       let linkArray = link.split("/");
-      let user = linkArray.length == 3 ? linkArray[2] : linkArray[3];
+      let user = linkArray[2];
       return user;
     };
+    const getIDFromURL = () => {
+      let link = window.location.pathname;
+      let linkArray = link.split("/");
+      return linkArray.length == 4 ? linkArray[3] : "";
+    };
+    let id = getIDFromURL();
     let user = getUserFromURL();
     setUserType(user);
   }, []);
@@ -63,9 +69,9 @@ const AppRoutes = () => {
   useEffect(() => {
     let link;
     const getIDFromURL = () => {
-      link = window.location.pathname;
-      let linkArray = link.split("/").pop();
-      return parseInt(linkArray) ? linkArray : "";
+      let link = window.location.pathname;
+      let linkArray = link.split("/");
+      return linkArray.length == 4 ? linkArray[3] : "";
     };
     let id = getIDFromURL();
     setFormFields({
@@ -73,16 +79,16 @@ const AppRoutes = () => {
       teamID: id,
     });
     getTeamMembers(setTeamMembers);
-    getTeams(setTeams);
     const getUserFromURL = () => {
       let link = window.location.pathname;
       let linkArray = link.split("/");
-      let user = linkArray.length == 3 ? linkArray[2] : linkArray[3];
+      let user = linkArray[2];
       return user;
     };
     let user = getUserFromURL();
     setUserType(user);
     setError(null);
+    getTeams(setTeams);
   }, []);
 
   const memberType = ["player", "guestPlayer", "manager", "admin"];
@@ -116,6 +122,7 @@ const AppRoutes = () => {
           <Waiver
             formFields={formFields}
             setFormFields={setFormFields}
+            setTeamMembers={setTeamMembers}
             history={history}
             setError={setError}
           />
@@ -258,8 +265,15 @@ const AppRoutes = () => {
                         : false
                     }
                     customID={{
-                      name: `${type}ID`,
-                      placeholder: `${type} ID`,
+                      name: `teamID`,
+                      placeholder:
+                        type === "admin"
+                          ? "Admin ID"
+                          : type === "player" || type === "guestPlayer"
+                          ? "Team ID"
+                          : type === "manager"
+                          ? "Manager ID"
+                          : "ID",
                     }}
                     handleOnChange={handleOnChange}
                     setFormFields={setFormFields}
