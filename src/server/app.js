@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const AWS = require("aws-sdk");
 const fs = require("fs");
+const multer = require("multer");
+const upload = multer({ dest: "images/" });
 
-const s3 = new AWS.S3();
 require("dotenv").config(); //gets variables from .env and allows us to pass it in here
 
 AWS.config.update({
@@ -12,15 +13,23 @@ AWS.config.update({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
-(async () => {
-  await s3
-    .putObject({
-      Body: "hello world",
-      Bucket: "apl-logos",
-      Key: "my-file.txt",
-    })
-    .promise();
-})();
+app.post("/api/images", upload.single("image"), (req, res) => {
+  // 4
+  const imagePath = req.file.path;
+  const description = req.body.description;
+
+  // Save this data to a database probably
+
+  res.send({ description, imagePath });
+});
+
+app.get("/images/:imageName", (req, res) => {
+  const imageName = req.params.imageName;
+  const readStream = fs.createReadStream(`images/${imageName}`);
+  readStream.pipe(res);
+});
+
+app.use("/images", express.static("images"));
 
 const {
   getTeams,

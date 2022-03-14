@@ -13,9 +13,14 @@ export const getTeamById = async (id) => {
   });
 };
 
-export const addTeam = (teamName, division, setTeams) => {
+export const addTeam = (teamName, division, setTeams, imageURL) => {
   axios
-    .post("/teams", { id: uuidv4(), teamName: teamName, division: division })
+    .post("/teams", {
+      id: uuidv4(),
+      teamName: teamName,
+      division: division,
+      imageURL: imageURL,
+    })
     .then((res) => {
       getTeams(setTeams);
     })
