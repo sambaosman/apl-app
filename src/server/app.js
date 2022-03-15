@@ -17,7 +17,7 @@ const upload = multer({
       cb(null, { fieldName: file.fieldname });
     },
     key: (req, file, cb) => {
-      cb(null, `${uuid()}`);
+      cb(null, file.originalname);
     },
   }),
 });
@@ -32,8 +32,8 @@ AWS.config.update({
 
 app.post("/images", upload.single("image"), (req, res) => {
   const imagePath = req.file.path;
-  const description = req.body.description;
-  res.send({ description, imagePath });
+  const id = req.body.id;
+  res.send({ id, imagePath });
   return res.json({ status: "ok" });
 });
 
