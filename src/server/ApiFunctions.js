@@ -12,10 +12,10 @@ export const getTeamById = async (id) => {
   });
 };
 
-export const addTeam = (teamName, division, setTeams, imageName) => {
+export const addTeam = (teamName, division, setTeams, id, imageName) => {
   axios
     .post("/teams", {
-      // id: id,
+      id: id,
       teamName: teamName,
       division: division,
       imageURL: `https://apl-logos.s3.amazonaws.com/${imageName}`,

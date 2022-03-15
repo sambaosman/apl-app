@@ -168,9 +168,7 @@ const RosterIndividual = ({
         <Col>
           <div className="user-icon-circle">
             <img
-              src={
-                "https://apl-logos.s3.amazonaws.com/DRFC%2BLogo-%2BVector%2B(Final).png"
-              }
+              src={team.imageURL}
               style={{ maxWidth: "100%", maxHeight: "100%" }}
             />
           </div>

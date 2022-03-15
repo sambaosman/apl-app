@@ -35,11 +35,10 @@ const AddTeamModal = ({
     formData.append("image", file);
     formData.append("id", id);
 
-    // const result = await axios.post("/images", formData, {
-    //   headers: { "Content-Type": "multipart/form-data" },
-    // });
-
-    addTeam(teamName, division, setTeams, file.name);
+    const result = await axios.post("/images", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    addTeam(teamName, division, setTeams, id, file.name);
     setAddTeamModalOpen(false);
   };
 
