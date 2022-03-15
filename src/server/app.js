@@ -17,7 +17,7 @@ const upload = multer({
       cb(null, { fieldName: file.fieldname });
     },
     key: (req, file, cb) => {
-      cb(null, file.originalname);
+      cb(null, file.originalname.replace(" ", ""));
     },
   }),
 });
@@ -38,7 +38,10 @@ app.post("/images", upload.single("image"), (req, res) => {
 });
 
 app.get("/image/:imageName", function (req, res, next) {
-  var params = { Bucket: keys.AWS_BUCKET, Key: req.params.originalname };
+  var params = {
+    Bucket: keys.AWS_BUCKET,
+    Key: req.params.originalname,
+  };
   s3.getObject(params, function (err, data) {
     if (err) {
       return res.send({ error: err });
