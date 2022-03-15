@@ -102,12 +102,12 @@ app.put("/teams/:id", async (req, res) => {
   }
 });
 
-app.delete("/teams:id", async (req, res) => {
-  const id = req.params.id;
+app.delete("/teams/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    const team = await deleteTeam(id);
-    res.json(team);
-  } catch (error) {
+    res.json(await deleteTeam(id));
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ err: "Something went wrong" });
   }
 });

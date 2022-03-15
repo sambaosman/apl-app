@@ -40,7 +40,12 @@ export const updateTeam = (id, teamName, division, setTeams) => {
 };
 
 export const deleteTeam = (id, setTeams) => {
-  axios.delete(`teams/${id}`).then((res) => {
-    getTeams(setTeams);
-  });
+  axios
+    .delete(`teams/${id}`)
+    .then((res) => {
+      getTeams(setTeams);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 };
