@@ -166,7 +166,14 @@ const RosterIndividual = ({
         }}
       >
         <Col>
-          <div className="user-icon-circle"></div>
+          <div className="user-icon-circle">
+            <img
+              src={
+                "https://apl-logos.s3.amazonaws.com/DRFC%2BLogo-%2BVector%2B(Final).png"
+              }
+              style={{ maxWidth: "100%", maxHeight: "100%" }}
+            />
+          </div>
         </Col>
         <Col style={{ textAlign: "left", fontWeight: "bold" }}>
           {team.teamName}

@@ -37,10 +37,14 @@ app.post("/images", upload.single("image"), (req, res) => {
   return res.json({ status: "ok" });
 });
 
-app.get("/images/:imageName", (req, res) => {
-  const imageName = req.params.imageName;
-  const readStream = fs.createReadStream(`images/${imageName}`);
-  readStream.pipe(res);
+app.get("/image/:imageName", function (req, res, next) {
+  var params = { Bucket: keys.AWS_BUCKET, Key: req.params.originalname };
+  s3.getObject(params, function (err, data) {
+    if (err) {
+      return res.send({ error: err });
+    }
+    res.send(data.Body);
+  });
 });
 
 app.use("/images", express.static("images"));

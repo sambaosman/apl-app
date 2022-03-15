@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dropdown,
   DropdownToggle,
@@ -35,11 +35,11 @@ const AddTeamModal = ({
     formData.append("image", file);
     formData.append("id", id);
 
-    const result = await axios.post("/images", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    // const result = await axios.post("/images", formData, {
+    //   headers: { "Content-Type": "multipart/form-data" },
+    // });
 
-    addTeam(teamName, division, setTeams, id);
+    addTeam(teamName, division, setTeams, file.name);
     setAddTeamModalOpen(false);
   };
 
