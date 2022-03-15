@@ -3,21 +3,32 @@
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
-  color: white !important ;
 }
 .side-bar {
   height: 100vh;
-  background-color: red;
+  background-color: white;
   width: 250px;
+  padding-top: 20px;
 }
-.nav-row:active {
-  background-color: blue;
+.active {
+  color: #6f58c9 !important;
 }
 
 .logo-title {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 22px;
+  padding-left: 10px;
+}
+
+.nav-link-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0px 20px 40px;
+}
+
+.grayscale {
+  filter: grayscale(100%);
 }
