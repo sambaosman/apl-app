@@ -1,7 +1,7 @@
 import React from "react";
 import AdminPage from "./AdminPage";
 import RosterPage from "./SharedComponents/RosterPage";
-import AppHeader from "./AppHeader";
+import NavBar from "./components/NavBar/NavBar";
 
 const HomePage = ({
   team,
@@ -16,7 +16,7 @@ const HomePage = ({
 }) => {
   return (
     <React.Fragment>
-      <AppHeader />
+      <NavBar />
       <div className="app-container">
         {/* {userType === "admin" ? ( */}
         <AdminPage
