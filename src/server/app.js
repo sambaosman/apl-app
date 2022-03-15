@@ -3,7 +3,24 @@ const app = express();
 const AWS = require("aws-sdk");
 const fs = require("fs");
 const multer = require("multer");
-const upload = multer({ dest: "images/" });
+const multerS3 = require("multer-s3");
+const uuid = require("uuid").v4;
+const path = require("path");
+
+const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "apl-logos",
+    metadata: (req, file, cb) => {
+      cb(null, { fieldName: file.fieldname });
+    },
+    key: (req, file, cb) => {
+      cb(null, file.originalname.replace(" ", ""));
+    },
+  }),
+});
 
 require("dotenv").config(); //gets variables from .env and allows us to pass it in here
 
@@ -13,20 +30,24 @@ AWS.config.update({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
-app.post("/api/images", upload.single("image"), (req, res) => {
-  // 4
+app.post("/images", upload.single("image"), (req, res) => {
   const imagePath = req.file.path;
-  const description = req.body.description;
-
-  // Save this data to a database probably
-
-  res.send({ description, imagePath });
+  const id = req.body.id;
+  res.send({ id, imagePath });
+  return res.json({ status: "ok" });
 });
 
-app.get("/images/:imageName", (req, res) => {
-  const imageName = req.params.imageName;
-  const readStream = fs.createReadStream(`images/${imageName}`);
-  readStream.pipe(res);
+app.get("/image/:imageName", function (req, res, next) {
+  var params = {
+    Bucket: keys.AWS_BUCKET,
+    Key: req.params.originalname,
+  };
+  s3.getObject(params, function (err, data) {
+    if (err) {
+      return res.send({ error: err });
+    }
+    res.send(data.Body);
+  });
 });
 
 app.use("/images", express.static("images"));
@@ -81,12 +102,12 @@ app.put("/teams/:id", async (req, res) => {
   }
 });
 
-app.delete("/teams:id", async (req, res) => {
-  const id = req.params.id;
+app.delete("/teams/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    const team = await deleteTeam(id);
-    res.json(team);
-  } catch (error) {
+    res.json(await deleteTeam(id));
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ err: "Something went wrong" });
   }
 });

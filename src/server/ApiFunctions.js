@@ -1,5 +1,4 @@
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 
 export const getTeams = async (setTeams) => {
   axios.get(`/teams`).then((res) => {
@@ -13,13 +12,13 @@ export const getTeamById = async (id) => {
   });
 };
 
-export const addTeam = (teamName, division, setTeams, imageURL) => {
+export const addTeam = (teamName, division, setTeams, id, imageName) => {
   axios
     .post("/teams", {
-      id: uuidv4(),
+      id: id,
       teamName: teamName,
       division: division,
-      imageURL: imageURL,
+      imageURL: `https://apl-logos.s3.amazonaws.com/${imageName}`,
     })
     .then((res) => {
       getTeams(setTeams);
@@ -41,7 +40,12 @@ export const updateTeam = (id, teamName, division, setTeams) => {
 };
 
 export const deleteTeam = (id, setTeams) => {
-  axios.delete(`teams/${id}`).then((res) => {
-    getTeams(setTeams);
-  });
+  axios
+    .delete(`teams/${id}`)
+    .then((res) => {
+      getTeams(setTeams);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 };

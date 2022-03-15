@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dropdown,
   DropdownToggle,
@@ -10,6 +10,7 @@ import { Form as ReactForm, FormGroup, Label } from "reactstrap";
 import { addTeam } from "./server/ApiFunctions";
 import Modal from "./SharedComponents/Modal";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 const AddTeamModal = ({
   addTeamModalOpen,
@@ -25,19 +26,19 @@ const AddTeamModal = ({
   setImageURL,
 }) => {
   const [file, setFile] = useState();
-  const [description, setDescription] = useState("");
   const [image, setImage] = useState();
   const submit = async (event) => {
     event.preventDefault();
+    let id = uuidv4();
 
     const formData = new FormData();
     formData.append("image", file);
-    formData.append("description", description);
+    formData.append("id", id);
 
-    const result = await axios.post("/api/images", formData, {
+    const result = await axios.post("/images", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-    addTeam(teamName, division, setTeams, result.data.imagePath);
+    addTeam(teamName, division, setTeams, id, file.name.replace(" ", ""));
     setAddTeamModalOpen(false);
   };
 
