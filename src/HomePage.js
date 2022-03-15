@@ -2,6 +2,7 @@ import React from "react";
 import AdminPage from "./AdminPage";
 import RosterPage from "./SharedComponents/RosterPage";
 import NavBar from "./components/NavBar/NavBar";
+import { Row, Col } from "reactstrap";
 
 const HomePage = ({
   team,
@@ -15,9 +16,12 @@ const HomePage = ({
   setClickedTeam,
 }) => {
   return (
-    <React.Fragment>
-      <NavBar />
-      <div className="app-container">
+    <Row>
+      <Col className="nav-column">
+        <NavBar />
+      </Col>
+      <Col>
+        {/* <div className="app-container"> */}
         {/* {userType === "admin" ? ( */}
         <AdminPage
           teams={teams}
@@ -36,8 +40,9 @@ const HomePage = ({
             teams={teams}
           />
         )} */}
-      </div>
-    </React.Fragment>
+        {/* </div> */}
+      </Col>
+    </Row>
   );
 };
 
