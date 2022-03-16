@@ -33,15 +33,9 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
   let link = team && `${window.location.href}${team.id}`;
 
   return (
-    <div className="admin-container">
-      <div
-        style={{
-          display: "flex",
-          justifyContent: " space-between",
-          alignItems: "center",
-        }}
-      >
-        <div className="page-title">Teams</div>T
+    <div className="page-container">
+      <div className="admin-heading">
+        <div className="page-title">Teams</div>
         <div
           className="add-circle-button"
           onClick={() => setAddTeamModalOpen(true)}
@@ -75,9 +69,7 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
         setTeamName={setTeamName}
         editedTeam={editedTeam}
       />
-      <div className="roster-user-section">
-        <div className="roster-user-label">Premier</div>
-      </div>
+      <div className="division-label">Premier</div>
       {premierTeams && premierTeams.length ? (
         premierTeams.map((team, index) => (
           <div key={index}>
