@@ -62,3 +62,17 @@ export const IconButton = styled(Button)`
   float: right;
   margin-top: 10px;
 `;
+
+export const CardButtonWithText = styled(Button)`
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--secondary)
+  border-radius: 7px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  margin-top: 20px;
+  margin-left: 10px;
+`;

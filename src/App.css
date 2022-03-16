@@ -1,6 +1,6 @@
 :root {
   --primary: #4a4a4a;
-  --secondary: #2d4c74;
+  --secondary: #6f58c9;
   --tertiary: #c7f2a7;
   --danger: #d36135;
 }
@@ -132,16 +132,6 @@ a {
   cursor: pointer;
 }
 
-.user-icon-circle {
-  height: 60px;
-  width: 60px;
-  background-color: #f8f8f8;
-  border-radius: 100%;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
 .delete-player-icon {
   border-radius: 100%;
   width: 30px;
@@ -263,11 +253,13 @@ th {
 .page-container {
   margin: 30px;
   height: 100%;
-  overflow: auto;
 }
 
 @media only screen and (max-width: 600px) {
   .page-container {
     height: calc(100% - 70px);
+  }
+  .right-column {
+    height: calc(100%-70px);
   }
 }
