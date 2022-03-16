@@ -2,7 +2,10 @@ import React from "react";
 import { Row, Col, Card } from "reactstrap";
 import { deleteTeam } from "../../../server/ApiFunctions";
 import "./TeamCard.scss";
-import { CardButtonWithText } from "../../../../src/StyledComponents/StyledComponents";
+import {
+  CardButtonWithText,
+  IconButton,
+} from "../../../../src/StyledComponents/StyledComponents";
 import { Icon } from "@iconify/react";
 
 const TeamCard = ({
@@ -55,47 +58,52 @@ const TeamCard = ({
         </Row>
       </Card>
       <Card className="mobile-team-card">
-        <Row>
-          <Col>
+        <Row style={{ width: "100%" }}>
+          <Col className="center" style={{ width: "10%", margin: "auto" }}>
             <div className="team-logo">
               <img src={team.imageURL} className="image-container" />
             </div>
           </Col>
-          <Col>
-            <div className="team-card-title"> {team.teamName}</div>
+          <Col className="flex-start" style={{ width: "70%", margin: "auto" }}>
+            <div>
+              <div className="team-card-title" style={{ paddingTop: "0px" }}>
+                {" "}
+                {team.teamName}
+              </div>
+              <div className="team-card-subtitle"> {team.division}</div>
+            </div>
           </Col>
           <Col
-            className="center"
-            style={{ paddingRight: "5px", maxWidth: "50%" }}
+            className="flex-end"
+            style={{
+              paddingRight: "5px",
+              width: "20%",
+            }}
           >
-            <Row style={{ width: "100%" }}>
-              <CardButtonWithText
+            <div>
+              <IconButton
                 style={{
                   backgroundColor: "rgba(111, 88, 201, 0.15)",
-                  width: "20px",
-                  height: "20px",
-                  marginTop: "10px",
+                  width: "30px",
+                  height: "30px",
                 }}
               >
                 <span className="center">
                   <Icon color="var(--secondary" icon="bxs:pencil" />
                 </span>
-              </CardButtonWithText>
-            </Row>
-            <Row>
-              <CardButtonWithText
+              </IconButton>
+              <IconButton
                 style={{
                   backgroundColor: "rgba(211, 97, 53, 0.15)",
-                  width: "20px",
-                  height: "20px",
-                  marginTop: "10px",
+                  width: "30px",
+                  height: "30px",
                 }}
               >
                 <span className="center">
                   <Icon color="var(--danger)" icon="eva:trash-fill" />
                 </span>
-              </CardButtonWithText>
-            </Row>
+              </IconButton>
+            </div>
           </Col>
         </Row>
       </Card>

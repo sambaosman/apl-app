@@ -50,17 +50,15 @@ export const PrimaryButton = styled(Button)`
 `;
 
 export const IconButton = styled(Button)`
-  font-size: 15px;
-  background-color: white;
+  font-size: 20px;
   font-weight: bold;
-  color: white;
-  margin-right: none;
-  height: 40px;
   border-radius: 7px;
-  display: block;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
   border: none;
-  float: right;
-  margin-top: 10px;
+  margin: 10px;
 `;
 
 export const CardButtonWithText = styled(Button)`
