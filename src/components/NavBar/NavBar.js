@@ -44,16 +44,19 @@ const NavBar = () => {
 
       <Row className="bottom-navbar">
         {NavBarData.map((navItem, index) => (
-          <NavLink
-            key={index}
-            href={navItem.link}
-            className={
-              activeTab !== index ? "nav-option-icon" : "nav-option-icon active"
-            }
-            onClick={() => setActiveTab(index)}
-          >
-            <Col className="center">{navItem.icon} </Col>
-          </NavLink>
+          <Col key={index} className="center">
+            <NavLink
+              href={navItem.link}
+              className={
+                activeTab !== index
+                  ? "nav-option-icon"
+                  : "nav-option-icon active"
+              }
+              onClick={() => setActiveTab(index)}
+            >
+              {navItem.icon}
+            </NavLink>
+          </Col>
         ))}
       </Row>
     </React.Fragment>

@@ -42,7 +42,7 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
   let link = team && `${window.location.href}${team.id}`;
 
   return (
-    <div style={{ width: "100%", margin: "auto" }}>
+    <div className="admin-container">
       <div
         style={{
           display: "flex",

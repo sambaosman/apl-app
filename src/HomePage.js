@@ -18,7 +18,7 @@ const HomePage = ({
   return (
     <Row>
       <NavBar />
-      <Col>
+      <Col className="right-column">
         {/* <div className="app-container"> */}
         {/* {userType === "admin" ? ( */}
         <AdminPage

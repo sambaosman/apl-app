@@ -21,6 +21,7 @@
   background: #f8f8f8;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   height: 100vh;
+  overflow-y: scroll;
 }
 .side-bar {
   height: 100%;
@@ -52,7 +53,7 @@
 }
 
 .bottom-navbar {
-  display: none;
+  display: none !important;
 }
 @media only screen and (max-width: 600px) {
   //removes side nav for mobile view
@@ -60,13 +61,15 @@
     display: none;
   }
   .bottom-navbar {
-    display: block;
+    display: flex !important;
     position: fixed;
     bottom: 0;
-    width: 100vw;
+    max-width: none !important;
+    width: 105% !important;
     padding-right: 0px !important;
     margin: 0px !important;
     background-color: white;
     padding: 20px;
+    transform: translate(0px, 0px);
   }
 }

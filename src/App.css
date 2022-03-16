@@ -270,3 +270,16 @@ td {
 th {
   padding: 4px !important;
 }
+
+.admin-container {
+  width: 100%;
+  margin: auto;
+  height: 100%;
+  overflow: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .admin-container {
+    height: calc(100% - 70px);
+  }
+}
