@@ -34,8 +34,11 @@
   font-style: normal;
   font-weight: 700;
   font-size: 25px;
-  line-height: 29px;
-  text-align: center;
+  white-space: nowrap; /* Don't forget this one */
+  text-overflow: ellipsis;
+  width: 200px;
+  overflow: hidden;
+  padding-top: 20px;
 }
 
 .team-logo {
