@@ -20,7 +20,11 @@ const TeamCard = ({
       </div>
       <div className="team-card-title"> {team.teamName}</div>
       <Row style={{ width: "100%" }}>
-        <Col md="6">
+        <Col
+          md="6"
+          className="center"
+          style={{ paddingRight: "5px", maxWidth: "50%" }}
+        >
           <CardButtonWithText
             style={{ backgroundColor: "rgba(111, 88, 201, 0.15)" }}
           >
@@ -30,17 +34,17 @@ const TeamCard = ({
             <span className="button-title">Edit</span>
           </CardButtonWithText>
         </Col>
-        <Col md="6">
+        <Col
+          md="6"
+          className="center"
+          style={{ paddingLeft: "5px", maxWidth: "50%" }}
+        >
           {" "}
           <CardButtonWithText
             style={{ backgroundColor: "rgba(211, 97, 53, 0.15)" }}
           >
             <span className="center">
-              <Icon
-                color="var(--danger)"
-                icon="bxs:trash-alt
-"
-              />
+              <Icon color="var(--danger)" icon="eva:trash-fill" />
             </span>
             <span className="button-title" style={{ color: "var(--danger)" }}>
               Delete

@@ -74,5 +74,4 @@ export const CardButtonWithText = styled(Button)`
   align-items: center;
   border: none;
   margin-top: 20px;
-  margin-left: 10px;
 `;
