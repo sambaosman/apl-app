@@ -12,7 +12,7 @@ import Waiver from "./LoginRegistration/Waiver";
 import RosterPage from "./SharedComponents/RosterPage";
 import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import moment from "moment";
-import AppHeader from "./AppHeader";
+import NavBar from "./components/NavBar/NavBar";
 import { getTeams } from "./server/ApiFunctions";
 
 const AppRoutes = () => {
@@ -132,7 +132,7 @@ const AppRoutes = () => {
         path="/roster"
         element={
           <React.Fragment>
-            <AppHeader />
+            <NavBar />
             <div className="app-container">
               <RosterPage
                 team={clickedTeam}
