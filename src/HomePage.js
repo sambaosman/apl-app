@@ -1,5 +1,5 @@
 import React from "react";
-import AdminPage from "./AdminPage";
+import AdminPage from "./components/AdminPage/AdminPage";
 import RosterPage from "./SharedComponents/RosterPage";
 import NavBar from "./components/NavBar/NavBar";
 import { Row, Col } from "reactstrap";

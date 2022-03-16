@@ -278,6 +278,13 @@ th {
   overflow: auto;
 }
 
+.page-title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 30px;
+}
+
 @media only screen and (max-width: 600px) {
   .admin-container {
     height: calc(100% - 70px);

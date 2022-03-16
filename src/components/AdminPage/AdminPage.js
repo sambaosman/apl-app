@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  Form as ReactForm,
-  FormGroup,
-  Label,
-  Input,
-  Modal,
-  Row,
-  Col,
-} from "reactstrap";
-import { signOut } from "./LoginRegistration/LoginRegistrationFunctions";
-import { PrimaryButton } from "./StyledComponents/StyledComponents";
-import AddTeamModal from "./AddTeamModal";
-import EditTeamModal from "./EditTeamModal";
-import { getTeams, deleteTeam } from "./server/ApiFunctions";
+import { Row, Col } from "reactstrap";
+import AddTeamModal from "../../AddTeamModal";
+import EditTeamModal from "../../EditTeamModal";
+import { getTeams, deleteTeam } from "../../server/ApiFunctions";
+import "./AdminPage.scss";
 
 const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
   const [teamName, setTeamName] = useState(null);
@@ -50,6 +41,7 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
           alignItems: "center",
         }}
       >
+        <div className="page-title">Teams</div>T
         <div
           className="add-circle-button"
           onClick={() => setAddTeamModalOpen(true)}
