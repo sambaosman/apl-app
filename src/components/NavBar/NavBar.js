@@ -9,35 +9,54 @@ const NavBar = () => {
   const history = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
   return (
-    <div className="side-bar">
-      <Row className="center">
-        <Col md="1">
-          {" "}
-          <img src={logo} height={40} width={40} className="grayscale" />
-        </Col>
-        <Col md="10">
-          {" "}
-          <div className="logo-title">American Premier League</div>
-        </Col>
-      </Row>
-      <Nav>
+    <React.Fragment>
+      <Col className="nav-column">
+        <div className="side-bar">
+          <Row className="center">
+            <Col md="1">
+              {" "}
+              <img src={logo} height={40} width={40} className="grayscale" />
+            </Col>
+            <Col md="10">
+              {" "}
+              <div className="logo-title">American Premier League</div>
+            </Col>
+          </Row>
+          <Nav>
+            {NavBarData.map((navItem, index) => (
+              <NavLink
+                href={navItem.link}
+                className={
+                  activeTab !== index
+                    ? "nav-option nav-link-container"
+                    : "nav-option nav-link-container active"
+                }
+                key={index}
+                onClick={() => setActiveTab(index)}
+              >
+                {navItem.icon}
+                <span style={{ paddingLeft: "20px" }}>{navItem.title}</span>
+              </NavLink>
+            ))}
+          </Nav>
+        </div>
+      </Col>
+
+      <Row className="bottom-navbar">
         {NavBarData.map((navItem, index) => (
           <NavLink
+            key={index}
             href={navItem.link}
             className={
-              activeTab !== index
-                ? "nav-option nav-link-container"
-                : "nav-option nav-link-container active"
+              activeTab !== index ? "nav-option-icon" : "nav-option-icon active"
             }
-            key={index}
             onClick={() => setActiveTab(index)}
           >
-            {navItem.icon}
-            <span style={{ paddingLeft: "20px" }}>{navItem.title}</span>
+            <Col className="center">{navItem.icon} </Col>
           </NavLink>
         ))}
-      </Nav>
-    </div>
+      </Row>
+    </React.Fragment>
   );
 };
 export default NavBar;
