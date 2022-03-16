@@ -87,6 +87,10 @@ const TeamCard = ({
                   width: "30px",
                   height: "30px",
                 }}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  updateTeam(team.id, setTeams);
+                }}
               >
                 <span className="center">
                   <Icon color="var(--secondary" icon="bxs:pencil" />
@@ -97,6 +101,10 @@ const TeamCard = ({
                   backgroundColor: "rgba(211, 97, 53, 0.15)",
                   width: "30px",
                   height: "30px",
+                }}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  deleteTeam(team.id, setTeams);
                 }}
               >
                 <span className="center">

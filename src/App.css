@@ -218,20 +218,6 @@ input[type="date"]:focus::-webkit-datetime-edit {
   color: black !important;
 }
 
-.individual-team {
-  margin: 20px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.individual-team:hover {
-  cursor: pointer;
-  background-color: #f8f8f84b;
-  border-radius: 7px;
-}
-
 @media screen {
   .printed-roster {
     display: none;
@@ -244,7 +230,7 @@ input[type="date"]:focus::-webkit-datetime-edit {
 }
 
 .btn-secondary:hover {
-  background-color: var(--primary) !important;
+  background-color: #f8f8f8 !important;
   border: none !important;
 }
 
