@@ -14,45 +14,92 @@ const TeamCard = ({
   history,
 }) => {
   return (
-    <Card className="team-card">
-      <div className="team-logo">
-        <img src={team.imageURL} className="image-container" />
-      </div>
-      <div className="team-card-title"> {team.teamName}</div>
-      <Row style={{ width: "100%" }}>
-        <Col
-          md="6"
-          className="center"
-          style={{ paddingRight: "5px", maxWidth: "50%" }}
-        >
-          <CardButtonWithText
-            style={{ backgroundColor: "rgba(111, 88, 201, 0.15)" }}
+    <React.Fragment>
+      <Card className="web-team-card">
+        <div className="team-logo">
+          <img src={team.imageURL} className="image-container" />
+        </div>
+        <div className="team-card-title"> {team.teamName}</div>
+        <Row style={{ width: "100%" }} className="text-buttons">
+          <Col
+            md="6"
+            className="center"
+            style={{ paddingRight: "5px", maxWidth: "50%" }}
           >
-            <span className="center">
-              <Icon color="var(--secondary" icon="bxs:pencil" />
-            </span>
-            <span className="button-title">Edit</span>
-          </CardButtonWithText>
-        </Col>
-        <Col
-          md="6"
-          className="center"
-          style={{ paddingLeft: "5px", maxWidth: "50%" }}
-        >
-          {" "}
-          <CardButtonWithText
-            style={{ backgroundColor: "rgba(211, 97, 53, 0.15)" }}
+            <CardButtonWithText
+              style={{ backgroundColor: "rgba(111, 88, 201, 0.15)" }}
+            >
+              <span className="center">
+                <Icon color="var(--secondary" icon="bxs:pencil" />
+              </span>
+              <span className="button-title">Edit</span>
+            </CardButtonWithText>
+          </Col>
+          <Col
+            md="6"
+            className="center"
+            style={{ paddingLeft: "5px", maxWidth: "50%" }}
           >
-            <span className="center">
-              <Icon color="var(--danger)" icon="eva:trash-fill" />
-            </span>
-            <span className="button-title" style={{ color: "var(--danger)" }}>
-              Delete
-            </span>
-          </CardButtonWithText>
-        </Col>
-      </Row>
-    </Card>
+            {" "}
+            <CardButtonWithText
+              style={{ backgroundColor: "rgba(211, 97, 53, 0.15)" }}
+            >
+              <span className="center">
+                <Icon color="var(--danger)" icon="eva:trash-fill" />
+              </span>
+              <span className="button-title" style={{ color: "var(--danger)" }}>
+                Delete
+              </span>
+            </CardButtonWithText>
+          </Col>
+        </Row>
+      </Card>
+      <Card className="mobile-team-card">
+        <Row>
+          <Col>
+            <div className="team-logo">
+              <img src={team.imageURL} className="image-container" />
+            </div>
+          </Col>
+          <Col>
+            <div className="team-card-title"> {team.teamName}</div>
+          </Col>
+          <Col
+            className="center"
+            style={{ paddingRight: "5px", maxWidth: "50%" }}
+          >
+            <Row style={{ width: "100%" }}>
+              <CardButtonWithText
+                style={{
+                  backgroundColor: "rgba(111, 88, 201, 0.15)",
+                  width: "20px",
+                  height: "20px",
+                  marginTop: "10px",
+                }}
+              >
+                <span className="center">
+                  <Icon color="var(--secondary" icon="bxs:pencil" />
+                </span>
+              </CardButtonWithText>
+            </Row>
+            <Row>
+              <CardButtonWithText
+                style={{
+                  backgroundColor: "rgba(211, 97, 53, 0.15)",
+                  width: "20px",
+                  height: "20px",
+                  marginTop: "10px",
+                }}
+              >
+                <span className="center">
+                  <Icon color="var(--danger)" icon="eva:trash-fill" />
+                </span>
+              </CardButtonWithText>
+            </Row>
+          </Col>
+        </Row>
+      </Card>
+    </React.Fragment>
     // <div style={{ display: "flex", justifyContent: "flex-start" }}>
     //   <Row
     //     className="individual-team"
