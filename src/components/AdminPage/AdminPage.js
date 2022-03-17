@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col } from "reactstrap";
 import AddTeamModal from "../../AddTeamModal";
 import EditTeamModal from "../../EditTeamModal";
 import "./AdminPage.scss";
@@ -45,29 +44,6 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
           />
         </div>
       </div>
-      <AddTeamModal
-        addTeamModalOpen={addTeamModalOpen}
-        setAddTeamModalOpen={setAddTeamModalOpen}
-        dropdownOpen={dropdownOpen}
-        setDropdownOpen={setDropdownOpen}
-        division={division}
-        setDivision={setDivision}
-        setTeams={setTeams}
-        teamName={teamName}
-        setTeamName={setTeamName}
-      />
-      <EditTeamModal
-        editTeamModalOpen={editTeamModalOpen}
-        setEditTeamModalOpen={setEditTeamModalOpen}
-        dropdownOpen={dropdownOpen}
-        setDropdownOpen={setDropdownOpen}
-        division={division}
-        setDivision={setDivision}
-        setTeams={setTeams}
-        teamName={teamName}
-        setTeamName={setTeamName}
-        editedTeam={editedTeam}
-      />
       <div className="division-label">Premier</div>
       <div className="grid-wrapper">
         {premierTeams && premierTeams.length
@@ -98,6 +74,29 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
             ))
           : null}
       </div>
+      <AddTeamModal
+        addTeamModalOpen={addTeamModalOpen}
+        setAddTeamModalOpen={setAddTeamModalOpen}
+        dropdownOpen={dropdownOpen}
+        setDropdownOpen={setDropdownOpen}
+        division={division}
+        setDivision={setDivision}
+        setTeams={setTeams}
+        teamName={teamName}
+        setTeamName={setTeamName}
+      />
+      <EditTeamModal
+        editTeamModalOpen={editTeamModalOpen}
+        setEditTeamModalOpen={setEditTeamModalOpen}
+        dropdownOpen={dropdownOpen}
+        setDropdownOpen={setDropdownOpen}
+        division={division}
+        setDivision={setDivision}
+        setTeams={setTeams}
+        teamName={teamName}
+        setTeamName={setTeamName}
+        editedTeam={editedTeam}
+      />
     </div>
   );
 };
