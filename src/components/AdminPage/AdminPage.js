@@ -111,6 +111,7 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
           setTeams={setTeams}
           teamName={teamName}
           setTeamName={setTeamName}
+          setShowAddTeam={setShowAddTeam}
         />
       )}
     </React.Fragment>

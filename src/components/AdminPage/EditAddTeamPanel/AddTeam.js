@@ -24,6 +24,7 @@ const AddTeam = ({
   setTeams,
   teamName,
   setTeamName,
+  setShowAddTeam,
 }) => {
   const [file, setFile] = useState();
   const [image, setImage] = useState();
@@ -39,6 +40,7 @@ const AddTeam = ({
       headers: { "Content-Type": "multipart/form-data" },
     });
     addTeam(teamName, division, setTeams, id, file.name.replace(" ", ""));
+    setShowAddTeam(false);
   };
 
   useEffect(() => {
@@ -64,7 +66,11 @@ const AddTeam = ({
             isOpen={dropdownOpen}
             toggle={() => setDropdownOpen(!dropdownOpen)}
           >
-            <StyledDropdownToggle caret className="dropdown-toggle">
+            <StyledDropdownToggle
+              caret
+              className="dropdown-toggle"
+              style={{ backgroundColor: "#f8f8f8" }}
+            >
               {division ? division : "Division"}
             </StyledDropdownToggle>
             <DropdownMenu>
@@ -91,7 +97,12 @@ const AddTeam = ({
                 {file ? (
                   <img src={image} className="image-container" />
                 ) : (
-                  <div>Upload Logo </div>
+                  <div
+                    className="division-label "
+                    style={{ textAlign: "center", padding: "10px" }}
+                  >
+                    Upload Logo
+                  </div>
                 )}
               </div>
             </Col>
@@ -100,7 +111,10 @@ const AddTeam = ({
               style={{ width: "70%", margin: "auto" }}
             >
               <div>
-                <div className="team-card-title" style={{ paddingTop: "0px" }}>
+                <div
+                  className="team-card-title"
+                  style={{ paddingTop: "0px", textAlign: "left" }}
+                >
                   {" "}
                   {teamName ? teamName : "Team Name"}{" "}
                 </div>
@@ -120,15 +134,14 @@ const AddTeam = ({
             <CardButtonWithText
               style={{ backgroundColor: "rgba(211, 97, 53, 0.15)" }}
               onClick={(event) => {
-                // event.stopPropagation();
-                // deleteTeam(team.id, setTeams);
+                setShowAddTeam(false);
               }}
             >
               <span className="center">
                 <Icon color="var(--danger)" icon="eva:trash-fill" />
               </span>
               <span className="button-title" style={{ color: "var(--danger)" }}>
-                Delete
+                Cancel
               </span>
             </CardButtonWithText>
           </Col>
@@ -140,8 +153,8 @@ const AddTeam = ({
             <CardButtonWithText
               style={{ backgroundColor: "rgba(111, 88, 201, 0.15)" }}
               onClick={(event) => {
-                // event.stopPropagation();
-                // updateTeam(team.id, setTeams);
+                event.stopPropagation();
+                submit();
               }}
             >
               <span className="center">

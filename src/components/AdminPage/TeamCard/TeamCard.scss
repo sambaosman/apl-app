@@ -32,6 +32,7 @@
   white-space: nowrap; /* Don't forget this one */
   text-overflow: ellipsis;
   width: 200px;
+  text-align: center;
   overflow: hidden;
   padding-top: 20px;
   padding-left: 10px;
@@ -51,7 +52,7 @@
   height: 300px;
   width: 100%;
   overflow: hidden;
-  padding: 0px;
+  padding: 10px;
   display: flex;
   margin: 10px;
   justify-content: center;

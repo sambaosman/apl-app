@@ -2,9 +2,10 @@ import styled from "styled-components";
 import { Input, Button, DropdownToggle } from "reactstrap";
 
 export const TextInput = styled(Input)`
-  background-color: #f5f5f5;
+  background-color: #f8f8f8 !important;
   font-size: 15px;
   margin-left: 0px;
+  color: var(--primary) !important;
   margin-right: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
