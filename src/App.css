@@ -24,6 +24,10 @@ a {
   padding-left: 20px;
 }
 
+.hover:hover {
+  cursor: pointer;
+}
+
 .logo-header-container {
   display: flex;
   align-items: center;

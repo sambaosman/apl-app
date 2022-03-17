@@ -25,12 +25,19 @@ const AddTeam = ({
   teamName,
   setTeamName,
   setShowAddTeam,
+  showAddTeam,
+  closePanel,
 }) => {
   const [file, setFile] = useState();
   const [image, setImage] = useState();
-  const submit = async (event) => {
-    let id = uuidv4();
 
+  const submit = async (
+    setTeamName,
+    setDivision,
+    showAddTeam,
+    setShowAddTeam
+  ) => {
+    let id = uuidv4();
     const formData = new FormData();
     formData.append("image", file);
     formData.append("id", id);
@@ -39,7 +46,7 @@ const AddTeam = ({
       headers: { "Content-Type": "multipart/form-data" },
     });
     addTeam(teamName, division, setTeams, id, file.name.replace(" ", ""));
-    setShowAddTeam(false);
+    closePanel(setTeamName, setDivision, setShowAddTeam, showAddTeam);
   };
 
   useEffect(() => {
@@ -53,6 +60,13 @@ const AddTeam = ({
       <div className="page-container">
         <div className="admin-heading">
           <div className="page-title">Add Team</div>
+          <i
+            className={`fa-solid fa-xmark hover`}
+            style={{ fontSize: "25px", color: "var(--primary)" }}
+            onClick={() =>
+              closePanel(setTeamName, setDivision, setShowAddTeam, showAddTeam)
+            }
+          />
         </div>
         <FormGroup>
           <TextInput
@@ -124,20 +138,23 @@ const AddTeam = ({
             </Col>
           </Row>
         </Card>
-        <Row className="text-buttons">
+        <Row className="text-buttons" style={{ margin: "auto !important" }}>
           <Col
             md="6"
             className="center"
             style={{ paddingRight: "5px", maxWidth: "50%" }}
           >
             <CardButtonWithText
-              style={{ backgroundColor: "rgba(211, 97, 53, 0.15)" }}
+              style={{ backgroundColor: "var(--danger-transparent)" }}
               onClick={(event) => {
                 setShowAddTeam(false);
               }}
             >
               <span className="center">
-                <Icon color="var(--danger)" icon="eva:trash-fill" />
+                <i
+                  className={`fa-solid fa-xmark`}
+                  style={{ fontSize: "15px", color: "var(--danger)" }}
+                />
               </span>
               <span className="button-title" style={{ color: "var(--danger)" }}>
                 Cancel
@@ -150,14 +167,17 @@ const AddTeam = ({
             style={{ paddingLeft: "5px", maxWidth: "50%" }}
           >
             <CardButtonWithText
-              style={{ backgroundColor: "rgba(111, 88, 201, 0.15)" }}
+              style={{ backgroundColor: "var(--secondary-transparent)" }}
               onClick={(event) => {
                 event.stopPropagation();
-                submit();
+                submit(setTeamName, setDivision, showAddTeam, setShowAddTeam);
               }}
             >
               <span className="center">
-                <Icon color="var(--secondary" icon="akar-icons:plus" />
+                <i
+                  className={`fa-solid fa-plus`}
+                  style={{ fontSize: "15px", color: "var(--secondary)" }}
+                />
               </span>
               <span className="button-title">Add Team</span>
             </CardButtonWithText>{" "}

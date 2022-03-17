@@ -31,7 +31,13 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
 
   const team = teams && teams.find((team) => teamName === team.teamName);
 
-  const clearFields = (setTeamName, setDivision) => {
+  const closePanel = (
+    setTeamName,
+    setDivision,
+    setShowAddTeam,
+    showAddTeam
+  ) => {
+    setShowAddTeam(!showAddTeam);
     setTeamName("");
     setDivision("");
   };
@@ -45,8 +51,12 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
             <div
               className="add-circle-button"
               onClick={() => {
-                setShowAddTeam(!showAddTeam);
-                clearFields(setTeamName, setDivision);
+                closePanel(
+                  setTeamName,
+                  setDivision,
+                  setShowAddTeam,
+                  showAddTeam
+                );
               }}
             >
               <i
@@ -120,6 +130,8 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
           teamName={teamName}
           setTeamName={setTeamName}
           setShowAddTeam={setShowAddTeam}
+          showAddTeam={showAddTeam}
+          closePanel={closePanel}
         />
       )}
     </React.Fragment>
