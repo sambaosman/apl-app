@@ -27,7 +27,7 @@ const WebTeamCard = ({
         <img src={team.imageURL} className="image-container" />
       </div>
       <div className="team-card-title"> {team.teamName}</div>
-      <Row style={{ width: "100%" }} className="text-buttons">
+      <Row className="text-buttons">
         <Col
           md="6"
           className="center"
@@ -63,7 +63,7 @@ const WebTeamCard = ({
               <Icon color="var(--danger)" icon="eva:trash-fill" />
             </span>
             <span className="button-title" style={{ color: "var(--danger)" }}>
-              Delete
+              Cancel
             </span>
           </CardButtonWithText>
         </Col>

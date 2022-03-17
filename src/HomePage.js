@@ -18,16 +18,15 @@ const HomePage = ({
   return (
     <Row>
       <NavBar />
-      <Col className="right-column">
-        {/* <div className="app-container"> */}
-        {/* {userType === "admin" ? ( */}
-        <AdminPage
-          teams={teams}
-          setTeams={setTeams}
-          history={history}
-          setClickedTeam={setClickedTeam}
-        />
-        {/* ) : (
+      {/* <div className="app-container"> */}
+      {/* {userType === "admin" ? ( */}
+      <AdminPage
+        teams={teams}
+        setTeams={setTeams}
+        history={history}
+        setClickedTeam={setClickedTeam}
+      />
+      {/* ) : (
           <RosterPage
             team={team}
             teamMembers={teamMembers}
@@ -38,8 +37,7 @@ const HomePage = ({
             teams={teams}
           />
         )} */}
-        {/* </div> */}
-      </Col>
+      {/* </div> */}
     </Row>
   );
 };
