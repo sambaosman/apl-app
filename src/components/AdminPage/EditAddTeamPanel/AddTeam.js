@@ -29,7 +29,6 @@ const AddTeam = ({
   const [file, setFile] = useState();
   const [image, setImage] = useState();
   const submit = async (event) => {
-    event.preventDefault();
     let id = uuidv4();
 
     const formData = new FormData();

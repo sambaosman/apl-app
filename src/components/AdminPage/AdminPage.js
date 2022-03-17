@@ -17,10 +17,10 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
 
   useEffect(() => {
     setPremierTeams(
-      teams && teams.filter((team) => team.division === "premier")
+      teams && teams.filter((team) => team.division === "Premier")
     );
     setChampionshipTeams(
-      teams && teams.filter((team) => team.division === "championship")
+      teams && teams.filter((team) => team.division === "Championship")
     );
   }, [teams]);
 
@@ -31,6 +31,11 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
 
   const team = teams && teams.find((team) => teamName === team.teamName);
 
+  const clearFields = (setTeamName, setDivision) => {
+    setTeamName("");
+    setDivision("");
+  };
+
   return (
     <React.Fragment>
       <Col className="right-column">
@@ -39,7 +44,10 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
             <div className="page-title">Teams</div>
             <div
               className="add-circle-button"
-              onClick={() => setShowAddTeam(!showAddTeam)}
+              onClick={() => {
+                setShowAddTeam(!showAddTeam);
+                clearFields(setTeamName, setDivision);
+              }}
             >
               <i
                 className={`fa-solid fa-plus`}
