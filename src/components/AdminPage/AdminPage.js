@@ -70,10 +70,8 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
       />
       <div className="division-label">Premier</div>
       <div className="grid-wrapper">
-        {premierTeams &&
-          premierTeams.length &&
-          premierTeams.map((team) => (
-            <React.Fragment>
+        {premierTeams && premierTeams.length
+          ? premierTeams.map((team) => (
               <TeamCard
                 team={team}
                 setTeams={setTeams}
@@ -82,55 +80,23 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
                 setClickedTeam={setClickedTeam}
                 history={history}
               />
-              <TeamCard
-                team={team}
-                setTeams={setTeams}
-                setEditTeamModalOpen={setEditTeamModalOpen}
-                updateTeam={updateTeam}
-                setClickedTeam={setClickedTeam}
-                history={history}
-              />
-              <TeamCard
-                team={team}
-                setTeams={setTeams}
-                setEditTeamModalOpen={setEditTeamModalOpen}
-                updateTeam={updateTeam}
-                setClickedTeam={setClickedTeam}
-                history={history}
-              />
-              <TeamCard
-                team={team}
-                setTeams={setTeams}
-                setEditTeamModalOpen={setEditTeamModalOpen}
-                updateTeam={updateTeam}
-                setClickedTeam={setClickedTeam}
-                history={history}
-              />
-              <TeamCard
-                team={team}
-                setTeams={setTeams}
-                setEditTeamModalOpen={setEditTeamModalOpen}
-                updateTeam={updateTeam}
-                setClickedTeam={setClickedTeam}
-                history={history}
-              />
-            </React.Fragment>
-          ))}
+            ))
+          : null}
       </div>
       <div className="division-label">Championship</div>
       <div className="grid-wrapper">
-        {championshipTeams &&
-          championshipTeams.length &&
-          championshipTeams.map((team, index) => (
-            <TeamCard
-              team={team}
-              setTeams={setTeams}
-              setEditTeamModalOpen={setEditTeamModalOpen}
-              updateTeam={updateTeam}
-              setClickedTeam={setClickedTeam}
-              history={history}
-            />
-          ))}
+        {championshipTeams && championshipTeams.length
+          ? championshipTeams.map((team, index) => (
+              <TeamCard
+                team={team}
+                setTeams={setTeams}
+                setEditTeamModalOpen={setEditTeamModalOpen}
+                updateTeam={updateTeam}
+                setClickedTeam={setClickedTeam}
+                history={history}
+              />
+            ))
+          : null}
       </div>
     </div>
   );
