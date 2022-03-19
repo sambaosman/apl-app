@@ -12,7 +12,7 @@ const NavBar = () => {
     <React.Fragment>
       <Col className="nav-column">
         <div className="side-bar">
-          <Row className="center">
+          <Row className="center" style={{ marginBottom: "10px" }}>
             <Col md="1">
               {" "}
               <img src={logo} height={40} width={40} className="grayscale" />
@@ -34,8 +34,10 @@ const NavBar = () => {
                 key={index}
                 onClick={() => setActiveTab(index)}
               >
-                {navItem.icon}
-                <span style={{ paddingLeft: "20px" }}>{navItem.title}</span>
+                <div classname="nav-link-text">
+                  <span> {navItem.icon}</span>
+                  <span style={{ paddingLeft: "20px" }}>{navItem.title}</span>
+                </div>
               </NavLink>
             ))}
           </Nav>
