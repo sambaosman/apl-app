@@ -14,6 +14,7 @@ const WebTeamCard = ({
   setTeams,
   team,
   history,
+  setShowEditTeam,
 }) => {
   return (
     <Card
@@ -37,7 +38,8 @@ const WebTeamCard = ({
             style={{ backgroundColor: "rgba(111, 88, 201, 0.15)" }}
             onClick={(event) => {
               event.stopPropagation();
-              updateTeam(team.id, setTeams);
+              setShowEditTeam();
+              // updateTeam(team.id, setTeams);
             }}
           >
             <span className="center">

@@ -6,7 +6,7 @@ import "./TeamCard.scss";
 const TeamCard = ({
   team,
   setTeams,
-  setEditTeamModalOpen,
+  setShowEditTeam,
   updateTeam,
   setClickedTeam,
   history,
@@ -19,6 +19,7 @@ const TeamCard = ({
         setTeams={setTeams}
         team={team}
         history={history}
+        setShowEditTeam={setShowEditTeam}
       />
       <MobileTeamCard
         setClickedTeam={setClickedTeam}
@@ -26,6 +27,7 @@ const TeamCard = ({
         setTeams={setTeams}
         team={team}
         history={history}
+        setShowEditTeam={setShowEditTeam}
       />
       {/* shows when vw is less than 750px */}
     </React.Fragment>

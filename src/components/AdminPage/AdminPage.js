@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import EditTeamModal from "../../EditTeamModal";
 import AddTeam from "./EditAddTeamPanel/AddTeam";
+import EditTeam from "./EditAddTeamPanel/EditTeam";
 import "./AdminPage.scss";
 import TeamCard from "./TeamCard/TeamCard";
 import { Row, Col } from "reactstrap";
@@ -9,7 +9,7 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
   const [teamName, setTeamName] = useState(null);
   const [division, setDivision] = useState(null);
   const [showAddTeam, setShowAddTeam] = useState(false);
-  const [editTeamModalOpen, setEditTeamModalOpen] = useState(false);
+  const [showEditTeam, setShowEditTeam] = useState(false);
   const [editedTeam, setEditedTeam] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [premierTeams, setPremierTeams] = useState([]);
@@ -25,7 +25,7 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
   }, [teams]);
 
   const updateTeam = (event, id, setTeams) => {
-    setEditTeamModalOpen(true);
+    showEditTeam(true);
     setEditedTeam(id);
   };
 
@@ -72,7 +72,7 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
                   <TeamCard
                     team={team}
                     setTeams={setTeams}
-                    setEditTeamModalOpen={setEditTeamModalOpen}
+                    setShowEditTeam={setShowEditTeam}
                     updateTeam={updateTeam}
                     setClickedTeam={setClickedTeam}
                     history={history}
@@ -87,7 +87,7 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
                   <TeamCard
                     team={team}
                     setTeams={setTeams}
-                    setEditTeamModalOpen={setEditTeamModalOpen}
+                    setShowEditTeam={setShowEditTeam}
                     updateTeam={updateTeam}
                     setClickedTeam={setClickedTeam}
                     history={history}
@@ -95,31 +95,9 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
                 ))
               : null}
           </div>
-          {/* <AddTeamModal
-        addTeamModalOpen={addTeamModalOpen}
-        setAddTeamModalOpen={setAddTeamModalOpen}
-        dropdownOpen={dropdownOpen}
-        setDropdownOpen={setDropdownOpen}
-        division={division}
-        setDivision={setDivision}
-        setTeams={setTeams}
-        teamName={teamName}
-        setTeamName={setTeamName}
-      /> */}
-          <EditTeamModal
-            editTeamModalOpen={editTeamModalOpen}
-            setEditTeamModalOpen={setEditTeamModalOpen}
-            dropdownOpen={dropdownOpen}
-            setDropdownOpen={setDropdownOpen}
-            division={division}
-            setDivision={setDivision}
-            setTeams={setTeams}
-            teamName={teamName}
-            setTeamName={setTeamName}
-            editedTeam={editedTeam}
-          />
         </div>
       </Col>
+
       {showAddTeam && (
         <AddTeam
           dropdownOpen={dropdownOpen}
@@ -134,6 +112,20 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
           closePanel={closePanel}
         />
       )}
+      {/* {showEditTeam && (
+          <EditTeam
+            dropdownOpen={dropdownOpen}
+            setDropdownOpen={setDropdownOpen}
+            division={division}
+            setDivision={setDivision}
+            setTeams={setTeams}
+            teamName={teamName}
+            setTeamName={setTeamName}
+            setShowAddTeam={setShowAddTeam}
+            showAddTeam={showAddTeam}
+            closePanel={closePanel}
+          />
+        )} */}
     </React.Fragment>
   );
 };

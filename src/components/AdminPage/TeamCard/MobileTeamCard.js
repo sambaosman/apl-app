@@ -14,6 +14,7 @@ const MobileTeamCard = ({
   setTeams,
   team,
   history,
+  setShowEditTeam,
 }) => {
   return (
     <Card
@@ -54,7 +55,8 @@ const MobileTeamCard = ({
               }}
               onClick={(event) => {
                 event.stopPropagation();
-                updateTeam(team.id, setTeams);
+                setShowEditTeam();
+                // updateTeam(team.id, setTeams);
               }}
             >
               <span className="center">
