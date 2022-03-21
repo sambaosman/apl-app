@@ -181,8 +181,11 @@ const AddTeam = ({
                   >
                     <div>
                       <div
-                        className="team-card-title"
-                        style={{ paddingTop: "0px", textAlign: "left" }}
+                        className="web-team-card-title"
+                        style={{
+                          paddingTop: "0px",
+                          textAlign: "left !important",
+                        }}
                       >
                         {" "}
                         {teamName ? teamName : "Team Name"}{" "}
