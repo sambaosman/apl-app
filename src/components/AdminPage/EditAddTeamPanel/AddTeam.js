@@ -256,59 +256,6 @@ const AddTeam = ({
         />
       </div>
     </div>
-
-    // <Modal
-    //   isModalOpen={addTeamModalOpen}
-    //   toggleModal={() => setAddTeamModalOpen(false)}
-    //   title={"Add Team"}
-    //   isButtonVisible={true}
-    //   buttonFunction={(event) => {
-    //     submit(event);
-    //   }}
-    //   buttonTitle={"Add Team"}
-    //   children={
-    //     <React.Fragment>
-    //       <FormGroup>
-    //         <Label for="firstName">Team Name</Label>
-    //         <TextInput
-    //           name="teamName"
-    //           id="teamName"
-    //           placeholder="Enter Team Name"
-    //           onChange={(event) => setTeamName(event.target.value)}
-    //         />
-    //         <Dropdown
-    //           isOpen={dropdownOpen}
-    //           toggle={() => setDropdownOpen(!dropdownOpen)}
-    //         >
-    //           <DropdownToggle
-    //             caret
-    //             style={{
-    //               backgroundColor: "white",
-    //               color: "black",
-    //               textTransform: "capitalize",
-    //             }}
-    //           >
-    //             {division ? division : "Division"}
-    //           </DropdownToggle>
-    //           <DropdownMenu>
-    //             <DropdownItem onClick={() => setDivision("premier")}>
-    //               Premier
-    //             </DropdownItem>
-    //             <DropdownItem onClick={() => setDivision("championship")}>
-    //               Championship
-    //             </DropdownItem>
-    //           </DropdownMenu>
-    //         </Dropdown>
-    //         <input
-    //           filename={file}
-    //           onChange={(e) => setFile(e.target.files[0])}
-    //           type="file"
-    //           accept="image/*"
-    //         />
-    //       </FormGroup>
-    //     </React.Fragment>
-    //   }
-    // />
   );
 };
 
