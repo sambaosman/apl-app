@@ -49,6 +49,7 @@
 .web-team-card {
   height: 300px;
   width: 250px;
+  min-width: 250px !important;
   overflow: hidden;
   padding: 10px;
   display: flex;
@@ -103,7 +104,7 @@
     font-style: normal;
     font-weight: 700;
     font-size: 25px;
-    white-space: nowrap; /* Don't forget this one */
+    white-space: nowrap;
     text-overflow: ellipsis;
     width: 180px;
     overflow: hidden;

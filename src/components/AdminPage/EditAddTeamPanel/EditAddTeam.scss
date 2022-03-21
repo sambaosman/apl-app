@@ -3,15 +3,18 @@
   width: 400px !important;
   background-color: white;
   padding-left: 0px !important;
-  left: -100%;
-  animation: showSidePanel 400ms ease forwards;
+  position: absolute;
+  height: 100vh;
+  right: 0;
+  // left: -100%;
+  // animation: showSidePanel 400ms ease forwards;
 }
 
-@keyframes showSidePanel {
-  to {
-    left: 0;
-  }
-}
+// @keyframes showSidePanel {
+//   to {
+//     left: 0;
+//   }
+// }
 
 .review-team-card {
   height: 100px;

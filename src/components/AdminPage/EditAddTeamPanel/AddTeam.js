@@ -59,7 +59,7 @@ const AddTeam = ({
   };
 
   return (
-    <Col className="edit-add-side-panel">
+    <div className="edit-add-side-panel">
       <div className="page-container">
         <div className="admin-heading">
           <div className="page-title">Add Team</div>
@@ -255,7 +255,7 @@ const AddTeam = ({
           )}
         />
       </div>
-    </Col>
+    </div>
 
     // <Modal
     //   isModalOpen={addTeamModalOpen}
