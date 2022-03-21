@@ -1,7 +1,6 @@
 .active {
   color: var(--secondary) !important;
   border-left: 5px solid var(--secondary) !important;
-  background-color: var(--secondary-transparent);
 }
 .bottom-navbar {
   display: none !important;
@@ -15,7 +14,7 @@
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 22px;
 }
 
@@ -45,7 +44,8 @@
 }
 
 .nav-link:hover {
-  background-color: var(--secondary-transparent) !important;
+  background-color: #f8f8f8 !important;
+  color: black !important;
 }
 
 .nav-option-icon {
