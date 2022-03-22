@@ -38,7 +38,7 @@ const WebTeamCard = ({
             style={{ backgroundColor: "rgba(111, 88, 201, 0.15)" }}
             onClick={(event) => {
               event.stopPropagation();
-              setShowEditTeam();
+              setShowEditTeam(true);
               // updateTeam(team.id, setTeams);
             }}
           >

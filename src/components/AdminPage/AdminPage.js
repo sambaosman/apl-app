@@ -112,20 +112,20 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
           closePanel={closePanel}
         />
       )}
-      {/* {showEditTeam && (
-          <EditTeam
-            dropdownOpen={dropdownOpen}
-            setDropdownOpen={setDropdownOpen}
-            division={division}
-            setDivision={setDivision}
-            setTeams={setTeams}
-            teamName={teamName}
-            setTeamName={setTeamName}
-            setShowAddTeam={setShowAddTeam}
-            showAddTeam={showAddTeam}
-            closePanel={closePanel}
-          />
-        )} */}
+      {showEditTeam && (
+        <EditTeam
+          dropdownOpen={dropdownOpen}
+          setDropdownOpen={setDropdownOpen}
+          division={division}
+          setDivision={setDivision}
+          setTeams={setTeams}
+          teamName={teamName}
+          setTeamName={setTeamName}
+          setShowAddTeam={setShowAddTeam}
+          showAddTeam={showAddTeam}
+          closePanel={() => setShowEditTeam(false)}
+        />
+      )}
     </React.Fragment>
   );
 };

@@ -55,7 +55,7 @@ const MobileTeamCard = ({
               }}
               onClick={(event) => {
                 event.stopPropagation();
-                setShowEditTeam();
+                setShowEditTeam(true);
                 // updateTeam(team.id, setTeams);
               }}
             >

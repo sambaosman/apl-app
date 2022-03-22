@@ -62,13 +62,11 @@ const EditTeam = ({
     <div className="edit-add-side-panel">
       <div className="page-container">
         <div className="admin-heading">
-          <div className="page-title">Add Team</div>
+          <div className="page-title">Edit Team</div>
           <i
             className={`fa-solid fa-xmark hover`}
             style={{ fontSize: "25px", color: "var(--primary)" }}
-            onClick={() =>
-              closePanel(setTeamName, setDivision, setShowAddTeam, showAddTeam)
-            }
+            onClick={() => closePanel()}
           />
         </div>
         <Form
@@ -209,7 +207,7 @@ const EditTeam = ({
                   <CardButtonWithText
                     style={{ backgroundColor: "var(--danger-transparent)" }}
                     onClick={(event) => {
-                      setShowAddTeam(false);
+                      closePanel();
                     }}
                   >
                     <span className="center">
