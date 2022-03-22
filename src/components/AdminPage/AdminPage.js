@@ -24,9 +24,8 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
     );
   }, [teams]);
 
-  const updateTeam = (event, id, setTeams) => {
-    showEditTeam(true);
-    setEditedTeam(id);
+  const updateTeam = (team) => {
+    setEditedTeam(team);
   };
 
   const team = teams && teams.find((team) => teamName === team.teamName);
@@ -121,9 +120,9 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
           setTeams={setTeams}
           teamName={teamName}
           setTeamName={setTeamName}
-          setShowAddTeam={setShowAddTeam}
-          showAddTeam={showAddTeam}
           closePanel={() => setShowEditTeam(false)}
+          editedTeam={editedTeam}
+          updateTeam={updateTeam}
         />
       )}
     </React.Fragment>

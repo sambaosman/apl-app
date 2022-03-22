@@ -23,18 +23,24 @@ const EditTeam = ({
   setTeams,
   teamName,
   setTeamName,
-  setShowAddTeam,
-  showAddTeam,
   closePanel,
+  editedTeam,
 }) => {
   const [file, setFile] = useState();
   const [image, setImage] = useState();
 
+  useEffect(() => {
+    setDivision(editedTeam.division);
+    setImage(editedTeam.imageURL);
+  }, []);
+
+  console.log("edit", editedTeam);
+
   const submit = async (
     setTeamName,
-    setDivision,
-    showAddTeam,
-    setShowAddTeam
+    setDivision
+    // showAddTeam,
+    // setShowAddTeam
   ) => {
     let id = uuidv4();
     const formData = new FormData();
@@ -45,7 +51,7 @@ const EditTeam = ({
       headers: { "Content-Type": "multipart/form-data" },
     });
     addTeam(teamName, division, setTeams, id, file.name.replace(" ", ""));
-    closePanel(setTeamName, setDivision, setShowAddTeam, showAddTeam);
+    closePanel();
   };
 
   useEffect(() => {
@@ -95,6 +101,7 @@ const EditTeam = ({
                         id="teamName"
                         placeholder="Enter Team Name"
                         onChange={(event) => setTeamName(event.target.value)}
+                        value={editedTeam && editedTeam.teamName}
                       />
                       {meta.error && meta.touched && (
                         <span className="form-error">{meta.error}</span>
@@ -161,7 +168,7 @@ const EditTeam = ({
                     style={{ width: "10%", margin: "auto" }}
                   >
                     <div className="team-logo">
-                      {file ? (
+                      {file || image ? (
                         <img src={image} className="image-container" />
                       ) : (
                         <div
@@ -186,10 +193,12 @@ const EditTeam = ({
                         }}
                       >
                         {" "}
-                        {teamName ? teamName : "Team Name"}{" "}
+                        {editedTeam.teamName
+                          ? editedTeam.teamName
+                          : "Team Name"}{" "}
                       </div>
                       <div className="team-card-subtitle">
-                        {division ? division : "Division"}
+                        {editedTeam.division ? editedTeam.division : "Division"}
                       </div>
                     </div>
                   </Col>
@@ -234,12 +243,7 @@ const EditTeam = ({
                     disabled={!valid}
                     onClick={(event) => {
                       event.stopPropagation();
-                      submit(
-                        setTeamName,
-                        setDivision,
-                        showAddTeam,
-                        setShowAddTeam
-                      );
+                      submit(setTeamName, setDivision);
                     }}
                   >
                     <span className="center">

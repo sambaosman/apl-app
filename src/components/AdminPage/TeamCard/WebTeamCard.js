@@ -39,7 +39,7 @@ const WebTeamCard = ({
             onClick={(event) => {
               event.stopPropagation();
               setShowEditTeam(true);
-              // updateTeam(team.id, setTeams);
+              updateTeam(team);
             }}
           >
             <span className="center">
