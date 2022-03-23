@@ -221,7 +221,6 @@ const EditTeam = ({
                 >
                   <CardButtonWithText
                     style={{ backgroundColor: "var(--secondary-transparent)" }}
-                    disabled={!valid}
                     onClick={(event) => {
                       event.stopPropagation();
                       updateTeam(
