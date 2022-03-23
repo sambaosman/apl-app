@@ -7,7 +7,7 @@ import {
   CardButtonWithText,
 } from "../../../StyledComponents/StyledComponents";
 import { Form as ReactForm, FormGroup, Label } from "reactstrap";
-import { addTeam } from "../../../server/ApiFunctions";
+import { updateTeam } from "../../../server/ApiFunctions";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { Form, Field } from "react-final-form";
@@ -30,29 +30,10 @@ const EditTeam = ({
   const [image, setImage] = useState();
 
   useEffect(() => {
+    setTeamName(editedTeam.teamName);
     setDivision(editedTeam.division);
     setImage(editedTeam.imageURL);
   }, []);
-
-  console.log("edit", editedTeam);
-
-  const submit = async (
-    setTeamName,
-    setDivision
-    // showAddTeam,
-    // setShowAddTeam
-  ) => {
-    let id = uuidv4();
-    const formData = new FormData();
-    formData.append("image", file);
-    formData.append("id", id);
-
-    const result = await axios.post("/images", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    addTeam(teamName, division, setTeams, id, file.name.replace(" ", ""));
-    closePanel();
-  };
 
   useEffect(() => {
     {
@@ -85,7 +66,7 @@ const EditTeam = ({
             if (!division) {
               errors.division = "Required";
             }
-            if (!file) {
+            if (!file || !image) {
               errors.file = "Required";
             }
             return errors;
@@ -100,8 +81,10 @@ const EditTeam = ({
                         name="teamName"
                         id="teamName"
                         placeholder="Enter Team Name"
-                        onChange={(event) => setTeamName(event.target.value)}
-                        value={editedTeam && editedTeam.teamName}
+                        onChange={(event) => {
+                          setTeamName(event.target.value);
+                        }}
+                        value={teamName}
                       />
                       {meta.error && meta.touched && (
                         <span className="form-error">{meta.error}</span>
@@ -193,12 +176,10 @@ const EditTeam = ({
                         }}
                       >
                         {" "}
-                        {editedTeam.teamName
-                          ? editedTeam.teamName
-                          : "Team Name"}{" "}
+                        {teamName ? teamName : "Team Name"}{" "}
                       </div>
                       <div className="team-card-subtitle">
-                        {editedTeam.division ? editedTeam.division : "Division"}
+                        {division ? division : "Division"}
                       </div>
                     </div>
                   </Col>
@@ -243,16 +224,22 @@ const EditTeam = ({
                     disabled={!valid}
                     onClick={(event) => {
                       event.stopPropagation();
-                      submit(setTeamName, setDivision);
+                      updateTeam(
+                        editedTeam,
+                        teamName,
+                        division,
+                        file
+                          ? `https://apl-logos.s3.amazonaws.com/${file.name.replace(
+                              " ",
+                              ""
+                            )}`
+                          : image,
+                        setTeams
+                      );
+                      closePanel();
                     }}
                   >
-                    <span className="center">
-                      <i
-                        className={`fa-solid fa-plus`}
-                        style={{ fontSize: "15px", color: "var(--secondary)" }}
-                      />
-                    </span>
-                    <span className="button-title">Add Team</span>
+                    <span className="button-title">Update Team</span>
                   </CardButtonWithText>{" "}
                 </Col>
               </Row>

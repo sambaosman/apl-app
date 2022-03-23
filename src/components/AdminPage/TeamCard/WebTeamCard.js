@@ -65,7 +65,7 @@ const WebTeamCard = ({
               <Icon color="var(--danger)" icon="eva:trash-fill" />
             </span>
             <span className="button-title" style={{ color: "var(--danger)" }}>
-              Cancel
+              Delete
             </span>
           </CardButtonWithText>
         </Col>
