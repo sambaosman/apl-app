@@ -1,6 +1,10 @@
 :root {
   --primary: #4a4a4a;
-  --secondary: #2d4c74;
+  --secondary: #6f58c9;
+  --secondary-transparent: #e9e6f7;
+  --tertiary: #c7f2a7;
+  --danger: #d36135;
+  --danger-transparent: #f2e1db;
 }
 a {
   color: var(--primary) !important;
@@ -20,12 +24,8 @@ a {
   padding-left: 20px;
 }
 
-.app-header {
-  height: 50px;
-  width: 100%;
-  background-color: #f8f8f8;
-  margin-top: 20px;
-  margin-bottom: 20px;
+.hover:hover {
+  cursor: pointer;
 }
 
 .logo-header-container {
@@ -38,6 +38,18 @@ a {
 .center {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -130,34 +142,12 @@ a {
   border-radius: 100%;
 }
 
-.roster-user-section {
-  border-bottom: 2px solid #f8f8f8;
-  margin: 0px 0px 20px 0px;
-  text-align: left;
-}
-.roster-user-label {
-  padding-top: 20px;
-  padding-bottom: 10px;
-  text-transform: capitalize;
-  color: var(--primary);
-}
-
 .logout-button {
   font-weight: bold;
 }
 
 .logout-button:hover {
   cursor: pointer;
-}
-
-.user-icon-circle {
-  height: 60px;
-  width: 60px;
-  background-color: #f8f8f8;
-  border-radius: 100%;
-  justify-content: center;
-  align-items: center;
-  display: flex;
 }
 
 .delete-player-icon {
@@ -176,13 +166,14 @@ a {
 }
 
 .add-circle-button {
-  background-color: var(--secondary);
+  background-color: var(--tertiary);
   height: 60px;
   width: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 100%;
+  box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.15);
 }
 
 .print-button {
@@ -205,46 +196,13 @@ a {
 }
 
 .icon-button:hover {
-  color: var(--secondary);
-  cursor: pointer;
-}
-
-.shareable-link {
-  padding-left: 20px;
-}
-input[type="date"] {
-  color: var(--primary);
-  text-align: left;
-}
-
-input[type="date"]:before {
-  color: var(--primary);
-  content: attr(placeholder) !important;
-  margin-right: 0.5em;
-}
-
-input[type="date"]:focus:before {
-  content: "" !important;
+  color: v;
 }
 input[type="date"]:required:invalid::-webkit-datetime-edit {
   color: transparent;
 }
 input[type="date"]:focus::-webkit-datetime-edit {
   color: black !important;
-}
-
-.individual-team {
-  margin: 20px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.individual-team:hover {
-  cursor: pointer;
-  background-color: #f8f8f84b;
-  border-radius: 7px;
 }
 
 @media screen {
@@ -259,8 +217,19 @@ input[type="date"]:focus::-webkit-datetime-edit {
 }
 
 .btn-secondary:hover {
-  background-color: var(--primary) !important;
+  background-color: #f8f8f8 !important;
   border: none !important;
+  color: var(--primary) !important;
+}
+
+.dropdown-toggle::after {
+  color: var(--secondary) !important;
+}
+
+.dropdown-toggle:hover {
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--primary);
 }
 
 td {
@@ -271,15 +240,22 @@ th {
   padding: 4px !important;
 }
 
-.admin-container {
-  width: 100%;
-  margin: auto;
+.page-title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 30px;
+}
+.page-container {
+  margin: 30px;
   height: 100%;
-  overflow: auto;
 }
 
-@media only screen and (max-width: 600px) {
-  .admin-container {
+@media only screen and (max-width: 715px) {
+  .page-container {
     height: calc(100% - 70px);
+  }
+  .right-column {
+    height: calc(100vh - 70px) !important;
   }
 }

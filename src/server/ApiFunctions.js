@@ -28,11 +28,12 @@ export const addTeam = (teamName, division, setTeams, id, imageName) => {
     });
 };
 
-export const updateTeam = (id, teamName, division, setTeams) => {
+export const updateTeam = (editedTeam, teamName, division, image, setTeams) => {
   axios
-    .put(`teams/${id}`, {
+    .put(`teams/${editedTeam.id}`, {
       teamName: teamName,
       division: division,
+      imageURL: image,
     })
     .then((res) => {
       getTeams(setTeams);

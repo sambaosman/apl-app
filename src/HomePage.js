@@ -1,5 +1,5 @@
 import React from "react";
-import AdminPage from "./AdminPage";
+import AdminPage from "./components/AdminPage/AdminPage";
 import RosterPage from "./SharedComponents/RosterPage";
 import NavBar from "./components/NavBar/NavBar";
 import { Row, Col } from "reactstrap";
@@ -18,16 +18,15 @@ const HomePage = ({
   return (
     <Row>
       <NavBar />
-      <Col className="right-column">
-        {/* <div className="app-container"> */}
-        {/* {userType === "admin" ? ( */}
-        <AdminPage
-          teams={teams}
-          setTeams={setTeams}
-          history={history}
-          setClickedTeam={setClickedTeam}
-        />
-        {/* ) : (
+      {/* <div className="app-container"> */}
+      {/* {userType === "admin" ? ( */}
+      <AdminPage
+        teams={teams}
+        setTeams={setTeams}
+        history={history}
+        setClickedTeam={setClickedTeam}
+      />
+      {/* ) : (
           <RosterPage
             team={team}
             teamMembers={teamMembers}
@@ -38,8 +37,7 @@ const HomePage = ({
             teams={teams}
           />
         )} */}
-        {/* </div> */}
-      </Col>
+      {/* </div> */}
     </Row>
   );
 };
