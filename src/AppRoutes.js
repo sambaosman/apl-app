@@ -15,7 +15,7 @@ import moment from "moment";
 import NavBar from "./components/NavBar/NavBar";
 import { getTeams } from "./server/ApiFunctions";
 
-const AppRoutes = () => {
+const AppRoutes = (setLoggedIn) => {
   const initialFormFields = {
     firstName: "",
     lastName: "",
@@ -132,7 +132,7 @@ const AppRoutes = () => {
         path="/roster"
         element={
           <React.Fragment>
-            <NavBar />
+            <NavBar setLoggedIn-={setLoggedIn}/>
             <div className="app-container">
               <RosterPage
                 team={clickedTeam}

@@ -4,8 +4,9 @@ import { Nav, NavItem, NavLink, Row, Col } from "reactstrap";
 import "./NavBar.scss";
 import { NavBarData } from "./NavBarData";
 import logo from "../../Images/apllogo.png";
+import GoogleLogout from "react-google-login";
 
-const NavBar = () => {
+const NavBar = (setLoggedIn) => {
   const history = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
   return (
