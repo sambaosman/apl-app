@@ -3,11 +3,12 @@ import GoogleLogin from "react-google-login";
 import graphic from "../../Images/bicyclekick.png";
 import logo from "../../Images/apllogo.png";
 import { Row, Col } from "reactstrap";
+import { CardButtonWithText } from "../../StyledComponents/StyledComponents";
 import "../Login.scss";
 
 const Login = ({ handleLogin, handleFailure }) => {
   return (
-    <React.Fragment>
+    <div className="login-container">
       <Row className="center" style={{ marginBottom: "10px", width: "100%" }}>
         <Col md="1">
           {" "}
@@ -26,13 +27,29 @@ const Login = ({ handleLogin, handleFailure }) => {
         clientId={
           "281501315717-3q4u5jr1fnil0eamk218j0bshq9tp8j6.apps.googleusercontent.com"
         }
+        render={(renderProps) => (
+          <CardButtonWithText
+            style={{ backgroundColor: "#F8F8F8" }}
+            onClick={renderProps.onClick}
+          >
+            <span className="center google-button">
+              <i
+                className="fa-brands fa-google"
+                style={{ fontSize: "15px", color: "white" }}
+              />
+            </span>
+            <span className="button-title" style={{ color: "#4A4A4A" }}>
+              Sign in with Google
+            </span>
+          </CardButtonWithText>
+        )}
         buttonText="Log in with Google"
         onSuccess={handleLogin}
         onFailure={handleFailure}
         cookiePolicy={"single_host_origin"}
         style={{ alignItems: "center" }}
       />
-    </React.Fragment>
+    </div>
   );
 };
 

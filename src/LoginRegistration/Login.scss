@@ -1,6 +1,18 @@
 .bicycle-kick-graphic {
-    height: 100px;
+    height: 150px;
     overflow: hidden;
+}
+
+.google-button {
+    background-color: #4A4A4A;
+    height: 25px;
+    width: 25px;
+    border-radius: 100%;
+}
+
+.login-container {
+    width: 350px;
+    padding: 20px;
 }
 
 .login-title {
@@ -9,6 +21,6 @@
     font-weight: 700;
     font-size: 25px;
     line-height: 23px;
-    padding: 20px 20px 20px 0px;
+    padding: 20px 20px 20px 20px;
     text-align: left;
   }
