@@ -14,10 +14,11 @@ const HomePage = ({
   teamMembers,
   setTeamMembers,
   setClickedTeam,
+  setLoggedIn,
 }) => {
   return (
     <Row>
-      <NavBar />
+      <NavBar setLoggedIn={setLoggedIn} />
       {/* <div className="app-container"> */}
       {/* {userType === "admin" ? ( */}
       <AdminPage

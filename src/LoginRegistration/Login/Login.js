@@ -1,5 +1,5 @@
 import React from "react";
-import GoogleLogin from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 import graphic from "../../Images/bicyclekick.png";
 import logo from "../../Images/apllogo.png";
 import { Row, Col } from "reactstrap";
@@ -43,7 +43,6 @@ const Login = ({ handleLogin, handleFailure }) => {
             </span>
           </CardButtonWithText>
         )}
-        buttonText="Log in with Google"
         onSuccess={handleLogin}
         onFailure={handleFailure}
         cookiePolicy={"single_host_origin"}
