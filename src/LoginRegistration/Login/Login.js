@@ -22,6 +22,8 @@ const Login = ({ handleLogin, handleFailure }) => {
       <div className="bicycle-kick-graphic">
         <img src={graphic} className="image-container" />
       </div>
+      <div className="logo-title-large">American Premier League</div>
+      <div className="logo-subtitle">The future of soccer is here</div>
       <div className="login-title">Log In</div>
       <GoogleLogin
         clientId={

@@ -1,5 +1,5 @@
 .bicycle-kick-graphic {
-    height: 150px;
+    height: 300px;
     overflow: hidden;
 }
 
@@ -11,7 +11,7 @@
 }
 
 .login-container {
-    width: 350px;
+    width: 400px;
     padding: 20px;
     margin: auto;
 }
@@ -24,4 +24,24 @@
     line-height: 23px;
     padding: 20px 20px 20px 20px;
     text-align: left;
+  }
+
+  .logo-title-large {
+    font-family: "Karla";
+    font-style: bold;
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 23px;
+    padding: 20px 20px 0px 20px;
+    text-align: center;
+  }
+
+  .logo-subtitle {
+    font-family: "Karla";
+    font-style: bold;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    padding: 20px 20px 20px 20px;
+    text-align: center;
   }
