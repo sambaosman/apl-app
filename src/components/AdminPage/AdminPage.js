@@ -4,8 +4,16 @@ import EditTeam from "./EditAddTeamPanel/EditTeam";
 import "./AdminPage.scss";
 import TeamCard from "./TeamCard/TeamCard";
 import { Row, Col } from "reactstrap";
+import { GoogleLogout } from "react-google-login";
+import { CardButtonWithText } from "../../StyledComponents/StyledComponents";
 
-const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
+const AdminPage = ({
+  teams,
+  setTeams,
+  history,
+  setClickedTeam,
+  setLoggedIn,
+}) => {
   const [teamName, setTeamName] = useState(null);
   const [division, setDivision] = useState(null);
   const [showAddTeam, setShowAddTeam] = useState(false);
@@ -45,6 +53,35 @@ const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
     <React.Fragment>
       <Col className="right-column">
         <div className="page-container">
+          <div className="page-signout-button">
+            <GoogleLogout
+              clientId={
+                "281501315717-3q4u5jr1fnil0eamk218j0bshq9tp8j6.apps.googleusercontent.com"
+              }
+              render={(renderProps) => (
+                <CardButtonWithText
+                  style={{
+                    backgroundColor: "white",
+                    width: "120px",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }}
+                  onClick={renderProps.onClick}
+                >
+                  <i
+                    className="fa-solid fa-arrow-right-to-bracket"
+                    style={{ fontSize: "15px", color: "#4A4A4A" }}
+                  />
+                  <span style={{ color: "#4A4A4A", paddingLeft: "10px" }}>
+                    Sign out
+                  </span>
+                </CardButtonWithText>
+              )}
+              onLogoutSuccess={() => setLoggedIn(false)}
+              cookiePolicy={"single_host_origin"}
+              style={{ alignItems: "center" }}
+            />
+          </div>
           <div className="admin-heading">
             <div className="page-title">Teams</div>
             <div

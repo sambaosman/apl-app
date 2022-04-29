@@ -26,6 +26,7 @@ const HomePage = ({
         setTeams={setTeams}
         history={history}
         setClickedTeam={setClickedTeam}
+        setLoggedIn={setLoggedIn}
       />
       {/* ) : (
           <RosterPage
