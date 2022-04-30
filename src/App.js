@@ -6,8 +6,11 @@ import Login from "./LoginRegistration/Login/Login.js";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userTeamArray, setUserTeamArray] = useState([]);
+  const [googleData, setGoogleData] = useState([]);
 
   const handleLogin = (googleData) => {
+    setGoogleData(googleData);
     setLoggedIn(true);
   };
 
@@ -19,7 +22,11 @@ function App() {
     <BrowserRouter>
       <div className="App">
         {loggedIn ? (
-          <AppRoutes setLoggedIn={setLoggedIn} />
+          <AppRoutes
+            setLoggedIn={setLoggedIn}
+            userTeamArray={userTeamArray}
+            googleData={googleData}
+          />
         ) : (
           <Login handleLogin={handleLogin} handleFailure={handleFailure} />
         )}

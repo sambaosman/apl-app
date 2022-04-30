@@ -3,6 +3,7 @@ import AdminPage from "./components/AdminPage/AdminPage";
 import RosterPage from "./SharedComponents/RosterPage";
 import NavBar from "./components/NavBar/NavBar";
 import { Row, Col } from "reactstrap";
+import AddToTeam from "./LoginRegistration/AddToTeam";
 
 const HomePage = ({
   team,
@@ -15,19 +16,25 @@ const HomePage = ({
   setTeamMembers,
   setClickedTeam,
   setLoggedIn,
+  userTeamArray,
+  googleData,
 }) => {
   return (
     <Row>
       <NavBar setLoggedIn={setLoggedIn} />
       {/* <div className="app-container"> */}
       {/* {userType === "admin" ? ( */}
-      <AdminPage
-        teams={teams}
-        setTeams={setTeams}
-        history={history}
-        setClickedTeam={setClickedTeam}
-        setLoggedIn={setLoggedIn}
-      />
+      {userTeamArray && userTeamArray.length ? (
+        <AdminPage
+          teams={teams}
+          setTeams={setTeams}
+          history={history}
+          setClickedTeam={setClickedTeam}
+          setLoggedIn={setLoggedIn}
+        />
+      ) : (
+        <AddToTeam googleData={googleData} setLoggedIn={setLoggedIn} />
+      )}
       {/* ) : (
           <RosterPage
             team={team}

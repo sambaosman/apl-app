@@ -15,7 +15,13 @@ import moment from "moment";
 import NavBar from "./components/NavBar/NavBar";
 import { getTeams } from "./server/ApiFunctions";
 
-const AppRoutes = ({ setLoggedIn }) => {
+const AppRoutes = ({
+  userTeamArray,
+  setLoggedIn,
+  googleData,
+  handleLogin,
+  handleFailure,
+}) => {
   const initialFormFields = {
     firstName: "",
     lastName: "",
@@ -295,21 +301,21 @@ const AppRoutes = ({ setLoggedIn }) => {
       <Route
         path="/"
         element={
-          <div>
-            <HomePage
-              team={clickedTeam}
-              teams={teams}
-              setTeams={setTeams}
-              history={history}
-              userType={userType}
-              teamID={teamID}
-              teamMembers={teamMembers}
-              setTeamMembers={setTeamMembers}
-              setClickedTeam={setClickedTeam}
-              setUserType={setUserType}
-              setLoggedIn={setLoggedIn}
-            />
-          </div>
+          <HomePage
+            team={clickedTeam}
+            teams={teams}
+            setTeams={setTeams}
+            history={history}
+            userType={userType}
+            teamID={teamID}
+            teamMembers={teamMembers}
+            setTeamMembers={setTeamMembers}
+            setClickedTeam={setClickedTeam}
+            setUserType={setUserType}
+            setLoggedIn={setLoggedIn}
+            userTeamArray={userTeamArray}
+            googleData={googleData}
+          />
         }
       />
     </Routes>
