@@ -9,7 +9,7 @@ import {
   createSearchParams,
 } from "react-router-dom";
 
-const RegistrationSelector = ({ formFields }) => {
+const RegistrationSelector = () => {
   const registrationTypes = [
     {
       type: "player",
@@ -28,16 +28,15 @@ const RegistrationSelector = ({ formFields }) => {
     },
   ];
 
-  const { teamMemberType } = formFields;
   const history = useNavigate();
 
   return (
     <div className="app-container">
       <div className="login-container">
         <React.Fragment>
-          <div className="app-title" style={{ paddingBottom: "10px" }}>
+          {/* <div className="app-title" style={{ paddingBottom: "10px" }}>
             Register for APL
-          </div>
+          </div> */}
           {registrationTypes.map((registrationType, index) => (
             <Row
               className="selector-row"
@@ -46,7 +45,10 @@ const RegistrationSelector = ({ formFields }) => {
             >
               <Col>
                 <div className="registration-selector-icon">
-                  <i className={`fa-solid fa-${registrationType.icon}`} />
+                  <i
+                    style={{ color: "var(--secondary)" }}
+                    className={`fa-solid fa-${registrationType.icon}`}
+                  />
                 </div>
               </Col>
               <Col style={{ minWidth: "200px" }}>
@@ -63,14 +65,14 @@ const RegistrationSelector = ({ formFields }) => {
               </Col>
             </Row>
           ))}
-          <div className="login-subsection">
+          {/* <div className="login-subsection">
             Already have an account?
             <Link to="/login">
               <span className="login-subsection-link" type="submit">
                 Log in
               </span>
             </Link>
-          </div>
+          </div> */}
         </React.Fragment>
       </div>
     </div>

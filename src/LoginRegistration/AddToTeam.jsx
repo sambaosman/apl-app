@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col } from "reactstrap";
 import { GoogleLogout } from "react-google-login";
 import { CardButtonWithText } from "../StyledComponents/StyledComponents";
-const AddToTeam = ({ googleData, setLoggedIn }) => {
+import RegistrationSelector from "./Registration/RegistrationSelector";
+
+const AddToTeam = ({ googleData, setLoggedIn, userTeamArray }) => {
+  const [linkClicked, setLinkClicked] = useState(false);
+
   return (
     <React.Fragment>
       <Col className="right-column">
@@ -43,9 +47,19 @@ const AddToTeam = ({ googleData, setLoggedIn }) => {
               googleData.profileObj.givenName
             }`}</div>
           </div>
-          <div className="link-label center">
-            To begin, <a className="add-to-team-link">add yourself to a team</a>
-          </div>
+          {linkClicked ? (
+            <RegistrationSelector />
+          ) : (
+            <div className="link-label center">
+              To begin,{" "}
+              <a
+                className="add-to-team-link"
+                onClick={() => setLinkClicked(true)}
+              >
+                add yourself to a team
+              </a>
+            </div>
+          )}
         </div>
       </Col>
     </React.Fragment>

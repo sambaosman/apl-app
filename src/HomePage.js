@@ -33,7 +33,11 @@ const HomePage = ({
           setLoggedIn={setLoggedIn}
         />
       ) : (
-        <AddToTeam googleData={googleData} setLoggedIn={setLoggedIn} />
+        <AddToTeam
+          googleData={googleData}
+          setLoggedIn={setLoggedIn}
+          userTeamArray={userTeamArray}
+        />
       )}
       {/* ) : (
           <RosterPage
