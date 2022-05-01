@@ -19,8 +19,7 @@ const AppRoutes = ({
   userTeamArray,
   setLoggedIn,
   googleData,
-  handleLogin,
-  handleFailure,
+  setUserTeamArray,
 }) => {
   const initialFormFields = {
     firstName: "",
@@ -315,6 +314,7 @@ const AppRoutes = ({
             setLoggedIn={setLoggedIn}
             userTeamArray={userTeamArray}
             googleData={googleData}
+            setUserTeamArray={setUserTeamArray}
           />
         }
       />

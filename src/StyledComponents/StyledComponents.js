@@ -17,6 +17,22 @@ export const TextInput = styled(Input)`
   border: none;
 `;
 
+export const TextInputWhite = styled(Input)`
+  background-color: white !important;
+  font-size: 15px;
+  margin-left: 0px;
+  color: var(--primary) !important;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 40px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 7px;
+  display: block;
+  border: none;
+`;
+
 export const NumberInput = styled(Input)`
   display: flex;
   text-align: center;

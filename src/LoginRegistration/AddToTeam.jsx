@@ -4,8 +4,15 @@ import { GoogleLogout } from "react-google-login";
 import { CardButtonWithText } from "../StyledComponents/StyledComponents";
 import RegistrationSelector from "./Registration/RegistrationSelector";
 
-const AddToTeam = ({ googleData, setLoggedIn, userTeamArray }) => {
+const AddToTeam = ({
+  googleData,
+  setLoggedIn,
+  userTeamArray,
+  setUserTeamArray,
+}) => {
   const [linkClicked, setLinkClicked] = useState(false);
+  const [userTeam, setUserTeam] = useState(null);
+  const [teamId, setTeamId] = useState(null);
 
   return (
     <React.Fragment>
@@ -48,7 +55,14 @@ const AddToTeam = ({ googleData, setLoggedIn, userTeamArray }) => {
             }`}</div>
           </div>
           {linkClicked ? (
-            <RegistrationSelector />
+            <RegistrationSelector
+              setUserTeam={setUserTeam}
+              setTeamId={setTeamId}
+              setUserTeamArray={setUserTeamArray}
+              userTeamArray={userTeamArray}
+              userTeam={userTeam}
+              teamId={teamId}
+            />
           ) : (
             <div className="link-label center">
               To begin,{" "}

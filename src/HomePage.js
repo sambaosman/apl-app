@@ -18,6 +18,7 @@ const HomePage = ({
   setLoggedIn,
   userTeamArray,
   googleData,
+  setUserTeamArray,
 }) => {
   return (
     <Row>
@@ -37,6 +38,7 @@ const HomePage = ({
           googleData={googleData}
           setLoggedIn={setLoggedIn}
           userTeamArray={userTeamArray}
+          setUserTeamArray={setUserTeamArray}
         />
       )}
       {/* ) : (

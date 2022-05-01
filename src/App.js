@@ -26,6 +26,7 @@ function App() {
             setLoggedIn={setLoggedIn}
             userTeamArray={userTeamArray}
             googleData={googleData}
+            setUserTeamArray={setUserTeamArray}
           />
         ) : (
           <Login handleLogin={handleLogin} handleFailure={handleFailure} />
