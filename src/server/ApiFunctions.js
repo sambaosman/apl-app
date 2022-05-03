@@ -77,3 +77,18 @@ export const addUser = (
       console.error(err);
     });
 };
+
+export const getUserById = async (id) => {
+  axios.get(`/users/${id}`).then((res) => {
+    console.log(res);
+  });
+};
+
+export const getUsers = async (googleData, setCurrentUser) => {
+  axios.get(`/users`).then((res) => {
+    let currentUser = res.data.Items.find(
+      (user) => user.googleId === googleData.profileObj.googleId
+    );
+    setCurrentUser(currentUser);
+  });
+};
