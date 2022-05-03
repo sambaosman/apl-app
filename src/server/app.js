@@ -57,6 +57,7 @@ const {
   getTeamById,
   deleteTeam,
   addOrUpdateTeam,
+  addOrUpdateUser,
 } = require("./dynamo");
 
 app.use(express.json()); //allows you to parse BODY data coming from inside a post request
@@ -108,6 +109,17 @@ app.delete("/teams/:id", async (req, res) => {
     res.json(await deleteTeam(id));
   } catch (err) {
     console.error(err);
+    res.status(500).json({ err: "Something went wrong" });
+  }
+});
+
+app.post("/users", async (req, res) => {
+  const user = req.body;
+  try {
+    const newUser = await addOrUpdateUser(user);
+    res.json(newUser);
+  } catch (error) {
+    console.log(error);
     res.status(500).json({ err: "Something went wrong" });
   }
 });

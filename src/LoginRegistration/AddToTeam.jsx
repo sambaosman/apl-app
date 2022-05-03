@@ -62,6 +62,7 @@ const AddToTeam = ({
               userTeamArray={userTeamArray}
               userTeam={userTeam}
               teamId={teamId}
+              googleData={googleData}
             />
           ) : (
             <div className="link-label center">

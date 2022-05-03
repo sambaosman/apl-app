@@ -50,3 +50,30 @@ export const deleteTeam = (id, setTeams) => {
       console.error(err);
     });
 };
+
+export const addUser = (
+  userTeamArray,
+  googleData,
+  setUserTeamArray,
+  teamId,
+  userTeam,
+  id
+) => {
+  axios
+    .post("/users", {
+      id: id,
+      firstName: googleData.profileObj.givenName,
+      lastName: googleData.profileObj.familyName,
+      email: googleData.profileObj.familyName,
+      imageUrl: googleData.profileObj.imageUrl,
+      googleId: googleData.profileObj.googleId,
+      teams: userTeamArray,
+    })
+    .then((res) => {
+      console.log("response", res);
+      setUserTeamArray([...userTeamArray, { teamId: teamId, user: userTeam }]);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col } from "reactstrap";
 import RegistrationInputGroup from "./RegistrationInputGroup";
+import { addUser } from "../../server/ApiFunctions";
 import {
   Link,
   Routes,
@@ -12,6 +13,7 @@ import {
   TextInputWhite,
   CardButtonWithText,
 } from "../../StyledComponents/StyledComponents";
+import { v4 as uuidv4 } from "uuid";
 
 const RegistrationSelector = ({
   setUserTeam,
@@ -20,6 +22,7 @@ const RegistrationSelector = ({
   userTeamArray,
   userTeam,
   teamId,
+  googleData,
 }) => {
   const registrationTypes = [
     {
@@ -42,6 +45,18 @@ const RegistrationSelector = ({
   const history = useNavigate();
 
   const [showTeamIdInput, setShowTeamIdInput] = useState(false);
+
+  const addUserTeam = (setUserTeamArray, userTeamArray, teamId, userTeam) => {
+    let id = uuidv4();
+    addUser(
+      [...userTeamArray, { teamId: teamId, user: userTeam }],
+      googleData,
+      setUserTeamArray,
+      teamId,
+      userTeam,
+      id
+    );
+  };
 
   return (
     <div className="app-container">
@@ -69,10 +84,12 @@ const RegistrationSelector = ({
                     height: "40px",
                   }}
                   onClick={() =>
-                    setUserTeamArray([
-                      ...userTeamArray,
-                      { teamId: teamId, user: userTeam },
-                    ])
+                    addUserTeam(
+                      setUserTeamArray,
+                      userTeamArray,
+                      teamId,
+                      userTeam
+                    )
                   }
                 >
                   <span>Add</span>

@@ -46,10 +46,20 @@ const getTeamById = async (id) => {
   return await dynamoClient.scan(params).promise();
 };
 
+const addOrUpdateUser = async (user) => {
+  console.log("test");
+  const params = {
+    TableName: "users",
+    Item: user,
+  };
+  return await dynamoClient.put(params).promise();
+};
+
 module.exports = {
   dynamoClient,
   getTeams,
   getTeamById,
   deleteTeam,
   addOrUpdateTeam,
+  addOrUpdateUser,
 };
