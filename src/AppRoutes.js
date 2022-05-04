@@ -14,6 +14,7 @@ import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import moment from "moment";
 import NavBar from "./components/NavBar/NavBar";
 import { getTeams } from "./server/ApiFunctions";
+import MyTeam from "./components/MyTeam/MyTeam";
 
 const AppRoutes = ({
   userTeamArray,
@@ -298,7 +299,7 @@ const AppRoutes = ({
           </React.Fragment>
         ))}
       <Route
-        path="/"
+        path="/teams"
         element={
           <HomePage
             team={clickedTeam}
@@ -318,6 +319,7 @@ const AppRoutes = ({
           />
         }
       />
+      <Route exact path="/" element={<MyTeam setLoggedIn={setLoggedIn} />} />
     </Routes>
   );
 };
