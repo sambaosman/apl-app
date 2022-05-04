@@ -5,12 +5,12 @@ export const NavBarData = [
   {
     title: "Teams",
     icon: <Icon icon="fluent:people-team-16-regular" />,
-    link: "/",
+    link: "/teams",
   },
   {
     title: "My Team",
     icon: <Icon icon="bxs:group" />,
-    link: "/myTeam",
+    link: "/",
   },
   {
     title: "Games",
