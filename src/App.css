@@ -78,12 +78,11 @@ a {
 }
 
 .app-container {
-  width: 100vw;
   padding: 20px;
 }
 
 .registration-selector-icon {
-  background-color: white;
+  background-color: var(--secondary-transparent);
   height: 50px;
   width: 50px;
   border-radius: 100%;
@@ -94,7 +93,7 @@ a {
 }
 
 .selector-row {
-  background-color: #f6f6f6;
+  background-color: white;
   border-radius: 7px;
   display: flex;
   padding: 10px;

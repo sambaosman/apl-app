@@ -59,6 +59,13 @@ const {
   addOrUpdateTeam,
 } = require("./dynamo");
 
+const {
+  getUsers,
+  addOrUpdateUser,
+  getUserById,
+  deleteUser,
+} = require("./userServices");
+
 app.use(express.json()); //allows you to parse BODY data coming from inside a post request
 
 app.get("/teams", async (req, res) => {
@@ -108,6 +115,58 @@ app.delete("/teams/:id", async (req, res) => {
     res.json(await deleteTeam(id));
   } catch (err) {
     console.error(err);
+    res.status(500).json({ err: "Something went wrong" });
+  }
+});
+
+app.get("/users", async (req, res) => {
+  try {
+    const users = await getUsers();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ err: "Something went wrong" });
+  }
+});
+
+app.get("/users:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await getUserById(id);
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ err: "Something went wrong" });
+  }
+});
+
+app.put("/users/:id", async (req, res) => {
+  const user = req.body;
+  const id = req.params.id;
+  user.id = id;
+  try {
+    const updatedUser = await addOrUpdateUser(user);
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ err: "Something went wrong" });
+  }
+});
+
+app.delete("/users/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    res.json(await deleteUser(id));
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ err: "Something went wrong" });
+  }
+});
+
+app.post("/users", async (req, res) => {
+  const user = req.body;
+  try {
+    const newUser = await addOrUpdateUser(user);
+    res.json(newUser);
+  } catch (error) {
+    console.log(error);
     res.status(500).json({ err: "Something went wrong" });
   }
 });

@@ -9,26 +9,27 @@ AWS.config.update({
 });
 
 const dynamoClient = new AWS.DynamoDB.DocumentClient();
-("teams");
+("users");
 
-const getTeams = async () => {
+const getUsers = async () => {
   const params = {
-    TableName: "teams",
+    TableName: "users",
   };
-  const teams = await dynamoClient.scan(params).promise();
-  return teams;
+  const users = await dynamoClient.scan(params).promise();
+  return users;
 };
-const addOrUpdateTeam = async (team) => {
+
+const addOrUpdateUser = async (user) => {
   const params = {
-    TableName: "teams",
-    Item: team,
+    TableName: "users",
+    Item: user,
   };
   return await dynamoClient.put(params).promise();
 };
 
-const deleteTeam = async (id) => {
+const deleteUser = async (id) => {
   const params = {
-    TableName: "teams",
+    TableName: "users",
     Key: {
       id,
     },
@@ -36,9 +37,9 @@ const deleteTeam = async (id) => {
   return await dynamoClient.delete(params).promise();
 };
 
-const getTeamById = async (id) => {
+const getUserById = async (id) => {
   const params = {
-    TableName: "teams",
+    TableName: "users",
     Key: {
       id,
     },
@@ -48,8 +49,8 @@ const getTeamById = async (id) => {
 
 module.exports = {
   dynamoClient,
-  getTeams,
-  getTeamById,
-  deleteTeam,
-  addOrUpdateTeam,
+  getUsers,
+  addOrUpdateUser,
+  getUserById,
+  deleteUser,
 };

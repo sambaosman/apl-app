@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col } from "reactstrap";
 import RegistrationInputGroup from "./RegistrationInputGroup";
+import { addUser } from "../../server/ApiFunctions";
 import {
   Link,
   Routes,
@@ -8,8 +9,21 @@ import {
   useNavigate,
   createSearchParams,
 } from "react-router-dom";
+import {
+  TextInputWhite,
+  CardButtonWithText,
+} from "../../StyledComponents/StyledComponents";
+import { v4 as uuidv4 } from "uuid";
 
-const RegistrationSelector = ({ formFields }) => {
+const RegistrationSelector = ({
+  setUserTeam,
+  setTeamId,
+  setUserTeamArray,
+  userTeamArray,
+  userTeam,
+  teamId,
+  googleData,
+}) => {
   const registrationTypes = [
     {
       type: "player",
@@ -28,49 +42,104 @@ const RegistrationSelector = ({ formFields }) => {
     },
   ];
 
-  const { teamMemberType } = formFields;
   const history = useNavigate();
+
+  const [showTeamIdInput, setShowTeamIdInput] = useState(false);
+
+  const addUserTeam = (setUserTeamArray, userTeamArray, teamId, userTeam) => {
+    let id = uuidv4();
+    addUser(
+      [...userTeamArray, { teamId: teamId, user: userTeam }],
+      googleData,
+      setUserTeamArray,
+      teamId,
+      userTeam,
+      id
+    );
+  };
 
   return (
     <div className="app-container">
       <div className="login-container">
         <React.Fragment>
-          <div className="app-title" style={{ paddingBottom: "10px" }}>
+          {/* <div className="app-title" style={{ paddingBottom: "10px" }}>
             Register for APL
-          </div>
-          {registrationTypes.map((registrationType, index) => (
-            <Row
-              className="selector-row"
-              key={index}
-              onClick={() => history(`/register/${registrationType.type}`)}
-            >
-              <Col>
-                <div className="registration-selector-icon">
-                  <i className={`fa-solid fa-${registrationType.icon}`} />
-                </div>
+          </div> */}
+          {showTeamIdInput ? (
+            <Row>
+              <Col md="9">
+                <TextInputWhite
+                  name="teamId"
+                  id="teamId"
+                  placeholder="Enter Team ID"
+                  onChange={(e) => setTeamId(e.target.value)}
+                />
               </Col>
-              <Col style={{ minWidth: "200px" }}>
-                I am a {registrationType.name}
-              </Col>
-              <Col
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  marginRight: "20px",
-                }}
-              >
-                <i className="fa-solid fa-angle-right" />
+              <Col md="3">
+                {" "}
+                <CardButtonWithText
+                  style={{
+                    backgroundColor: "var(--tertiary)",
+                    marginTop: "10px",
+                    height: "40px",
+                  }}
+                  onClick={() =>
+                    addUserTeam(
+                      setUserTeamArray,
+                      userTeamArray,
+                      teamId,
+                      userTeam
+                    )
+                  }
+                >
+                  <span>Add</span>
+                </CardButtonWithText>
               </Col>
             </Row>
-          ))}
-          <div className="login-subsection">
+          ) : (
+            <React.Fragment>
+              {registrationTypes.map((registrationType, index) => (
+                <Row
+                  className="selector-row"
+                  key={index}
+                  onClick={() => {
+                    setUserTeam(registrationType.type);
+                    setShowTeamIdInput(true);
+                  }}
+                  // onClick={() => history(`/register/${registrationType.type}`)}
+                >
+                  <Col>
+                    <div className="registration-selector-icon">
+                      <i
+                        style={{ color: "var(--secondary)" }}
+                        className={`fa-solid fa-${registrationType.icon}`}
+                      />
+                    </div>
+                  </Col>
+                  <Col style={{ minWidth: "200px" }}>
+                    I am a {registrationType.name}
+                  </Col>
+                  <Col
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      marginRight: "20px",
+                    }}
+                  >
+                    <i className="fa-solid fa-angle-right" />
+                  </Col>
+                </Row>
+              ))}
+            </React.Fragment>
+          )}
+          {/* <div className="login-subsection">
             Already have an account?
             <Link to="/login">
               <span className="login-subsection-link" type="submit">
                 Log in
               </span>
             </Link>
-          </div>
+          </div> */}
         </React.Fragment>
       </div>
     </div>
