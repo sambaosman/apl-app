@@ -49,6 +49,7 @@ const Login = ({ handleLogin, handleFailure }) => {
         onFailure={handleFailure}
         cookiePolicy={"single_host_origin"}
         style={{ alignItems: "center" }}
+        isSignedIn={true}
       />
     </div>
   );
