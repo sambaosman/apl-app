@@ -4,6 +4,8 @@ import AppRoutes from "./AppRoutes";
 import { BrowserRouter } from "react-router-dom";
 import Login from "./LoginRegistration/Login/Login.js";
 import { getUserById, getUsers } from "./server/ApiFunctions";
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement } from "./redux/counterSlice";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -11,9 +13,13 @@ function App() {
   const [googleData, setGoogleData] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
 
+  const { value } = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
+
   const handleLogin = async (googleData) => {
     getUsers(googleData, setCurrentUser);
     setGoogleData(googleData);
+    dispatch(increment());
     setLoggedIn(true);
   };
 
@@ -24,6 +30,9 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <div>{value}</div>
+        <button onClick={() => dispatch(increment())}>+</button>
+        <button onClick={() => dispatch(decrement())}>-</button>
         {loggedIn ? (
           <AppRoutes
             setLoggedIn={setLoggedIn}
