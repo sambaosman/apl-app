@@ -319,7 +319,18 @@ const AppRoutes = ({
           />
         }
       />
-      <Route exact path="/" element={<MyTeam setLoggedIn={setLoggedIn} />} />
+      <Route
+        exact
+        path="/"
+        element={
+          <MyTeam
+            googleData={googleData}
+            setLoggedIn={setLoggedIn}
+            userTeamArray={userTeamArray}
+            setUserTeamArray={setUserTeamArray}
+          />
+        }
+      />
     </Routes>
   );
 };

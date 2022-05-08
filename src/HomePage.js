@@ -24,23 +24,13 @@ const HomePage = ({
     <Row>
       <NavBar setLoggedIn={setLoggedIn} />
       {/* <div className="app-container"> */}
-      {/* {userType === "admin" ? ( */}
-      {userTeamArray && userTeamArray.length ? (
-        <AdminPage
-          teams={teams}
-          setTeams={setTeams}
-          history={history}
-          setClickedTeam={setClickedTeam}
-          setLoggedIn={setLoggedIn}
-        />
-      ) : (
-        <AddToTeam
-          googleData={googleData}
-          setLoggedIn={setLoggedIn}
-          userTeamArray={userTeamArray}
-          setUserTeamArray={setUserTeamArray}
-        />
-      )}
+      <AdminPage
+        teams={teams}
+        setTeams={setTeams}
+        history={history}
+        setClickedTeam={setClickedTeam}
+        setLoggedIn={setLoggedIn}
+      />
       {/* ) : (
           <RosterPage
             team={team}

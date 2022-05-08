@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Row, Col } from "reactstrap";
+import { Col } from "reactstrap";
 import { GoogleLogout } from "react-google-login";
 import { CardButtonWithText } from "../StyledComponents/StyledComponents";
 import RegistrationSelector from "./Registration/RegistrationSelector";
-
+import { useSelector } from "react-redux";
 const AddToTeam = ({
   googleData,
   setLoggedIn,
@@ -14,6 +14,7 @@ const AddToTeam = ({
   const [userTeam, setUserTeam] = useState(null);
   const [teamId, setTeamId] = useState(null);
 
+  const user = useSelector((state) => state.user.user);
   return (
     <React.Fragment>
       <Col className="right-column">
@@ -49,9 +50,7 @@ const AddToTeam = ({
           </div>
           <div className="admin-heading">
             <div className="page-title">{`Hello ${
-              googleData &&
-              googleData.profileObj &&
-              googleData.profileObj.givenName
+              user && user.firstName
             }`}</div>
           </div>
           {linkClicked ? (
