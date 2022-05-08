@@ -4,21 +4,26 @@ import AppRoutes from "./AppRoutes";
 import { BrowserRouter } from "react-router-dom";
 import Login from "./LoginRegistration/Login/Login.js";
 import { getUserById, getUsers } from "./server/ApiFunctions";
+import { useSelector, useDispatch } from "react-redux";
+import { addUser } from "./redux/userSlice";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userTeamArray, setUserTeamArray] = useState([]);
   const [googleData, setGoogleData] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const addUsers = (currentUser) => {
+    dispatch(addUser(currentUser));
+  };
 
   const handleLogin = async (googleData) => {
-    getUsers(googleData, setCurrentUser);
-    setGoogleData(googleData);
-    setLoggedIn(true);
+    getUsers(googleData, addUsers, setLoggedIn);
   };
 
   const handleFailure = (result) => {
-    alert(result);
+    console.log("error:", result);
   };
 
   return (
@@ -30,14 +35,9 @@ function App() {
             userTeamArray={userTeamArray}
             googleData={googleData}
             setUserTeamArray={setUserTeamArray}
-            currentUser={currentUser}
           />
         ) : (
-          <Login
-            handleLogin={handleLogin}
-            handleFailure={handleFailure}
-            setCurrentUser={setCurrentUser}
-          />
+          <Login handleLogin={handleLogin} handleFailure={handleFailure} />
         )}
       </div>
     </BrowserRouter>
