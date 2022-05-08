@@ -14,11 +14,12 @@ function App() {
 
   const dispatch = useDispatch();
 
+  const addUsers = (currentUser) => {
+    dispatch(addUser(currentUser));
+  };
+
   const handleLogin = async (googleData) => {
-    getUsers(googleData);
-    setGoogleData(googleData);
-    dispatch(addUser(googleData));
-    setLoggedIn(true);
+    getUsers(googleData, addUsers, setLoggedIn);
   };
 
   const handleFailure = (result) => {

@@ -84,10 +84,15 @@ export const getUserById = async (id) => {
   });
 };
 
-export const getUsers = async (googleData) => {
-  axios.get(`/users`).then((res) => {
-    let currentUser = res.data.Items.find(
-      (user) => user.googleId === googleData.profileObj.googleId
-    );
-  });
+export const getUsers = async (googleData, addUsers, setLoggedIn) => {
+  axios
+    .get(`/users`)
+    .then((res) => {
+      let currentUser = res.data.Items.find(
+        (user) => user.googleId === googleData.profileObj.googleId
+      );
+      addUsers(currentUser);
+      setLoggedIn(true);
+    })
+    .catch((err) => console.log(err));
 };
