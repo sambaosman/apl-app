@@ -84,11 +84,10 @@ export const getUserById = async (id) => {
   });
 };
 
-export const getUsers = async (googleData, setCurrentUser) => {
+export const getUsers = async (googleData) => {
   axios.get(`/users`).then((res) => {
     let currentUser = res.data.Items.find(
       (user) => user.googleId === googleData.profileObj.googleId
     );
-    setCurrentUser(currentUser);
   });
 };

@@ -5,48 +5,38 @@ import { BrowserRouter } from "react-router-dom";
 import Login from "./LoginRegistration/Login/Login.js";
 import { getUserById, getUsers } from "./server/ApiFunctions";
 import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement } from "./redux/counterSlice";
+import { addUser } from "./redux/userSlice";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userTeamArray, setUserTeamArray] = useState([]);
   const [googleData, setGoogleData] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
 
-  const { value } = useSelector((state) => state.counter);
   const dispatch = useDispatch();
 
   const handleLogin = async (googleData) => {
-    getUsers(googleData, setCurrentUser);
+    getUsers(googleData);
     setGoogleData(googleData);
-    dispatch(increment());
+    dispatch(addUser(googleData));
     setLoggedIn(true);
   };
 
   const handleFailure = (result) => {
-    alert(result);
+    console.log("error:", result);
   };
 
   return (
     <BrowserRouter>
       <div className="App">
-        <div>{value}</div>
-        <button onClick={() => dispatch(increment())}>+</button>
-        <button onClick={() => dispatch(decrement())}>-</button>
         {loggedIn ? (
           <AppRoutes
             setLoggedIn={setLoggedIn}
             userTeamArray={userTeamArray}
             googleData={googleData}
             setUserTeamArray={setUserTeamArray}
-            currentUser={currentUser}
           />
         ) : (
-          <Login
-            handleLogin={handleLogin}
-            handleFailure={handleFailure}
-            setCurrentUser={setCurrentUser}
-          />
+          <Login handleLogin={handleLogin} handleFailure={handleFailure} />
         )}
       </div>
     </BrowserRouter>
