@@ -53,7 +53,7 @@ const NavBar = () => {
               </Link>
             ))}
           </Nav>
-          <div style={{ marginTop: "330px" }}>
+          <div style={{ marginTop: "250px" }}>
             <GoogleLogout
               clientId={
                 "281501315717-3q4u5jr1fnil0eamk218j0bshq9tp8j6.apps.googleusercontent.com"
