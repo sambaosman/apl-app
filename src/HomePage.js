@@ -21,9 +21,7 @@ const HomePage = ({
   setUserTeamArray,
 }) => {
   return (
-    <Row>
-      <NavBar setLoggedIn={setLoggedIn} />
-      {/* <div className="app-container"> */}
+    <div>
       <AdminPage
         teams={teams}
         setTeams={setTeams}
@@ -43,7 +41,7 @@ const HomePage = ({
           />
         )} */}
       {/* </div> */}
-    </Row>
+    </div>
   );
 };
 

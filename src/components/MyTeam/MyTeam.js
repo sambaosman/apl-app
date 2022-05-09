@@ -2,22 +2,23 @@ import React from "react";
 import NavBar from "../NavBar/NavBar";
 import { Row, Col } from "reactstrap";
 import AddToTeam from "../../LoginRegistration/AddToTeam";
-
+import { useSelector } from "react-redux";
+import MultipleTeams from "./MultipleTeams";
 const MyTeam = ({
   googleData,
   setLoggedIn,
   userTeamArray,
   setUserTeamArray,
 }) => {
+  const user = useSelector((state) => state.user.user);
   return (
-    <Row>
-      <NavBar setLoggedIn={setLoggedIn} />
-      {userTeamArray && userTeamArray.length ? (
+    <React.Fragment>
+      {user.teams && user.teams.length ? (
         <React.Fragment>
-          {userTeamArray.length > 1 ? (
-            <div>multiple teams</div>
+          {user.teams && user.teams.length > 1 ? (
+            <div>single</div>
           ) : (
-            <div>single team</div>
+            <MultipleTeams />
           )}
         </React.Fragment>
       ) : (
@@ -28,7 +29,7 @@ const MyTeam = ({
           setUserTeamArray={setUserTeamArray}
         />
       )}
-    </Row>
+    </React.Fragment>
   );
 };
 

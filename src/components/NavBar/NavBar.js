@@ -6,13 +6,16 @@ import { NavBarData } from "./NavBarData";
 import logo from "../../Images/apllogo.png";
 import { GoogleLogout } from "react-google-login";
 import { CardButtonWithText } from "../../StyledComponents/StyledComponents";
-
+import { useDispatch } from "react-redux";
+import { clearUser } from "../../redux/userSlice";
 const NavBar = ({ setLoggedIn }) => {
   const history = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
+  const dispatch = useDispatch();
 
   const handleLogout = (setLoggedIn) => {
     setLoggedIn(false);
+    dispatch(clearUser());
   };
 
   return (
