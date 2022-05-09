@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { getTeamMembers } from "./RegistrationServices";
-// import { getTeams } from "./TeamServices";
 import LoginPage from "./LoginRegistration/Login/LoginPage";
 import Register from "./LoginRegistration/Registration/Register";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
@@ -10,7 +9,7 @@ import RegistrationInputGroup from "./LoginRegistration/Registration/Registratio
 import OTP from "./LoginRegistration/Registration/OTP";
 import Waiver from "./LoginRegistration/Waiver";
 import RosterPage from "./SharedComponents/RosterPage";
-import { PrimaryButton } from "./StyledComponents/StyledComponents";
+// import { PrimaryButton } from "./StyledComponents/StyledComponents";
 import moment from "moment";
 import NavBar from "./components/NavBar/NavBar";
 import { getTeams } from "./server/ApiFunctions";
@@ -328,6 +327,8 @@ const AppRoutes = ({
             setLoggedIn={setLoggedIn}
             userTeamArray={userTeamArray}
             setUserTeamArray={setUserTeamArray}
+            teamID={teamID}
+            setTeamID={setTeamID}
           />
         }
       />

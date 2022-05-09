@@ -11,8 +11,15 @@ import { clearUser } from "../../redux/userSlice";
 import { getTeamById } from "../../server/ApiFunctions";
 import RegistrationSelector from "../../LoginRegistration/Registration/RegistrationSelector";
 
-const MultipleTeams = ({ googleData }) => {
+const MultipleTeams = ({
+  googleData,
+  setLoggedIn,
+  userTeamArray,
+  setUserTeamArray,
+}) => {
   const [showInput, setShowInput] = useState(false);
+  const [userTeam, setUserTeam] = useState(null);
+  const [teamId, setTeamId] = useState(null);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
 
@@ -22,7 +29,7 @@ const MultipleTeams = ({ googleData }) => {
       user.teams &&
       user.teams.length &&
       user.teams.map((team) => {
-        getTeamById(team.id).then((team) => {
+        getTeamById(team.teamId).then((team) => {
           teams.push(team);
         });
       });
@@ -74,7 +81,18 @@ const MultipleTeams = ({ googleData }) => {
               />
             </div>
           </div>
-          <div className="grid-wrapper">
+          <div style={{ margin: "auto" }}>
+            {showInput && (
+              <RegistrationSelector
+                setUserTeam={setUserTeam}
+                setTeamId={setTeamId}
+                setUserTeamArray={setUserTeamArray}
+                userTeamArray={userTeamArray}
+                userTeam={userTeam}
+                teamId={teamId}
+                googleData={googleData}
+              />
+            )}
             {/* {premierTeams && premierTeams.length
               ? premierTeams.map((team) => (
                   <TeamCard
@@ -90,7 +108,6 @@ const MultipleTeams = ({ googleData }) => {
           </div>
         </div>
       </Col>
-      {showInput && <RegistrationSelector googleData={googleData} />}
     </React.Fragment>
   );
 };

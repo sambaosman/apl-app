@@ -13,13 +13,12 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const dispatch = useDispatch();
+  const activeTab = useSelector((state) => state.activeTab.activeTab);
 
   const handleLogout = () => {
     dispatch(clearUser());
   };
 
-  const activeTab = useSelector((state) => state.activeTab.activeTab);
-  console.log(activeTab);
   return (
     <React.Fragment>
       <Col className="nav-column">

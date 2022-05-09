@@ -6,7 +6,7 @@ import { Row, Col } from "reactstrap";
 import { CardButtonWithText } from "../../StyledComponents/StyledComponents";
 import "../Login.scss";
 
-const Login = ({ handleLogin, handleFailure, setCurrentUser }) => {
+const Login = ({ handleLogin, handleFailure }) => {
   return (
     <div className="login-container">
       <Row className="center" style={{ marginBottom: "10px", width: "100%" }}>

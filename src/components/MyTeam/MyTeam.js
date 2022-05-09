@@ -9,6 +9,8 @@ const MyTeam = ({
   setLoggedIn,
   userTeamArray,
   setUserTeamArray,
+  teamID,
+  setTeamID,
 }) => {
   const user = useSelector((state) => state.user.user);
   return (
@@ -18,7 +20,14 @@ const MyTeam = ({
           {user.teams && user.teams.length > 1 ? (
             <div>single</div>
           ) : (
-            <MultipleTeams />
+            <MultipleTeams
+              googleData={googleData}
+              setLoggedIn={setLoggedIn}
+              userTeamArray={userTeamArray}
+              setUserTeamArray={setUserTeamArray}
+              teamID={teamID}
+              setTeamID={setTeamID}
+            />
           )}
         </React.Fragment>
       ) : (

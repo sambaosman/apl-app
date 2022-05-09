@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userTeamArray, setUserTeamArray] = useState([]);
-  const [googleData, setGoogleData] = useState([]);
+  const [googleData, setGoogleData] = useState({});
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);

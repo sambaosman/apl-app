@@ -16,13 +16,13 @@ import {
 import { v4 as uuidv4 } from "uuid";
 
 const RegistrationSelector = ({
+  googleData,
   setUserTeam,
   setTeamId,
   setUserTeamArray,
   userTeamArray,
   userTeam,
   teamId,
-  googleData,
 }) => {
   const registrationTypes = [
     {
@@ -50,7 +50,6 @@ const RegistrationSelector = ({
     let id = uuidv4();
     addUser(
       [...userTeamArray, { teamId: teamId, user: userTeam }],
-      googleData,
       setUserTeamArray,
       teamId,
       userTeam,
@@ -88,7 +87,8 @@ const RegistrationSelector = ({
                       setUserTeamArray,
                       userTeamArray,
                       teamId,
-                      userTeam
+                      userTeam,
+                      googleData
                     )
                   }
                 >
@@ -106,7 +106,6 @@ const RegistrationSelector = ({
                     setUserTeam(registrationType.type);
                     setShowTeamIdInput(true);
                   }}
-                  // onClick={() => history(`/register/${registrationType.type}`)}
                 >
                   <Col>
                     <div className="registration-selector-icon">
