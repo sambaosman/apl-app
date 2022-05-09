@@ -84,7 +84,7 @@ export const getUserById = async (id) => {
   });
 };
 
-export const getUsers = async (googleData, addUsers, setLoggedIn) => {
+export const getUsers = async (googleData, addUsers) => {
   axios
     .get(`/users`)
     .then((res) => {
@@ -92,7 +92,6 @@ export const getUsers = async (googleData, addUsers, setLoggedIn) => {
         (user) => user.googleId === googleData.profileObj.googleId
       );
       addUsers(currentUser);
-      setLoggedIn(true);
     })
     .catch((err) => console.log(err));
 };

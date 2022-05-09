@@ -44,7 +44,7 @@ const NavBar = () => {
                     : "nav-option nav-link-container active"
                 }
                 key={index}
-                onClick={() => setActiveTab(index)}
+                onClick={() => dispatch(setActiveTab(index))}
               >
                 <div classname="nav-link-text">
                   <span> {navItem.icon}</span>
