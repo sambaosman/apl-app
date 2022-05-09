@@ -50,7 +50,7 @@ const AdminPage = ({
   };
 
   return (
-    <React.Fragment>
+    <Row>
       <Col className="right-column">
         <div className="page-container">
           <div className="page-signout-button">
@@ -162,7 +162,7 @@ const AdminPage = ({
           updateTeam={updateTeam}
         />
       )}
-    </React.Fragment>
+    </Row>
   );
 };
 export default AdminPage;
