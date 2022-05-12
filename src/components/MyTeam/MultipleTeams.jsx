@@ -91,6 +91,8 @@ const MultipleTeams = ({
                 userTeam={userTeam}
                 teamId={teamId}
                 googleData={googleData}
+                type="update"
+                testFunction={() => setShowInput(false)}
               />
             )}
             {/* {premierTeams && premierTeams.length

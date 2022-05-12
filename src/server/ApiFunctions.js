@@ -53,11 +53,12 @@ export const deleteTeam = (id, setTeams) => {
 
 export const addUser = (
   userTeamArray,
-  googleData,
   setUserTeamArray,
   teamId,
   userTeam,
-  id
+  googleData,
+  id,
+  setShowTeamIdInput
 ) => {
   axios
     .post("/users", {
@@ -72,9 +73,26 @@ export const addUser = (
     .then((res) => {
       console.log("response", res);
       setUserTeamArray([...userTeamArray, { teamId: teamId, user: userTeam }]);
+      setShowTeamIdInput(false);
     })
     .catch((err) => {
       console.error(err);
+    });
+};
+
+export const updateUser = (user, teams) => {
+  axios
+    .put(`users/${user.id}`, {
+      ...user,
+      teams: teams,
+    })
+    .then((res) => {
+      console.log("res", res);
+      getUserById(user.id)
+        .then((res) => {
+          console.log("res", res);
+        })
+        .catch((err) => console.log("err", err));
     });
 };
 
@@ -91,6 +109,19 @@ export const getUsers = async (googleData, addUsers) => {
       let currentUser = res.data.Items.find(
         (user) => user.googleId === googleData.profileObj.googleId
       );
+      if (!currentUser) {
+        currentUser = {
+          id: googleData.profileObj.googleId,
+          firstName: googleData.profileObj.givenName,
+          lastName: googleData.profileObj.familyName,
+          email: googleData.profileObj.familyName,
+          imageUrl: googleData.profileObj.imageUrl,
+          googleId: googleData.profileObj.googleId,
+          teams: [],
+        };
+        axios.post("/users", currentUser);
+      }
+      console.log("currentUser2", currentUser);
       addUsers(currentUser);
     })
     .catch((err) => console.log(err));

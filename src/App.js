@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import AppRoutes from "./AppRoutes";
 import { BrowserRouter } from "react-router-dom";
 import Login from "./LoginRegistration/Login/Login.js";
-import { getUsers } from "./server/ApiFunctions";
+import { getUsers, addUser } from "./server/ApiFunctions";
 import { useDispatch } from "react-redux";
-import { addUser } from "./redux/userSlice";
+import { addOrUpdateUser } from "./redux/userSlice";
 import NavBar from "./components/NavBar/NavBar";
 import { Row, Col } from "reactstrap";
 import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -19,7 +20,7 @@ function App() {
   const user = useSelector((state) => state.user.user);
 
   const addUsers = (currentUser) => {
-    dispatch(addUser(currentUser));
+    dispatch(addOrUpdateUser(currentUser));
   };
 
   const handleLogin = async (googleData) => {

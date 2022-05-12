@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 import { Row, Col } from "reactstrap";
-import RegistrationInputGroup from "./RegistrationInputGroup";
-import { addUser } from "../../server/ApiFunctions";
-import {
-  Link,
-  Routes,
-  Route,
-  useNavigate,
-  createSearchParams,
-} from "react-router-dom";
+import { addUser, updateUser } from "../../server/ApiFunctions";
 import {
   TextInputWhite,
   CardButtonWithText,
 } from "../../StyledComponents/StyledComponents";
 import { v4 as uuidv4 } from "uuid";
+import { useSelector, useDispatch } from "react-redux";
+import { addOrUpdateUser } from "../../redux/userSlice";
 
 const RegistrationSelector = ({
   googleData,
@@ -23,6 +17,8 @@ const RegistrationSelector = ({
   userTeamArray,
   userTeam,
   teamId,
+  type,
+  testFunction,
 }) => {
   const registrationTypes = [
     {
@@ -42,19 +38,44 @@ const RegistrationSelector = ({
     },
   ];
 
-  const history = useNavigate();
-
+  const dispatch = useDispatch();
+  const newFunction = () => {
+    dispatch(addOrUpdateUser());
+  };
   const [showTeamIdInput, setShowTeamIdInput] = useState(false);
+  const currentUser = useSelector((state) => state.user.user);
 
-  const addUserTeam = (setUserTeamArray, userTeamArray, teamId, userTeam) => {
+  const addUserTeam = (
+    setUserTeamArray,
+    userTeamArray,
+    teamId,
+    userTeam,
+    googleData,
+    setShowTeamIdInput,
+    testFunction
+  ) => {
     let id = uuidv4();
-    addUser(
-      [...userTeamArray, { teamId: teamId, user: userTeam }],
-      setUserTeamArray,
-      teamId,
-      userTeam,
-      id
-    );
+
+    // if (type === "add") {
+    //   console.log("id", googleData);
+
+    //   addUser(
+    //     [...userTeamArray, { teamId: teamId, user: userTeam }],
+    //     setUserTeamArray,
+    //     teamId,
+    //     userTeam,
+    //     googleData,
+    //     id,
+    //     setShowTeamIdInput
+    //   );
+    // } else if (type === "update") {
+    //   console.log("update");
+    //   testFunction();
+
+    updateUser(currentUser, [
+      ...userTeamArray,
+      { teamId: teamId, user: userTeam },
+    ]);
   };
 
   return (
@@ -88,7 +109,9 @@ const RegistrationSelector = ({
                       userTeamArray,
                       teamId,
                       userTeam,
-                      googleData
+                      googleData,
+                      setShowTeamIdInput,
+                      testFunction
                     )
                   }
                 >

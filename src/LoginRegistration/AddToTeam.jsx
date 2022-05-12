@@ -62,6 +62,8 @@ const AddToTeam = ({
               userTeam={userTeam}
               teamId={teamId}
               googleData={googleData}
+              type="add"
+              testFunction={() => console.log("test")}
             />
           ) : (
             <div className="link-label center">
