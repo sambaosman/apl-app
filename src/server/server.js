@@ -57,14 +57,14 @@ const {
   getTeamById,
   deleteTeam,
   addOrUpdateTeam,
-} = require("./dynamo");
+} = require("./dynamo/dynamoTeamServices");
 
 const {
   getUsers,
   addOrUpdateUser,
   getUserById,
   deleteUser,
-} = require("./userServices");
+} = require("./dynamo/dynamoUserServices");
 
 app.use(express.json()); //allows you to parse BODY data coming from inside a post request
 

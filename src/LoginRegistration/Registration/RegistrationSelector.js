@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Row, Col } from "reactstrap";
-import { addUser, updateUser } from "../../server/ApiFunctions";
+import { updateUser } from "../../server/endpoints/userEndpoints";
 import {
   TextInputWhite,
   CardButtonWithText,
 } from "../../StyledComponents/StyledComponents";
-import { v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from "react-redux";
 import { addOrUpdateUser } from "../../redux/userSlice";
 
@@ -62,9 +61,6 @@ const RegistrationSelector = ({
     <div className="app-container">
       <div className="login-container">
         <React.Fragment>
-          {/* <div className="app-title" style={{ paddingBottom: "10px" }}>
-            Register for APL
-          </div> */}
           {showTeamIdInput ? (
             <Row>
               <Col md="9">
@@ -132,14 +128,6 @@ const RegistrationSelector = ({
               ))}
             </React.Fragment>
           )}
-          {/* <div className="login-subsection">
-            Already have an account?
-            <Link to="/login">
-              <span className="login-subsection-link" type="submit">
-                Log in
-              </span>
-            </Link>
-          </div> */}
         </React.Fragment>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import HomePage from "./components/AdminPage/HomePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import moment from "moment";
-import { getTeams } from "./server/ApiFunctions";
+import { getTeams } from "./server/endpoints/teamEndpoints";
 import MyTeam from "./components/MyTeam/MyTeam";
 
 const AppRoutes = ({

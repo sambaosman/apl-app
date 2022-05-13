@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
-// import AddTeam from "./EditAddTeamPanel/AddTeam";
-// import EditTeam from "./EditAddTeamPanel/EditTeam";
-// import "./AdminPage.scss";
 import TeamCard from "../AdminPage/TeamCard/TeamCard";
 import { Col } from "reactstrap";
 import { GoogleLogout } from "react-google-login";
 import { CardButtonWithText } from "../../StyledComponents/StyledComponents";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "../../redux/userSlice";
-import { getTeamById } from "../../server/ApiFunctions";
+import { getTeamById } from "../../server/endpoints/teamEndpoints";
 import RegistrationSelector from "../../LoginRegistration/Registration/RegistrationSelector";
 
 const MultipleTeams = ({

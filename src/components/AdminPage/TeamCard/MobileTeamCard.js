@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Card } from "reactstrap";
-import { deleteTeam } from "../../../server/ApiFunctions";
+import { deleteTeam } from "../../../server/endpoints/teamEndpoints";
 import "./TeamCard.scss";
 import {
   CardButtonWithText,

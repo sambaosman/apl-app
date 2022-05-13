@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import AppRoutes from "./AppRoutes";
 import { BrowserRouter } from "react-router-dom";
 import Login from "./LoginRegistration/Login/Login.js";
-import { getUsers, addUser } from "./server/ApiFunctions";
+import { getUsers, addUser } from "./server/endpoints/userEndpoints";
 import { useDispatch } from "react-redux";
 import { addOrUpdateUser } from "./redux/userSlice";
 import NavBar from "./components/NavBar/NavBar";
