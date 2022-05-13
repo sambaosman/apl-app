@@ -4,6 +4,7 @@ import { GoogleLogout } from "react-google-login";
 import { CardButtonWithText } from "../StyledComponents/StyledComponents";
 import RegistrationSelector from "./Registration/RegistrationSelector";
 import { useSelector } from "react-redux";
+
 const AddToTeam = ({
   googleData,
   setLoggedIn,

@@ -4,7 +4,7 @@ import graphic from "../../Images/bicyclekick.png";
 import logo from "../../Images/apllogo.png";
 import { Row, Col } from "reactstrap";
 import { CardButtonWithText } from "../../StyledComponents/StyledComponents";
-import "../Login.scss";
+import "./Login.scss";
 
 const Login = ({ handleLogin, handleFailure }) => {
   return (
