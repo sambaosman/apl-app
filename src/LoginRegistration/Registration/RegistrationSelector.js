@@ -13,12 +13,8 @@ const RegistrationSelector = ({
   googleData,
   setUserTeam,
   setTeamId,
-  setUserTeamArray,
-  userTeamArray,
   userTeam,
   teamId,
-  type,
-  testFunction,
 }) => {
   const registrationTypes = [
     {
@@ -39,43 +35,27 @@ const RegistrationSelector = ({
   ];
 
   const dispatch = useDispatch();
+
   const newFunction = () => {
     dispatch(addOrUpdateUser());
   };
+
   const [showTeamIdInput, setShowTeamIdInput] = useState(false);
+  const [teamArray, setTeamArray] = useState([]);
+
   const currentUser = useSelector((state) => state.user.user);
 
   const addUserTeam = (
-    setUserTeamArray,
-    userTeamArray,
+    teamArray,
+    setTeamArray,
     teamId,
     userTeam,
-    googleData,
-    setShowTeamIdInput,
-    testFunction
+    newFunction
   ) => {
-    let id = uuidv4();
-
-    // if (type === "add") {
-    //   console.log("id", googleData);
-
-    //   addUser(
-    //     [...userTeamArray, { teamId: teamId, user: userTeam }],
-    //     setUserTeamArray,
-    //     teamId,
-    //     userTeam,
-    //     googleData,
-    //     id,
-    //     setShowTeamIdInput
-    //   );
-    // } else if (type === "update") {
-    //   console.log("update");
-    //   testFunction();
-
-    updateUser(currentUser, [
-      ...userTeamArray,
-      { teamId: teamId, user: userTeam },
-    ]);
+    teamArray.push({ teamId: teamId, user: userTeam });
+    console.log("new", teamArray);
+    updateUser(currentUser, teamArray, newFunction);
+    setTeamArray(teamArray);
   };
 
   return (
@@ -105,13 +85,11 @@ const RegistrationSelector = ({
                   }}
                   onClick={() =>
                     addUserTeam(
-                      setUserTeamArray,
-                      userTeamArray,
+                      teamArray,
+                      setTeamArray,
                       teamId,
                       userTeam,
-                      googleData,
-                      setShowTeamIdInput,
-                      testFunction
+                      newFunction
                     )
                   }
                 >

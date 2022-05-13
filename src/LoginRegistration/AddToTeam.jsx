@@ -55,15 +55,13 @@ const AddToTeam = ({
           </div>
           {linkClicked ? (
             <RegistrationSelector
+              googleData={googleData}
               setUserTeam={setUserTeam}
               setTeamId={setTeamId}
               setUserTeamArray={setUserTeamArray}
               userTeamArray={userTeamArray}
               userTeam={userTeam}
               teamId={teamId}
-              googleData={googleData}
-              type="add"
-              testFunction={() => console.log("test")}
             />
           ) : (
             <div className="link-label center">
