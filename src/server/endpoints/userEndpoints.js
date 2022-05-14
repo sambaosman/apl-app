@@ -60,7 +60,7 @@ export const addUser = (
     });
 };
 
-export const updateUser = (user, teams, newFunction) => {
+export const updateUser = (user, teams, updateUserStore) => {
   console.log("teams", teams);
   axios
     .put(`users/${user.id}`, {
@@ -68,11 +68,10 @@ export const updateUser = (user, teams, newFunction) => {
       teams: teams,
     })
     .then((res) => {
-      console.log("res", res);
       getUserById(user.id)
         .then((res) => {
           console.log("res", res);
-          newFunction(res);
+          updateUserStore(res.Items[0]);
         })
         .catch((err) => console.log("err", err));
     });

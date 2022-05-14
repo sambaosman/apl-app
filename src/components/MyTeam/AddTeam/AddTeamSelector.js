@@ -7,6 +7,7 @@ import {
 } from "../../../StyledComponents/StyledComponents";
 import { useSelector, useDispatch } from "react-redux";
 import { addOrUpdateUser } from "../../../redux/userSlice";
+import { cloneDeep } from "lodash";
 
 const AddTeamSelectorWrapper = ({
   googleData,
@@ -35,26 +36,15 @@ const AddTeamSelectorWrapper = ({
 
   const dispatch = useDispatch();
 
-  const newFunction = () => {
-    dispatch(addOrUpdateUser());
-  };
-
   const [showTeamIdInput, setShowTeamIdInput] = useState(false);
   const [teamArray, setTeamArray] = useState([]);
 
-  const currentUser = useSelector((state) => state.user.user);
+  let currentUser = useSelector((state) => state.user.user);
 
-  const addUserTeam = (
-    teamArray,
-    setTeamArray,
-    teamId,
-    userTeam,
-    newFunction
-  ) => {
-    teamArray.push({ teamId: teamId, user: userTeam });
-    console.log("new", teamArray);
-    updateUser(currentUser, teamArray, newFunction);
-    setTeamArray(teamArray);
+  const addUserTeam = (teamArray, setTeamArray, teamId, userTeam) => {
+    let array = cloneDeep(currentUser.teams);
+    array.push({ teamId: teamId, user: userTeam });
+    updateUser(currentUser, array, dispatch(addOrUpdateUser()));
   };
 
   return (
@@ -80,13 +70,7 @@ const AddTeamSelectorWrapper = ({
                     height: "40px",
                   }}
                   onClick={() =>
-                    addUserTeam(
-                      teamArray,
-                      setTeamArray,
-                      teamId,
-                      userTeam,
-                      newFunction
-                    )
+                    addUserTeam(teamArray, setTeamArray, teamId, userTeam)
                   }
                 >
                   <span>Add</span>

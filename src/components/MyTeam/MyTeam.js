@@ -15,7 +15,7 @@ const MyTeam = ({
     <React.Fragment>
       {user.teams && user.teams.length ? (
         <React.Fragment>
-          {user.teams && user.teams.length > 1 ? (
+          {user.teams && user.teams.length < 1 ? (
             <div>single</div>
           ) : (
             <MultipleTeams
