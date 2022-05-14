@@ -5,11 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MyTeam from "./components/MyTeam/MyTeam";
 
 const AppRoutes = ({ userTeamArray, googleData, setUserTeamArray }) => {
-  const [teamMembers, setTeamMembers] = useState([]);
   const [teams, setTeams] = useState([]);
   const [clickedTeam, setClickedTeam] = useState();
-  const [error, setError] = useState();
-  const [userType, setUserType] = useState("");
   const [teamID, setTeamID] = useState("");
 
   const history = useNavigate();
@@ -20,19 +17,10 @@ const AppRoutes = ({ userTeamArray, googleData, setUserTeamArray }) => {
         path="/teams"
         element={
           <HomePage
-            team={clickedTeam}
             teams={teams}
             setTeams={setTeams}
             history={history}
-            userType={userType}
-            teamID={teamID}
-            teamMembers={teamMembers}
-            setTeamMembers={setTeamMembers}
             setClickedTeam={setClickedTeam}
-            setUserType={setUserType}
-            userTeamArray={userTeamArray}
-            googleData={googleData}
-            setUserTeamArray={setUserTeamArray}
           />
         }
       />

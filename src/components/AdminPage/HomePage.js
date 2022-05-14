@@ -2,20 +2,7 @@ import React from "react";
 import AdminPage from "./AdminPage";
 import { Row, Col } from "reactstrap";
 
-const HomePage = ({
-  team,
-  teams,
-  setTeams,
-  history,
-  userType,
-  teamID,
-  teamMembers,
-  setTeamMembers,
-  setClickedTeam,
-  userTeamArray,
-  googleData,
-  setUserTeamArray,
-}) => {
+const HomePage = ({ teams, setTeams, history, setClickedTeam }) => {
   return (
     <AdminPage
       teams={teams}
