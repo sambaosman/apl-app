@@ -77,7 +77,7 @@ app.get("/teams", async (req, res) => {
   }
 });
 
-app.get("/teams:id", async (req, res) => {
+app.get("/teams/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const team = await getTeamById(id);
@@ -128,7 +128,7 @@ app.get("/users", async (req, res) => {
   }
 });
 
-app.get("/users:id", async (req, res) => {
+app.get("/users/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const user = await getUserById(id);
