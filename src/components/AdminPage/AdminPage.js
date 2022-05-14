@@ -6,14 +6,10 @@ import TeamCard from "./TeamCard/TeamCard";
 import { Row, Col } from "reactstrap";
 import { GoogleLogout } from "react-google-login";
 import { CardButtonWithText } from "../../StyledComponents/StyledComponents";
+import { useDispatch } from "react-redux";
+import { addOrUpdateUser } from "../../redux/userSlice";
 
-const AdminPage = ({
-  teams,
-  setTeams,
-  history,
-  setClickedTeam,
-  setLoggedIn,
-}) => {
+const AdminPage = ({ teams, setTeams, history, setClickedTeam }) => {
   const [teamName, setTeamName] = useState(null);
   const [division, setDivision] = useState(null);
   const [showAddTeam, setShowAddTeam] = useState(false);
@@ -23,6 +19,7 @@ const AdminPage = ({
   const [premierTeams, setPremierTeams] = useState([]);
   const [championshipTeams, setChampionshipTeams] = useState([]);
 
+  const dispatch = useDispatch();
   useEffect(() => {
     setPremierTeams(
       teams && teams.filter((team) => team.division === "Premier")
@@ -77,7 +74,7 @@ const AdminPage = ({
                   </span>
                 </CardButtonWithText>
               )}
-              onLogoutSuccess={() => setLoggedIn(false)}
+              onLogoutSuccess={() => dispatch(addOrUpdateUser(null))}
               cookiePolicy={"single_host_origin"}
               style={{ alignItems: "center" }}
             />

@@ -11,7 +11,6 @@ import { Row, Col } from "reactstrap";
 import { useSelector } from "react-redux";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
   const [userTeamArray, setUserTeamArray] = useState([]);
   const [googleData, setGoogleData] = useState({});
 
@@ -23,7 +22,7 @@ function App() {
   };
 
   const handleLogin = async (googleData) => {
-    getUsers(googleData, addUsers, setLoggedIn);
+    getUsers(googleData, addUsers);
   };
 
   const handleFailure = (result) => {
@@ -35,11 +34,10 @@ function App() {
       <div className="App">
         {user ? (
           <Row>
-            <NavBar setLoggedIn={setLoggedIn} />
+            <NavBar />
             <Col>
               <div className="page-container">
                 <AppRoutes
-                  setLoggedIn={setLoggedIn}
                   userTeamArray={userTeamArray}
                   googleData={googleData}
                   setUserTeamArray={setUserTeamArray}

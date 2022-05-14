@@ -8,12 +8,7 @@ import { clearUser } from "../../redux/userSlice";
 import { getTeamById } from "../../server/endpoints/teamEndpoints";
 import RegistrationSelector from "../../LoginRegistration/Registration/RegistrationSelector";
 
-const MultipleTeams = ({
-  googleData,
-  setLoggedIn,
-  userTeamArray,
-  setUserTeamArray,
-}) => {
+const MultipleTeams = ({ googleData, userTeamArray, setUserTeamArray }) => {
   const [showInput, setShowInput] = useState(false);
   const [userTeam, setUserTeam] = useState(null);
   const [teamId, setTeamId] = useState(null);

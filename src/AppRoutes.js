@@ -4,12 +4,7 @@ import HomePage from "./components/AdminPage/HomePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MyTeam from "./components/MyTeam/MyTeam";
 
-const AppRoutes = ({
-  userTeamArray,
-  setLoggedIn,
-  googleData,
-  setUserTeamArray,
-}) => {
+const AppRoutes = ({ userTeamArray, googleData, setUserTeamArray }) => {
   const [teamMembers, setTeamMembers] = useState([]);
   const [teams, setTeams] = useState([]);
   const [clickedTeam, setClickedTeam] = useState();
@@ -35,7 +30,6 @@ const AppRoutes = ({
             setTeamMembers={setTeamMembers}
             setClickedTeam={setClickedTeam}
             setUserType={setUserType}
-            setLoggedIn={setLoggedIn}
             userTeamArray={userTeamArray}
             googleData={googleData}
             setUserTeamArray={setUserTeamArray}
@@ -48,7 +42,6 @@ const AppRoutes = ({
         element={
           <MyTeam
             googleData={googleData}
-            setLoggedIn={setLoggedIn}
             userTeamArray={userTeamArray}
             setUserTeamArray={setUserTeamArray}
             teamID={teamID}

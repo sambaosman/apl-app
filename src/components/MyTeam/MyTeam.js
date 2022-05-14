@@ -5,7 +5,6 @@ import MultipleTeams from "./MultipleTeams";
 
 const MyTeam = ({
   googleData,
-  setLoggedIn,
   userTeamArray,
   setUserTeamArray,
   teamID,
@@ -21,7 +20,6 @@ const MyTeam = ({
           ) : (
             <MultipleTeams
               googleData={googleData}
-              setLoggedIn={setLoggedIn}
               userTeamArray={userTeamArray}
               setUserTeamArray={setUserTeamArray}
               teamID={teamID}
@@ -32,7 +30,6 @@ const MyTeam = ({
       ) : (
         <AddToTeam
           googleData={googleData}
-          setLoggedIn={setLoggedIn}
           userTeamArray={userTeamArray}
           setUserTeamArray={setUserTeamArray}
         />

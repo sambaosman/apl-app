@@ -4,13 +4,11 @@ import { GoogleLogout } from "react-google-login";
 import { CardButtonWithText } from "../StyledComponents/StyledComponents";
 import RegistrationSelector from "./Registration/RegistrationSelector";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addOrUpdateUser } from "../redux/userSlice";
 
-const AddToTeam = ({
-  googleData,
-  setLoggedIn,
-  userTeamArray,
-  setUserTeamArray,
-}) => {
+const AddToTeam = ({ googleData, userTeamArray, setUserTeamArray }) => {
+  const dispatch = useDispatch();
   const [linkClicked, setLinkClicked] = useState(false);
   const [userTeam, setUserTeam] = useState(null);
   const [teamId, setTeamId] = useState(null);
@@ -44,7 +42,7 @@ const AddToTeam = ({
                   </span>
                 </CardButtonWithText>
               )}
-              onLogoutSuccess={() => setLoggedIn(false)}
+              onLogoutSuccess={() => dispatch(addOrUpdateUser(null))}
               cookiePolicy={"single_host_origin"}
               style={{ alignItems: "center" }}
             />

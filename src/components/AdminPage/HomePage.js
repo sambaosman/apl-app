@@ -12,7 +12,6 @@ const HomePage = ({
   teamMembers,
   setTeamMembers,
   setClickedTeam,
-  setLoggedIn,
   userTeamArray,
   googleData,
   setUserTeamArray,
@@ -23,7 +22,6 @@ const HomePage = ({
       setTeams={setTeams}
       history={history}
       setClickedTeam={setClickedTeam}
-      setLoggedIn={setLoggedIn}
     />
   );
 };
