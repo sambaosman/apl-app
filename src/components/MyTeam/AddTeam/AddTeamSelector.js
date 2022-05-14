@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Row, Col } from "reactstrap";
-import { updateUser } from "../../server/endpoints/userEndpoints";
+import { updateUser } from "../../../server/endpoints/userEndpoints";
 import {
   TextInputWhite,
   CardButtonWithText,
-} from "../../StyledComponents/StyledComponents";
+} from "../../../StyledComponents/StyledComponents";
 import { useSelector, useDispatch } from "react-redux";
-import { addOrUpdateUser } from "../../redux/userSlice";
+import { addOrUpdateUser } from "../../../redux/userSlice";
 
-const RegistrationSelector = ({
+const AddTeamSelectorWrapper = ({
   googleData,
   setUserTeam,
   setTeamId,
@@ -134,4 +134,4 @@ const RegistrationSelector = ({
   );
 };
 
-export default RegistrationSelector;
+export default AddTeamSelectorWrapper;

@@ -6,7 +6,7 @@ import { CardButtonWithText } from "../../StyledComponents/StyledComponents";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "../../redux/userSlice";
 import { getTeamById } from "../../server/endpoints/teamEndpoints";
-import RegistrationSelector from "../../LoginRegistration/Registration/RegistrationSelector";
+import AddTeamSelector from "./AddTeam/AddTeamSelector";
 
 const MultipleTeams = ({ googleData, userTeamArray, setUserTeamArray }) => {
   const [showInput, setShowInput] = useState(false);
@@ -75,7 +75,7 @@ const MultipleTeams = ({ googleData, userTeamArray, setUserTeamArray }) => {
           </div>
           <div style={{ margin: "auto" }}>
             {showInput && (
-              <RegistrationSelector
+              <AddTeamSelector
                 setUserTeam={setUserTeam}
                 setTeamId={setTeamId}
                 setUserTeamArray={setUserTeamArray}

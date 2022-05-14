@@ -1,5 +1,5 @@
 import React from "react";
-import AddToTeam from "../../LoginRegistration/AddToTeam";
+import AddTeamSelectorWrapper from "./AddTeam/AddTeamSelectorWrapper";
 import { useSelector } from "react-redux";
 import MultipleTeams from "./MultipleTeams";
 
@@ -28,7 +28,7 @@ const MyTeam = ({
           )}
         </React.Fragment>
       ) : (
-        <AddToTeam
+        <AddTeamSelectorWrapper
           googleData={googleData}
           userTeamArray={userTeamArray}
           setUserTeamArray={setUserTeamArray}

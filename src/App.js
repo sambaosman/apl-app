@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useState } from "react";
 import AppRoutes from "./AppRoutes";
 import { BrowserRouter } from "react-router-dom";
-import Login from "./LoginRegistration/Login/Login.js";
+import Login from "./components/Login/Login";
 import { getUsers } from "./server/endpoints/userEndpoints";
 import { useDispatch } from "react-redux";
 import { addOrUpdateUser } from "./redux/userSlice";

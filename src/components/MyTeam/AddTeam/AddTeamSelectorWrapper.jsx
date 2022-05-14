@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Col } from "reactstrap";
 import { GoogleLogout } from "react-google-login";
-import { CardButtonWithText } from "../StyledComponents/StyledComponents";
-import RegistrationSelector from "./Registration/RegistrationSelector";
+import { CardButtonWithText } from "../../../StyledComponents/StyledComponents";
+import AddTeamSelector from "./AddTeamSelector";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { addOrUpdateUser } from "../redux/userSlice";
+import { addOrUpdateUser } from "../../../redux/userSlice";
 
 const AddToTeam = ({ googleData, userTeamArray, setUserTeamArray }) => {
   const dispatch = useDispatch();
@@ -53,7 +53,7 @@ const AddToTeam = ({ googleData, userTeamArray, setUserTeamArray }) => {
             }`}</div>
           </div>
           {linkClicked ? (
-            <RegistrationSelector
+            <AddTeamSelector
               googleData={googleData}
               setUserTeam={setUserTeam}
               setTeamId={setTeamId}
