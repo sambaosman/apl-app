@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Nav, NavItem, Row, Col } from "reactstrap";
 import "./NavBar.scss";
 import { NavBarData } from "./NavBarData";
-import logo from "../../Images/apllogo.png";
+import logo from "../../images/apllogo.png";
 import { GoogleLogout } from "react-google-login";
 import { CardButtonWithText } from "../../StyledComponents/StyledComponents";
 import { useDispatch, useSelector } from "react-redux";

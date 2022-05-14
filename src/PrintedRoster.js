@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "reactstrap";
-import logo from "./Images/apllogo.png";
+import logo from "./images/apllogo.png";
 
 class PrintedRoster extends React.Component {
   render() {

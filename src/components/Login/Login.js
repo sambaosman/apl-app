@@ -1,7 +1,7 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
-import graphic from "../../Images/bicyclekick.png";
-import logo from "../../Images/apllogo.png";
+import graphic from "../../images/bicyclekick.png";
+import logo from "../../images/apllogo.png";
 import { Row, Col } from "reactstrap";
 import { CardButtonWithText } from "../../StyledComponents/StyledComponents";
 import "./Login.scss";
