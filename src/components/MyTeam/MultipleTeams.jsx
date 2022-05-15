@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import TeamCard from "../AdminPage/TeamCard/TeamCard";
 import { GoogleLogout } from "react-google-login";
 import { CardButtonWithText } from "../../StyledComponents/StyledComponents";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +7,7 @@ import { getTeamById } from "../../server/endpoints/teamEndpoints";
 import AddTeamSelector from "./AddTeam/AddTeamSelector";
 import { Row, Col, Card } from "reactstrap";
 import { Icon } from "@iconify/react";
+import TeamCard from "../SharedComponents/TeamCard";
 
 const MultipleTeams = ({ googleData, userTeamArray, setUserTeamArray }) => {
   const [showInput, setShowInput] = useState(false);
@@ -64,11 +64,13 @@ const MultipleTeams = ({ googleData, userTeamArray, setUserTeamArray }) => {
           <div className="admin-heading">
             <div className="page-title">My Teams</div>
             <div
-              className="add-circle-button"
-              onClick={() => setShowInput(true)}
+              className={
+                showInput ? "cancel-circle-button hover" : "add-circle-button"
+              }
+              onClick={() => setShowInput(!showInput)}
             >
               <i
-                className={`fa-solid fa-plus`}
+                className={showInput ? `fa-solid fa-times` : `fa-solid fa-plus`}
                 style={{ fontSize: "25px", color: "white" }}
               />
             </div>
@@ -87,69 +89,7 @@ const MultipleTeams = ({ googleData, userTeamArray, setUserTeamArray }) => {
                 testFunction={() => setShowInput(false)}
               />
             )}
-            {teamInfoArray && teamInfoArray.length
-              ? teamInfoArray.map((team) => (
-                  <Card
-                    className="web-team-card"
-                    // onClick={() => {
-                    //   setClickedTeam(team);
-                    //   history("/roster");
-                    // }}
-                  >
-                    <div className="team-logo">
-                      <img src={team.imageURL} className="image-container" />
-                    </div>
-                    <div className="team-card-title"> {team.teamName}</div>
-                    <Row className="text-buttons">
-                      <Col
-                        md="6"
-                        className="center"
-                        style={{ paddingRight: "5px", maxWidth: "50%" }}
-                      >
-                        <CardButtonWithText
-                          style={{
-                            backgroundColor: "rgba(111, 88, 201, 0.15)",
-                          }}
-                          // onClick={(event) => {
-                          //   event.stopPropagation();
-                          //   setShowEditTeam(true);
-                          //   updateTeam(team);
-                          // }}
-                        >
-                          <span className="center">
-                            <Icon color="var(--secondary" icon="bxs:pencil" />
-                          </span>
-                          <span className="button-title">Edit</span>
-                        </CardButtonWithText>
-                      </Col>
-                      <Col
-                        md="6"
-                        className="center"
-                        style={{ paddingLeft: "5px", maxWidth: "50%" }}
-                      >
-                        {" "}
-                        <CardButtonWithText
-                          style={{ backgroundColor: "rgba(211, 97, 53, 0.15)" }}
-                          // onClick={(event) => {
-                          //   event.stopPropagation();
-                          //   deleteTeam(team.id, setTeams);
-                          // }}
-                        >
-                          <span className="center">
-                            <Icon color="var(--danger)" icon="eva:trash-fill" />
-                          </span>
-                          <span
-                            className="button-title"
-                            style={{ color: "var(--danger)" }}
-                          >
-                            Delete
-                          </span>
-                        </CardButtonWithText>
-                      </Col>
-                    </Row>
-                  </Card>
-                ))
-              : null}
+            <TeamCard teams={teamInfoArray} />
           </div>
         </div>
       </Col>

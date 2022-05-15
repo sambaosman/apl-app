@@ -1,25 +1,25 @@
 import React from "react";
 import { Row, Col, Card } from "reactstrap";
-import { deleteTeam } from "../../../server/endpoints/teamEndpoints";
-// import "./TeamCard.scss";
-import { CardButtonWithText } from "../../../../src/StyledComponents/StyledComponents";
+import "./TeamCard.scss";
 import { Icon } from "@iconify/react";
+import { CardButtonWithText } from "../../StyledComponents/StyledComponents";
 
 const WebTeamCard = ({
-  setClickedTeam,
-  updateTeam,
-  setTeams,
   team,
-  history,
-  setShowEditTeam,
+  //   setClickedTeam,
+  //   updateTeam,
+  //   setTeams,
+  //   team,
+  //   history,
+  //   setShowEditTeam,
 }) => {
   return (
     <Card
       className="web-team-card"
-      onClick={() => {
-        setClickedTeam(team);
-        history("/roster");
-      }}
+      //   onClick={() => {
+      //     setClickedTeam(team);
+      //     history("/roster");
+      //   }}
     >
       <div className="team-logo">
         <img src={team.imageURL} className="image-container" />
@@ -33,11 +33,11 @@ const WebTeamCard = ({
         >
           <CardButtonWithText
             style={{ backgroundColor: "rgba(111, 88, 201, 0.15)" }}
-            onClick={(event) => {
-              event.stopPropagation();
-              setShowEditTeam(true);
-              updateTeam(team);
-            }}
+            // onClick={(event) => {
+            //   event.stopPropagation();
+            //   setShowEditTeam(true);
+            //   updateTeam(team);
+            // }}
           >
             <span className="center">
               <Icon color="var(--secondary" icon="bxs:pencil" />
@@ -53,10 +53,10 @@ const WebTeamCard = ({
           {" "}
           <CardButtonWithText
             style={{ backgroundColor: "rgba(211, 97, 53, 0.15)" }}
-            onClick={(event) => {
-              event.stopPropagation();
-              deleteTeam(team.id, setTeams);
-            }}
+            // onClick={(event) => {
+            //   event.stopPropagation();
+            //   deleteTeam(team.id, setTeams);
+            // }}
           >
             <span className="center">
               <Icon color="var(--danger)" icon="eva:trash-fill" />

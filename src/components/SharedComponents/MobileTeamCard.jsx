@@ -1,25 +1,26 @@
 import React from "react";
 import { Row, Col, Card } from "reactstrap";
-import { deleteTeam } from "../../../server/endpoints/teamEndpoints";
-// import "./TeamCard.scss";
-import { IconButton } from "../../../../src/StyledComponents/StyledComponents";
+// import { deleteTeam } from "../../../server/endpoints/teamEndpoints";
+import "./TeamCard.scss";
+import { IconButton } from "../../StyledComponents/StyledComponents";
 import { Icon } from "@iconify/react";
 
 const MobileTeamCard = ({
-  setClickedTeam,
-  updateTeam,
-  setTeams,
   team,
-  history,
-  setShowEditTeam,
+  //   setClickedTeam,
+  //   updateTeam,
+  //   setTeams,
+  //   team,
+  //   history,
+  //   setShowEditTeam,
 }) => {
   return (
     <Card
       className="mobile-team-card"
-      onClick={() => {
-        setClickedTeam(team);
-        history("/roster");
-      }}
+      //   onClick={() => {
+      //     setClickedTeam(team);
+      //     history("/roster");
+      //   }}
     >
       <Row style={{ width: "100%" }}>
         <Col className="center" style={{ width: "10%", margin: "auto" }}>
@@ -50,11 +51,11 @@ const MobileTeamCard = ({
                 width: "30px",
                 height: "30px",
               }}
-              onClick={(event) => {
-                event.stopPropagation();
-                setShowEditTeam(true);
-                updateTeam(team);
-              }}
+              //   onClick={(event) => {
+              //     event.stopPropagation();
+              //     setShowEditTeam(true);
+              //     updateTeam(team);
+              //   }}
             >
               <span className="center">
                 <Icon color="var(--secondary" icon="bxs:pencil" />
@@ -66,10 +67,10 @@ const MobileTeamCard = ({
                 width: "30px",
                 height: "30px",
               }}
-              onClick={(event) => {
-                event.stopPropagation();
-                deleteTeam(team.id, setTeams);
-              }}
+              //   onClick={(event) => {
+              //     event.stopPropagation();
+              //     deleteTeam(team.id, setTeams);
+              //   }}
             >
               <span className="center">
                 <Icon color="var(--danger)" icon="eva:trash-fill" />
