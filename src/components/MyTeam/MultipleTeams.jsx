@@ -76,7 +76,7 @@ const MultipleTeams = ({ googleData, userTeamArray, setUserTeamArray }) => {
             </div>
           </div>
           <div style={{ margin: "auto" }}>
-            {showInput && (
+            {showInput ? (
               <AddTeamSelector
                 setUserTeam={setUserTeam}
                 setTeamId={setTeamId}
@@ -88,8 +88,9 @@ const MultipleTeams = ({ googleData, userTeamArray, setUserTeamArray }) => {
                 type="update"
                 testFunction={() => setShowInput(false)}
               />
+            ) : (
+              <TeamCard teams={teamInfoArray} showButtons={false} />
             )}
-            <TeamCard teams={teamInfoArray} showButtons={false} />
           </div>
         </div>
       </Col>
