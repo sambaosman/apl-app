@@ -89,7 +89,7 @@ const MultipleTeams = ({ googleData, userTeamArray, setUserTeamArray }) => {
                 testFunction={() => setShowInput(false)}
               />
             )}
-            <TeamCard teams={teamInfoArray} />
+            <TeamCard teams={teamInfoArray} showButtons={false} />
           </div>
         </div>
       </Col>

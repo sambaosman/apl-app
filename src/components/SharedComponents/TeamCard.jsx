@@ -2,9 +2,11 @@ import React from "react";
 import WebTeamCard from "./WebTeamCard";
 import MobileTeamCard from "./MobileTeamCard";
 import "./TeamCard.scss";
+import { Row } from "reactstrap";
 
 const TeamCard = ({
   teams,
+  showButtons,
   //   team,
   //   setTeams,
   //   setShowEditTeam,
@@ -13,11 +15,12 @@ const TeamCard = ({
   //   history,
 }) => {
   return (
-    <React.Fragment>
+    <Row>
       {teams.map((team) => (
         <React.Fragment>
           <WebTeamCard
             team={team}
+            showButtons={showButtons}
             // setClickedTeam={setClickedTeam}
             // updateTeam={updateTeam}
             // setTeams={setTeams}
@@ -27,6 +30,8 @@ const TeamCard = ({
           />
           <MobileTeamCard
             team={team}
+            showButtons={showButtons}
+
             // setClickedTeam={setClickedTeam}
             // updateTeam={updateTeam}
             // setTeams={setTeams}
@@ -38,7 +43,7 @@ const TeamCard = ({
       ))}
 
       {/* shows when vw is less than 750px */}
-    </React.Fragment>
+    </Row>
   );
 };
 
