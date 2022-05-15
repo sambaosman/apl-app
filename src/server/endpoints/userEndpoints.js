@@ -19,7 +19,6 @@ export const getUsers = async (googleData, addUsers) => {
         };
         axios.post("/users", currentUser);
       }
-      console.log("currentUser2", currentUser);
       addUsers(currentUser);
     })
     .catch((err) => console.log(err));
@@ -45,7 +44,7 @@ export const addUser = (
       id: id,
       firstName: googleData.profileObj.givenName,
       lastName: googleData.profileObj.familyName,
-      email: googleData.profileObj.familyName,
+      email: googleData.profileObj.email,
       imageUrl: googleData.profileObj.imageUrl,
       googleId: googleData.profileObj.googleId,
       teams: userTeamArray,

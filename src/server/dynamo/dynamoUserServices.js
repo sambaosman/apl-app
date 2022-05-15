@@ -44,7 +44,7 @@ const getUserById = async (id) => {
       id,
     },
   };
-  return await dynamoClient.scan(params).promise();
+  return await dynamoClient.get(params).promise();
 };
 
 module.exports = {

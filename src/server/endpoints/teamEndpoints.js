@@ -6,11 +6,7 @@ export const getTeams = async (setTeams) => {
   });
 };
 
-export const getTeamById = async (id) => {
-  axios.get(`/teams/${id}`).then((res) => {
-    console.log(res);
-  });
-};
+export const getTeamById = async (id) => axios.get(`/teams/${id}`);
 
 export const addTeam = (teamName, division, setTeams, id, imageName) => {
   axios
