@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Nav, NavItem, NavLink, Row, Col } from "reactstrap";
+import { Nav, NavItem, Row, Col } from "reactstrap";
 import "./NavBar.scss";
 import { NavBarData } from "./NavBarData";
-import logo from "../../Images/apllogo.png";
+import logo from "../../images/apllogo.png";
 import { GoogleLogout } from "react-google-login";
 import { CardButtonWithText } from "../../StyledComponents/StyledComponents";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUser } from "../../redux/userSlice";
+import { setActiveTab } from "../../redux/navBarSlice";
+import { Link } from "react-router-dom";
 
-const NavBar = ({ setLoggedIn }) => {
-  const history = useNavigate();
-  const [activeTab, setActiveTab] = useState(0);
+const NavBar = () => {
+  const dispatch = useDispatch();
+  const activeTab = useSelector((state) => state.activeTab.activeTab);
 
-  const handleLogout = (setLoggedIn) => {
-    setLoggedIn(false);
+  const handleLogout = () => {
+    dispatch(clearUser());
   };
 
   return (
@@ -31,24 +35,24 @@ const NavBar = ({ setLoggedIn }) => {
           </Row>
           <Nav>
             {NavBarData.map((navItem, index) => (
-              <NavLink
-                href={navItem.link}
+              <Link
+                to={navItem.link}
                 className={
                   activeTab !== index
                     ? "nav-option nav-link-container"
                     : "nav-option nav-link-container active"
                 }
                 key={index}
-                onClick={() => setActiveTab(index)}
+                onClick={() => dispatch(setActiveTab(index))}
               >
                 <div classname="nav-link-text">
                   <span> {navItem.icon}</span>
                   <span style={{ paddingLeft: "20px" }}>{navItem.title}</span>
                 </div>
-              </NavLink>
+              </Link>
             ))}
           </Nav>
-          <div style={{ marginTop: "330px" }}>
+          <div style={{ marginTop: "250px" }}>
             <GoogleLogout
               clientId={
                 "281501315717-3q4u5jr1fnil0eamk218j0bshq9tp8j6.apps.googleusercontent.com"
@@ -69,7 +73,7 @@ const NavBar = ({ setLoggedIn }) => {
                   </span>
                 </CardButtonWithText>
               )}
-              onLogoutSuccess={() => handleLogout(setLoggedIn)}
+              onLogoutSuccess={() => handleLogout()}
               cookiePolicy={"single_host_origin"}
               style={{ alignItems: "center" }}
             />
@@ -80,17 +84,17 @@ const NavBar = ({ setLoggedIn }) => {
       <Row className="bottom-navbar">
         {NavBarData.map((navItem, index) => (
           <Col key={index} className="center">
-            <NavLink
-              href={navItem.link}
+            <Link
+              to={navItem.link}
               className={
                 activeTab !== index
                   ? "nav-option-icon"
                   : "nav-option-icon active"
               }
-              onClick={() => setActiveTab(index)}
+              onClick={() => console.log(index)}
             >
               {navItem.icon}
-            </NavLink>
+            </Link>
           </Col>
         ))}
       </Row>

@@ -43,7 +43,7 @@
   text-align: left;
 }
 
-.nav-link:hover {
+.nav-option:hover {
   background-color: #f8f8f8 !important;
   color: black !important;
 }
@@ -62,12 +62,15 @@
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
+  padding: 30px !important;
 }
 .side-bar {
   height: 100%;
   background-color: white;
   width: 270px;
   padding-top: 20px;
+  position: fixed;
+  overflow-x: hidden;
 }
 
 @media only screen and (max-width: 715px) {

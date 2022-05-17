@@ -6,8 +6,8 @@ import {
   UploadButton,
   CardButtonWithText,
 } from "../../../StyledComponents/StyledComponents";
-import { Form as ReactForm, FormGroup, Label } from "reactstrap";
-import { addTeam } from "../../../server/ApiFunctions";
+import { FormGroup } from "reactstrap";
+import { addTeam } from "../../../server/endpoints/teamEndpoints";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { Form, Field } from "react-final-form";

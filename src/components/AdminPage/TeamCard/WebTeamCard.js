@@ -1,11 +1,8 @@
 import React from "react";
 import { Row, Col, Card } from "reactstrap";
-import { deleteTeam } from "../../../server/ApiFunctions";
-import "./TeamCard.scss";
-import {
-  CardButtonWithText,
-  IconButton,
-} from "../../../../src/StyledComponents/StyledComponents";
+import { deleteTeam } from "../../../server/endpoints/teamEndpoints";
+// import "./TeamCard.scss";
+import { CardButtonWithText } from "../../../../src/StyledComponents/StyledComponents";
 import { Icon } from "@iconify/react";
 
 const WebTeamCard = ({
