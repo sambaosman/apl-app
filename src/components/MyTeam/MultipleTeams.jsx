@@ -5,17 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "../../redux/userSlice";
 import { getTeamById } from "../../server/endpoints/teamEndpoints";
 import AddTeamSelector from "./AddTeam/AddTeamSelector";
-import { Row, Col, Card } from "reactstrap";
-import { Icon } from "@iconify/react";
+import { Col } from "reactstrap";
 import TeamCard from "../SharedComponents/TeamCard";
 
 const MultipleTeams = ({ googleData, userTeamArray, setUserTeamArray }) => {
   const [showInput, setShowInput] = useState(false);
-  const [userTeam, setUserTeam] = useState(null);
   const [teamId, setTeamId] = useState(null);
+  const [teamInfoArray, setTeamInfoArray] = useState([]);
+  const [userTeam, setUserTeam] = useState(null);
+
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const [teamInfoArray, setTeamInfoArray] = useState([]);
 
   useEffect(() => {
     const getTeamInfo = async () => {
